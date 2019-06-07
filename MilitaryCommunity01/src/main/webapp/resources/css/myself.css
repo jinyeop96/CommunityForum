@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+/* login.jsp */
+#loginDiv{
+	margin-top: 30px;
+}
+
+.input{
+	border-radius: 10px;
+}
+
+
+#loginBtn{
+	border: 1px solid #fff;
+	background-color: transparent;
+	margin-top: 10px;
+	padding: 5px 100px;
+    border-radius: 25px;
+    color: #fff;
+}
+
+#loginBtn:hover{
+    border: 1px solid #2c3e50;
+	background-color: transparent;
+	margin-top: 10px;
+	padding: 5px 100px;
+    border-radius: 25px;
+    color: #2c3e50;
+    font-style: italic;
+}
+
+/*navigation.jsp    Menu bar */
+.menu-bar li ul {
+	background-image: url("../img/background/camo-pattern.jpg");
+	display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
+	height:auto;
+	padding:0px;
+	margin:0px;
+	border:0px;
+	position:absolute;
+	width:200px;
+	z-index:200;
+	list-style-type: none;
+}
+
+.menu-bar li:hover ul {
+display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
+}
+
+/* section02.jsp */
+.restaurant {
+	background-color: #1abc9c;
+}
