@@ -1,4 +1,4 @@
-package com.military.loginDto;
+package com.military.dto;
 
 public class LoginDTO {
 	

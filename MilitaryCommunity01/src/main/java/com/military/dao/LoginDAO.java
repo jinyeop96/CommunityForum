@@ -1,6 +1,6 @@
-package com.military.loginDao;
+package com.military.dao;
 
-import com.military.loginDto.LoginDTO;
+import com.military.dto.LoginDTO;
 
 public interface LoginDAO {
 	

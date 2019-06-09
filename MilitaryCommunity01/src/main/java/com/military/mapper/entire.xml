@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper  namespace="com.military.mapper.entire">
+	<select id="getRecords" resultType="com.military.dto.EntireDTO">
+		SELECT * FROM entire ORDER BY entire_no DESC
+	</select>
+	
+	<select id="selectList" resultType="com.military.dto.EntireDTO">
+		SELECT * FROM (SELECT ROWNUM r, b.* FROM entire b ORDER BY entire_no DESC) WHERE <![CDATA[ r >= #{rowStart} AND r <= #{rowStart} + 20 ]]>	<!-- mapper 안에선 <,> 와 같은 비교연산자는 <![CDATA[요기에 넣으셈요]]> --> -->
+		<!-- SELECT * FROM (SELECT ROWNUM r, b.* FROM entire b ORDER BY entire_no DESC) WHERE <![CDATA[ r >= 1 AND r <= 15 ]]> -->
+	</select>
+	
+	<select id="selectOne" resultType="com.military.dto.EntireDTO">
+		SELECT * FROM entire WHERE entire_no = #{no}
+	</select>
+</mapper>
