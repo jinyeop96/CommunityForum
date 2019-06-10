@@ -40,7 +40,7 @@
           <li class="nav-item mx-0 mx-lg-1">
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Board</a>
               <ul class="board_bg">
-              	<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#path">전체</a></li>
+              	<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="entire.do?pageParam=1">전체</a></li>   <%-- 요청하는 페이지 --%>
               	<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#path">자유</a></li>
               	<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#path">뭐뭐</a></li>
               </ul>

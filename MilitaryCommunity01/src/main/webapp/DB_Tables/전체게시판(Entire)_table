@@ -1,0 +1,22 @@
+create table entire(
+	entire_no number(10) primary key, 		// entire_seq.nextval로 해주고	 
+	entire_nickname varchar2(30) not null,
+	entire_pwd varchar2(30) not null,
+	entire_title varchar2(30) not null,	
+	entire_content varchar2(10000) not null,
+	entire_group number(10) not null,		// entire_seq.currval
+	entire_step number(10) not null,		// 0
+	entire_indent number(10) not null,		// 0
+	entire_view number(10) not null,		// 0
+	entire_reply  number(10) not null,		// 0
+	entire_like number(10) not null,		// 0
+	entire_dislike number(10) not null		// 0
+	entire_dislike date not null		// sysdate
+);
+
+create sequence entire_seq
+	start with 1
+	increment by 1
+	nocache;
+	 
+	

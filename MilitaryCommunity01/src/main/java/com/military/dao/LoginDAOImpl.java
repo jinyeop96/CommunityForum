@@ -1,10 +1,10 @@
-package com.military.loginDao;
+package com.military.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.military.loginDto.LoginDTO;
+import com.military.dto.LoginDTO;
 
 @Repository
 public class LoginDAOImpl implements LoginDAO {

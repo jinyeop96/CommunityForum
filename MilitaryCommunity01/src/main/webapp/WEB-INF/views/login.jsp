@@ -34,6 +34,6 @@
   
   <jsp:include page="/resources/include/footer.jsp" />
   <jsp:include page="/resources/include/copyright.jsp" />
-  <jsp:include page="/resources/include/modals.jsp" />
+  <jsp:include page="/resources/include/modals.jsp" />	<%-- modal.jsp 끝에 js 파일 있어서 반응형 웹이 됩니다~ 마지막에 꼭 넣으십쏘~ --%>
 
 </html>
