@@ -38,10 +38,10 @@
       <div class="collapse navbar-collapse " id="navbarResponsive">
         <ul class="navbar-nav ml-auto menu-bar">
           <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Board</a>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >Board</a>
               <ul class="board_bg">
               	<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="entire.do?pageParam=1">전체</a></li>   <%-- 요청하는 페이지 --%>
-              	<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#path">자유</a></li>
+              	<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="free.do">자유</a></li>
               	<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#path">뭐뭐</a></li>
               </ul>
           </li>
@@ -56,13 +56,18 @@
           <li class="nav-item mx-0 mx-lg-1">
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#path">News</a>
           </li>
-          <li class="nav-item mx-0 mx-lg-1">
+         <%--  <li class="nav-item mx-0 mx-lg-1">
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/login.do">Login</a>
-          </li>
-           <li class="nav-item mx-0 mx-lg-1">
+          </li> --%>
+          <%--  <li class="nav-item mx-0 mx-lg-1">
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/register.do">Register</a>
-          </li>
+          </li> --%>
+          
         </ul>
       </div>
     </div>
+    	<div class="navbar-log-regi">	<%-- 메뉴바 우측상단배치 --%>
+	  		<a class="navbar-top-right" href="login.do" >Login</a>  
+	  		<a class="navbar-top-right" href="register.do" >Register</a>  
+    	</div>
   </nav>

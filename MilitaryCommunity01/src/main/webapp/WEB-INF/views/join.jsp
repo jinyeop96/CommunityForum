@@ -47,7 +47,7 @@
       		
       		<tr>
       			<th>이 메 일 </th>
-      			<td align="left"><input class="input" name="j_email1">@<input name="j_emailself" placeholder="직접 입력">
+      			<td align="left"><input class="input" name="j_email1">@<input name="j_emailself" class="input" placeholder="직접 입력">
       			<select name="j_email2">
       			  <option id="naver" value="@naver.com">naver.com</option>
       			  <option id="hanmail" value="@hanmail.net">hanmail.net</option>

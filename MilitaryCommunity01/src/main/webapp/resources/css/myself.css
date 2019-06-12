@@ -44,36 +44,48 @@
 }
 
 .menu-bar li:hover ul {
-display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
+	display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
 }
 
-/* section02.jsp */
-.restaurant {
+.navbar-log-regi{
+	margin-left:auto;
+	float: right;
+	margin-top: -50px; 
+	word-spacing: 20px;
+}
+
+.navbar-top-right{
+	color:#fff;
+	border: 1px solid #fff;
+	font-size: 12px;
+	border-radius: 8px;
+	padding: 3px;
+}
+
+.navbar-top-right:hover{
+	color:#1abc9c;
+	border: 1px solid #1abc9c;
+	text-decoration: none;
+}
+
+/*section02.jsp */
+.section2{
 	background-color: #1abc9c;
 }
-
 /* board */
 .board{
 	width: 100%;
 }
 
-.t1{
+.board-table{
 	text-align: center;
 	font-size: 14px;
 }
 
-.t2{
-	
-}
-
-.t3{
-	
-}
 
 .blocks{
 	color: #fff;
 }
-
 
 
 

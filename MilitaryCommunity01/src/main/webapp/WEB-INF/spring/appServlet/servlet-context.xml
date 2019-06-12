@@ -27,9 +27,9 @@
 	
 	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">	<!-- DriverManagerDataSource는 spring-jdbc 라이브러리 안에 있음 -->
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />
+		<beans:property name="url" value="jdbc:oracle:thin:@192.168.3.82:1521:XE" />
 		<beans:property name="username" value="web" />
-		<beans:property name="password" value="oh123" />
+		<beans:property name="password" value="web2580" />
 	</beans:bean>	
 	
 	<beans:bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">

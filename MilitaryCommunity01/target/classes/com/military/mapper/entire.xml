@@ -3,16 +3,79 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper  namespace="com.military.mapper.entire">
+	<!-- 전체 레코드 수 -->
 	<select id="getRecords" resultType="com.military.dto.EntireDTO">
 		SELECT * FROM entire ORDER BY entire_no DESC
 	</select>
-	
+	 
+	 <!-- 일반 전체 검색 -->
 	<select id="selectList" resultType="com.military.dto.EntireDTO">
-		SELECT * FROM (SELECT ROWNUM r, b.* FROM entire b ORDER BY entire_no DESC) WHERE <![CDATA[ r >= #{rowStart} AND r <= #{rowStart} + 20 ]]>	<!-- mapper 안에선 <,> 와 같은 비교연산자는 <![CDATA[요기에 넣으셈요]]> --> -->
-		<!-- SELECT * FROM (SELECT ROWNUM r, b.* FROM entire b ORDER BY entire_no DESC) WHERE <![CDATA[ r >= 1 AND r <= 15 ]]> -->
+		<!-- SELECT * FROM (SELECT ROWNUM r, e.* FROM entire e ORDER BY entire_no DESC) WHERE <![CDATA[ r >= #{rowStart} AND r <= #{rowStart} + 20 ]]> -->	<!-- mapper 안에선 <,> 와 같은 비교연산자는 <![CDATA[요기에 넣으셈요]]> --> -->
+		SELECT *
+		    FROM (SELECT ROWNUM r, e.*
+		            FROM (SELECT * 
+		                    FROM entire
+		                    ORDER BY entire_no DESC) e)
+		    WHERE <![CDATA[ r >= #{rowStart} AND r <= #{rowEnd} ]]>
 	</select>
 	
+		
+		
+	<!-- 검색한 게시물 수 -->	
+	<select id="getSearchByTypeRecords" resultType="com.military.dto.EntireDTO">
+		SELECT *
+		    FROM (SELECT ROWNUM r, e.* 
+		            FROM (SELECT  * FROM entire ORDER BY entire_group DESC, entire_step) e
+		
+		<if test="entireSearchType == 'all' ">
+	        WHERE entire_title LIKE '%' || #{entireSearchData} || '%' OR
+	        	  entire_content LIKE '%' || #{entireSearchData} || '%' OR
+	        	  entire_nickname LIKE '%' || #{entireSearchData} || '%') e
+	    </if>
+		
+		<if test="entireSearchType == 'title' ">
+	        WHERE entire_title LIKE '%' || #{entireSearchData} || '%') e
+	    </if>
+
+		<if test="entireSearchType == 'content' ">
+	        WHERE entire_content LIKE '%' || #{entireSearchData} || '%') e
+	    </if>
+
+		<if test="entireSearchType == 'nickname' ">
+	        WHERE entire_nickname LIKE '%' || #{entireSearchData} || '%') e
+	    </if>
+	</select>
+	
+	<!-- 검색한 데이터 타입에 따라 가져오기 -->
+	<select id="searchData" resultType="com.military.dto.EntireDTO">
+		SELECT *
+		    FROM (SELECT ROWNUM r, e.* 
+		            FROM (SELECT  * FROM entire ORDER BY entire_group DESC, entire_step) e
+				
+				<if test="entireSearchType == 'all' ">
+			        WHERE entire_title LIKE '%' || #{entireSearchData} || '%' OR
+			        	  entire_content LIKE '%' || #{entireSearchData} || '%' OR
+			        	  entire_nickname LIKE '%' || #{entireSearchData} || '%') e
+				</if>
+				
+				<if test="entireSearchType == 'title' ">
+			        WHERE entire_title LIKE '%' || #{entireSearchData} || '%') e
+			    </if>
+		
+				<if test="entireSearchType == 'content' ">
+			        WHERE entire_content LIKE '%' || #{entireSearchData} || '%') e
+			    </if>
+		
+				<if test="entireSearchType == 'nickname' ">
+			        WHERE entire_nickname LIKE '%' || #{entireSearchData} || '%') e
+			    </if>
+			WHERE <![CDATA[r >= #{rowStart} AND r <= #{rowEnd}]]>
+	</select>
+	
+	
+	
+	<!-- 특정 제목 클릭 했을때 -->
 	<select id="selectOne" resultType="com.military.dto.EntireDTO">
-		SELECT * FROM entire WHERE entire_no = #{no}
+		SELECT * FROM entire WHERE entire_no = #{no} ORDER BY entire_group DESC, entire_step
 	</select>
 </mapper>
