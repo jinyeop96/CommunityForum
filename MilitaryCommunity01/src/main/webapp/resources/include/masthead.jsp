@@ -10,8 +10,8 @@
       <img class="masthead-avatar mb-5" src="<c:url value="/resources/img/avataaars.svg" />" alt="">	<%-- mapping되어 있기 떄문에 jstl로 불러오쎼용 --%>
 
       <!-- Masthead Heading -->
-      <h1 class="masthead-heading text-uppercase mb-0">Start Bootstrap</h1>
-
+      <h1 class="masthead-heading text-uppercase mb-0">오.와.열</h1>
+	
       <!-- Icon Divider -->
       <div class="divider-custom divider-light">
         <div class="divider-custom-line"></div>
