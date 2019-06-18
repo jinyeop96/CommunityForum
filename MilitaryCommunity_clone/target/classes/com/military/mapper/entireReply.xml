@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.military.mapper.entireReply">
+
+	<select id="selectList" resultType="com.military.dto.EntireReplyDTO">
+		SELECT * FROM entire_reply WHERE e_reply_group = #{no} ORDER BY e_reply_step, e_reply_indent
+	</select>
+	
+	<update id="updateReplyOthers">
+		UPDATE entire_reply
+			SET e_reply_step = e_reply_step + 1
+			WHERE e_reply_group = #{no}
+	</update>
+
+	<update id="updateReply">
+		INSERT INTO entire_reply
+			VALUES(e_reply_seq.NEXTVAL, #{no}, 1, 1, #{e_reply_nickname}, #{e_reply_content}, 0, 0, SYSDATE)
+	</update>
+</mapper>

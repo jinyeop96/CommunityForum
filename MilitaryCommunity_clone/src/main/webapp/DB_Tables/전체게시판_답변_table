@@ -1,0 +1,16 @@
+create table entire_reply(
+	e_reply_no number(10) primary key,
+	e_reply_group number(10) not null,
+	e_reply_step number(10) not null,
+	e_reply_indent number(10) not null,
+	e_reply_nickname varchar2(30) not null,
+	e_reply_content varchar2(1000) not null,
+	e_reply_like number(10) not null,
+	e_reply_dislike number(10) not null,
+	e_reply_date date not null
+);
+
+create sequence e_reply_seq
+	start with 1
+	increment by 1
+	nocache;
