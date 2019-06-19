@@ -7,6 +7,11 @@
 	background-position: center;
 }
 
+.bg-primary{
+	background-color: #1abc9c;	
+}
+
+
 @media ( max-width: 991px){
 	.navbar-top-right{
 		display: none;
@@ -117,12 +122,6 @@
 	resize: none;
 }
 
-
-
-
-.bg-primary{
-	background-image: url("../img/background/bg-primary.jpg");
-}
 
 
 
