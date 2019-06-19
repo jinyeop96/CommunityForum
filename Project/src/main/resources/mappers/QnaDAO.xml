@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.dao.QnaDAO">
+	
+	
+	<insert id="qna_insert" parameterType="com.project.dto.QnaDTO">
+		insert into qna_table values(qna_seq.nextval,#{title},#{qna_content},#{pw})
+	</insert>
+	
+	<select id="qna_list" resultType="com.project.dto.QnaDTO">
+		<![CDATA[
+		select 
+			seq, title, qna_content
+		from
+			(select /*+INDEX_DESC(qna_table) */
+				rownum rn, seq,title,qna_content
+			from 
+				qna_table
+			where rownum <= #{pageNum} *#{amount}
+			)
+			where rn> (#{pageNum}-1) * #{amount}
+		
+		
+		]]>
+	</select>
+	
+	<select id="qna_pwcheck" resultType="int">
+		select count(*) from qna_table where seq =#{seq} and pw=#{pw}
+	</select>
+	
+	<select id="qna_count" resultType="int">
+		select count(*) from qna_table
+	</select>
+</mapper>

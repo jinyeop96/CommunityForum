@@ -42,41 +42,40 @@
 
 			<div class="collapse navbar-collapse " id="navbarResponsive">
 				<ul class="navbar-nav ml-auto menu-bar">
-					<li class="nav-item mx-0 mx-lg-1"><a
-						class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Board</a>
-						<ul class="board_bg">
-							<li><a
-								class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-								href="entire.do?pageParam=1">전체</a></li>
-							<li><a
-								class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-								href="free.do">자유</a></li>
-							<li><a
-								class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-								href="#path">뭐뭐</a></li>
-						</ul></li>
-					<li class="nav-item mx-0 mx-lg-1"><a
-						class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Browse</a>
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Board</a>
+							<ul class="board_bg">
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="entire.do?pageParam=1">전체</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="free.do">자유</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#path">뭐뭐</a></li>
+							</ul>
+					</li>
+					
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Browse</a>
+							<ul>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#hotel">Hotel</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#restaurant">Restaurant</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#transport">Transport</a></li>
+							</ul>
+					</li>
+					
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#path">News</a>
 						<ul>
-							<li><a
-								class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-								href="#hotel">Hotel</a></li>
-							<li><a
-								class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-								href="#restaurant">Restaurant</a></li>
-							<li><a
-								class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-								href="#transport">Transport</a></li>
-						</ul></li>
-					 <li class="nav-item mx-0 mx-lg-1"><a
-						class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-						href="#path">News</a></li>
-					  <li class="nav-item mx-0 mx-lg-1">
-           				 <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="login.do">Login</a>
-         			 </li>
-					 <%--<li class="nav-item mx-0 mx-lg-1">
-            			<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-top-right" href="<%=request.getContextPath()%>/register.do">Register</a>
-          			</li> --%>
+		             		<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="allqna.do">부대행사</a></li>
+		              		<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="allqnalist.do">전군공지</a></li>
+		              	</ul>
+					</li>
+						
+					<li class="nav-item mx-0 mx-lg-1">
+           				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="login.do">Login</a>
+         			</li>
+	
+					<li class="nav-item mx-0 mx-lg-1">
+           				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="join.do">Join</a>
+         			</li>
+					 
 		
 				</ul>
 			</div>
@@ -84,6 +83,6 @@
 		<div class="navbar-log-regi">
 			<!-- 메뉴바 우측상단배치 -->
 			<a class="navbar-top-right" href="login.do">Login</a> <a
-				class="navbar-top-right" href="register.do">Register</a>
+				class="navbar-top-right" href="join.do">Join</a>
 		</div>
 	</nav>

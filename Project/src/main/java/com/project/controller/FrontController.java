@@ -16,11 +16,6 @@ public class FrontController {
 	public String login() {
 		return "login";
 	}
-	
-	@RequestMapping("/register.do")
-	public String join() {
-		return "join";
-	}
 
 	@RequestMapping("/free.do")
 	public String free() {
