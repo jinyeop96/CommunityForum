@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.military.dao.joinDAO">
+
+<select id="insert" parameterType="com.military.dto.JoinDTO">
+insert into hmember values(#{j_id},#{j_pwd},#{j_name},#{j_nickname},#{j_email},#{j_mobile},#{j_addr},#{j_birth})  
+</select>
+
+
+<select id="findid" resultType="int">
+  select count(*) from hmember where j_id=#{j_id}  
+</select>
+
+
+<select id="findnick" resultType="int">
+  select count(*) from hmember where j_nickname=#{j_nickname}  
+</select>
+
+</mapper>
