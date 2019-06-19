@@ -31,7 +31,7 @@ public class QnaController {
 	public String allqnaList(Criteria cri, Model model) throws Exception{
 		
 		//페이징 처리 
-		model.addAttribute("pageMaker", new PageDTO(cri,qnaDao.qna_count()));
+		model.addAttribute("pageMaker", new PageDTO(cri,qnaDao.qna_count()));	// (cri, qna_table의 레코드 수)
 
 		model.addAttribute("list",qnaDao.qna_list(cri));
 		return "qna_list";

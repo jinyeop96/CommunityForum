@@ -41,7 +41,7 @@ public class QnaDAOImpl implements QnaDAO {
 
 	@Override
 	public int qna_count() throws Exception {
-		return template.selectOne("qna_count");
+		return template.selectOne("qna_count");	// qna_table의 모든 레코드 수를 가져옴
 	}
 
 }
