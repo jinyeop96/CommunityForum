@@ -24,7 +24,7 @@ public class EntireBoardController {
 	public EntireDAOImpl entire;	// 전체 게시판 DAO
 	
 	@Autowired
-	public EntireReplyDAOImpl entireReply;
+	public EntireReplyDAOImpl entireReply;	//전체
 	
 	Pagination pagination;
 	Map<String, Object> map;
@@ -32,12 +32,14 @@ public class EntireBoardController {
 	@RequestMapping("/content.do")
 	public String content(@RequestParam("no") int no, Model model) {
 		entire.updateView(no); 	//조회수 증가
-		
-		model.addAttribute("dto", entire.selectOne(no));	// 특정 레코드 가져오기
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("no", no);
-		model.addAttribute("list", entireReply.selectList(map));	//특정 레코드 답변글 가져오기
+		
+		model.addAttribute("dto", entire.selectOne(no));	// 특정 레코드 가져오기
+		model.addAttribute("replyNum", entireReply.getRecords(map));
+		
+		
 		return "content";
 	} ///content.do
 	
@@ -78,8 +80,8 @@ public class EntireBoardController {
 	
 	@RequestMapping("/replyUpdate.do")
 	@ResponseBody
-	public void replySave(HttpServletRequest request, Model model) {
-		Map<String, Object> map = new HashMap<String, Object>();
+	public void replySave(HttpServletRequest request) {
+		map = new HashMap<String, Object>();
 		map.put("no", Integer.parseInt(request.getParameter("no")));
 		map.put("e_reply_nickname", request.getParameter("e_reply_nickname").trim());
 		map.put("e_reply_content", request.getParameter("e_reply_content"));
@@ -89,12 +91,64 @@ public class EntireBoardController {
 	}
 	
 	@RequestMapping("/replyList.do")
-	public ModelAndView replyList(@RequestParam int no, ModelAndView mav  ) {
-		Map<String, Object> map = new HashMap<String, Object>();
+	public ModelAndView replyList(@RequestParam int no, @RequestParam int pageParam, ModelAndView mav  ) {
+		map = new HashMap<String, Object>();
 		map.put("no", no);
 		
+		pagination = new Pagination(entireReply.getRecords(map), pageParam, 10, 5);	// 10rows, 5 blocks
+		
+		map.put("rowStart", pagination.getRowStart());
+		map.put("rowEnd", pagination.getRowEnd());
+		
 		mav.addObject("list", entireReply.selectList(map));
+		mav.addObject("page", pagination);
+		mav.addObject("replyNum", entireReply.getRecords(map));
 		mav.setViewName("reply/replyList");
 		return mav;
 	}
+	
+	@RequestMapping("/entireUpdateLike.do")
+	@ResponseBody
+	public void updateLike(@RequestParam int no, @RequestParam int e_reply_no) {
+		map = new HashMap<String, Object>();
+		map.put("no", no);
+		map.put("e_reply_no", e_reply_no);
+		entireReply.updateLike(map);
+	}
+	
+	@RequestMapping("/entireUpdateDislike.do")
+	@ResponseBody
+	public void updateDislike(@RequestParam int no, @RequestParam int e_reply_no) {
+		map = new HashMap<String, Object>();
+		map.put("no", no);
+		map.put("e_reply_no", e_reply_no);
+		entireReply.updateDislike(map);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

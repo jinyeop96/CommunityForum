@@ -22,15 +22,23 @@ public class EntireReplyDAOImpl  implements EntireReplyDAO{
 	}
 	
 	@Override
-	public int getRecords() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getRecords(Map<String, Object> map) {
+		return template.selectOne("com.project.mapper.entireReply.getRecords", map);
 	}
 	
 	@Override
 	public void updateReply(Map<String, Object> map) {
 		template.update("com.project.mapper.entireReply.updateReplyOthers", map);
 		template.update("com.project.mapper.entireReply.updateReply", map);
-		
+	}
+	
+	@Override
+	public void updateLike(Map<String, Object> map) {
+		template.update("com.project.mapper.entireReply.updateLike", map);
+	}
+	
+	@Override
+	public void updateDislike(Map<String, Object> map) {
+		template.update("com.project.mapper.entireReply.updateDislike", map);
 	}
 }
