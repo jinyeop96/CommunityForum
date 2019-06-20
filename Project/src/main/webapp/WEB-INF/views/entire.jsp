@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>entire</title>
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
+	<style type="text/css">
+		#hr{
+			background-color: transparent;
+		}
+	</style>
 </head>
 <body>
 		<jsp:include page="/resources/include/navigation.jsp" />
@@ -21,7 +26,7 @@
 	      		<form action="entireSearch.do" method="get">
 	     			<input type="hidden" name="pageParam" value="1">
 	      			 
-	      			<table class="board table table-hover" id="entireList"> <%-- table : 선 긋기, table-hover : 마우스 올렸을 때 색변화 --%>
+	      			<table class="board table-hover" id="entireList"> <%-- table : 선 긋기, table-hover : 마우스 올렸을 때 색변화 --%>
 			      		<%------------------가져온 전체 게시물 있다면-------------- --%>
 			      		<c:if test="${!empty list }">
 				      		<tr class="t2">
@@ -46,12 +51,34 @@
 					      			<td class="t3">${dto.getEntire_view() }</td>
 					      			<td class="t3">${dto.getEntire_like() }</td>
 					      		</tr>
+					      		
+					      		<tr>
+					      			<td colspan="7">
+					      				<hr style="border: none; border-top: 1px solid white;" id="hr">
+					      			</td>
+					      		</tr>
+					      		
 				      		</c:forEach>
+				      		
+				      		<tr>
+				      			<%-- 검색창 --%>
+					      		<td colspan="6" align="center">
+					      			<select name="entireSearchType">
+					      				<option value="all">전체</option>
+					      				<option value="title">제목</option>
+					      				<option value="content">내용</option>
+					      				<option value="nickname">글쓴이</option>
+					      			</select>
+					      			
+					      			<input name="entireSearchData">
+					      			<input type="submit" value="검색">
+					      		</td>
+				      		</tr>
 				      	
 				      		
 				      		<%-- 하단부 페이징 및 검색창 --%>
 					      	<tr>
-				      			<td colspan="3" align="center">
+				      			<td colspan="6" align="center">
 				      				<%-----------------Left Arrows----------- --%>
 				      				<c:if test="${ page.getPage() > page.getBlocks() }">
 										<a href="entire.do?pageParam=1" class="blocks">[◀◀]</a>
@@ -79,19 +106,6 @@
 									</c:if>
 					      		</td>
 					      		
-					      		
-					      		<%-- 검색창 --%>
-					      		<td colspan="3" align="center">
-					      			<select name="entireSearchType">
-					      				<option value="all">전체</option>
-					      				<option value="title">제목</option>
-					      				<option value="content">내용</option>
-					      				<option value="nickname">글쓴이</option>
-					      			</select>
-					      			
-					      			<input name="entireSearchData">
-					      			<input type="submit" value="검색">
-					      		</td>
 				      		</tr>
 			      		</c:if>
 			      		
