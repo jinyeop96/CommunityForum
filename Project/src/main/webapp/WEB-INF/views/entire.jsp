@@ -53,19 +53,19 @@
 					      	<tr>
 				      			<td colspan="3" align="center">
 				      				<%-----------------Left Arrows----------- --%>
-				      				<c:if test="${ page > blocks }">
+				      				<c:if test="${ page.getPage() > page.getBlocks() }">
 										<a href="entire.do?pageParam=1" class="blocks">[◀◀]</a>
-										<a href="entire.do?pageParam=${blockStart - 1}" class="blocks">[◀]</a>
+										<a href="entire.do?pageParam=${page.getBlockStart() - 1}" class="blocks">[◀]</a>
 									</c:if>
 								 
 				      				
 				      				<%------------------ block 번호 ------------ --%>
-						      		<c:forEach begin="${blockStart }" end="${blockEnd }" step="1" var="i">
-						      			<c:if test="${page == i }">
+						      		<c:forEach begin="${page.getBlockStart() }" end="${page.getBlockEnd() }" step="1" var="i">
+						      			<c:if test="${page.getPage() == i }">
 						      				<b>${i }</b> 
 						      			</c:if>
 						      
-						      			<c:if test="${page != i }">
+						      			<c:if test="${page.getPage() != i }">
 						      				<b><a href="entire.do?pageParam=${i }" class="blocks">${i }</a></b>
 						      			</c:if>
 						      			&nbsp;&nbsp;&nbsp;
@@ -73,9 +73,9 @@
 
 						      		
 						      		<%--------------------Right Arrows----------------- --%>
-						      		<c:if test="${blockEnd < totalPages }">
-										<a href="entire.do?pageParam=${blockEnd + 1}" class="blocks">[▶]</a>
-										<a href="entire.do?pageParam=${totalPages }" class="blocks">[▶▶] </a>
+						      		<c:if test="${page.getBlockEnd() < page.getTotalPages() }">
+										<a href="entire.do?pageParam=${page.getBlockEnd() + 1}" class="blocks">[▶]</a>
+										<a href="entire.do?pageParam=${page.getTotalPages() }" class="blocks">[▶▶] </a>
 									</c:if>
 					      		</td>
 					      		
