@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!-- Footer -->
   <footer class="footer text-center">
     <div class="container">
@@ -16,11 +18,13 @@
         <!-- Footer Military Icons -->
         <div class="col-lg-4 mb-5 mb-lg-0">
           <h4 class="text-uppercase mb-4">관련기관 / 서비스 바로가기</h4>
-          <a class="btn btn-outline-light btn-social mx-1" href="http://www.army.mil.kr"> <!-- 육군 사이트 -->
-            <i class="fab fa-fw fa-facebook-f"></i>
+          <a class="btn btn-outline-light btn-social mx-1" href="http://http://www.mnd.go.kr/mbshome/mbs/mnd/"> <!-- 국방부 사이트 -->
+            <!-- <i class="fab fa-fw fa-facebook-f"></i> -->
+            <img src="<c:url value='/resources/img/logos/mnd.png'/>" title="국방부로 이동" style="width: 33px;">
           </a>
-             <a class="btn btn-outline-light btn-social mx-1" href="http://www.jcs.mil.kr"> <!-- 합참 사이트 -->
-            <i class="fab fa-fw fa-instagram"></i>
+             <a class="btn btn-outline-light btn-social mx-1" href="https://www.mma.go.kr/index.do"> <!-- 병무청 사이트 -->
+            <!-- <i class="fab fa-fw fa-instagram"></i> -->
+            <img src="<c:url value='/resources/img/logos/mma.png'/>" title="병무청으로 이동" style="width: 23px;">
           </a>
           <a class="btn btn-outline-light btn-social mx-1" href="http://www.navy.mil.kr">	<!-- 해군 사이트 -->
             <i class="fab fa-fw fa-twitter"></i>
