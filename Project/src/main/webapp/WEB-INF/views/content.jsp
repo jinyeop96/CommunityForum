@@ -101,35 +101,35 @@
 		<header class="masthead bg-primary text-white text-center">
 	    <div class="container d-flex align-items-center flex-column">
 	      
-	      	
+	      	<%pageContext.setAttribute("newLineChar", "\n"); %>	<%-- \n -> newLineChar로 --%>
 	      	<div class="board" align="center"> 
       			<table class="board font-black">
-		      		<tr class="t2">
+		      		<tr>
 		      			<th class="content-title">${dto.getEntire_title() }</th>
 		      		</tr>
 		      		
-		      		<tr class="t2">
-		      			<td class="t3">${dto.getEntire_nickname() }</td>
+		      		<tr >
+		      			<td>${dto.getEntire_nickname() }</td>
 		      		</tr>
 		      		
 		      		<tr>
-		      			<td class="t3">${dto.getEntire_date() } </td>
+		      			<td>${dto.getEntire_date() } </td>
 		      		</tr>
 		      		
 		      		<tr>
-		      			<td class="t3">조회수  : ${dto.getEntire_view() }</td> 
+		      			<td>조회수  : ${dto.getEntire_view() }</td> 
 		      		</tr>
 		      		
 		      		<tr>
-		      			<td class="t3">추천 : ${dto.getEntire_like() }</td> 
+		      			<td>추천 : ${dto.getEntire_like() }</td> 
 		      		</tr>
 		      				      		
 		      		<tr>
-		      			<td class="t3">비추천 : ${dto.getEntire_dislike() }</td> 
+		      			<td>비추천 : ${dto.getEntire_dislike() }</td> 
 		      		</tr>
 		      				      		
 		      		<tr>
-		      			<td class="t3">답글 : ${replyNum }</td> 
+		      			<td>답글 : ${replyNum }</td> 
 		      		</tr>
 		      		
 		      		<tr>
@@ -137,7 +137,10 @@
 		      		</tr>
 		      		
 		      		<tr>
-		      			<td>${dto.getEntire_content() }</td>
+		      			<td>
+		      				<c:set var="replyStr" value="${fn:replace(dto.getEntire_content(), '  ', '&nbsp;&nbsp;' ) }"></c:set>	<%-- 공백 가능하게 처리해줌 --%>
+      						${fn:replace(replyStr , newLineChar, "<br>")} 	<!-- \n를 해주는 과정 --> 
+		      			</td>
 		      		</tr>	
 		      		
 		      		<tr>
