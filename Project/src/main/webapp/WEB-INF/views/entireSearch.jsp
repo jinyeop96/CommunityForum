@@ -44,8 +44,8 @@
 					      		</tr>
 					      		<tr>
 					      			<%-- <td class="text-center" style="border: 1px solid red;">${dto.getEntire_no() }</td> --%>
-					      			<td class="text-center">${dto.getEntire_nickname() }</td>
-					      			<td class="text-center">${dto.getEntire_date().substring(0, 10) }</td>
+					      			<td>${dto.getEntire_nickname() }</td>
+					      			<td>${dto.getEntire_date().substring(0, 10) }</td>
 					      			<td class="text-center">조회 ${dto.getEntire_view() }</td>
 					      			<td class="text-center">추천 ${dto.getEntire_like() }</td>
 					      		</tr>
