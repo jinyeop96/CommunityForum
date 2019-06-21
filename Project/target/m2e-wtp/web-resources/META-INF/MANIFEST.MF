@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: TJ
+=======
+Built-By: JINYEOP
+>>>>>>> 1cdabd04fcc922c74b64aaa06f23d4ba81c9b440
 Build-Jdk: 1.8.0_201
 Created-By: Maven Integration for Eclipse
 

@@ -101,7 +101,6 @@
 		<header class="masthead bg-primary text-white text-center">
 	    <div class="container d-flex align-items-center flex-column">
 	      
-	    	<h3 class="masthead-heading text-uppercase mb-0">content</h3>
 	      	
 	      	<div class="board" align="center"> 
       			<table class="board font-black">
@@ -153,11 +152,11 @@
 		        <%-- 답변 글쓰기 폼 --%>
 		        <table class="board">
 		        	<tr>
-		        		<td><textarea class="board reply-board" rows="4"  placeholder="댓글 쓰기" id="e_reply_content" ></textarea></td>
+		        		<td><textarea class="board resize-none" rows="4"  placeholder="댓글 쓰기" id="e_reply_content" ></textarea></td>
 		        	</tr>
 		        	<tr>
 		        		<td colspan="2" align="right">
-		        			nickname : <input id="e_reply_nickname">
+		        			<input id="e_reply_nickname" placeholder="nickname"> 
 			        		<input type="button" id="reply" value="저장">
 	        			</td>
 		        	</tr>

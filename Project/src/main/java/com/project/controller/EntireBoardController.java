@@ -27,13 +27,12 @@ public class EntireBoardController {
 	public EntireReplyDAOImpl entireReply;	//전체
 	
 	Pagination pagination;
-	Map<String, Object> map;
+	Map<String, Object> map = new HashMap<String, Object>();
 	
 	@RequestMapping("/content.do")
 	public String content(@RequestParam("no") int no, Model model) {
 		entire.updateView(no); 	//조회수 증가
 
-		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("no", no);
 		
 		model.addAttribute("dto", entire.selectOne(no));	// 특정 레코드 가져오기
@@ -47,7 +46,6 @@ public class EntireBoardController {
 	public String entire(@RequestParam int pageParam, Model model) {
 		pagination = new Pagination(entire.getRecords(), pageParam);	// (전체레코드 수, 페이지 번호)
 		
-		map = new HashMap<String, Object>();
 		map.put("rowStart", pagination.getRowStart());
 		map.put("rowEnd", pagination.getRowEnd());
 		
@@ -60,7 +58,6 @@ public class EntireBoardController {
 	@RequestMapping("/entireSearch.do")
 	public String entireSearch(@RequestParam String entireSearchType, @RequestParam String entireSearchData, @RequestParam int pageParam, Model model) {
 		//검색종류, 검색어 map에 담아서 sql query로 전달
-		map	= new HashMap<String, Object>();
 		map.put("entireSearchType", entireSearchType);
 		map.put("entireSearchData", entireSearchData);
 		
@@ -81,7 +78,6 @@ public class EntireBoardController {
 	@RequestMapping("/replyUpdate.do")
 	@ResponseBody
 	public void replySave(HttpServletRequest request) {
-		map = new HashMap<String, Object>();
 		map.put("no", Integer.parseInt(request.getParameter("no")));
 		map.put("e_reply_nickname", request.getParameter("e_reply_nickname").trim());
 		map.put("e_reply_content", request.getParameter("e_reply_content"));
@@ -92,7 +88,6 @@ public class EntireBoardController {
 	
 	@RequestMapping("/replyList.do")
 	public ModelAndView replyList(@RequestParam int no, @RequestParam int pageParam, ModelAndView mav  ) {
-		map = new HashMap<String, Object>();
 		map.put("no", no);
 		
 		pagination = new Pagination(entireReply.getRecords(map), pageParam, 10, 5);	// 10rows, 5 blocks
@@ -110,7 +105,6 @@ public class EntireBoardController {
 	@RequestMapping("/entireUpdateLike.do")
 	@ResponseBody
 	public void updateLike(@RequestParam int no, @RequestParam int e_reply_no) {
-		map = new HashMap<String, Object>();
 		map.put("no", no);
 		map.put("e_reply_no", e_reply_no);
 		entireReply.updateLike(map);
@@ -119,12 +113,30 @@ public class EntireBoardController {
 	@RequestMapping("/entireUpdateDislike.do")
 	@ResponseBody
 	public void updateDislike(@RequestParam int no, @RequestParam int e_reply_no) {
-		map = new HashMap<String, Object>();
 		map.put("no", no);
 		map.put("e_reply_no", e_reply_no);
 		entireReply.updateDislike(map);
 	}
+
+	@RequestMapping("/writeEntire.do")
+	public String writeEntire() {
+		return "writeEntire";
+	}
+
+	@RequestMapping("/writeEntireOk.do")
+	public String writeEntireOk(HttpServletRequest request, Model model) {
+		map.put("entire_title", request.getParameter("entire_title").trim());
+		map.put("entire_content", request.getParameter("entire_content"));
+		map.put("entire_nickname", request.getParameter("entire_nickname").trim());
+		map.put("entire_pwd", request.getParameter("entire_pwd").trim());
+		
+		entire.insertRecord(map);
+		
+		return "redirect:entire.do?pageParam="+1;
+	}
 }
+
+
 
 
 
