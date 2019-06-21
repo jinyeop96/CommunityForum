@@ -57,7 +57,11 @@ public class EntireDAOImpl implements EntireDAO {
 		template.update("com.project.mapper.entire.updateView", no);
 	}
 	
-	
+	// -----------------게시물 등록--------------
+	@Override
+	public void insertRecord(Map<String, Object> map) {
+		template.insert("com.project.mapper.entire.insertRecord", map);
+	}
 	
 	
 	

@@ -20,7 +20,7 @@ public interface EntireDAO {
 	
 	public void updateView(int no);
 	
-	
+	public void insertRecord(Map<String, Object> map);
 	
 	
 }

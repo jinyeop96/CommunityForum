@@ -7,11 +7,7 @@
 <meta charset="UTF-8">
 <title>entire</title>
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
-	<style type="text/css">
-		#hr{
-			background-color: transparent;
-		}
-	</style>
+	
 </head>
 <body>
 		<jsp:include page="/resources/include/navigation.jsp" />
@@ -21,40 +17,39 @@
 	    <div class="container d-flex align-items-center flex-column">
 	      
 	    	<h3 class="masthead-heading text-uppercase mb-0">전체 게시물</h3>
+	    	<br><br>
 	      
 	      	<div class="board" align="center"> 
 	      		<form action="entireSearch.do" method="get">
 	     			<input type="hidden" name="pageParam" value="1">
 	      			 
-	      			<table class="board table-hover" id="entireList"> <%-- table : 선 긋기, table-hover : 마우스 올렸을 때 색변화 --%>
+	      			<table class="board font-black " id="entireList"> <%-- table : 선 긋기, table-hover : 마우스 올렸을 때 색변화 --%>
 			      		<%------------------가져온 전체 게시물 있다면-------------- --%>
 			      		<c:if test="${!empty list }">
-				      		<tr class="t2">
-				      			<th class="t3">번호</th>
-				      			<th class="t3">제목</th>
-				      			<th class="t3">글쓴이</th>
-				      			<th class="t3">작성일</th>
-				      			<th class="t3">조회</th>
-				      			<th class="t3">추천</th>
+				      		<tr>
+				      			<td colspan="7" align="right">
+				      				<input class="buttons" type="button" value="글쓰기" onclick="location.href='writeEntire.do'">
+				      			</td>
 				      		</tr>
-			      		
+			      		 
 			      			<%-- 가져온 게시물 뿌려주기 --%>
 				      		<c:forEach items="${list }" var="dto">
-					      		<tr class="t2">
-					      		
-					      			<td class="t3">${dto.getEntire_no() }</td>
-					      			<td class="t3"><a href="content.do?no=${dto.getEntire_no() }" style="color: #000">
-					      				${dto.getEntire_title() }
+					      		<tr>
+					      			<td colspan="7" ><a href="content.do?no=${dto.getEntire_no() }" style="color: #000">
+					      				<h6>${dto.getEntire_title() }</h6>
 					      			</a></td>
-					      			<td class="t3">${dto.getEntire_nickname() }</td>
-					      			<td class="t3">${dto.getEntire_date().substring(0, 10) }</td>
-					      			<td class="t3">${dto.getEntire_view() }</td>
-					      			<td class="t3">${dto.getEntire_like() }</td>
+					      		</tr>
+					      		<tr>
+					      			<%-- <td class="text-center" style="border: 1px solid red;">${dto.getEntire_no() }</td> --%>
+					      			<td class="text-center">${dto.getEntire_nickname() }</td>
+					      			<td class="text-center">${dto.getEntire_date().substring(0, 10) }</td>
+					      			<td class="text-center">조회 ${dto.getEntire_view() }</td>
+					      			<td class="text-center">추천 ${dto.getEntire_like() }</td>
 					      		</tr>
 					      		
 					      		<tr>
 					      			<td colspan="7">
-					      				<hr style="border: none; border-top: 1px solid white;" id="hr">
+					      				<hr style="border: none; border-top: 1px solid white;" class="hr">
 					      			</td>
 					      		</tr>
 					      		
@@ -119,14 +114,14 @@
 			     			</tr>
 			      			<tr>
 			      				<td colspan="6" align="center">
-					      			<select name="entireSearchType">
+					      			<select name="entireSearchType" class="radius-10px">
 					      				<option value="all">전체</option>
 					      				<option value="title">제목</option>
 					      				<option value="content">내용</option>
 					      				<option value="nickname">글쓴이</option>
 					      			</select>
-					      			<input name="entireSearchData">
-					      			<input type="submit" value="검색">
+					      			<input class="radius-10px" name="entireSearchData" >
+					      			<input type="submit" class="searchBtn" value="검색" > 
 					      		</td>
 			      			</tr>
 			      		</c:if>
