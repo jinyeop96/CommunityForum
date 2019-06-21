@@ -63,7 +63,7 @@
 					<li class="nav-item mx-0 mx-lg-1">
 						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#path">News</a>
 						<ul>
-		             		<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="allqna.do">부대행사</a></li>
+		             		<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="allqna.do">고객센터</a></li>
 		              		<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="allqnalist.do">전군공지</a></li>
 		              	</ul>
 					</li>
