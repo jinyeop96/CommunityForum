@@ -82,6 +82,12 @@
 	<update id="updateView">
 		UPDATE entire SET entire_view = entire_view + 1 WHERE entire_no = #{no}
 	</update>
+	
+	<!--  게시물 등록 -->
+	<insert id="insertRecord">
+		INSERT INTO entire 
+			VALUES(entire_seq.NEXTVAL, #{entire_nickname}, #{entire_pwd}, #{entire_title}, #{entire_content}, entire_seq.CURRVAL, 0, 0, 0, 0, 0, 0, SYSDATE)
+	</insert>
 </mapper>
 
 
