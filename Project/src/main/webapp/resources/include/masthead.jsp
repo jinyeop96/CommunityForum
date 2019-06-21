@@ -22,7 +22,7 @@
       </div>
 
       <!-- Masthead Subheading -->
-      <p class="masthead-subheading font-weight-light mb-0">Graphic Artist - Web Designer - Illustrator</p>
+      <p class="masthead-subheading font-weight-light mb-0">군인 - 민간인 대통합 프로젝트!!</p>
 
     </div>
   </header>
