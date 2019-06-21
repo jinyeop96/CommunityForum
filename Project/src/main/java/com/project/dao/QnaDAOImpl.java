@@ -20,7 +20,7 @@ public class QnaDAOImpl implements QnaDAO {
 
 	@Override
 	public int qna_insert(QnaDTO qnaDTO) throws Exception {
-		return template.insert("com.military.dao.QnaDAO.qna_insert",qnaDTO);
+		return template.insert("com.project.dao.QnaDAO.qna_insert",qnaDTO);
 	}
 
 

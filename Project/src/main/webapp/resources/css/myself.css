@@ -123,8 +123,14 @@
 	resize: none;
 }
 
+.font-black{
+	color: black;
+}
 
-
+.rec{
+		max-width: 19px;
+		height: auto;
+	}
 
 
 

@@ -30,6 +30,7 @@
 		    <version>1.3.2</version>
 		</dependency>
 		
+<<<<<<< HEAD
 				<!-- json라이브러리 -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -38,6 +39,8 @@
 		</dependency>
 		
 		
+=======
+>>>>>>> refs/heads/join
 		<!-- Spring DataSource(commons-DBCP)-->
 		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
 		<dependency>
