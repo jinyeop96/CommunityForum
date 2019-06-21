@@ -54,19 +54,19 @@
 					      	<tr>
 				      			<td colspan="3" align="center">
 				      				<%--//////////////Left Arrows//////////// --%>
-				      				<c:if test="${ page > blocks }">
+				      				<c:if test="${ page.getPage() > page.getBlocks() }">
 										<a href="entireSearch.do?pageParam=1&entireSearchType=${entireSearchType }&entireSearchData=${entireSearchData}" class="blocks">[◀◀]</a>
-										<a href="entireSearch.do?pageParam=${blockStart - 1}&entireSearchType=${entireSearchType }&entireSearchData=${entireSearchData}" class="blocks">[◀]</a>
+										<a href="entireSearch.do?pageParam=${page.getBlockStart() - 1}&entireSearchType=${entireSearchType }&entireSearchData=${entireSearchData}" class="blocks">[◀]</a>
 									</c:if>
 				      				
 				      				<%--/////////// block 번호 ///////////////// --%>
 				      				
-						      		<c:forEach begin="${blockStart }" end="${blockEnd }" step="1" var="i">
-						      			<c:if test="${page == i }">
+						      		<c:forEach begin="${page.getBlockStart() }" end="${page.getBlockEnd() }" step="1" var="i">
+						      			<c:if test="${page.getPage() == i }">
 						      				<b>${i }</b> 
 						      			</c:if>
 						      			
-						      			<c:if test="${page != i }">
+						      			<c:if test="${page.getPage() != i }">
 						      				<b><a href="entireSearch.do?pageParam=${i }&entireSearchType=${entireSearchType }&entireSearchData=${entireSearchData}" class="blocks">${i }</a></b>
 						      			</c:if>
 						      			&nbsp;&nbsp;&nbsp;
@@ -74,9 +74,9 @@
 						      		
 						      		<%--////////////////////Right Arrows//////////////// --%>
 						      		
-						      		<c:if test="${blockEnd < totalPages }">
-										<a href="entireSearch.do?pageParam=${blockEnd + 1}&entireSearchType=${entireSearchType }&entireSearchData=${entireSearchData}" class="blocks">[▶]</a>
-										<a href="entireSearch.do?pageParam=${totalPages }&entireSearchType=${entireSearchType }&entireSearchData=${entireSearchData}" class="blocks">[▶▶] </a>
+						      		<c:if test="${page.getBlockEnd() < page.getTotalPages() }">
+										<a href="entireSearch.do?pageParam=${page.getBlockEnd() + 1}&entireSearchType=${entireSearchType }&entireSearchData=${entireSearchData}" class="blocks">[▶]</a>
+										<a href="entireSearch.do?pageParam=${page.getTotalPages() }&entireSearchType=${entireSearchType }&entireSearchData=${entireSearchData}" class="blocks">[▶▶] </a>
 									</c:if>
 					      		</td>
 					      		
