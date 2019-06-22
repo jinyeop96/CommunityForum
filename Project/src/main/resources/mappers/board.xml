@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper  namespace="com.project.mappers.board">
+	<!-- 전체 레코드 수 -->
+	<select id="getRecords" resultType="com.project.dto.BoardDTO">
+		SELECT * FROM board WHERE board_type = #{board_type} ORDER BY board_no
+	</select>
+	 
+	 <!-- 일반 전체 검색 -->
+	<select id="selectList" resultType="com.project.dto.BoardDTO">
+		<!-- SELECT * FROM (SELECT ROWNUM r, e.* FROM entire e ORDER BY entire_no DESC) WHERE <![CDATA[ r >= #{rowStart} AND r <= #{rowStart} + 20 ]]> -->	<!-- mapper 안에선 <,> 와 같은 비교연산자는 <![CDATA[요기에 넣으셈요]]> --> -->
+		SELECT *
+		    FROM (SELECT ROWNUM r, b.*
+		            FROM (SELECT * 
+		                    FROM board
+		                    WHERE board_type = #{board_type}
+		                    ORDER BY board_no DESC) b)
+		    WHERE <![CDATA[ r >= #{rowStart} AND r <= #{rowEnd} ]]>
+	</select>
+	
+		
+		
+	<!-- 검색한 게시물 수 -->	
+	<select id="getSearchByTypeRecords" resultType="com.project.dto.BoardDTO">
+		SELECT *
+		    FROM (SELECT ROWNUM r, b.* 
+		            FROM (SELECT  * FROM board WHERE board_type = #{board_type} ) b
+		
+		<if test="searchType == 'all' ">
+	        WHERE board_title LIKE '%' || #{searchData} || '%' OR
+	        	  board_content LIKE '%' || #{searchData} || '%' OR
+	        	  board_nickname LIKE '%' || #{searchData} || '%')
+	    </if>
+		
+		<if test="searchType == 'title' ">
+	        WHERE board_title LIKE '%' || #{searchData} || '%')
+	    </if>
+
+		<if test="searchType == 'content' ">
+	        WHERE board_content LIKE '%' || #{searchData} || '%') 
+	    </if>
+
+		<if test="searchType == 'nickname' ">
+	        WHERE board_nickname LIKE '%' || #{searchData} || '%')
+	    </if>
+	</select>
+	
+	<!-- 검색한 데이터 타입에 따라 가져오기 -->
+	<select id="searchData" resultType="com.project.dto.BoardDTO">
+		SELECT *
+		    FROM (SELECT ROWNUM r, b.* 
+		            FROM (SELECT  * FROM board WHERE board_type = #{board_type} ORDER BY board_no DESC) b
+				
+				<if test="searchType == 'all' ">
+			        WHERE board_title LIKE '%' || #{searchData} || '%' OR
+			        	  board_content LIKE '%' || #{searchData} || '%' OR
+			        	  board_nickname LIKE '%' || #{searchData} || '%')
+				</if>
+				
+				<if test="searchType == 'title' ">
+			        WHERE board_title LIKE '%' || #{searchData} || '%')
+			    </if>
+		
+				<if test="searchType == 'content' ">
+			        WHERE board_content LIKE '%' || #{searchData} || '%')
+			    </if>
+		
+				<if test="searchType == 'nickname' ">
+			        WHERE board_nickname LIKE '%' || #{searchData} || '%')
+			    </if>
+			WHERE <![CDATA[r >= #{rowStart} AND r <= #{rowEnd}]]>
+	</select>
+	
+	
+	
+	<!-- 특정 제목 클릭 했을때 -->
+	<select id="selectOne" resultType="com.project.dto.BoardDTO">
+		SELECT * FROM board WHERE board_no = #{board_no}
+	</select>
+	
+	<update id="updateView">
+		UPDATE board SET board_view = board_view + 1 WHERE board_no = #{board_no}
+	</update>
+	
+	<!--  게시물 등록 -->
+	<insert id="insertRecord">
+		INSERT INTO board
+			VALUES(#{board_type} ,board_seq.NEXTVAL, #{board_nickname}, #{board_pwd}, #{board_title}, #{board_content}, 0, 0, 0, SYSDATE)
+	</insert>
+</mapper>

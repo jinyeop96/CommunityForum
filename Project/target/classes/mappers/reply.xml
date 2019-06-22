@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mappers.reply">
+	<select id="getRecords" resultType="int" >
+		SELECT COUNT(*) FROM reply WHERE reply_group = #{board_no}	<!--  board_no == reply_group -->
+	</select>
+	
+	<select id="selectList" resultType="com.project.dto.ReplyDTO">
+		SELECT * 
+		    FROM(SELECT ROWNUM r, b.*
+		            FROM (SELECT * FROM reply WHERE reply_group = #{board_no} ORDER BY reply_step) b)
+		    WHERE <![CDATA[ r >= #{rowStart} AND r <= #{rowEnd}]]>
+	</select>
+	
+	<update id="updateReplyOthers">
+		UPDATE reply
+			SET reply_step = reply_step + 1
+			WHERE reply_group = #{board_no}
+	</update>
+
+	<update id="updateReply">
+		INSERT INTO reply
+			VALUES(reply_seq.NEXTVAL, #{board_no}, 1, 1, #{reply_nickname}, #{reply_content}, 0, 0, SYSDATE)
+	</update>
+	
+	<update id="updateLike">
+		UPDATE reply
+			SET reply_like = reply_like + 1
+			WHERE reply_no = #{reply_no}
+	</update>
+
+	<update id="updateDislike">
+		UPDATE reply
+			SET reply_dislike = reply_dislike - 1
+			WHERE reply_no = #{reply_no}
+	</update>
+</mapper>

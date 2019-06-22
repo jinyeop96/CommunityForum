@@ -43,11 +43,12 @@
 			<div class="collapse navbar-collapse " id="navbarResponsive">
 				<ul class="navbar-nav ml-auto menu-bar">
 					<li class="nav-item mx-0 mx-lg-1">
-						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Board</a>
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">게시판</a>
 							<ul class="board_bg">
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="entire.do?pageParam=1">전체</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="free.do">자유</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#path">뭐뭐</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=entire">전체게시판</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=free">자유게시판</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=review">후기게시판</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=question">질문게시판</a></li>
 							</ul>
 					</li>
 					

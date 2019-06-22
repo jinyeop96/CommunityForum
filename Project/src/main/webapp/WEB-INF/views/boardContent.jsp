@@ -6,14 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Content</title>
+<title>${dto.getBoard_title() }</title>
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 	<script type="text/javascript">
 		$(function(){
-			getReplylist();	// 처음 실행될 때 답변글 가져오는 함수 실행.
-			
-			//$("#replyTable").hide();
-			
+			getReplyList();	// 처음 실행될 때 답변글 가져오는 함수 실행.
 			
 			$("#reply").click(function(){	// 답장버튼 누르면 reply() 실행
 				reply();
@@ -21,7 +18,7 @@
 		});	
 		
 		
-		function getReplylist(pageParam){  // 해당 글의 답변 다 가져오기
+		function getReplyList(pageParam){  // 해당 글의 답변 다 가져오기
 			if(pageParam == null){
 				pageParam = 1;
 			}
@@ -29,8 +26,8 @@
 			$.ajax({
 				url: "replyList.do",
 				type:"post",
-				data: {"no": "${dto.getEntire_no() }",
-						"pageParam": pageParam},
+				data: {"board_no": "${dto.getBoard_no() }",
+					   "pageParam": pageParam},
 				success:function(result){
 					$("#replyTable").html(result).trigger("create");
 				}
@@ -38,37 +35,31 @@
 		};	// getReplyList()
 		
 		
-		
-		
-		
-		
 		function reply(){	// 답변 등록
 			$.ajax({
-				url:"<c:url value='replyUpdate.do' />",
+				url:"replyUpdate.do",
 				type:"get",
-				data: { "no": "${dto.getEntire_no()}",			//해당 원글 번호
-						"e_reply_content": $("#e_reply_content").val(),	//답글
-						"e_reply_nickname": $("#e_reply_nickname").val() },	// 닉네임 (나중에 session으로 처리할 때 nickname으로 할 예정)
+				data: { "board_no": "${dto.getBoard_no()}",			//해당 원글 번호
+						"reply_content": $("#reply_content").val(),	//답글
+						"reply_nickname": $("#reply_nickname").val() },	// 닉네임 (나중에 session으로 처리할 때 nickname으로 할 예정)
 			
 				success:function(){
-						$("#e_reply_content").val("");
-						$("#e_reply_nickname").val("");
-						getReplylist();			// 댓글 달기 성공하면 바로 답변글 DB에서 가져옴
+						$("#reply_content").val("");
+						$("#reply_nickname").val("");
+						getReplyList();			// 댓글 달기 성공하면 바로 답변글 DB에서 가져옴
 				}
 			});
 		};	//reply();
 	
 	
-		
 		/// 좋아요 & 싫어요
-		function updateLike(e_reply_no){
+		function updateLike(reply_no){
 			$.ajax({
-				url: "entireUpdateLike.do",
+				url: "updateLike.do",
 				type:"get",
-				data: {"no": "${dto.getEntire_no() }",
-						"e_reply_no": e_reply_no},
+				data: {"reply_no": reply_no},
 				success:function(result){
-					getReplylist();
+					getReplyList();
 				},
 				error:function(){
 					alert("오류가 생겼습니다.");
@@ -76,14 +67,13 @@
 			});
 		}
 
-		function updateDislike(e_reply_no){
+		function updateDislike(reply_no){
 			$.ajax({
-				url: "entireUpdateDislike.do",
+				url: "updateDislike.do",
 				type:"get",
-				data: {"no": "${dto.getEntire_no() }",
-					   "e_reply_no": e_reply_no},
+				data: {"reply_no": reply_no},
 				success:function(result){
-					getReplylist();
+					getReplyList();
 				},
 				error:function(){
 					alert("오류가 생겼습니다.");
@@ -105,27 +95,27 @@
 	      	<div class="board" align="center"> 
       			<table class="board font-black">
 		      		<tr>
-		      			<th class="content-title">${dto.getEntire_title() }</th>
-		      		</tr>
-		      		
-		      		<tr >
-		      			<td>${dto.getEntire_nickname() }</td>
+		      			<th class="content-title">${dto.getBoard_title() }</th>
 		      		</tr>
 		      		
 		      		<tr>
-		      			<td>${dto.getEntire_date() } </td>
+		      			<td><b>> ${dto.getBoard_nickname() }</b></td>
 		      		</tr>
 		      		
 		      		<tr>
-		      			<td>조회수  : ${dto.getEntire_view() }</td> 
+		      			<td>${dto.getBoard_date() } </td>
 		      		</tr>
 		      		
 		      		<tr>
-		      			<td>추천 : ${dto.getEntire_like() }</td> 
+		      			<td>조회수  : ${dto.getBoard_view() }</td> 
+		      		</tr>
+		      		
+		      		<tr>
+		      			<td>추천 : ${dto.getBoard_like() }</td> 
 		      		</tr>
 		      				      		
 		      		<tr>
-		      			<td>비추천 : ${dto.getEntire_dislike() }</td> 
+		      			<td>비추천 : ${dto.getBoard_dislike() }</td> 
 		      		</tr>
 		      				      		
 		      		<tr>
@@ -138,8 +128,8 @@
 		      		
 		      		<tr>
 		      			<td>
-		      				<c:set var="replyStr" value="${fn:replace(dto.getEntire_content(), '  ', '&nbsp;&nbsp;' ) }"></c:set>	<%-- 공백 가능하게 처리해줌 --%>
-      						${fn:replace(replyStr , newLineChar, "<br>")} 	<!-- \n를 해주는 과정 --> 
+		      				<c:set var="content" value="${fn:replace(dto.getBoard_content(), '  ', '&nbsp;&nbsp;' ) }"></c:set>	<%-- 공백 가능하게 처리해줌 --%>
+      						${fn:replace(content , newLineChar, "<br>")} 	<!-- \n를 해주는 과정 --> 
 		      			</td>
 		      		</tr>	
 		      		
@@ -155,18 +145,16 @@
 		        <%-- 답변 글쓰기 폼 --%>
 		        <table class="board">
 		        	<tr>
-		        		<td><textarea class="board resize-none" rows="4"  placeholder="댓글 쓰기" id="e_reply_content" ></textarea></td>
+		        		<td><textarea class="board resize-none" rows="4"  placeholder="댓글 쓰기" id="reply_content" ></textarea></td>
 		        	</tr>
 		        	<tr>
 		        		<td colspan="2" align="right">
-		        			<input id="e_reply_nickname" placeholder="nickname"> 
+		        			<input id="reply_nickname" placeholder="nickname"> 
 			        		<input type="button" id="reply" value="저장">
 	        			</td>
 		        	</tr>
-		        	<tr>
-		        		<td><hr></td>
-		        	</tr>
 		        </table>
+		        
      		 </div>
 	   	 </div>
 	  </header>

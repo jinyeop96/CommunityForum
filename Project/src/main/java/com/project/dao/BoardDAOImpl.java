@@ -1,0 +1,65 @@
+package com.project.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.project.dto.BoardDTO;
+
+@Repository
+public class BoardDAOImpl implements BoardDAO{
+	
+	@Autowired
+	private SqlSessionTemplate template;
+	
+	//--------전체 게시물 ----------
+	@Override
+	//전체 레코드 수
+	public int getRecords(String board_type) {
+		return template.selectList("com.project.mappers.board.getRecords", board_type).size();
+	}
+	
+	@Override
+	// 레코드 전체 가져오기
+	public List<BoardDTO> selectList(Map<String, Object> map) {	
+		return template.selectList("com.project.mappers.board.selectList", map);
+	}
+	
+	
+	
+	// ------------------검색했을때--------------------
+	@Override
+	// 검색한 레코드 전체 수
+	public int getRecordsBySerachType(Map<String, Object> map) {
+		return template.selectList("com.project.mappers.board.getSearchByTypeRecords", map).size();
+	}
+	
+	@Override
+	// 검색한 레코드 전체 가져오기
+	public List<BoardDTO> selectSearchData(Map<String, Object> map) {
+		return template.selectList("com.project.mappers.board.searchData", map);
+	}
+
+	
+	
+	
+	//-------------content 관련 ----------------
+	@Override
+	public BoardDTO selectOne(int board_no) {			// no(게시글 번호) 넘겨서 특정 레코드만 가져오기
+		return template.selectOne("com.project.mappers.board.selectOne", board_no);
+	}
+	
+	@Override
+	public void updateView(int no) {
+		template.update("com.project.mappers.board.updateView", no);
+	}
+	
+	// -----------------게시물 등록--------------
+	@Override
+	public void insertRecord(Map<String, Object> map) {
+		template.insert("com.project.mappers.board.insertRecord", map);
+	}
+}

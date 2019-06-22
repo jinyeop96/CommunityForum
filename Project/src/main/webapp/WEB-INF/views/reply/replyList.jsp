@@ -16,60 +16,48 @@
 		min-width: 40px;
 	}
 </style>
+	<%pageContext.setAttribute("newLineChar", "\n"); %>	<%-- \n -> newLineChar로 --%>
 	
 	<table class="board font-black" id="replyTable"> <%-- table : 선 긋기, table-hover : 마우스 올렸을 때 색변화 --%>
-	<%pageContext.setAttribute("newLineChar", "\n"); %>	<%-- \n -> newLineChar로 --%>
 	<%------------------가져온 게시물의 답변글이 있다면-------------- --%>
 	<c:if test="${!empty list }">
 		<%-- 가져온 게시물 뿌려주기 --%>
+		
    		<c:forEach items="${list }" var="reply">
+   			<!-- 닉네임 -->
      		<tr>
-     			<th id="nickname" colspan="7">
-     				<c:if test="${!empty reply.getE_reply_indent() }">
-					<c:forEach begin="1" end="${reply.getE_reply_indent() }" step="1">
-	      				>
-	      			</c:forEach>
-     				</c:if>
-     				${reply.getE_reply_nickname() }
-     			</th>
+     			<th colspan="7">> ${reply.getReply_nickname() }</th>
      		</tr>
      		
+     		
      		<tr>
+     			<!--  좋아요 -->
      			<td colspan="2">
-     				<a href="javascript:void(0)"  onclick="updateLike(${reply.getE_reply_no()})" class="font-black">
-     					<img class="rec" src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;${reply.getE_reply_like() }
+     				<a href="javascript:void(0)"  onclick="updateLike(${reply.getReply_no()})" class="font-black">
+     					<img class="rec" src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;${reply.getReply_like() }
     				</a>
 				</td>
+				
+				<!-- 싫어요 -->
      			<td colspan="2">
-     				<a href="javascript:void(0)"  onclick="updateDislike(${reply.getE_reply_no()})" class="font-black">
-     					<img class="rec" src="<c:url value='/resources/img/logos/dislike2.png'/>">&nbsp;&nbsp;${reply.getE_reply_dislike() }
+     				<a href="javascript:void(0)"  onclick="updateDislike(${reply.getReply_no()})" class="font-black">
+     					<img class="rec" src="<c:url value='/resources/img/logos/dislike2.png'/>">&nbsp;&nbsp;${reply.getReply_dislike() }
      				</a>
      			</td>
-     			<td >${reply.getE_reply_date() }</td>
+     			
+     			<!-- 작성일 -->
+     			<td >${reply.getReply_date() }</td>
      		</tr>
-		
-     		<tr><td colspan="7"  >
-     			<c:if test="${!empty reply.getE_reply_indent() }">	<%-- indent 만큼 띄어쓰기를 해줄거임. --%>
-					<c:forEach begin="1" end="${reply.getE_reply_indent() }" step="1">
-	      				&nbsp;&nbsp;&nbsp;
-	      			</c:forEach>
-     			</c:if>
-     			<c:set var="replyStr" value="${fn:replace(reply.getE_reply_content(), '  ', '&nbsp;&nbsp;' ) }"></c:set>	<%-- 공백 가능하게 처리해줌 --%>
+			
+			<!-- 답변글 -->
+     		<tr><td colspan="7"  > 
+     		&nbsp;&nbsp;&nbsp;
+     			<c:set var="replyStr" value="${fn:replace(reply.getReply_content(), '  ', '&nbsp;&nbsp;' ) }"></c:set>	<%-- 공백 가능하게 처리해줌 --%>
       			${fn:replace(replyStr , newLineChar, "<br>")} 	<!-- \n를 해주는 과정 --> 
      		</td></tr>
 	     		
-	    		
-			<tr>
-				<td colspan="7">
-					<c:if test="${reply.getE_reply_indent() >= 2 }">
-						<hr style="border: none; border-top: 3px dotted blue;">
-					</c:if>
-					
-					<c:if test="${reply.getE_reply_indent() == 1 }">
-						<hr>
-					</c:if>
-				</td>
-			</tr>
+	    	<!-- 답변 글 나누기 -->
+			<tr><td colspan="7"><hr></td></tr>
    		</c:forEach>
 			
 			
@@ -77,8 +65,8 @@
       			<td colspan="7" align="center" >
       				<%-----------------Left Arrows----------- --%>
       				<c:if test="${ page.getPage() > page.getBlocks() }">
-						<a href="javascript:void(0)" onclick="getReplylist(1)" class="blocks">[◀◀]</a>
-						<a href="javascript:void(0)" onclick="getReplylist(${page.getBlockStart() - 1})" class="blocks">[◀]</a>
+						<a href="javascript:void(0)" onclick="getReplyList(1)" class="blocks">[◀◀]</a>
+						<a href="javascript:void(0)" onclick="getReplyList(${page.getBlockStart() - 1})" class="blocks">[◀]</a>
 					</c:if>
 				 
       				
@@ -89,8 +77,8 @@
 		      			</c:if>
 		      
 		      			<c:if test="${page.getPage() != i }">
-		      				<c:set value="${i }" var="pageParam"></c:set>	<%-- page넘기려면 set 해줘야함 --%>
-		      				<b><a href="javascript:void(0)" onclick="getReplylist(${pageParam})" class="blocks">${i }</a></b>
+							<c:set value="${i }" var="pageParam"></c:set>	<%-- page넘기려면 set 해줘야함 --%>
+		      				<b><a href="javascript:void(0)" onclick="getReplyList(${pageParam})" class="blocks">${i }</a></b>
 		      			</c:if>
 		      			&nbsp;&nbsp;&nbsp;
 		      		</c:forEach>
@@ -98,26 +86,11 @@
 		      		
 		      		<%--------------------Right Arrows----------------- --%>
 		      		<c:if test="${page.getBlockEnd() < page.getTotalPages() }">
-						<a href="javascript:void(0)" onclick="getReplylist(${page.getBlockEnd() + 1})" class="blocks">[▶]</a>
-						<a href="javascript:void(0)" onclick="getReplylist(${page.getTotalPages() })" class="blocks">[▶▶] </a>
+						<a href="javascript:void(0)" onclick="getReplyList(${page.getBlockEnd() + 1})" class="blocks">[▶]</a>
+						<a href="javascript:void(0)" onclick="getReplyList(${page.getTotalPages() })" class="blocks">[▶▶] </a>
 						
 					</c:if>
 	      		</td>
-	      		
-	      		
-	      		<%-- 검색창 --%>
-	      		<!-- <td colspan="4" align="center" >
-	      			<select name="entireSearchType">
-	      				<option value="all">전체</option>
-	      				<option value="title">제목</option>
-	      				<option value="content">내용</option>
-	      				<option value="nickname">글쓴이</option>
-	      			</select>
-	      			
-	      			<input name="entireSearchData" id="inputSearch input">
-	      			<input type="submit" value="검색">
-	      			
-	      		</td> -->
       		</tr>
    	</c:if>
    	</table>
