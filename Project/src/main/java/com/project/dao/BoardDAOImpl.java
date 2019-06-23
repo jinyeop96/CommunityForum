@@ -57,6 +57,28 @@ public class BoardDAOImpl implements BoardDAO{
 		template.update("com.project.mappers.board.updateView", no);
 	}
 	
+	@Override
+	public void boardUpdateLike(int board_no) {
+		template.update("com.project.mappers.board.updateLike", board_no);
+		
+	}
+	
+	@Override
+	public void boardUpdateDislike(int board_no) {
+		template.update("com.project.mappers.board.updateDislike", board_no);
+		
+	}
+	
+	@Override
+	public int getLikes(int board_no) {
+		return template.selectOne("com.project.mappers.board.getLikes", board_no);
+	}
+	
+	@Override
+	public int getDislikes(int board_no) {
+		return template.selectOne("com.project.mappers.board.getDislikes", board_no);
+	}
+	
 	// -----------------게시물 등록--------------
 	@Override
 	public void insertRecord(Map<String, Object> map) {

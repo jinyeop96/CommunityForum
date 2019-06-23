@@ -19,4 +19,12 @@ public List<BoardDTO> selectList(Map<String, Object> map);
 	public void updateView(int no);
 	
 	public void insertRecord(Map<String, Object> map);
+	
+	public void boardUpdateLike(int board_no);
+
+	public void boardUpdateDislike(int board_no);
+
+	public int getLikes(int board_no);
+	
+	public int getDislikes(int board_no);
 }

@@ -162,7 +162,10 @@
 	height: 2.75rem;
 }
 
-
+.contentRec{
+	max-width: 40px;
+    height: auto;
+}
 
 
 

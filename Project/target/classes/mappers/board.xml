@@ -12,8 +12,8 @@
 		<!-- SELECT * FROM (SELECT ROWNUM r, e.* FROM entire e ORDER BY entire_no DESC) WHERE <![CDATA[ r >= #{rowStart} AND r <= #{rowStart} + 20 ]]> -->	<!-- mapper 안에선 <,> 와 같은 비교연산자는 <![CDATA[요기에 넣으셈요]]> --> -->
 		SELECT *
 		    FROM (SELECT ROWNUM r, b.*
-		            FROM (SELECT * 
-		                    FROM board
+		            FROM (SELECT (SELECT COUNT(*) FROM reply WHERE reply_group = board_no) board_reply, b.* 
+		                    FROM board b
 		                    WHERE board_type = #{board_type}
 		                    ORDER BY board_no DESC) b)
 		    WHERE <![CDATA[ r >= #{rowStart} AND r <= #{rowEnd} ]]>
@@ -88,4 +88,29 @@
 		INSERT INTO board
 			VALUES(#{board_type} ,board_seq.NEXTVAL, #{board_nickname}, #{board_pwd}, #{board_title}, #{board_content}, 0, 0, 0, SYSDATE)
 	</insert>
+	
+	<update id="updateLike">
+		UPDATE board
+			SET board_like = board_like + 1
+			WHERE board_no = #{board_no}
+	</update>
+
+	<update id="updateDislike">
+		UPDATE board
+			SET board_dislike = board_dislike - 1
+			WHERE board_no = #{board_no}
+	</update>
+	
+	<select id="getLikes" resultType="int">
+		SELECT board_like
+			FROM board
+			WHERE board_no = #{board_no}
+	</select>
+
+	<select id="getDislikes" resultType="int">
+		SELECT board_dislike
+			FROM board
+			WHERE board_no = #{board_no}
+	</select>
+	
 </mapper>

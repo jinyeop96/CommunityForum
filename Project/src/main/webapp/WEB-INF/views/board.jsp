@@ -32,11 +32,29 @@
 	    	
 	      	<%--------------------------------------------------- --%>
 	      	<div class="board" align="center"> 
+	      		<%-- 검색내용 상단에 표시 --%>
+	      			<c:if test="${!empty searchData }">
+			      	<c:if test="${searchType == 'all' }">
+			  		  	<b>전체</b>
+			      	</c:if>
+			      	<c:if test="${searchType == 'title' }">
+			  		  	<b>제목</b>
+			      	</c:if>
+			      	<c:if test="${searchType == 'content' }">
+			  		  	<b>내용</b>
+			      	</c:if>
+			      	<c:if test="${searchType == 'nickname' }">
+			  		  	<b>글쓴이</b>
+			      	</c:if>
+
+			      	<b> -> ${searchData } (으)로 검색하였습니다.</b> 
+	      		</c:if>
+	      	
 	      		<form action="boardSearch.do" method="get">
 	     			<input type="hidden" name="pageParam" value="1">
 	     			<input type="hidden" name="board_type" value="${board_type }">
 	      			 
-	      			<table class="board font-black " id="entireList"> <%-- table : 선 긋기, table-hover : 마우스 올렸을 때 색변화 --%>
+	      			<table class="board font-black " id="entireList"> 
 			      		<%------------------가져온 전체 게시물 있다면-------------- --%>
 			      		<c:if test="${!empty list }">
 				      		<tr>
@@ -44,19 +62,20 @@
 				      				<input class="buttons" type="button" value="글쓰기" onclick="location.href='boardWrite.do?board_type=${board_type}'">
 				      			</td>
 				      		</tr>
+				      		<br><br>
 			      		 
 			      			<%-- 가져온 게시물 뿌려주기 --%>
 				      		<c:forEach items="${list }" var="dto">
 					      		<tr>
-					      			<td colspan="7" ><a href="content.do?board_no=${dto.getBoard_no() }" style="color: #000">
-					      				<h6>${dto.getBoard_title() }</h6>
+					      			<td colspan="7" ><a href="content.do?board_no=${dto.getBoard_no() }&board_type=${board_type}&pageParam=${page.getPage()}" style="color: #000">
+					      				<h6>${dto.getBoard_title() } [${dto.getBoard_reply() }]</h6>
 					      			</a></td>
 					      		</tr>
 					      		<tr>
 					      			<td><b>> ${dto.getBoard_nickname() }</b></td>
 					      			<td>${dto.getBoard_date().substring(0, 10) }</td>
-					      			<td class="text-center">조회 ${dto.getBoard_view() }</td>
 					      			<td class="text-center">추천 ${dto.getBoard_like() }</td>
+					      			<td class="text-center">조회 ${dto.getBoard_view() }</td>
 					      		</tr>
 					      		
 					      		<tr>
@@ -69,12 +88,49 @@
 				      	
 				      		
 				      		<%-- 하단부 페이징 및 검색창 --%>
+				      		
+				      		
 					      	<tr>
 				      			<td colspan="6" align="center">
+				      		<%------------------------ 일반 게시물이라면 ( 검색하지 않은 상태 ) ----------------------------%>
+				      			<c:if test="${empty searchData }">
 				      				<%-----------------Left Arrows----------- --%>
 				      				<c:if test="${ page.getPage() > page.getBlocks() }">
-										<a href="board.do?pageParam=1&board_type=${board_type }" class="blocks">[◀◀]</a>
-										<a href="board.do?pageParam=${page.getBlockStart() - 1}&board_type=${board_type }" class="blocks">[◀]</a>
+										<a href="board.do?pageParam=1&board_type=${board_type }&boardSearch=no" class="blocks">[◀◀]</a>
+										<a href="board.do?pageParam=${page.getBlockStart() - 1}&board_type=${board_type }&boardSearch=no" class="blocks">[◀]</a>
+									</c:if>
+								 
+				      				
+				      				<%------------------ block 번호 ------------ --%>
+						      		<c:forEach begin="${page.getBlockStart() }" end="${page.getBlockEnd() }" step="1" var="i">
+						      			<!-- 현재페이지 -->
+						      			<c:if test="${page.getPage() == i }">
+						      				<b>${i }</b> 
+						      			</c:if>
+						      
+						      			<!--  no 현재페이지 -->
+						      			<c:if test="${page.getPage() != i }">
+						      				<b><a href="board.do?pageParam=${i }&board_type=${board_type }&boardSearch=no" class="blocks">${i }</a></b>
+						      			</c:if>
+						      			&nbsp;&nbsp;&nbsp;
+						      		</c:forEach>
+
+						      		
+						      		<%--------------------Right Arrows----------------- --%>
+						      		<c:if test="${page.getBlockEnd() < page.getTotalPages() }">
+										<a href="board.do?pageParam=${page.getBlockEnd() + 1}&board_type=${board_type }&boardSearch=no" class="blocks">[▶]</a>
+										<a href="board.do?pageParam=${page.getTotalPages() }&board_type=${board_type }&boardSearch=no" class="blocks">[▶▶] </a>
+									</c:if>
+				      			</c:if>
+							
+							
+							
+							<%------------------------ 검색한 상태라면 ----------------------------%>
+									
+								<c:if test="${!empty searchData }">
+									<c:if test="${ page.getPage() > page.getBlocks() }">
+										<a href="boardSearch.do?pageParam=1&board_type=${board_type }&searchType=${searchType}&searchData=${searchData}" class="blocks">[◀◀]</a>
+										<a href="boardSearch.do?pageParam=${page.getBlockStart() - 1}&board_type=${board_type }&searchType=${searchType}&searchData=${searchData}" class="blocks">[◀]</a>
 									</c:if>
 								 
 				      				
@@ -85,7 +141,7 @@
 						      			</c:if>
 						      
 						      			<c:if test="${page.getPage() != i }">
-						      				<b><a href="board.do?pageParam=${i }&board_type=${board_type }" class="blocks">${i }</a></b>
+						      				<b><a href="boardSearch.do?pageParam=${i }&board_type=${board_type }&searchType=${searchType}&searchData=${searchData}" class="blocks">${i }</a></b>
 						      			</c:if>
 						      			&nbsp;&nbsp;&nbsp;
 						      		</c:forEach>
@@ -93,11 +149,11 @@
 						      		
 						      		<%--------------------Right Arrows----------------- --%>
 						      		<c:if test="${page.getBlockEnd() < page.getTotalPages() }">
-										<a href="board.do?pageParam=${page.getBlockEnd() + 1}&board_type=${board_type }" class="blocks">[▶]</a>
-										<a href="board.do?pageParam=${page.getTotalPages() }&board_type=${board_type }" class="blocks">[▶▶] </a>
+										<a href="boardSearch.do?pageParam=${page.getBlockEnd() + 1}&board_type=${board_type }&searchType=${searchType}&searchData=${searchData}" class="blocks">[▶]</a>
+										<a href="boardSearch.do?pageParam=${page.getTotalPages() }&board_type=${board_type }&searchType=${searchType}&searchData=${searchData}" class="blocks">[▶▶] </a>
 									</c:if>
+								</c:if>	
 					      		</td>
-					      		
 				      		</tr>
 			      		</c:if>
 			      		
@@ -112,7 +168,13 @@
 			      		
 			      			<tr>
 			     				<th colspan="7" align="center">
-			     					<h3>글이 하나도 없습니다! 새로운 글을 써주세요</h3>
+				      				<c:if test="${empty searchData }">
+					     				<h3>글이 하나도 없습니다! 새로운 글을 써주세요</h3>
+				      				</c:if>
+				      				
+				      				<c:if test="${!empty searchData }">
+					     				<h3>검색 게시물이 없습니다!</h3>
+				      				</c:if>
 			     				</th>
 			     			</tr>
 			      		</c:if>

@@ -1,6 +1,7 @@
 package com.project.dto;
 
 public class BoardDTO {
+	private int board_reply;
 	private String board_type;
 	private int board_no;
 	private String board_nickname;
@@ -12,6 +13,14 @@ public class BoardDTO {
 	private int board_dislike;
 	private String board_date;
 	
+	
+	
+	public int getBoard_reply() {
+		return board_reply;
+	}
+	public void setBoard_reply(int board_reply) {
+		this.board_reply = board_reply;
+	}
 	public String getBoard_type() {
 		return board_type;
 	}
