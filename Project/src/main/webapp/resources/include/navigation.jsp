@@ -42,6 +42,17 @@
 
 			<div class="collapse navbar-collapse " id="navbarResponsive">
 				<ul class="navbar-nav ml-auto menu-bar">
+				
+				<li class="nav-item mx-0 mx-lg-1">
+					<a class="nav-link pv-3 px-0 px-lg-3 rounded js-scroll-trigger">팀 소개</a>
+						<ul>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">팀원구성</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">기획의도</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">프로젝트의 미래</a></li>
+						</ul>
+				</li>
+				
+				
 					<li class="nav-item mx-0 mx-lg-1">
 						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">게시판</a>
 							<ul class="board_bg">
@@ -49,6 +60,7 @@
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=free&boardSearch=no">자유게시판</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=review&boardSearch=no">후기게시판</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=question&boardSearch=no">질문게시판</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=findPeople&boardSearch=no">사람찾습니다!</a></li>							
 							</ul>
 					</li>
 					
@@ -58,6 +70,7 @@
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#hotel">Hotel</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#restaurant">Restaurant</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#transport">Transport</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#address">ADDRESS</a></li>
 							</ul>
 					</li>
 					
@@ -65,6 +78,7 @@
 						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#path">News</a>
 						<ul>
 		             		<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="allqna.do">고객센터</a></li>
+		              		<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="allqnalist.do">공지사항</a></li>
 		              		<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="allqnalist.do">전군공지</a></li>
 		              	</ul>
 					</li>
@@ -76,14 +90,20 @@
 					<li class="nav-item mx-0 mx-lg-1">
            				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="join.do">Join</a>
          			</li>
-					 
-		
 				</ul>
+				
+				<li class="nav-item mx-0 mx-lg-1">
+					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">O.W.Y contents</a>
+					<ul>
+						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Logo</a></li>
+					</ul>
+				</li>
+
 			</div>
 		</div>
 		<div class="navbar-log-regi">
 			<!-- 메뉴바 우측상단배치 -->
-			<a class="navbar-top-right" href="login.do">Login</a> <a
-				class="navbar-top-right" href="join.do">Join</a>
+			<a class="navbar-top-right" href="login.do">Login</a> 
+			<a class="navbar-top-right" href="join.do">Join</a>
 		</div>
 	</nav>

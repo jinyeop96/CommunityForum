@@ -94,7 +94,7 @@ function div_OnOff(v,id){
 	if(v=="1"){
 		document.getElementById(id).style.display=""; //보여줌
 	}else {
-		document.getElementbyId(id).style.display="nome"; //숨김
+		document.getElementbyId(id).style.display="none"; //숨김
 	}
 }
 

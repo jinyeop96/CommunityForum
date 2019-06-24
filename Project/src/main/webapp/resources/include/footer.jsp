@@ -22,25 +22,34 @@
             <!-- <i class="fab fa-fw fa-facebook-f"></i> -->
             <img src="<c:url value='/resources/img/logos/mnd.png'/>" title="국방부로 이동" style="width: 33px;">
           </a>
-             <a class="btn btn-outline-light btn-social mx-1" href="https://www.mma.go.kr/index.do"> <!-- 병무청 사이트 -->
+          
+             <a class="btn btn-outline-light btn-social mx-1" href="http://www.army.mil.kr"> <!-- 육군 사이트 -->
             <!-- <i class="fab fa-fw fa-instagram"></i> -->
-            <img src="<c:url value='/resources/img/logos/mma.png'/>" title="병무청으로 이동" style="width: 23px;">
+            <img src="<c:url value='/resources/img/logos/rockArmy.png'/>" title="육군 사이트로 이동" style="width: 33px;">
           </a>
+          
           <a class="btn btn-outline-light btn-social mx-1" href="http://www.navy.mil.kr">	<!-- 해군 사이트 -->
-            <i class="fab fa-fw fa-twitter"></i>
+            <!--<i class="fab fa-fw fa-twitter"></i>-->
+            <img src="<c:url value='/resources/img/logos/navy.png'/>" title="해군 사이트로 이동" style="width: 33px;">
           </a>
+          
           <a class="btn btn-outline-light btn-social mx-1" href="http://http://mnd.go.kr">  <!-- 공군 사이트 -->
-            <i class="fab fa-fw fa-instagram"></i>
+           <!--<i class="fab fa-fw fa-instagram"></i>-->
+          	<img src="<c:url value='/resources/img/logos/airforce.png'/>" title="공군 사이트로 이동" style="width: 33px;">
           </a>
+          
           <a class="btn btn-outline-light btn-social mx-1" href="http://www.rokmc.mil.kr"> <!-- 해병대 사이트 -->
-            <i class="fab fa-fw fa-youtube"></i>
+            <!--<i class="fab fa-fw fa-youtube"></i>-->
+            <img src="<c:url value='/resources/img/logos/marine.png'/>" title="해병대 사이트로 이동" style="width: 33px;">
           </a>
+          
           <a class="btn btn-outline-light btn-social mx-1" href="https://www.mma.go.kr"> <!-- 병무청 사이트 -->
-            <i class="fab fa-fw fa-facebook-f"></i>
+           <!--<i class="fab fa-fw fa-facebook-f"></i>-->
+           <img src="<c:url value='/resources/img/logos/mma.png'/>" title="병무청 사이트로 이동" style="width: 23px;">
           </a><br>
        
           
-          <p> <a href="http://www.mnd.go.kr">국방부 메인 사이트</a></p><br>
+          <br><br>
           <p class="lead mb-0">우리는 대한민국 청춘들을 응원합니다!</p>
           
           
