@@ -21,18 +21,10 @@
       <form onsubmit="return loginformchk()" action="<%=request.getContextPath()%>/loginok.do">
       	<table>
       		<tr>
-      			<th>user ID</th>
-      			<td><input class="input" name="j_id" id ="j_id"></td> 
-      		</tr>
-      		
-      		<tr>
-      			<th>password</th>
-      			<td><input class="input" type="password" name="j_pwd" id="j_pwd" ></td>
+      		<td>로그인성공?</td>
       		</tr>
       	</table>
-      	<input id="loginBtn" type="submit" value="Login"><br>
-      	<input  id="loginBtn" type="button" value="find_Id" onclick="location.href='id_search.do'" >
-      	<input  id="loginBtn" type="button" value="find_pwd" onclick="location.href='pwd_search.do'">
+      	
       	</form>
       </div>
     </div>
