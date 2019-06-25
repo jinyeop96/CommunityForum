@@ -1,36 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>OwyMember</title>
+<script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 </head>
 	<jsp:include page="/resources/include/navigation.jsp" />
 	
-
-	 <!--  section01 -->
 	<header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
-      
-      <h1 class="masthead-heading text-uppercase mb-0">로그인</h1>
-      <div id="loginDiv">
-      	<table>
-      		<tr>
-      			<th>username</th>
-      			<td><input class="input" name="username"></td> 
-      		</tr>
-      		
-      		<tr>
-      			<th>password</th>
-      			<td><input class="input" type="password" name="pwd" ></td>
-      		</tr>
-      	</table>
-      	<input id="loginBtn" type="submit" value="Login">
-      </div>
+    
+    	<h1>O.W.Y Member</h1>
+    	
+    	<br><br>
+    	
+    	<h4>Oh jinyeop[PM] - Birth : 1996 / Good skills : everything </h4>
+    	<h4>Bang sangwon - Birth : 1993 / Good skills : nothing</h4>
+    	<h4>Yoo chihyuk - Birth : 1989 / Good Skills : Javascript, C++, Sql</h4>
+    	<h4>Kim dokyun - Birth : 1994 / Good Skills : Unity</h4>
+    	
+    
     </div>
-  </header>
-  
+    </header>
   
   <jsp:include page="/resources/include/footer.jsp" />
   <jsp:include page="/resources/include/copyright.jsp" />
