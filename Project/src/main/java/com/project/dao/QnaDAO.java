@@ -15,4 +15,11 @@ public interface QnaDAO {
 
 	public int qna_count() throws Exception;
 	
+	public int insertReply(Map<String,Object> map) throws Exception;
+	
+	public int AdmindeleteQna(int seq) throws Exception;
+	
+	public int qnaModify(Map<String,Object> map) throws Exception;
+	
+	public int qnaUserDelete(int seq) throws Exception;
 }

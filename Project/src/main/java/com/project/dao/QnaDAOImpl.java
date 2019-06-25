@@ -41,7 +41,37 @@ public class QnaDAOImpl implements QnaDAO {
 
 	@Override
 	public int qna_count() throws Exception {
-		return template.selectOne("qna_count");	// qna_table의 모든 레코드 수를 가져옴
+		return template.selectOne("qna_count");
+	}
+
+
+
+	@Override
+	public int insertReply(Map<String,Object> map) throws Exception {
+		return template.update("qna_reply_insert",map);
+	}
+
+
+
+	@Override
+	public int AdmindeleteQna(int seq) throws Exception {
+		return template.delete("qna_delete",seq);
+	}
+
+
+
+	@Override
+	public int qnaModify(Map<String,Object> map) throws Exception {
+		
+		return template.update("qna_modify",map);
+	}
+
+
+
+	@Override
+	public int qnaUserDelete(int seq) throws Exception {
+		
+		return template.delete("qna_user_delete",seq);
 	}
 
 }

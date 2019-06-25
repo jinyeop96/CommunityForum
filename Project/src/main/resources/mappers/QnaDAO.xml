@@ -5,16 +5,16 @@
 	
 	
 	<insert id="qna_insert" parameterType="com.project.dto.QnaDTO">
-		insert into qna_table values(qna_seq.nextval,#{title},#{qna_content},#{pw})
+		insert into qna_table(seq,title,name,qna_content,pw) values(qna_seq.nextval,#{title},#{name},#{qna_content},#{pw})
 	</insert>
 	
 	<select id="qna_list" resultType="com.project.dto.QnaDTO">
 		<![CDATA[
 		select 
-			seq, title, qna_content
+			seq, title, name, qna_content ,qna_reply
 		from
 			(select /*+INDEX_DESC(qna_table) */
-				rownum rn, seq,title,qna_content
+				rownum rn, seq,title,name, qna_content,qna_reply
 			from 
 				qna_table
 			where rownum <= #{pageNum} *#{amount}
@@ -32,4 +32,20 @@
 	<select id="qna_count" resultType="int">
 		select count(*) from qna_table
 	</select>
+	
+	<update id="qna_reply_insert">
+		update qna_table set qna_reply =#{reply} where seq= #{seq}
+	</update>
+	
+	<delete id="qna_delete">
+		delete from qna_table where seq =#{seq}
+	</delete>
+	
+	<update id="qna_modify">
+		update qna_table set qna_content =#{content} where seq = #{seq}
+	</update>
+	
+	<delete id="qna_user_delete">
+		delete from qna_table where seq=#{seq}
+	</delete>
 </mapper>

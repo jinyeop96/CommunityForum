@@ -9,6 +9,8 @@
 <title>QNA</title>
 <!-- jqeury import -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
 <style>
@@ -30,16 +32,32 @@ var tr;
 var td;	
 var pw;
 var seq;
+var clickcount=0;
+var seqlist= new Array();
 	//테이블 클릭 이벤트 
 	$("#example tr").click(function(){
-		
+		clickcount++;
 		//현재 클릭한 tr과  td정보를 가져온다 .
 		 tr = $(this);
 		 td = tr.children();
-		 seq = td.eq(0).text();
-		if (td.eq(0).text() != "번호") {
+		 seq = td.eq(1).text();
+		 seqlist.push(seq);
+		 console.log(seq);
+		if (td.eq(1).text() != "이름") {
 			$("#passch").css("display","block");
+			$("#myqna").css("display","none");
+			$("#admin_update").css("display","none");
+			$("#myqnaButton").css("display","none");
+
+		}else {
+			$("#passch").css("display","none");
+			$("#myqna").css("display","none");
+			$("#admin_update").css("display","none");
+			$("#myqnaButton").css("display","none");
+
 		}
+		
+	
 	});
 	
 	//내글 비밀번호 확인
@@ -59,7 +77,10 @@ var seq;
 				if (data == 1){
 					$("#myqna").css("display","block");
 					$("#admin_update").css("display","block");
-					$("#qnatext").val(td.eq(2).text());
+					$("#qnatext").val(td.eq(5).text());
+					$("#qnatext_re").val(td.eq(6).text());
+					$("#myqnaButton").css("display","block");
+					$("#pass").val("");
 					
 				} else{
 					alert("비밀번호가 틀렸습니다");
@@ -78,6 +99,85 @@ var seq;
 		}
 	});
 	
+	//사용자 질문 수정
+	$("#qnamodify").click(function(){
+		var content = $("#qnatext").val();
+		$.ajax({
+			url:"/allqnalist.do/qnamodify.do",
+			type:"post",
+			data:{
+				seq:seq,
+				content:content
+			},
+			success:function(data){
+				if (data == 1){
+					alert("수정되었습니다");
+					window.location.reload();
+				} else {
+					alert("수정에 실패하였습니다");
+				}
+			}
+			
+		});	
+	});
+	
+	//사용자 질문삭제
+	$("#qnadel").click(function(){
+		$.ajax({
+			url:"allqnalist.do/qna_delete",
+			data:{
+				seq:seq
+			},
+			success:function(data){
+				if (data == 1){
+					alert("삭제되었습니다");
+					window.location.reload();
+				} else{
+					alert("삭제에 실패하였습니다");
+				}
+			}
+		});
+	});
+	
+	//관리자 답글 등록 
+	$("#admin_rebutton").click(function(){
+		var reply = $("#admin_re").val();
+		$.ajax({
+			url:"/allqnalist.do/adminreply.do",
+			type:"post",
+			data:{
+				seq:seq,
+				reply:reply
+			},
+			success:function(data){
+				if (data == 1) {
+					alert("답글이 등록되었습니다");
+					window.location.reload();
+				} else {
+					alert("등록에 실패하였습니다");
+				}
+			}
+		});
+	});
+	
+	//관리자질문삭제
+	$("#qna_delete").click(function(){
+		$.ajax({
+			url:"/allqnalist.do/qna_delete",
+			type:"post",
+			data:{
+				seq:seq
+			},
+			success:function(data){
+				if (data == 1){
+					alert("삭제되었습니다");
+					window.location.reload();
+				} else {
+					alert("삭제에 실패하였습니다")
+				}
+			}
+		});
+	});
 	
 	//페이징 처리
 	var actionForm = $("#actionForm");
@@ -94,8 +194,12 @@ function div_OnOff(v,id){
 	if(v=="1"){
 		document.getElementById(id).style.display=""; //보여줌
 	}else {
-		document.getElementbyId(id).style.display="none"; //숨김
+		document.getElementbyId(id).style.display="nome"; //숨김
 	}
+}
+
+function namechange(name){
+	
 }
 
 </script>
@@ -109,26 +213,35 @@ function div_OnOff(v,id){
     <div class="container d-flex align-items-center flex-column">
       
       <h1 class="masthead-heading text-uppercase mb-0" >고객센터</h1> 
-      <div id="qnaDiv" align="left">
+      <div id="qnaDiv" align="center">
       	
-      	<h1 style = " font-size:20px; margin-top:30px;" align="center" >자주하는 질문</h1>
+      	<h1 style = " font-size:20px; margin-top:20px;" align="center" ></h1>
       		
       		<div style="margin-bottom:300px;">
       		<!-- qna 리스트 출력 -->
-      			<table border="1" width=500 id="example">
+      			<table class="table table-bordered table-dark"  width=500 id="example">
 	      			<tr>
-		      			<th>번호</th>
-		      			<th>제목</th>
+		      			<th scope="col">번호</th>
+		      			<th scope="col">이름</th>
+		      			<th scope="col">제목</th>
 	      			</tr>
 	      			<tr>
 	      			<c:forEach items="${list}" var="list" varStatus="status">
 	      				<tr>
 	      				<!-- oracle sequence 생성하면 nextval값은 2가나온다. 때문에  1이없다... -->
-	      					<td>${list.seq-1}</td>
+	      					<td style="color:white;">${(pageMaker.total - status.index) - ((pageMaker.cri.pageNum -1) * pageMaker.cri.amount)}</td>
+	      					<td style="display:none;">${list.seq}</td>
+	      					<script type="text/javascript">
+	      						var name ="${list.name}";
+	      						name = name.substring(0,2);
+	      						name = name+ "x";
+	      						document.write("<td style='color:white;'><a href='#'>"+name+"</a></td>");
+	      					</script>
 	      					<td> 		
 	      						<a href="#" id="qnalist" style="color:white; text-decoration:none;">${list.title}</a>	
 	      					</td>
 	      					<td style="display:none;">${list.qna_content}</td>
+	      					<td style="display:none;">${list.qna_reply}</td>
 	      				</tr>
 	      				
 	      			</c:forEach>
@@ -159,17 +272,24 @@ function div_OnOff(v,id){
       			</form>
       			
       			
-      			<div id="passch" style="display:none;">
-	      			<label for="pass">비밀번호</label>
-	      			<input type="password" id="pass">
-	      			<button type="button" id="pwcheck">확인</button>
+      			<div id="passch" style="display:none; margin-top:10px; width:500px;">
+      				<div style="width:330px; margin:auto;">
+		      			<label for="pass">비밀번호</label>
+		      			<input type="password" id="pass" >
+		      			<button type="button" class="btn btn-secondary" id="pwcheck" style="height:30px; padding-bottom:30px;">확인</button>
+      				</div>
       			</div>
-      			<div id="myqna" style="margin-top:50px; display:none; ">
+      			<div id="myqna" style="margin-top:30px; display:none; ">
 	      			<h6>내가 등록한 질문</h6>
 	      			<textarea id="qnatext" rows="5" cols="59" ></textarea>
 	      			<h6>답변</h6>
-	      			<textarea id="qnatext_re" rows="3" cols="59"></textarea>
+	      			<textarea id="qnatext_re" rows="3" cols="59" readonly style="background-color:gray;"></textarea>
       			</div>
+      			<div id="myqnaButton" style="display:none; margin-top:5px; margin-bottom:5px;">
+      				<button type="button"  class="btn btn-warning" id="qnamodify">질문수정</button>
+      				<button type="button" class="btn btn-danger" id="qnadel">질문삭제</button>
+      			</div>
+      			
       			<div id="admin_update" style="display:none;">
 	      			<label for="admin_pw">관리자 수정</label>
 	      			<input type="password" id="admin_pw">
@@ -180,6 +300,7 @@ function div_OnOff(v,id){
 	      					<textarea id="admin_re" rows="3" cols="59"></textarea>
 	      				</div>
 	      				<button type="button" id="admin_rebutton">답글등록</button>
+	      				<button type="button" id="qna_delete">질문삭제</button>
 	      			</div>
       			</div>
       			
