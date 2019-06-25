@@ -1,5 +1,7 @@
 package com.project.dao;
 
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,4 +17,19 @@ public interface JoinDAO {
 	public int findId(Map<String, Object> map) throws Exception;
 	
 	public int findnick(Map<String, Object> map) throws Exception;
+
+	public String searchId(Map<String, Object> map) throws Exception;
+
+	public String searchpwd(Map<String, Object> result) throws Exception;
+	
+
+
+	
+
+
+
+	
 }
+
+	
+

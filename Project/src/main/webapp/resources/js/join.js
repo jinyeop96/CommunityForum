@@ -2,6 +2,7 @@
 $(document).ready(function(){
 	$('#c_pwd').attr("readonly",true);//시작시 비밀번호 입력 인풋창은 입력불가
 	$('#j_pwd').attr("readonly",true);//시작시 비밀번호 확인 인풋창은 입력불가
+	
 });
 
 
@@ -109,8 +110,6 @@ function formchk(){
 		$('#j_id').focus();
 		return false;
 	}
-	
-	
 	
 	if($('#j_pwd').val()  ==""){
 		alert("비밀번호 입력해주세요");

@@ -18,4 +18,12 @@ insert into hmember values(#{j_id},#{j_pwd},#{j_name},#{j_nickname},#{j_email},#
   select count(*) from hmember where j_nickname=#{j_nickname}  
 </select>
 
+<select id="searchId"  resultType="String">
+select j_id from hmember where j_name=#{j_name} and j_mobile=#{j_mobile}
+</select>
+
+<select id="searchpwd"  resultType="String">
+select j_pwd from hmember where j_id=#{j_id} and j_mobile=#{j_mobile}
+</select>
+
 </mapper>
