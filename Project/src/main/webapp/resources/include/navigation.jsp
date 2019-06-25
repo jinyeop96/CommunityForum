@@ -23,6 +23,19 @@
 <!-- <link href="/resources/css/myself1.css" rel="stylesheet" type="text/css"> -->
 <link href="<c:url value="/resources/css/myself.css" />" rel="stylesheet" type="text/css">
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
+	<style>
+		@media(max-width: 500px){
+			#logo{
+				width: 85px;
+			}
+		}
+
+		@media(min-width: 500px){
+			#logo{
+				width: 120px;
+			}
+		} 
+	</style>
 
 </head>
 <body id="page-top">
@@ -31,7 +44,9 @@
 		class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top"
 		id="mainNav">
 		<div class="container">
-			<a class="navbar-brand js-scroll-trigger" href="main.do">오와열</a>
+			<a class="navbar-brand js-scroll-trigger" href="main.do">
+				<img id="logo" src="<c:url value='/resources/img/logos/510_2.png'/>">
+			</a> 
 			<button
 				class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
 				type="button" data-toggle="collapse" data-target="#navbarResponsive"

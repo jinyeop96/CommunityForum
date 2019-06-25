@@ -85,9 +85,20 @@
 	
 	<!--  게시물 등록 -->
 	<insert id="insertRecord">
-		INSERT INTO board
+		INSERT INTO board 
 			VALUES(#{board_type} ,board_seq.NEXTVAL, #{board_nickname}, #{board_pwd}, #{board_title}, #{board_content}, 0, 0, 0, SYSDATE)
 	</insert>
+	
+	<insert id="insertFile">
+		INSERT INTO boardfile values(#{board_no}, #{boardfile_name}, SYSDATE)
+	</insert>
+	
+	<select id="getLatest" resultType="int">
+		SELECT 	board_no 
+			FROM (SELECT ROWNUM r, board_no FROM board ORDER BY board_no DESC)
+			WHERE r = 1
+	</select>
+	
 	
 	<update id="updateLike">
 		UPDATE board
@@ -101,7 +112,7 @@
 			WHERE board_no = #{board_no}
 	</update>
 	
-	<select id="getLikes" resultType="int">
+	<select id="getLikes" resultType="int"> 
 		SELECT board_like
 			FROM board
 			WHERE board_no = #{board_no}

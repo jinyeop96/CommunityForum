@@ -27,4 +27,8 @@ public List<BoardDTO> selectList(Map<String, Object> map);
 	public int getLikes(int board_no);
 	
 	public int getDislikes(int board_no);
+	
+	public void insertFile(Map<String, Object> map);
+	
+	public int getLatest();
 }

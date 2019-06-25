@@ -31,6 +31,7 @@
 					   "pageParam": pageParam},
 					   
 				success:function(result){
+					$("#replyNum").text(result.replyNum);
 					$("#replyTable").html(result).trigger("create");
 				}
 			});
@@ -183,7 +184,7 @@
 		      		</tr>
 		      				      		
 		      		<tr>
-		      			<td>답글 : ${replyNum }</td> 
+		      			<td>답글 : <span id="replyNum">${replyNum }</span></td> 
 		      		</tr>
 		      		
 		      		<tr>

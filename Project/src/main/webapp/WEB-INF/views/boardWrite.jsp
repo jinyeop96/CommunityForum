@@ -21,6 +21,30 @@
 		    min-width: 250px;
 		}
 	</style>
+	
+	<!-- 
+	<script type="text/javascript">
+		$(function(){
+			$("#addFileBtn").click(function(){
+				var fileIndex = $('#fileArea').children().length;
+				
+				$("#fileArea").append(
+						"<tr><td>" +
+						"<input type='file' id='file"+fileIndex+"' style='width: 260px'>" +
+						"<input align='right' type='button' id='delBtn"+fileIndex+"'  value='삭제' onclick='delFileBtn("+fileIndex+")' >" +
+						"</td></tr>"
+						);
+			}); 
+			
+		}) 
+		
+		function delFileBtn(fileIndex){ 
+			$("#file"+fileIndex).remove();
+			$("#delBtn"+fileIndex).remove();
+		}
+			
+	</script>
+		-->	
 </head>
 <body>
 	<jsp:include page="/resources/include/navigation.jsp" />
@@ -39,11 +63,25 @@
 	      	</c:if>
 	    	<br><br>
 			
-			<form action="boardWriteOk.do" method="post">
+			<form action="boardWriteOk.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="board_type" value="${board_type }">
 				<table class="board font-black ">
 					<tr>
-						<td align="left"><input name="board_title" placeholder="제목" class="title"></td>
+						<td align="left" colspan="3">
+							<input name="board_title" placeholder="제목" class="title">
+						</td>
+					</tr>
+					<tr style="padding: -5px;">
+						<td align="left">
+							
+						</td>
+					</tr>
+					
+					<tr id="fileArea" align="left"> 
+						<td colspan="3">
+							<input multiple="multiple" type="file" name="file">
+							<span style="color: red; font-size: 10px;">Ctrl를 누른채 선택시 중복가능</span>
+						</td>
 					</tr>
 					
 					<tr>
