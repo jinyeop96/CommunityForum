@@ -14,7 +14,6 @@ public class BoardDTO {
 	private String board_date;
 	
 	
-	
 	public int getBoard_reply() {
 		return board_reply;
 	}
