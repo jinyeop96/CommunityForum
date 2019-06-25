@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>QNA</title>
-<!-- jqeury import -->
+<!-- jquery import -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
@@ -39,16 +39,16 @@ $(function(){
 		$("#qna_show4").css("display","block");
 	});
 	$("#qna4").mouseleave(function(){
-		$("qna_show4").css("diplay","none");
+		$("#qna_show4").css("display","none");
 	});
 	
 	$("#qna5").mouseover(function(){
 		$("#qna_show5").css("display","block");
 	});
 	$("#qna5").mouseleave(function(){
-		$("qna_show5").css("diplay","none");
+		$("#qna_show5").css("display","none");
 	});
-	
+
 	
 	
 	//qna form 등록 버튼 입력시 
@@ -94,7 +94,7 @@ function div_OnOff(v,id){
 	if(v=="1"){
 		document.getElementById(id).style.display=""; //보여줌
 	}else {
-		document.getElementbyId(id).style.display="nome"; //숨김
+		document.getElementbyId(id).style.display="none"; //숨김
 	}
 }
 
@@ -196,7 +196,6 @@ function div_OnOff(v,id){
     	
     		</div>
     	
-  
   </header>
   </head>
   
