@@ -1,8 +1,10 @@
 package com.project.dao;
 
-import com.project.dto.LoginDTO;
+import java.util.Map;
+
+import com.project.dto.JoinDTO;
 
 public interface LoginDAO {
 	
-	public LoginDTO selectUser(String username);
+	  public JoinDTO selectUser(Map<String, Object> map)throws Exception;
 }
