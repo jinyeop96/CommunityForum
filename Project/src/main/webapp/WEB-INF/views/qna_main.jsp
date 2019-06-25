@@ -39,14 +39,14 @@ $(function(){
 		$("#qna_show4").css("display","block");
 	});
 	$("#qna4").mouseleave(function(){
-		$("#qna_show4").css("display","none");
+		$("qna_show4").css("display","none");
 	});
 	
 	$("#qna5").mouseover(function(){
 		$("#qna_show5").css("display","block");
 	});
 	$("#qna5").mouseleave(function(){
-		$("#qna_show5").css("display","none");
+		$("qna_show5").css("display","none");
 	});
 
 	
@@ -58,6 +58,7 @@ $(function(){
 
 	var content=$("#content").val();
 	var title=$("#title").val();
+	var name=$("#name").val();
 	var pw=$("#pw").val();
 
 	console.log(content);
@@ -70,6 +71,7 @@ $(function(){
 		data:{
 			content:content,
 			title:title,
+			name:name,
 			pw:pw
 		},
 		success:function(data){
@@ -78,9 +80,10 @@ $(function(){
 				alert("등록 되었습니다");
 				$("#content").val("");
 				$("#title").val("");
+				$("#name").val("");
 				$("#pw").val("");
 			} else{
-				alert("등록에 실패하였습니다");ㅍ 
+				alert("등록에 실패하였습니다");
 			}
 		}
 		
@@ -124,7 +127,7 @@ function div_OnOff(v,id){
       	
       		<h6 id="qna2">숙식 업체의 선별기준은 무엇인가요?</h6>
       		<div>
-      		  <h5 id="qna_show2" style="display:none;">대한민국 국민 누구나 가입가능합니다.</h5>
+      		  <h5 id="qna_show2" style="display:none;">군장병들과 가족분들이 평가해주신 평점으로 선별됩니다~</h5>
       		</div>
       		
       	<br id="br3">
@@ -158,7 +161,7 @@ function div_OnOff(v,id){
     
     
     
-    		<div id="qnaDiv2">
+    	<div id="qnaDiv2">
     		
     			<input type="radio" name="qnabtn" value="1" onclick="div_OnOff(this.value,'QNAP');">원하는 질문이 없으신가요?
     		
@@ -181,16 +184,20 @@ function div_OnOff(v,id){
       		<td><input class="input" id="title"></td> 
       		</tr>
       		<tr>
-			<th>질문 비밀번호</th>
-      				<td><input class="input" id="pw" type="password" name="pwd" ></td>
+			<th>이름</th>
+   				<td>
+   				    <input class="input" id="name" name="name"/>
+   				</td>
       		</tr>
+      		
     		<div>
  
+ 			<label for="pw">비밀번호</label>
+      				<input class="input" id="pw" type="password" name="pwd"/>
+    		</div>  		
       		<input type="submit" value="등록" >
       		<input type="reset" value="취소">
       		</form>
-    		</div>  		
-      	
       </div>
    	
     	
