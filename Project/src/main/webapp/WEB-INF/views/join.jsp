@@ -4,19 +4,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
 <title>Login</title>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script> <!-- JQuery사용을 위한 라이브러리 다운로드 -->
 <script src="./resources/js/join.js" ></script>  <!-- Join.jsp에서 사용될 함수가 저장된 라이브러리로드 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> <!-- Daum 우편번호검색 API활용을 위한 라이브러리 다운로드 -->
 
 
-</head>
-	<jsp:include page="/resources/include/navigation.jsp" />
 <script >
 $(function(){
-	var id; 
-	var idflag = 0;
-	var nickflag = 0;
+	
+	
+	
 	$("#j_id").keyup(function(){
 		id = $("#j_id").val();
 		if(id!=''){
@@ -74,10 +77,14 @@ $(function(){
 				
 					if(data == '1'){
 						$('#checknick').html("중복된 닉네임입니다.");
-						nickflag=0;
+						$('#email1').attr("readonly",true);
+						$('#email2').attr("readonly",true);
+						
 					}else{
 						$('#checknick').html("사용가능한 닉네임입니다.");
-						nickflag=1;
+						$('#email2').attr("readonly",false);
+						$('#email2').attr("readonly",false);
+						
 					}
 					
 				}else{
@@ -95,9 +102,12 @@ $(function(){
 	
 	
 	
+	
+	
 });
 </script>
-	
+<body>
+		<jsp:include page="/resources/include/navigation.jsp" />
 
 	 <!--  section01 -->
 	<header class="masthead bg-primary text-white text-center">
@@ -105,9 +115,9 @@ $(function(){
       
       <h1 class="masthead-heading text-uppercase mb-0">회원 가입</h1><br><br><br>
       
-      <div id="JoinDiv" >
-      <form onsubmit="return formchk();" method="post" action="<%=request.getContextPath()%>/join_ok.do">
-      	<table>
+      <div id="loginDiv" align="center">
+      <form onsubmit="return formchk()" method="post" action="<%=request.getContextPath()%>/join_ok.do">
+      	<table >
       
       	
       		<tr>
@@ -138,14 +148,15 @@ $(function(){
       		
       		<tr>
       			<th>닉 네 임 </th>
-      			<td align="left"><input class="input" name="j_nickname" id="j_nickname">
+      			<td align="left"><input class="input" name="j_nickname" id="j_nickname" >
       			<span id="checknick"></span>
+      			
       			</td> 
       		</tr>
       		
       		<tr>
       			<th>이 메 일 </th>
-      			<td align="left"><input class="input" name="email1" id="email1">@<input class="input" placeholder="직접 입력" id="email2" >
+      			<td align="left"><input class="input" name="email1" id="email1" >@<input class="input" placeholder="직접 입력" id="email2" readonly="readonly">
       			<select id="email_select" onchange="mail()">
       			  <option value="">메일 도메인</option>
       			  <option  value="naver.com" >naver.com</option>
@@ -157,7 +168,7 @@ $(function(){
       		
       		<tr>
       			<th>전화번호 </th>
-      			<td align="left"><input class="input" name="j_mobile" id="j_mobile" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span> ' - '없이 숫자만 입력</span></td> 
+      			<td align="left"><input class="input" name="j_mobile" id="j_mobile" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" ><span> ' - '없이 숫자만 입력</span></td> 
       		</tr>
       		
       		<tr>
@@ -166,12 +177,13 @@ $(function(){
       		</tr>
       		<tr>
       			<th>상세주소1 </th>
-      			<td align="left"><input class="input"  size="50px" id="addr1"></td> 
+      			<td align="left"><input class="input"  size="50px" id="addr1" readonly="readonly"></td> 
       		</tr>
       		<tr>
       			<th>상세주소2</th>
-      			<td align="left"><input class="input"  size="50px" id="addr2" onblur="addrsum()" >
+      			<td align="left"><input class="input"  size="50px" id="addr2" onblur="addrsum();mailplus()" >
       			<input type="hidden" name="j_addr" id="j_addr" onblur="addrsum()">
+
       			</td> 
       		</tr>
       		
@@ -185,16 +197,16 @@ $(function(){
       		
       		
       	</table>
-      	<input  type="submit" value="가입하기">&nbsp;&nbsp;
+      	<input  type="submit" value="가입하기" onmouseover="">&nbsp;&nbsp;
       	<input type="button" value="돌아가기" onclick="history.back();"> 
       	</form>
       </div>
     </div>
   </header>
-  
+  </head>
   
   <jsp:include page="/resources/include/footer.jsp" />
   <jsp:include page="/resources/include/copyright.jsp" />
   <jsp:include page="/resources/include/modals.jsp" />
-
+</body>
 </html>
