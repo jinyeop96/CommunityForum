@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import java.io.IOException;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dao.*;
@@ -21,7 +24,10 @@ public class BoardController {
 	
 	@Autowired 
 	public ReplyDAOImpl reply;
-	 
+	
+	@Autowired
+	public FileUploadService fileUploadService;
+	
 	
 	Pagination pagination;
 	Map<String, Object> map = new HashMap<String, Object>();
@@ -54,16 +60,25 @@ public class BoardController {
 	}
 	
 	// 글 작성 완료
-	@RequestMapping("/boardWriteOk.do")
-	public String writeEntireOk(HttpServletRequest request, Model model) {
+	/* @RequestMapping( value="/boardWriteOk.do", method=RequestMethod.POST) */
+	@RequestMapping("boardWriteOk.do")
+	public String boardWriteOk(HttpServletRequest request, MultipartRequest files,  Model model) throws IOException {
+		// 글 장성 
 		map.put("board_title", request.getParameter("board_title").trim());
 		map.put("board_content", request.getParameter("board_content"));
 		map.put("board_nickname", request.getParameter("board_nickname").trim());
 		map.put("board_pwd", request.getParameter("board_pwd").trim());
 		map.put("board_type", request.getParameter("board_type"));
 		
-		
 		board.insertRecord(map);
+
+		
+		// name="file" 로 되어있는 파일 list에 담기
+		List<MultipartFile> fileList = files.getFiles("file"); 
+		
+		if(!fileList.isEmpty()) {	// 첨부파일이 있을때만 실행함.
+			fileUploadService.fileUpload(fileList, board.getLatest());	//getLatest() : 방금 올린 글의 board_no 얻기 위한 메서드
+		}  
 		
 		return "redirect:board.do?pageParam="+1+"&board_type="+request.getParameter("board_type")+"&boardSearch=no";
 		
@@ -168,6 +183,7 @@ public class BoardController {
 		
 		mav.addObject("list", reply.selectList(map));
 		mav.addObject("page", pagination);
+		mav.addObject("replyNum", reply.getRecords(board_no));
 		mav.setViewName("ajax/replyList");
 		return mav;
 	}

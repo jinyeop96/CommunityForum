@@ -28,6 +28,9 @@
 	      	<c:if test="${board_type == 'review' }">
 	  		  	<h3 class="masthead-heading text-uppercase mb-0">후기 게시판</h3>
 	      	</c:if>
+	      	<c:if test="${board_type == 'findPeople'}">
+	      		<h3 class="masthead-heading text-uppercase mb-0">사람 찾습니다!</h3>
+	      	</c:if>
 	    	<br><br>
 	    	
 	      	<%--------------------------------------------------- --%>

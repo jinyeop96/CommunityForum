@@ -170,8 +170,8 @@ $(function(){
       		</tr>
       		<tr>
       			<th>상세주소2</th>
-      			<td align="left"><input class="input"  size="50px" id="addr2" >
-      			<input type="hidden" name="j_addr" id="j_addr">
+      			<td align="left"><input class="input"  size="50px" id="addr2" onblur="addrsum()" >
+      			<input type="hidden" name="j_addr" id="j_addr" onblur="addrsum()">
       			</td> 
       		</tr>
       		

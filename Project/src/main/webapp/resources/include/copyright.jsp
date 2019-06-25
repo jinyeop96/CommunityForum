@@ -4,7 +4,7 @@
 <!-- Copyright Section -->
   <section class="copyright py-4 text-center text-white">
     <div class="container">
-      <small>Copyright &copy; Your Website 2019</small>
+      <small>Copyright &copy; Owayeol Project Team. All rights reserved.</small>
     </div>
   </section>
 

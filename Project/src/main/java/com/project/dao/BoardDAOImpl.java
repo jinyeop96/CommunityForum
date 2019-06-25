@@ -79,9 +79,19 @@ public class BoardDAOImpl implements BoardDAO{
 		return template.selectOne("com.project.mappers.board.getDislikes", board_no);
 	}
 	
+	@Override
+	public int getLatest() {
+		return template.selectOne("com.project.mappers.board.getLatest");
+	}
+	
 	// -----------------게시물 등록--------------
 	@Override
 	public void insertRecord(Map<String, Object> map) {
 		template.insert("com.project.mappers.board.insertRecord", map);
+	}
+	
+	@Override
+	public void insertFile(Map<String, Object> map) {
+		template.insert("com.project.mappers.board.insertFile", map);		
 	}
 }

@@ -23,6 +23,19 @@
 <!-- <link href="/resources/css/myself1.css" rel="stylesheet" type="text/css"> -->
 <link href="<c:url value="/resources/css/myself.css" />" rel="stylesheet" type="text/css">
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
+	<style>
+		@media(max-width: 500px){
+			#logo{
+				width: 85px;
+			}
+		}
+
+		@media(min-width: 500px){
+			#logo{
+				width: 120px;
+			}
+		} 
+	</style>
 
 </head>
 <body id="page-top">
@@ -31,7 +44,9 @@
 		class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top"
 		id="mainNav">
 		<div class="container">
-			<a class="navbar-brand js-scroll-trigger" href="main.do">오와열</a>
+			<a class="navbar-brand js-scroll-trigger" href="main.do">
+				<img id="logo" src="<c:url value='/resources/img/logos/510_2.png'/>">
+			</a> 
 			<button
 				class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
 				type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -42,6 +57,17 @@
 
 			<div class="collapse navbar-collapse " id="navbarResponsive">
 				<ul class="navbar-nav ml-auto menu-bar">
+				
+				<li class="nav-item mx-0 mx-lg-1">
+					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">팀 소개</a>
+						<ul>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="OwyMember.jsp">팀원구성</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="plan.jsp">기획의도</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="future.jsp">프로젝트의 미래</a></li>
+						</ul>
+				</li>
+				
+				
 					<li class="nav-item mx-0 mx-lg-1">
 						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">게시판</a>
 							<ul class="board_bg">
@@ -49,6 +75,7 @@
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=free&boardSearch=no">자유게시판</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=review&boardSearch=no">후기게시판</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=question&boardSearch=no">질문게시판</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=findPeople&boardSearch=no">사람찾습니다!</a></li>							
 							</ul>
 					</li>
 					
@@ -58,16 +85,13 @@
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#hotel">Hotel</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#restaurant">Restaurant</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#transport">Transport</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#address">ADDRESS</a></li>
 							</ul>
 					</li>
 					
-					<li class="nav-item mx-0 mx-lg-1">
-						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#path">News</a>
-						<ul>
-		             		<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="allqna.do">고객센터</a></li>
-		              		<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="allqnalist.do">전군공지</a></li>
-		              	</ul>
-					</li>
+							  <li class="nav-item mx-0 mx-lg-1">
+           <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/allqna.do">고객센터</a>
+          </li>
 						
 					<li class="nav-item mx-0 mx-lg-1">
            				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="login.do">Login</a>
@@ -76,14 +100,27 @@
 					<li class="nav-item mx-0 mx-lg-1">
            				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="join.do">Join</a>
          			</li>
-					 
-		
+				
+				<li class="nav-item mx-0 mx-lg-1">
+					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >O.W.Y contents</a>
+					<ul>
+						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="contents.jsp">Logo</a></li>
+					</ul>
+				</li>
+				
 				</ul>
 			</div>
 		</div>
+		
 		<div class="navbar-log-regi">
 			<!-- 메뉴바 우측상단배치 -->
-			<a class="navbar-top-right" href="login.do">Login</a> <a
-				class="navbar-top-right" href="join.do">Join</a>
+			<a class="navbar-top-right" href="login.do">Login</a> 
+			<a class="navbar-top-right" href="join.do">Join</a>
 		</div>
 	</nav>
+	</body>
+	
+	
+	
+	
+	

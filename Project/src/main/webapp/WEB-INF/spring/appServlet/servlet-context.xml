@@ -38,11 +38,20 @@
 		<beans:constructor-arg ref="sqlSessionFactoryBean" />
 	</beans:bean>
 	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 업로드 최대크기 -->
+		<beans:property name="maxUploadSize" value="5242880" />	<!-- 5MB -->
+		
+		
+		<!-- 디스크에 임시 파일을 생성하기 전에 메모리에 보관할수있는 최대 바이트 크기 -->
+        <!-- property name="maxInMemorySize" value="52428800" / -->
+        
+        <!-- defaultEncoding -->
+        <beans:property name="defaultEncoding" value="utf-8" />
+	</beans:bean>
 
 
-
-	<context:component-scan base-package="com.project" />
-	
+	<context:component-scan base-package="com.project"/>
 	
 	
 </beans:beans>
