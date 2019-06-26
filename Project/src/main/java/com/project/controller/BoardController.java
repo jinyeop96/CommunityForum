@@ -1,10 +1,13 @@
 package com.project.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +29,10 @@ public class BoardController {
 	public ReplyDAOImpl reply;
 	
 	@Autowired
-	public FileUploadService fileUploadService;
+	public FileService fileService;
+	
+	@Resource(name="uploadPath")
+	String uploadPath;
 	
 	
 	Pagination pagination;
@@ -77,7 +83,7 @@ public class BoardController {
 		List<MultipartFile> fileList = files.getFiles("file"); 
 		
 		if(!fileList.isEmpty()) {	// 첨부파일이 있을때만 실행함.
-			fileUploadService.fileUpload(fileList, board.getLatest());	//getLatest() :  insertRecord()의  board_no 얻기 위한 메서드 (같은 board_no으로 boardfile 테이블에 저장할예정)
+			fileService.fileUpload(fileList, board.getLatest());	//getLatest() :  insertRecord()의  board_no 얻기 위한 메서드 (같은 board_no으로 boardfile 테이블에 저장할예정)
 		}  
 		
 		return "redirect:board.do?pageParam="+1+"&board_type="+request.getParameter("board_type")+"&boardSearch=no";
@@ -114,7 +120,7 @@ public class BoardController {
 	
 
 	@RequestMapping("/content.do")
-	public String content(@RequestParam int board_no, @RequestParam String board_type,@RequestParam int pageParam, Model model) {
+	public String content(@RequestParam int board_no, @RequestParam String board_type,@RequestParam int pageParam, Model model) throws IOException {
 		board.updateView(board_no); 	//조회수 증가
 		
 		model.addAttribute("dto", board.selectOne(board_no));	// 해당 게시물 가져오기
@@ -122,11 +128,30 @@ public class BoardController {
 		model.addAttribute("board_type", board_type);	// bottomBoard(댓글 아래 다음 게시물들) 을 위해 board_type을 넘겨준다
 		model.addAttribute("pageParam", pageParam);	// bottomBoard(댓글 아래 다음 게시물들) 을 위해 현재페이지(pageParam)을 넘겨준다
 		
-		// 첨부파일 처리
-		model.addAttribute("files", board.selectFile(board_no));
+		
+		// 해당 게시물에 첨부되어 있을 첨부파일 가져오기
+		List<String> files = board.selectFile(board_no);
+		List<String> other = new ArrayList<String>();
+		List<String> img = new ArrayList<String>();
+		
+		// 만약 첨부파일이 있다면 실행
+		if(!files.isEmpty()) {
+			for(int i = 0; i < files.size(); i++) {
+				File file = new File(uploadPath+files.get(i));	//uploadPath는 servlet-context.xml에서 수정할 수 있음
+				
+				if(new Tika().detect(file).startsWith("image")) { // 가져온 첨부파일이 어떤 형태인지 (image 인지, txt 인지 등등)
+					img.add(files.get(i)); // 이미지에 해당하는 파일을 따로 담아 images라는 이름으로 넘긴다
+					model.addAttribute("images", img);
+				} else {
+					other.add(files.get(i));	// 위와 동일
+					model.addAttribute("files", other );
+				}
+			}
+		}
 		
 		return "boardContent";
 	} ///content.do
+	
 	
 	@RequestMapping("/boardBottom.do")
 	@ResponseBody

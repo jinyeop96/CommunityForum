@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -222,13 +223,13 @@
 		      			<td><hr style="border: none; border-top: 1px solid white"></td>
 		      		</tr>
 		      		
-		      		<c:if test="${!empty files }">
+		      		<c:if test="${!empty files}">
 		      			<tr align="right"><td><a href="javascript:showFile()" class="attach">첨부파일</a></td></tr>
 
 	      				<c:forEach items="${files }" var="file" >
 		      				<tr align="right" class="files"> 
 		      					<td> 
-		      						<a class="font-black attach" href="<c:url value='/resources/uploadFiles${file }'/> " >
+		      						<a class="font-black attach" href="<spring:url value='/image/${file }'/> " >
 		      						 	<span>${file.substring(48) }</span>
 		      						</a>
 		      					</td>
@@ -238,6 +239,12 @@
 		      		
 		      		<tr>
 		      			<td>
+		      				<c:if test="${!empty images }">
+		      					<c:forEach items="${images }" var="image">
+		      						<img style="max-width: 80%" src="<spring:url value='/image/${image }'/>"><br>
+		      					</c:forEach>
+		      				</c:if>
+		      				
 		      				<c:set var="content" value="${fn:replace(dto.getBoard_content(), '  ', '&nbsp;&nbsp;' ) }"></c:set>	<%-- 공백 가능하게 처리해줌 --%>
       						${fn:replace(content , newLineChar, "<br>")} 	<!-- \n를 해주는 과정 --> <br><br>
 		      			</td>

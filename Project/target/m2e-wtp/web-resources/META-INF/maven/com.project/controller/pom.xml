@@ -14,6 +14,14 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
+		<!-- 파일 업로드시 어떤 파일인지 확인  -->
+		<dependency>
+		    <groupId>org.apache.tika</groupId>
+		    <artifactId>tika-core</artifactId>
+		    <version>1.18</version>
+		</dependency>
+				
 		
 		<!--  파일 업로드 -->
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
