@@ -20,7 +20,7 @@ $(function(){
 	
 	
 	
-	$("#j_id").keyup(function(){
+	$("#idcheck").click(function(){
 		id = $("#j_id").val();
 		if(id!=''){
 			if(id.length < 5){
@@ -40,12 +40,12 @@ $(function(){
 						console.log(data);
 						
 						if(data == '1'){
-							$('#id_check').html("중복된 아이디입니다.");
+							alert("중복된 아이디입니다.");
 							$("#id_leng").html("");
 							$('#c_pwd').attr("readonly",true);
 							idflag = 0;
 						}else{
-							$('#id_check').html("사용가능한 아이디입니다.");
+							alert("사용가능한 아이디입니다.");
 							$("#id_leng").html("");
 							idflag = 1;
 							$('#c_pwd').attr("readonly",false);
@@ -58,7 +58,7 @@ $(function(){
 			}
 		
 		}else{
-			alert("아이디를 입력해주세요");
+			
 		}
 	});
 	
@@ -113,31 +113,31 @@ $(function(){
 	<header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
       
-      <h1 class="masthead-heading text-uppercase mb-0">회원 가입</h1><br><br><br>
+      <h1 class="masthead-heading text-uppercase mb-0">회원 가입</h1>
       
-      <div id="loginDiv" align="center">
+      <div id="loginDiv" align="center" style="width: 100%">
       <form onsubmit="return formchk()" method="post" action="<%=request.getContextPath()%>/join_ok.do">
-      	<table >
+      	<table style="width: 100%">
       
       	
       		<tr>
-      			<th>아 이 디 </th>
-      			<td align="left"><input class="input" name="j_id" id="j_id"  maxlength="16" >&nbsp;&nbsp;<span id="id_check"></span><br>
-      			<span id="id_leng"></span>
+      			<th style="width: 20%" >아 이 디 </th>
+      			<td align="left" style="margin-left: 0px"><input class="input" name="j_id" id="j_id"  maxlength="16" > <input type="button" id="idcheck" value="중복검사">
+      			<br><span id="id_leng"></span>
       			</td> 
       		</tr>
       		
       		<tr>
       			<th>비밀번호</th>
       			<td align="left"><input class="input" type="password" name="c_pwd" id="c_pwd" onkeyup="PwdLength()">
-      			<span id="pwd_leng"></span>
+      			<br><span id="pwd_leng"></span>
       			</td>
       		</tr>
       		
       		<tr>
       			<th>비밀번호 확인</th>
       			<td align="left"><input class="input" type="password" name="j_pwd" id="j_pwd" onkeyup="PwdChk()" >
-      			<span id="pwd_chk"></span>
+      			<br><span id="pwd_chk"></span>
       			</td>
       		</tr>
       		
@@ -149,7 +149,7 @@ $(function(){
       		<tr>
       			<th>닉 네 임 </th>
       			<td align="left"><input class="input" name="j_nickname" id="j_nickname" >
-      			<span id="checknick"></span>
+      			<br><span id="checknick"></span>
       			
       			</td> 
       		</tr>
@@ -168,7 +168,8 @@ $(function(){
       		
       		<tr>
       			<th>전화번호 </th>
-      			<td align="left"><input class="input" name="j_mobile" id="j_mobile" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" ><span> ' - '없이 숫자만 입력</span></td> 
+      			<td align="left"><input class="input" name="j_mobile" id="j_mobile" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" >
+      			<br><span> ' - '없이 숫자만 입력</span></td> 
       		</tr>
       		
       		<tr>
@@ -177,11 +178,11 @@ $(function(){
       		</tr>
       		<tr>
       			<th>상세주소1 </th>
-      			<td align="left"><input class="input"  size="50px" id="addr1" readonly="readonly"></td> 
+      			<td align="left"><input class="input"   id="addr1" readonly="readonly"></td> 
       		</tr>
       		<tr>
       			<th>상세주소2</th>
-      			<td align="left"><input class="input"  size="50px" id="addr2" onblur="addrsum();mailplus()" >
+      			<td align="left"><input class="input"   id="addr2" onblur="addrsum();mailplus()" >
       			<input type="hidden" name="j_addr" id="j_addr" onblur="addrsum()">
 
       			</td> 

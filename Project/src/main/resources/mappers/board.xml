@@ -99,6 +99,10 @@
 			WHERE r = 1
 	</select>
 	
+	<select id="selectFile" resultType="String">
+		SELECT boardfile_name FROM boardfile WHERE board_no = #{board_no}
+	</select>
+	
 	
 	<update id="updateLike">
 		UPDATE board
