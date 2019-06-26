@@ -10,13 +10,31 @@
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 	<script type="text/javascript">
 		$(function(){
+			$(".files").hide();	
+
 			getReplyList();	// 처음 실행될 때 답변글 가져오는 함수 실행.
 			boardBottom();
 			
 			$("#reply").click(function(){	// 답장버튼 누르면 reply() 실행
 				reply();
 			});
-		});	
+			
+		});
+		
+		
+		
+		function showFile(){
+			$(".files").toggle();  
+		}
+		
+		// 페이지 버튼 눌렀을 떄 위쪽으로 올라가는 에니메이션
+		function pageUp(num){	
+			if(num == 1){
+				$("html, body").animate({scrollTop : $("#dislike").offset().top}, 400); 
+			} else {
+				$("html, body").animate({scrollTop : $("#reply_content").offset().top}, 400);
+			}
+		}
 		
 		
 		function getReplyList(pageParam){  // 해당 글의 답변 다 가져오기
@@ -27,12 +45,14 @@
 			$.ajax({
 				url: "replyList.do",
 				type:"post",
+				async: false,
 				data: {"board_no": "${dto.getBoard_no() }",
 					   "pageParam": pageParam},
 					   
 				success:function(result){
 					$("#replyNum").text(result.replyNum);
 					$("#replyTable").html(result).trigger("create");
+
 				}
 			});
 		};	// getReplyList()
@@ -45,6 +65,7 @@
 			$.ajax({
 				url: "boardBottom.do",
 				type:"post",
+				async: false,
 				data: {"pageParam": pageParam,
 					   "board_type": "${dto.getBoard_type()}"},
 				success:function(result){
@@ -54,9 +75,9 @@
 		};	// getReplyList()
 		
 		
-		
-		
 		function reply(){	// 답변 등록
+		
+			
 			$.ajax({
 				url:"replyUpdate.do",
 				type:"get",
@@ -148,6 +169,16 @@
 		}
 		
 	</script>
+	
+	<style type="text/css">
+		.attach{
+		    font-weight: bold;
+		    color: white;
+		    text-decoration: underline;
+		    font-style: italic;
+		    font-size: 15px;
+		}
+	</style>
 </head>
 <body>
 	<jsp:include page="/resources/include/navigation.jsp" />
@@ -180,7 +211,7 @@
 		      		</tr>
 		      				      		
 		      		<tr>
-		      			<td>비추천 : <span class="boardUpdateDislike">${dto.getBoard_dislike() }</span></td> 
+		      			<td id="dislike">비추천 : <span class="boardUpdateDislike">${dto.getBoard_dislike() }</span></td> 
 		      		</tr>
 		      				      		
 		      		<tr>
@@ -190,6 +221,20 @@
 		      		<tr>
 		      			<td><hr style="border: none; border-top: 1px solid white"></td>
 		      		</tr>
+		      		
+		      		<c:if test="${!empty files }">
+		      			<tr align="right"><td><a href="javascript:showFile()" class="attach">첨부파일</a></td></tr>
+
+	      				<c:forEach items="${files }" var="file" >
+		      				<tr align="right" class="files"> 
+		      					<td> 
+		      						<a class="font-black attach" href="<c:url value='/resources/uploadFiles${file }'/> " >
+		      						 	<span>${file.substring(48) }</span>
+		      						</a>
+		      					</td>
+		      				</tr>
+	      				</c:forEach>
+		      		</c:if>
 		      		
 		      		<tr>
 		      			<td>
@@ -219,8 +264,7 @@
 		        </table>
 				
 				<%-- 답변글 뿌려주기 --%>
-				<table class="board font-black" id="replyTable"> <%--table : 선 긋기, table-hover : 마우스 올렸을 때 색변화 --%>
-		        </table> 
+				<table class="board font-black" id="replyTable"></table> <%--table : 선 긋기, table-hover : 마우스 올렸을 때 색변화 --%> 
 		        
 		        <%-- 답변 글쓰기 폼 --%>
 		        <table class="board">
@@ -237,6 +281,7 @@
 		        	<tr><td><hr style="border: none; border-top: 1px solid white"></td></tr>
 		        </table>
 		        
+		        <%-- 답글 아래 나오는 게시글 --%>
 		        <table id="boardBottom" class="board font-black"></table>
 		        
      		 </div>

@@ -21,8 +21,6 @@ public class FileUploadService {
 
 	String uploadName;	// uploadPath + 날짜폴더명
 	
-	//이름 중복 안되게끔 랜덤 String 만들어줌
-	UUID uuid = UUID.randomUUID();
 	
 	@Autowired
 	public BoardDAOImpl board;
@@ -53,6 +51,9 @@ public class FileUploadService {
 			//------------------업로드 파일 작업 시작----------------
 			
 			// 중복x처리. -> 랜덤_파일이름.확장자
+			
+			//이름 중복 안되게끔 랜덤 String 만들어줌
+			UUID uuid = UUID.randomUUID();
 			uploadName = uuid.toString()+"_"+multipartFile.getOriginalFilename();
 			
 			

@@ -65,8 +65,8 @@
       			<td colspan="7" align="center" >
       				<%-----------------Left Arrows----------- --%>
       				<c:if test="${ page.getPage() > page.getBlocks() }">
-						<a href="javascript:void(0)" onclick="getReplyList(1)" class="blocks">[◀◀]</a>
-						<a href="javascript:void(0)" onclick="getReplyList(${page.getBlockStart() - 1})" class="blocks">[◀]</a>
+						<a href="javascript:void(0)" onclick="getReplyList(1); pageUp(1);" class="blocks">[◀◀]</a>
+						<a href="javascript:void(0)" onclick="getReplyList(${page.getBlockStart() - 1}); pageUp(1);" class="blocks">[◀]</a>
 					</c:if>
 				 
       				
@@ -78,7 +78,7 @@
 		      
 		      			<c:if test="${page.getPage() != i }">
 							<c:set value="${i }" var="pageParam"></c:set>	<%-- page넘기려면 set 해줘야함 --%>
-		      				<b><a href="javascript:void(0)" onclick="getReplyList(${pageParam})" class="blocks">${i }</a></b>
+		      				<b><a href="javascript:void(0)" onclick="getReplyList(${pageParam}); pageUp(1);" class="blocks">${i }</a></b>
 		      			</c:if>
 		      			&nbsp;&nbsp;&nbsp;
 		      		</c:forEach>
@@ -86,8 +86,8 @@
 		      		
 		      		<%--------------------Right Arrows----------------- --%>
 		      		<c:if test="${page.getBlockEnd() < page.getTotalPages() }">
-						<a href="javascript:void(0)" onclick="getReplyList(${page.getBlockEnd() + 1})" class="blocks">[▶]</a>
-						<a href="javascript:void(0)" onclick="getReplyList(${page.getTotalPages() })" class="blocks">[▶▶] </a>
+						<a href="javascript:void(0)" onclick="getReplyList(${page.getBlockEnd() + 1}); pageUp(1);" class="blocks">[▶]</a>
+						<a href="javascript:void(0)" onclick="getReplyList(${page.getTotalPages() }); pageUp(1);" class="blocks">[▶▶] </a>
 						
 					</c:if>
 	      		</td>

@@ -77,7 +77,7 @@ public class BoardController {
 		List<MultipartFile> fileList = files.getFiles("file"); 
 		
 		if(!fileList.isEmpty()) {	// 첨부파일이 있을때만 실행함.
-			fileUploadService.fileUpload(fileList, board.getLatest());	//getLatest() : 방금 올린 글의 board_no 얻기 위한 메서드
+			fileUploadService.fileUpload(fileList, board.getLatest());	//getLatest() :  insertRecord()의  board_no 얻기 위한 메서드 (같은 board_no으로 boardfile 테이블에 저장할예정)
 		}  
 		
 		return "redirect:board.do?pageParam="+1+"&board_type="+request.getParameter("board_type")+"&boardSearch=no";
@@ -122,13 +122,16 @@ public class BoardController {
 		model.addAttribute("board_type", board_type);	// bottomBoard(댓글 아래 다음 게시물들) 을 위해 board_type을 넘겨준다
 		model.addAttribute("pageParam", pageParam);	// bottomBoard(댓글 아래 다음 게시물들) 을 위해 현재페이지(pageParam)을 넘겨준다
 		
+		// 첨부파일 처리
+		model.addAttribute("files", board.selectFile(board_no));
+		
 		return "boardContent";
 	} ///content.do
 	
 	@RequestMapping("/boardBottom.do")
 	@ResponseBody
 	public ModelAndView boardBottom(@RequestParam int pageParam, @RequestParam String board_type, ModelAndView mav) {
-		pagination = new Pagination(board.getRecords(board_type), pageParam, 10, 5);	// (전체레코드 수, 페이지 번호)
+		pagination = new Pagination(board.getRecords(board_type), pageParam);	// (전체레코드 수, 페이지 번호)
 		
 		map.put("rowStart", pagination.getRowStart());
 		map.put("rowEnd", pagination.getRowEnd());
@@ -194,7 +197,7 @@ public class BoardController {
 	public void replyUpdate(HttpServletRequest request) {
 		map.put("board_no", Integer.parseInt(request.getParameter("board_no")));
 		map.put("reply_nickname", request.getParameter("reply_nickname").trim());
-		map.put("reply_content", request.getParameter("reply_content"));
+		map.put("reply_content", request.getParameter("reply_content")); 
 		
 		reply.updateReply(map);
 		//알아서 결과값 리턴해줌

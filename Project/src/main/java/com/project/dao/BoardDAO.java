@@ -3,6 +3,7 @@ package com.project.dao;
 import java.util.*;
 
 import com.project.dto.BoardDTO;
+import com.project.dto.BoardFileDTO;
 
 public interface BoardDAO {
 	
@@ -31,4 +32,6 @@ public List<BoardDTO> selectList(Map<String, Object> map);
 	public void insertFile(Map<String, Object> map);
 	
 	public int getLatest();
+	
+	public List<String> selectFile(int board_no);
 }
