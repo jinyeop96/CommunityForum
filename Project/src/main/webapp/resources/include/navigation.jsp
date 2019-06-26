@@ -97,6 +97,13 @@
            						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="">업데이트</a></li>
            					</ul>
           		  </li>
+          		  
+          		  <li class="nav-item mx-0 mx-lg-1">
+					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >O.W.Y contents</a>
+					<ul>
+						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="contents.do">Logo</a></li>
+					</ul>
+			     </li>
 						
 					<li class="nav-item mx-0 mx-lg-1">
            				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="login.do">Login</a>
@@ -106,12 +113,7 @@
            				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="join.do">Join</a>
          			</li>
 				
-				<li class="nav-item mx-0 mx-lg-1">
-					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >O.W.Y contents</a>
-					<ul>
-						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="contents.do">Logo</a></li>
-					</ul>
-				</li>
+			
 				
 				</ul>
 			</div>
