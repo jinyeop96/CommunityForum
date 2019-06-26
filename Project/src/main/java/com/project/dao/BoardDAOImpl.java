@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.dto.BoardDTO;
+import com.project.dto.BoardFileDTO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -82,6 +83,11 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public int getLatest() {
 		return template.selectOne("com.project.mappers.board.getLatest");
+	}
+	
+	@Override
+	public List<String> selectFile(int board_no) {
+		return template.selectList("com.project.mappers.board.selectFile", board_no);
 	}
 	
 	// -----------------게시물 등록--------------

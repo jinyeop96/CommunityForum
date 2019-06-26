@@ -40,8 +40,8 @@
 		      			<td colspan="6" align="center">
 		      				<%-----------------Left Arrows----------- --%>
 		      				<c:if test="${ page.getPage() > page.getBlocks() }">
-								<a href="javascript:boardBottom(1)" class="blocks">[◀◀]</a>
-								<a href="javascript:boardBottom(${page.getBlockStart() - 1})" class="blocks">[◀]</a>
+								<a href="javascript:void(0)" onclick="boardBottom(1); pageUp(2)" class="blocks">[◀◀]</a>
+								<a href="javascript:void(0)" onclick="boardBottom(${pageB.getBlockStart() - 1}); pageUp(2)" class="blocks">[◀]</a>
 							</c:if>
 						 
 		      				
@@ -54,7 +54,7 @@
 				      
 				      			<!--  no 현재페이지 -->
 				      			<c:if test="${page.getPage() != i }">
-				      				<b><a href="javascript:boardBottom(${i })" class="blocks">${i }</a></b>
+				      				<b><a href="javascript:void(0)" onclick="boardBottom(${i }); pageUp(2)" class="blocks">${i }</a></b> 
 				      			</c:if>
 				      			&nbsp;&nbsp;&nbsp;
 				      		</c:forEach>
@@ -62,8 +62,8 @@
 				      		
 				      		<%--------------------Right Arrows----------------- --%>
 				      		<c:if test="${page.getBlockEnd() < page.getTotalPages() }">
-								<a href="javascript:boardBottom(${page.getBlockEnd() + 1})" class="blocks">[▶]</a>
-								<a href="javascript:boardBottom(${page.getTotalPages() })" class="blocks">[▶▶] </a>
+								<a href="javascript:void(0)" onclick="boardBottom(${pageB.getBlockEnd() + 1}); pageUp(2)" class="blocks">[▶]</a>
+								<a href="javascript:void(0)" onclick="boardBottom(${pageB.getTotalPages() }); pageUp(2)" class="blocks">[▶▶] </a>
 							</c:if>
 			      		</td>
 		      		</tr>

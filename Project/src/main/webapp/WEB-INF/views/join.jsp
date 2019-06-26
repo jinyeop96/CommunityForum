@@ -117,7 +117,7 @@ $(function(){
       
       <div id="loginDiv" align="center">
       <form onsubmit="return formchk()" method="post" action="<%=request.getContextPath()%>/join_ok.do">
-      	<table >
+      	<table style="width: 100%">
       
       	
       		<tr>
