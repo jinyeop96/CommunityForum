@@ -15,6 +15,7 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources location="file:///C:/Users/JINYEOP/Desktop/uploadFiles/" mapping="/image/**" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -50,6 +51,9 @@
         <beans:property name="defaultEncoding" value="utf-8" />
 	</beans:bean>
 
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg value="C:/Users/JINYEOP/Desktop/uploadFiles/" />
+	</beans:bean>
 
 	<context:component-scan base-package="com.project"/>
 	

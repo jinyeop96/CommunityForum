@@ -79,8 +79,7 @@
 					</tr>
 					<tr style="padding: -5px;">
 						<td align="left">
-							<span class="msg">Ctrl를 누른채 선택시 중복가능</span>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="msg">Ctrl를 누른채 선택시 중복가능</span><br>
 							<span class="msg">용량은 최대 5MB입니다.</span> 
 						</td>
 					</tr>
