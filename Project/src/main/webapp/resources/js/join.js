@@ -9,33 +9,30 @@ $(document).ready(function(){
 
 //다음 우편번호 검색 펑션
 function zipSearch(){
-    new daum.Postcode({
+	
+	new daum.Postcode({
         oncomplete: function(data) {
-            var fullRoadAddr = data.roadAddress; //도로명주소 변수
-            var extraRoadAddr = ''; //도로명 조합형 주소 변수
+                        var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
             
-            if(data.bname !==''&&/[동|로|가]$/g.test(data.bname)){
-            	extraRoadAddr += data.bname;
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
             }
-            
-            if(data.buildingName !==''&&data.apartment =='Y'){
-            	extraRoadAddr +=(extraRoadAddr !==''?','+data.buildingName : data.buildingName);
-            }
-            
-            if(extraRoadAddr !==''){
-            	extraRoadAddr = '('+ extraRoadAddr +')';
-            }
-            if(fullRoadAddr !==''){
-            	fullRoadAddr += extraRoadAddr; 
-            }
-            document.getElementById('zip').value = (data.zonecode);
-            document.getElementById('addr1').value = (data.zonecode)+(fullRoadAddr);
-            document.getElementById('addr2').focus();
-            
-            
+            document.getElementById('zip').value = data.zonecode;
+            document.getElementById("addr1").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("addr2").focus();
         }
     }).open();
-    }
+}
+	
+
+
+
+
 // 주소, 상세주소 합치는 펑션(히든값)
 function addrsum(){
 	var addr1 = $('#addr1').val();

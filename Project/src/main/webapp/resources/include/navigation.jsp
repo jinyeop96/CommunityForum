@@ -61,9 +61,9 @@
 				<li class="nav-item mx-0 mx-lg-1">
 					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">팀 소개</a>
 						<ul>
-							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="OwyMember.jsp">팀원구성</a></li>
-							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="plan.jsp">기획의도</a></li>
-							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="future.jsp">프로젝트의 미래</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="OwyMember.do">팀원구성</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="plan.do">기획의도</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="future.do">프로젝트의 미래</a></li>
 						</ul>
 				</li>
 				
@@ -89,9 +89,14 @@
 							</ul>
 					</li>
 					
-							  <li class="nav-item mx-0 mx-lg-1">
-           <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/allqna.do">고객센터</a>
-          </li>
+				  <li class="nav-item mx-0 mx-lg-1">
+           				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >Q&A</a>
+           					<ul>
+           						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/allqna.do">문의사항</a>
+           						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="">공지사항</a></li>
+           						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="">업데이트</a></li>
+           					</ul>
+          		  </li>
 						
 					<li class="nav-item mx-0 mx-lg-1">
            				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="login.do">Login</a>
@@ -104,7 +109,7 @@
 				<li class="nav-item mx-0 mx-lg-1">
 					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >O.W.Y contents</a>
 					<ul>
-						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="contents.jsp">Logo</a></li>
+						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="contents.do">Logo</a></li>
 					</ul>
 				</li>
 				

@@ -21,6 +21,27 @@ public class FrontController {
 	public String free() {
 		return "free";
 	}
+	
+	@RequestMapping("/OwyMember.do") 
+	public String OwyMember() {
+		return "OwyMember";
+	}
+	
+	@RequestMapping("/plan.do")
+	public String plan() {
+		return "plan";
+	}
+	
+	@RequestMapping("/future.do")
+	public String future() {
+		return "future";
+	}
+	
+	@RequestMapping("/contents.do")
+	public String contents() {
+		return "contents";
+	}
+	
 }
 
 

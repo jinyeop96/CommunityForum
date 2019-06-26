@@ -52,6 +52,9 @@
           <br><br>
           <p class="lead mb-0">우리는 대한민국 청춘들을 응원합니다!</p>
           
+			<a class="navbar-brand js-scroll-trigger" href="main.do">
+				<img id="logo" src="<c:url value='/resources/img/logos/510_2.png'/>">
+			</a> 
           
         </div>
 

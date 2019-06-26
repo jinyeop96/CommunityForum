@@ -6,7 +6,7 @@
 <title>main</title>
 </head>
 	
-	<%-- testtesttetete
+	<%--
 		resources 폴더에 css, image, js, jsp 등등 들어 있음. jsp 파일 불러오기는 아래와 같이 하시고~
 	
 		그 외 css, image, js 등은 
