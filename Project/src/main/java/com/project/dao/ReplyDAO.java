@@ -14,6 +14,10 @@ public interface ReplyDAO {
 	public void updateReply(Map<String, Object> map);
 	
 	public void updateLike(int reply_no);
+
+	public void updateLikeDown(int reply_no);
 	
 	public void updateDislike(int reply_no);
+
+	public void updateDislikeUp(int reply_no);
 }
