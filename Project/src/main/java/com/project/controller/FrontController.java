@@ -21,6 +21,11 @@ public class FrontController {
 	public String free() {
 		return "free";
 	}
+	
+	@RequestMapping("/hotel.do")
+	public String hotel() {
+		return "hotel";
+	}
 }
 
 

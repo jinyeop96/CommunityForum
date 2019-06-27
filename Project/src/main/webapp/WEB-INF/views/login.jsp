@@ -1,16 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
+<script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
+<style type="text/css">
+	.find{
+		color: white;
+	}
+	.find:hover{
+		font-style: italic;
+	}
+</style>
 
 </head>
 	<jsp:include page="/resources/include/navigation.jsp" />
-<script src="./resources/js/login.js" ></script>	
-	
-
+	<script src="./resources/js/login.js" ></script>	
 
 	 <!--  section01 -->
 	<header class="masthead bg-primary text-white text-center">
@@ -18,21 +26,20 @@
       
       <h1 class="masthead-heading text-uppercase mb-0">로그인</h1>
       <div id="loginDiv" align="center">
-      <form onsubmit="return loginformchk()" action="<%=request.getContextPath()%>/loginok.do">
+      <form onsubmit="return loginformchk()" action="<%=request.getContextPath()%>/loginok.do" method="post">
       	<table>
       		<tr>
-      			<th>user ID</th>
-      			<td><input class="input" name="j_id" id ="j_id"></td> 
+      			<td><input class="input" name="id" id ="id" placeholder="user ID"></td> 
       		</tr>
       		
       		<tr>
-      			<th>password</th>
-      			<td><input class="input" type="password" name="j_pwd" id="j_pwd" ></td>
+      			<td><input class="input" type="password" name="pwd" id="pwd" placeholder="password" ></td>
       		</tr>
       	</table>
       	<input id="loginBtn" type="submit" value="Login"><br>
-      	<input  id="loginBtn" type="button" value="find_Id" onclick="location.href='id_search.do'" >
-      	<input  id="loginBtn" type="button" value="find_pwd" onclick="location.href='pwd_search.do'">
+      	<c:if test="${!empty msg }">${msg }<br></c:if> 
+      	<a href="javascript:void(0)" class="find"  onclick="location.href='id_search.do'">find id</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;  
+      	<a href="javascript:void(0)" class="find" onclick="location.href='pwd_search.do'">find pwd</a> 
       	</form>
       </div>
     </div>

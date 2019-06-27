@@ -21,7 +21,7 @@
 
 <!--  CSS by myself -->
 <!-- <link href="/resources/css/myself1.css" rel="stylesheet" type="text/css"> -->
-<link href="<c:url value="/resources/css/myself.css" />" rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/myself1.css" />" rel="stylesheet" type="text/css">
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 	<style>
 		@media(max-width: 500px){
@@ -82,17 +82,26 @@
 					<li class="nav-item mx-0 mx-lg-1">
 						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Browse</a>
 							<ul>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#hotel">Hotel</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="hotel.do">Hotel</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#restaurant">Restaurant</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#transport">Transport</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#address">ADDRESS</a></li>
 							</ul>
 					</li>
 					
-							  <li class="nav-item mx-0 mx-lg-1">
-           <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/allqna.do">고객센터</a>
-          </li>
-						
+					<li class="nav-item mx-0 mx-lg-1">
+           				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/allqna.do">고객센터</a>
+          			</li>
+					
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >O.W.Y contents</a>
+
+						<ul>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="contents.jsp">Logo</a></li>
+						</ul>
+					</li>
+					
+			<c:if test="${empty nickname }">
 					<li class="nav-item mx-0 mx-lg-1">
            				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="login.do">Login</a>
          			</li>
@@ -100,13 +109,18 @@
 					<li class="nav-item mx-0 mx-lg-1">
            				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="join.do">Join</a>
          			</li>
-				
-				<li class="nav-item mx-0 mx-lg-1">
-					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >O.W.Y contents</a>
-					<ul>
-						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="contents.jsp">Logo</a></li>
-					</ul>
-				</li>
+			</c:if>		
+			
+			<c:if test="${!empty nickname }">
+					<li class="nav-item mx-0 mx-lg-1">
+           				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="logout.do">Logout</a>
+         			</li>
+	
+					<li class="nav-item mx-0 mx-lg-1">
+           				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="#">${nickname }</a>
+         			</li>
+			</c:if>
+						
 				
 				</ul>
 			</div>
@@ -114,8 +128,15 @@
 		
 		<div class="navbar-log-regi">
 			<!-- 메뉴바 우측상단배치 -->
-			<a class="navbar-top-right" href="login.do">Login</a> 
-			<a class="navbar-top-right" href="join.do">Join</a>
+			<c:if test="${empty nickname }">
+				<a class="navbar-top-right" href="login.do">Login</a> 
+				<a class="navbar-top-right" href="join.do">Join</a>
+			</c:if>
+			
+			<c:if test="${!empty nickname }">
+				<a class="navbar-top-right-session" href="#">${nickname }</a> 
+				<a class="navbar-top-right" href="logout.do">Logout</a>
+			</c:if>
 		</div>
 	</nav>
 	</body>

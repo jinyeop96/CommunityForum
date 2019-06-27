@@ -21,7 +21,7 @@
       <form onsubmit="return loginformchk()" action="<%=request.getContextPath()%>/loginok.do">
       	<table>
       		<tr>
-      		<td>로그인성공?</td>
+      		<td>${nickname }</td>
       		</tr>
       	</table>
       	

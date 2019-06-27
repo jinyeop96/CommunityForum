@@ -22,7 +22,7 @@
 
         <!-- Hohel Item 1 -->
         <div>            
-            <form action="#">
+            <form action="hotel.do">
             	<input name="hotel_search" placeholder="가고싶은 곳!!!">
             	<input type="submit" value="search">
             </form>
