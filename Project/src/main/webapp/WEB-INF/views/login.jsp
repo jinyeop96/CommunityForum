@@ -26,7 +26,7 @@
       
       <h1 class="masthead-heading text-uppercase mb-0">로그인</h1>
       <div id="loginDiv" align="center">
-      <form onsubmit="return loginformchk()" action="<%=request.getContextPath()%>/loginok.do" method="post">
+      <form action="<%=request.getContextPath()%>/loginok.do" method="post">
       	<table>
       		<tr>
       			<td><input class="input" name="id" id ="id" placeholder="user ID"></td> 
