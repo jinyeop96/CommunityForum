@@ -5,25 +5,25 @@
 <mapper namespace="com.project.dao.joinDAO">
 
 <select id="insert" parameterType="com.project.dto.JoinDTO">
-insert into hmember values(#{j_id},#{j_pwd},#{j_name},#{j_nickname},#{j_email},#{j_mobile},#{j_addr},#{j_birth})  
+insert into member values(#{id},#{pwd},#{name},#{nickname},#{email})  
 </select>
 
 
 <select id="findid" resultType="int">
-  select count(*) from hmember where j_id=#{j_id}  
+  select count(*) from member where id=#{id}  
 </select>
 
 
 <select id="findnick" resultType="int">
-  select count(*) from hmember where j_nickname=#{j_nickname}  
+  select count(*) from member where nickname=#{nickname}  
 </select>
 
 <select id="searchId"  resultType="String">
-select j_id from hmember where j_name=#{j_name} and j_mobile=#{j_mobile}
+select id from member where name=#{name} and email=#{email}
 </select>
 
 <select id="searchpwd"  resultType="String">
-select j_pwd from hmember where j_id=#{j_id} and j_mobile=#{j_mobile}
+select pwd from member where id=#{id} and email=#{email}
 </select>
 
 </mapper>

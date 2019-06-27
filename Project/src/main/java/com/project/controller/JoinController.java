@@ -44,25 +44,19 @@ public class JoinController {
 //아이디 중복체크	
 	@ResponseBody
 	@RequestMapping("/idcheck.do")
-	public  int checkId(String j_id) throws Exception{
-		System.out.println("펑션에서 넘어온값 ="+j_id);
+	public  int checkId(String id) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("j_id", j_id);
-		System.out.println("MAP구조형으로 변환된값 ="+j_id);
+		map.put("id", id);
 		int result = join.findId(map);
-		System.out.println("매핑후 결과값 ="+result);
 		return result;
 	}
 //닉네임 중복 체크 	
 	@ResponseBody
 	@RequestMapping("/nickcheck.do")
-	public  int checknick(String j_nickname) throws Exception{
-		System.out.println("펑션에서 넘어온값 ="+j_nickname);
+	public  int checknick(String nickname) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("j_nickname", j_nickname);
-		System.out.println("MAP구조형으로 변환된값 ="+j_nickname);
+		map.put("nickname", nickname);
 		int result = join.findnick(map);
-		System.out.println("매핑후 결과값 ="+result);
 		return result;
 	}
 	//아이디 찾기 페이지로 이동
@@ -73,17 +67,11 @@ public class JoinController {
 	//아이디 찾기 결과
 	@ResponseBody
 	@RequestMapping("/searchIdOK.do")
-	public String searchId(@RequestParam String j_name, @RequestParam String j_mobile) throws Exception{
+	public String searchId(@RequestParam String name, @RequestParam String email) throws Exception{
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("j_name", j_name);
-		result.put("j_mobile", j_mobile);
-		
-		System.out.println("매핑후 결과값 ="+result.get("j_name"));
-		System.out.println("매핑후 결과값 ="+result.get("j_mobile"));
+		result.put("name", name);
+		result.put("email", email);
 		  String id = join.searchId(result);
-		 
-		
-		System.out.println("sql후 결과값 ="+id);
 		return id;
 	}
 	
@@ -94,17 +82,11 @@ public class JoinController {
 	
 	@ResponseBody
 	@RequestMapping("/searchpwdOK")
-	public String searchpwd(@RequestParam String j_id, @RequestParam String j_mobile) throws Exception{
+	public String searchpwd(@RequestParam String id, @RequestParam String email) throws Exception{
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("j_id", j_id);
-		result.put("j_mobile", j_mobile);
-		
-		System.out.println("매핑후 결과값 ="+result.get("j_id"));
-		System.out.println("매핑후 결과값 ="+result.get("j_mobile"));
-		  String pwd = join.searchpwd(result);
-		 
-		
-		System.out.println("sql후 결과값 ="+pwd);
+		result.put("id", id);
+		result.put("email", email);
+		String pwd = join.searchpwd(result);
 		return pwd;
 	}
 	
