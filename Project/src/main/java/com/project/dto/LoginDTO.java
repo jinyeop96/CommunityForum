@@ -2,28 +2,22 @@ package com.project.dto;
 
 public class LoginDTO {
 	
-	private String j_id;
-	private String j_pwd;
-	private boolean useCookie;
+	private String id;
+	private String nickname;
 	
-	public boolean isUseCookie() {
-		return useCookie;
+	public String getId() {
+		return id;
 	}
-	public void setUseCookie(boolean useCookie) {
-		this.useCookie = useCookie;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getJ_id() {
-		return j_id;
+	public String getNickname() {
+		return nickname;
 	}
-	public void setJ_id(String j_id) {
-		this.j_id = j_id;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
-	public String getJ_pwd() {
-		return j_pwd;
-	}
-	public void setJ_pwd(String j_pwd) {
-		this.j_pwd = j_pwd;
-	}
-
+	
+	
 	
 }

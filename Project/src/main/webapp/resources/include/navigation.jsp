@@ -21,7 +21,7 @@
 
 <!--  CSS by myself -->
 <!-- <link href="/resources/css/myself1.css" rel="stylesheet" type="text/css"> -->
-<link href="<c:url value="/resources/css/myself.css" />" rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/myself1.css" />" rel="stylesheet" type="text/css">
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 	<style>
 		@media(max-width: 500px){
@@ -68,43 +68,36 @@
 				</li>
 				
 				
-					<li class="nav-item mx-0 mx-lg-1">
-						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">게시판</a>
-							<ul class="board_bg">
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=entire&boardSearch=no">전체게시판</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=free&boardSearch=no">자유게시판</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=review&boardSearch=no">후기게시판</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=question&boardSearch=no">질문게시판</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=findPeople&boardSearch=no">사람찾습니다!</a></li>							
-							</ul>
-					</li>
+				<li class="nav-item mx-0 mx-lg-1">
+					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">게시판</a>
+						<ul class="board_bg">
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=entire&boardSearch=no">전체게시판</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=free&boardSearch=no">자유게시판</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=review&boardSearch=no">후기게시판</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=question&boardSearch=no">질문게시판</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=findPeople&boardSearch=no">사람찾습니다!</a></li>							
+						</ul>
+				</li>
+				
+				<li class="nav-item mx-0 mx-lg-1">
+					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Browse</a>
+						<ul>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#hotel">Hotel</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#restaurant">Restaurant</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#transport">Transport</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#address">ADDRESS</a></li>
+						</ul>
+				</li>
 					
-					<li class="nav-item mx-0 mx-lg-1">
-						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Browse</a>
-							<ul>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#hotel">Hotel</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#restaurant">Restaurant</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#transport">Transport</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#address">ADDRESS</a></li>
-							</ul>
-					</li>
-					
-				  <li class="nav-item mx-0 mx-lg-1">
-           				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >Q&A</a>
-           					<ul>
-           						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/allqna.do">문의사항</a>
-           						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="">공지사항</a></li>
-           						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="">업데이트</a></li>
-           					</ul>
-          		  </li>
+			 	<li class="nav-item mx-0 mx-lg-1">
+       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >Q&A</a>
+       					<ul>
+       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/allqna.do">문의사항</a>
+       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="">공지사항</a></li>
+       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="">업데이트</a></li>
+       					</ul>
+      			</li>
 						
-					<li class="nav-item mx-0 mx-lg-1">
-           				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="login.do">Login</a>
-         			</li>
-	
-					<li class="nav-item mx-0 mx-lg-1">
-           				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="join.do">Join</a>
-         			</li>
 				
 				<li class="nav-item mx-0 mx-lg-1">
 					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >O.W.Y contents</a>
@@ -112,15 +105,42 @@
 						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="contents.do">Logo</a></li>
 					</ul>
 				</li>
+					
+			<c:if test="${empty nickname }">
+				<li class="nav-item mx-0 mx-lg-1">
+         			<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="login.do">Login</a>
+       			</li>
+
+				<li class="nav-item mx-0 mx-lg-1">
+      				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="join.do">Join</a>
+       			</li>
+			</c:if>		
+			
+			<c:if test="${!empty nickname }">
+				<li class="nav-item mx-0 mx-lg-1">
+       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="logout.do">Logout</a>
+       			</li>
+	
+				<li class="nav-item mx-0 mx-lg-1">
+       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="#">${nickname }</a>
+       			</li>
+			</c:if>
+						
 				
-				</ul>
 			</div>
 		</div>
 		
 		<div class="navbar-log-regi">
 			<!-- 메뉴바 우측상단배치 -->
-			<a class="navbar-top-right" href="login.do">Login</a> 
-			<a class="navbar-top-right" href="join.do">Join</a>
+			<c:if test="${empty nickname }">
+				<a class="navbar-top-right" href="login.do">Login</a> 
+				<a class="navbar-top-right" href="join.do">Join</a>
+			</c:if>
+			
+			<c:if test="${!empty nickname }">
+				<a class="navbar-top-right-session" href="#">${nickname }</a> 
+				<a class="navbar-top-right" href="logout.do">Logout</a>
+			</c:if>
 		</div>
 	</nav>
 	</body>

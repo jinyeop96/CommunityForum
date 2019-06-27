@@ -41,7 +41,6 @@ public class FrontController {
 	public String contents() {
 		return "contents";
 	}
-	
 }
 
 
