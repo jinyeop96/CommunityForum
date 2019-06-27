@@ -12,6 +12,87 @@
 	
 	<header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
+     <h1 class="masthead-heading text-uppercase mb-0">상징물</h1> 
+     
+     <br><br>
+     
+     	<section class="box_instruc_con">
+     		<div id="printContents">
+     			<section class="overflowW marB40"> 				
+
+				<img id="logo"  src="<c:url value='/resources/img/logos/510_2.png'/>">
+     			
+     				<div class=="floatL w55per marB20 re100">
+     					<h3 class="title">- O.W.Y 로고 No.1-</h3>
+     					<ol class="marB20 grey2">
+     						<h5>[팀프로젝트 명인 '오와열'이 내재 돼있고 군 관련 프로그램인 특성을 살려 군번줄을 형상화]</h5>
+     					</ol>
+     					<div class="line marB20"></div>
+     					<div class="box_btn">
+     						<a class="btn_down white" src="<c:url value='/resources/img/logos/510_2.png'/>" target="_blank" title="표준규격 다운로드">표준규격 다운로드</a>
+     					</div>
+     				</div>
+     			
+     				<div class="clear"></div>
+     				
+     				<div class="box_btn">
+     					<div class="floatR">
+     						<a class="btn_down greyL" href='/resources/img/logos/510_1.jpg' target="_blank" title="오와열 로고 다운로드(GIF)">|오와열 로고 다운로드(GIF) |</a>
+ 							<a class="btn_down greyL marR0" href='/resources/img/logos/510_1.jpg' target="_blank" title="오와열 로고 다운로드(일러파일)">오와열 로고 다운로드(일러파일)|</a>
+     					</div>
+     				</div>
+     				
+     				<img id="logo" src="<c:url value='/resources/img/logos/510logo_2.png'/>">
+     			
+     				<div class=="floatL w55per marB20 re100">
+     					<h3 class="title">- O.W.Y 로고 No.2-</h3>
+     					<ol class="marB20 grey2">
+     						<h5>['오와열' 타이틀을 제거하여 simple하게 제작된 제 2의 로고]</h5>
+     					</ol>
+     					<div class="line marB20"></div>
+     					<div class="box_btn">
+     						<a class="btn_down white" href='/resources/img/logos/510logo_2.png' target="_blank" title="표준규격 다운로드">표준규격 다운로드</a>
+     					</div>
+     				</div>
+     			
+     				<div class="clear"></div>
+     				
+     				<div class="box_btn">
+     					<div class="floatR">
+     						<a class="btn_down greyL" href='/resources/img/logos/510_1.jpg' target="_blank" title="오와열 로고 다운로드(GIF)">|오와열 로고 다운로드(GIF) |</a>
+ 							<a class="btn_down greyL marR0" href='/resources/img/logos/510_1.jpg' target="_blank" title="오와열 로고 다운로드(일러파일)">오와열 로고 다운로드(일러파일)|</a>
+     					</div>
+     				</div>
+     				
+     			</section>
+     			
+     			
+     			
+     			<section class="marB60">
+     				<h3 class="title">규격별 다운로드</h3>
+     				<div class="logo marB10">
+     				
+     				 <div>
+     				 	<h5 class="floatL">|Download|</h5>
+     				 	<img src="" alt="">
+     				 </div>
+     				</div>
+     				<div class="box_btn">
+     					<div class="floatR">
+     						<a class="btn_down greyL" href='/resources/img/logos/510_1.jpg' target="_blank" title="오와열 로고 다운로드(표준규격)">오와열 로고 다운로드(표준규격)</a>
+     						<a class="btn_down greyL" href='/resources/img/logos/510_1.jpg' target="_blank" title="요와열 로고 다운로드(GIF)">오와열 로고 다운로드(GIF)</a>
+     						<a class="btn_down greyL" href='/resources/img/logos/510_1.jpg' target="_blank" title="오와열 로고 다운로드(JPG)">오와열 로고 다운로드(JPG)</a>
+     					</div>
+     				</div>
+     			</section>
+     			
+     			 <div class="signature overflowW">
+     				 	<h5 class="floatL">Developer => jinyoep's GF</h5>
+     				 	<img src="" alt="">
+     				 </div>
+     			
+     		</div>
+     	</section>
     </div>
     </header>
   

@@ -23,7 +23,7 @@ public class LoginController {
 		
 		
 		@RequestMapping("/loginok.do")
-		public String userlogin(@RequestParam String id,@RequestParam String pwd, HttpSession session, Model model) throws Exception{
+		public String userlogin(@RequestParam String id,@RequestParam String pwd, HttpSession session, Model model, HttpServletRequest request) throws Exception{
 			Map<String, Object> result = new HashMap<String, Object>();
 			result.put("id", id);
 			result.put("pwd", pwd);

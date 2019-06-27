@@ -13,7 +13,7 @@
 	<header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
     
-    	<h1>O.W.Y Member</h1>
+    	<h1 class="masthead-heading text-uppercase mb-0">O.W.Y Member</h1>
     	
     	<br><br>
     	

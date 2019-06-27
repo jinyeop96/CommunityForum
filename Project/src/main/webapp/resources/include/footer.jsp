@@ -35,7 +35,7 @@
           
           <a class="btn btn-outline-light btn-social mx-1" href="http://http://mnd.go.kr">  <!-- 공군 사이트 -->
            <!--<i class="fab fa-fw fa-instagram"></i>-->
-          	<img src="<c:url value='/resources/img/logos/airforce.png'/>" title="공군 사이트로 이동" style="width: 33px;">
+          	<img src="<c:url value='/resources/img/logos/airforce.png'/>" title="공군 사이트로 이동" style="width: 38px;">
           </a>
           
           <a class="btn btn-outline-light btn-social mx-1" href="http://www.rokmc.mil.kr"> <!-- 해병대 사이트 -->
