@@ -36,9 +36,19 @@ public class ReplyDAOImpl implements ReplyDAO{
 	public void updateLike(int reply_no) {
 		template.update("com.project.mappers.reply.updateLike", reply_no);
 	}
+
+	@Override
+	public void updateLikeDown(int reply_no) {
+		template.update("com.project.mappers.reply.updateLikeDown", reply_no);
+	}
 	
 	@Override
 	public void updateDislike(int reply_no) {
 		template.update("com.project.mappers.reply.updateDislike", reply_no);
+	}
+
+	@Override
+	public void updateDislikeUp(int reply_no) {
+		template.update("com.project.mappers.reply.updateDislikeUp", reply_no);
 	}
 }

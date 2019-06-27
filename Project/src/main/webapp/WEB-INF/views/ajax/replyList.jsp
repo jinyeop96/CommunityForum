@@ -33,14 +33,14 @@
      		<tr>
      			<!--  좋아요 -->
      			<td colspan="2">
-     				<a href="javascript:void(0)"  onclick="updateLike(${reply.getReply_no()})" class="font-black">
+     				<a href="javascript:void(0)"  onclick="replyUpdateLike(${reply.getReply_no()})" class="font-black">
      					<img class="rec" src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;${reply.getReply_like() }
     				</a>
 				</td>
 				
 				<!-- 싫어요 -->
      			<td colspan="2">
-     				<a href="javascript:void(0)"  onclick="updateDislike(${reply.getReply_no()})" class="font-black">
+     				<a href="javascript:void(0)"  onclick="replyUpdateDislike(${reply.getReply_no()})" class="font-black">
      					<img class="rec" src="<c:url value='/resources/img/logos/dislike2.png'/>">&nbsp;&nbsp;${reply.getReply_dislike() }
      				</a>
      			</td>

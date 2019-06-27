@@ -60,12 +60,14 @@
 	      			<table class="board font-black " id="entireList"> 
 			      		<%------------------가져온 전체 게시물 있다면-------------- --%>
 			      		<c:if test="${!empty list }">
-				      		<tr>
-				      			<td colspan="7" align="right">
-				      				<input class="buttons" type="button" value="글쓰기" onclick="location.href='boardWrite.do?board_type=${board_type}'">
-				      			</td>
-				      		</tr>
-				      		<br><br>
+			      			<c:if test="${!empty nickname }">
+					      		<tr>
+					      			<td colspan="7" align="right">
+					      				<input class="buttons" type="button" value="글쓰기" onclick="location.href='boardWrite.do?board_type=${board_type}'">
+					      			</td>
+					      		</tr>
+					      		<br><br>
+			      			</c:if>
 			      		 
 			      			<%-- 가져온 게시물 뿌려주기 --%>
 				      		<c:forEach items="${list }" var="dto">

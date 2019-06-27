@@ -14,7 +14,7 @@ public class LoginDAOImpl implements LoginDAO {
 
 	@Override
 	public String selectUser(Map<String, Object> map) throws Exception {
-		return template.selectOne("selectUser", map);
+		return template.selectOne("com.project.mappers.LoginDAO.selectUser", map);
 	}
 
 
