@@ -93,6 +93,10 @@
 		INSERT INTO boardfile values(#{board_no}, #{boardfile_name}, SYSDATE)
 	</insert>
 	
+	<delete id="deleteRecord">
+		DELETE FROM boardfile WHERE board_no = #{board_no} AND boardfile_name = #{boardfile_name}
+	</delete>
+	
 	<select id="getLatest" resultType="int">
 		SELECT 	board_no 
 			FROM (SELECT ROWNUM r, board_no FROM board ORDER BY board_no DESC)
@@ -139,5 +143,16 @@
 			FROM board
 			WHERE board_no = #{board_no}
 	</select>
+	
+	<delete id="boardDelete">
+		DELETE FROM board WHERE board_no = #{board_no}
+	</delete>
+	
+	<update id="updateContent">
+		update board
+			SET board_title = #{board_title},
+				board_content = #{board_content}
+			where board_no = #{board_no}
+	</update>
 	
 </mapper>

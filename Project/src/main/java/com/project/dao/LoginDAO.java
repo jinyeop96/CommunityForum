@@ -2,7 +2,9 @@ package com.project.dao;
 
 import java.util.Map;
 
+import com.project.dto.LoginDTO;
+
 public interface LoginDAO {
 	
-	  public String selectUser(Map<String, Object> map)throws Exception;
+	  public LoginDTO selectUser(Map<String, Object> map)throws Exception;
 }

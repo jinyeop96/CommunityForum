@@ -142,10 +142,10 @@
 }
 
 .buttons{
-    border-radius: 15px;
+    border-radius: 8px;
     background-color: transparent;
     border: 1px solid white;
-    padding: 3px 30px;
+    padding: 0px 15px;
 }
 
 .searchBtn{

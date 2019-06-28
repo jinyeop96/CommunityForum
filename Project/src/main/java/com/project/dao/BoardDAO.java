@@ -34,9 +34,15 @@ public List<BoardDTO> selectList(Map<String, Object> map);
 	public int getDislikes(int board_no);
 	
 	public void insertFile(Map<String, Object> map);
+
+	public void deleteFile(Map<String, Object> map);
 	
 	public int getLatest();
 	
 	public List<String> selectFile(int board_no);
+	
+	public void boardDelete(int board_no);
+	
+	public void updateContent(Map<String, Object> map);
 	
 }

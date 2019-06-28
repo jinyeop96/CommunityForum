@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전체게시판</title>
+<title>게시물 수정</title>
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 	<script type="text/javascript">
 		function cancelConf(){
@@ -13,26 +13,19 @@
 				history.back();
 			}
 		}
-		/*
-		$(function(){
-			$("#addFileBtn").click(function(){	
-				var fileIndex = $('#fileArea').children().length;
-				
-				$("#fileArea").append(
-						"<tr><td>" +
-						"<input type='file' id='file"+fileIndex+"' style='width: 260px'>" +
-						"<input align='right' type='button' id='delBtn"+fileIndex+"'  value='삭제' onclick='delFileBtn("+fileIndex+")' >" +
-						"</td></tr>"
-						);
-			}); 
-			
-		}) 
 		
-		function delFileBtn(fileIndex){ 
-			$("#file"+fileIndex).remove();
-			$("#delBtn"+fileIndex).remove();
-		}
-		*/
+		$(function(){
+			$("#fileDelAll").click(function(){
+				var check = $(this).is(":checked");
+				
+				if(check){
+					$(".fileDel").prop("checked", true);
+				} else{
+					$(".fileDel").prop("checked", false);
+				}
+			})
+			
+		});
 		
 	</script>
 	<style type="text/css">
@@ -47,8 +40,7 @@
 			size: 15px;
 		}
 	</style>
-	
-</head>
+</head> 
 <body>
 	<jsp:include page="/resources/include/navigation.jsp" />
 	
@@ -66,33 +58,52 @@
 	      	</c:if>
 	    	<br><br>
 			
-			<form action="boardWriteOk.do" method="post" enctype="multipart/form-data">
+			<form action="boardEditOk.do" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="board_no" value="${dto.getBoard_no() }">
 				<input type="hidden" name="board_type" value="${board_type }">
+				<input type="hidden" name="pageParam" value="${pageParam }">
 				<input type="hidden" name="board_nickname" value="${nickname }">
+				
 				
 				<table class="board font-black ">
 					<tr>
 						<td align="left" colspan="3">
-							<input name="board_title" placeholder="제목" class="title">
-						</td>
-					</tr>
-					<tr style="padding: -5px;">
-						<td align="left">
-							<span class="msg">Ctrl를 누른채 선택시 중복가능</span><br>
-							<span class="msg">용량은 최대 5MB입니다.</span> 
+							<input name="board_title" placeholder="제목" class="title" value="${dto.getBoard_title() }">
 						</td>
 					</tr>
 					
+					<c:if test="${!empty files }">
+						<tr><td align="left">
+							 첨부파일삭제 
+						</td></tr> 
+
+						<tr><td align="left">
+							 <input type="checkbox" id="fileDelAll" value="${files }">전체삭제 
+						</td></tr>
+						<c:forEach items="${files }" var="name">
+							<tr>
+								<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="checkbox" class="fileDel" name="fileDel" value="${name }">${name.substring(47) }
+								</td>
+							</tr>
+						</c:forEach>
+						
+						<tr><td><br></td></tr>
+					</c:if>					
 					
+				 	<tr><td align="left">
+						 첨부파일추가
+					</td></tr>
+					 					
 					<tr id="fileArea" align="left">
 						<td colspan="3">
 							<input multiple="multiple" type="file" name="file">
 						</td> 
-					</tr>
+					</tr> 
 					
 					<tr>
 						<td>
-						<textarea rows="10" cols="200" class="board resize-none" name="board_content" ></textarea>
+						<textarea rows="10" cols="200" class="board resize-none" name="board_content" >${dto.getBoard_content() }</textarea>
 					</tr>
 					
 					<tr>

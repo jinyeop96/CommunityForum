@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.dao.LoginDAOImpl;
+import com.project.dto.LoginDTO;
 
 @Controller
 public class LoginController {
@@ -28,11 +29,11 @@ public class LoginController {
 			result.put("id", id);
 			result.put("pwd", pwd);
 			
-			String nickname = login.selectUser(result);	// id, pwd 로 멤버 가져옴
+			LoginDTO dto = login.selectUser(result);	// id, pwd 로 멤버 가져옴
 			
 			
-			if(nickname != null) {	// 가져온게 있을 때
-				session.setAttribute("nickname", nickname);
+			if(dto != null) {	// 가져온게 있을 때
+				session.setAttribute("nickname", dto.getNickname());
 				return "redirect:main.do";
 			}else {
 				

@@ -25,10 +25,15 @@ public class RecommendService {
 	Map<String, Object> map = new HashMap<String, Object>();
 	
 	public Map<String, Object> boardUpdateLike(int board_no, HttpSession session){
-		Map<String, Object> msg = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
 
 		map.put("board_no", board_no);
 		map.put("nickname", session.getAttribute("nickname"));
+		
+		if (map.get("nickname") == null) {
+			data.put("msg", "회원만 가능합니다.");
+			return data;
+		}
 
 		RecommendDTO dto = recommend.selectFromBoard(map);
 	
@@ -44,17 +49,22 @@ public class RecommendService {
 				recommend.RecUpdateLikeDownBoard(map);				// recommend 종아요 -1
 				board.boardUpdateLikeDown(board_no);				// board 종하요 -1
 			} else {
-				msg.put("msg", "이미 공감 하셨습니다.");
+				data.put("msg", "이미 공감 하셨습니다.");
 			}
 		}
-		return msg;
+		return data;
 	}
 
 	public Map<String, Object> boardUpdateDislike(int board_no, HttpSession session){
-		Map<String, Object> msg = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
 		
 		map.put("board_no", board_no);
 		map.put("nickname", session.getAttribute("nickname"));
+		
+		if (map.get("nickname") == null) {
+			data.put("msg", "회원만 가능합니다.");
+			return data;
+		}
 		
 		RecommendDTO dto = recommend.selectFromBoard(map);
 	
@@ -70,17 +80,22 @@ public class RecommendService {
 				recommend.RecUpdateDislikeUpBoard(map);				// recommend 종아요 -1
 				board.boardUpdateDislikeUp(board_no);				// board 종하요 -1
 			} else {
-				msg.put("msg", "이미 공감 하셨습니다.");
+				data.put("msg", "이미 공감 하셨습니다.");
 			}
 		}
-		return msg;
+		return data;
 	}
 
 	public Map<String, Object> replyUpdateLike(int reply_no, HttpSession session){
-		Map<String, Object> msg = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
 		
 		map.put("reply_no", reply_no);
 		map.put("nickname", session.getAttribute("nickname"));
+		
+		if (map.get("nickname") == null) {
+			data.put("msg", "회원만 가능합니다.");
+			return data;
+		}
 		
 		RecommendDTO dto = recommend.selectFromReply(map);
 		
@@ -95,18 +110,23 @@ public class RecommendService {
 				recommend.RecUpdateLikeDownReply(map);				// recommend 종아요 -1
 				reply.updateLikeDown(reply_no);
 			} else {
-				msg.put("msg", "이미 공감 하셨습니다.");
+				data.put("msg", "이미 공감 하셨습니다.");
 			}
 		}
-		return msg;
+		return data;
 		
 	}
 
 	public Map<String, Object> replyUpdateDisike(int reply_no, HttpSession session){
-		Map<String, Object> msg = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
 		
 		map.put("reply_no", reply_no);
 		map.put("nickname", session.getAttribute("nickname"));
+		
+		if (map.get("nickname") == null) {
+			data.put("msg", "회원만 가능합니다.");
+			return data;
+		}
 		
 		RecommendDTO dto = recommend.selectFromReply(map);
 		
@@ -121,10 +141,10 @@ public class RecommendService {
 				recommend.RecUpdateDislikeUpReply(map);				// recommend 종아요 -1
 				reply.updateDislikeUp(reply_no);
 			} else {
-				msg.put("msg", "이미 공감 하셨습니다.");
+				data.put("msg", "이미 공감 하셨습니다.");
 			}
 		}
-		return msg;
+		return data;
 		
 	}
 }

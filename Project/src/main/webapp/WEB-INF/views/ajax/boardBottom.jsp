@@ -24,11 +24,7 @@
 			      			<td class="text-center">조회 ${dto.getBoard_view() }</td>
 			      		</tr>
 			      		
-			      		<tr>
-			      			<td colspan="7">
-			      				<hr style="border-top: 1px solid white;">
-			      			</td>
-			      		</tr>
+			      		<tr><td colspan="7"><hr></td></tr>
 			      		
 		      		</c:forEach>
 		      	

@@ -198,6 +198,73 @@ public class BoardController {
 		return map;
 	}
 	
+	// 게시물 삭제
+	@RequestMapping("/boardDelete.do")
+	public String boardDelete(@RequestParam int board_no, @RequestParam String board_type) {
+		// 게시글 삭제
+		board.boardDelete(board_no);
+		
+		// 첨부파일 있다면 삭제 진행
+		List<String> files = board.selectFile(board_no);
+		
+		if(!files.isEmpty()) {
+			for(String name : files) {
+				File file = new File(uploadPath + name);
+				file.delete();
+			}
+		}
+				
+		return "redirect:board.do?pageParam=1&board_type="+board_type+"&boardSearch=no";
+	}
 	
+	// 게시물 수정
+	@RequestMapping("/boardEdit.do")
+	public String boardEdit(@RequestParam int board_no, @RequestParam String board_type,@RequestParam int pageParam, Model model) {
+		model.addAttribute("dto", board.selectOne(board_no));	// 해당 게시물 가져오기
+		model.addAttribute("board_type", board_type);	// bottomBoard(댓글 아래 다음 게시물들) 을 위해 board_type을 넘겨준다
+		model.addAttribute("files", board.selectFile(board_no));
+		model.addAttribute("pageParam", pageParam);
+		
+		return "boardEdit";
+	}
+
+	@RequestMapping("/boardEditOk.do")	//@RequestParam List<String> fileDel,  
+	public String boardEditOk(HttpServletRequest request, MultipartRequest multipart, Model model) {
+		int board_no = Integer.parseInt(request.getParameter("board_no"));
+		String board_type = request.getParameter("board_type");
+		int pageParam = Integer.parseInt(request.getParameter("pageParam"));
+		
+		map.put("board_title", request.getParameter("board_title").trim());
+		map.put("board_content", request.getParameter("board_content"));
+		map.put("board_nickname", request.getParameter("board_nickname"));
+		map.put("board_type", board_type);
+		map.put("board_no", board_no);
+		
+		// 변경한 게시글로 변경
+		board.updateContent(map);	
+		
+		// 삭제 하는 첨부파일
+		String[] fileDel = request.getParameterValues("fileDel");	// checkbox를 배열로 가져온다
+		
+		if( fileDel != null) {
+			for(String name: fileDel) {
+				map.put("boardfile_name", name);
+				fileService.deleteFile(map);	// 우선 boardfile table에 있는 레코드 삭제  (board_no, boardfile_name 으로 삭제함)
+				
+				File file = new File(uploadPath + name);	// 파일 위치
+				file.delete();		// 로컬 파일 삭제
+			}
+		}
+		
+		
+		// 파일 추가한게 있다면 List로 받아줌
+		List<MultipartFile> fileList = multipart.getFiles("file");
+		if(fileList.get(0).getOriginalFilename() != "") {	// 첨부파일이 있을때만 실행함.
+			fileService.fileUpload(fileList, board_no);	 // 해당 글번호(board_no)에 파일이름 다 넣어줌
+		} 
+		
+		// 다시 content.jsp 로 가면서 변경사항 바로 보이게끔 함
+		return "redirect:content.do?board_no="+board_no+"&board_type="+board_type+"&pageParam="+pageParam;
+	}
 	
 }
