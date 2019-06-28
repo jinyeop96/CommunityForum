@@ -30,7 +30,7 @@
      					<div class="line marB20"></div>
      					<div class="box_btn">
      						<a class="btn_down white" src="<c:url value='/resources/img/logos/510_2.png'/>" target="_blank" title="표준규격 다운로드">표준규격 다운로드</a>
-  	    					<a class="download" src="<c:url value='/resources/img/logos/OWY-1.png'/>" download>다운로드</a>
+  	    					<a class="download" src="<c:url value='/resources/img/logos/OWY-1.png'/>" download></a>
      					</div>
      				</div>
      			
@@ -54,7 +54,7 @@
      					</ol>
      					<div class="line marB20"></div>
      					<div class="box_btn">
-     						<a class="btn_down white" href='/resources/img/logos/510logo_2.png' target="_blank" title="표준규격 다운로드">표준규격 다운로드</a>
+     						<a class="btn_down white" scr="<c:url value='/resources/img/logos/510logo_2.png'/>" target="_blank" title="표준규격 다운로드">표준규격 다운로드</a>
      					</div>
      				</div>
      				<br><br><br>
