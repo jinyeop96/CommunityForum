@@ -32,9 +32,9 @@
 		
 		// 페이지 버튼 눌렀을 떄 위쪽으로 올라가는 에니메이션
 		function pageUp(num){	
-			if(num == 1){
-				$("html, body").animate({scrollTop : $("#dislike").offset().top}, 400); 
-			} else {
+			if(num == 1){	//댓글 다음 페이지 누르면 자동으로 위쪽으로 맞춰짐
+				$("html, body").animate({scrollTop : $("#dislike").offset().top}, 400);
+			} else {		//게시글 아래 나오는 게시글들
 				$("html, body").animate({scrollTop : $("#reply_content").offset().top}, 400);
 			}
 		}
@@ -109,7 +109,7 @@
 				type:"get",
 				data: { "board_no": "${dto.getBoard_no()}",			//해당 원글 번호
 						"reply_content": $("#reply_content").val(),	//답글
-						"reply_nickname": $("#reply_nickname").val() },	// 닉네임 (나중에 session으로 처리할 때 nickname으로 할 예정)
+						"reply_nickname": "${nickname}" },	// 닉네임 (나중에 session으로 처리할 때 nickname으로 할 예정)
 			
 				success:function(){
 						$("#reply_content").val("");
@@ -237,17 +237,18 @@
 		      		</tr>
 		      				      		
 		      		<tr>
-		      			<td id="dislike">비추천 : <span class="boardUpdateDislike">${dto.getBoard_dislike() }</span></td> 
+		      			<td>비추천 : <span class="boardUpdateDislike">${dto.getBoard_dislike() }</span></td> 
 		      		</tr>
 		      				      		
 		      		<tr>
-		      			<td>답글 : <span id="replyNum">${replyNum }</span></td> 
+		      			<td id="dislike">답글 : <span id="replyNum">${replyNum }</span></td> 
 		      		</tr>
 		      		
 		      		<tr>
 		      			<td><hr style="border: none; border-top: 1px solid white"></td>
 		      		</tr>
 		      		
+		      		<!--  첨부파일 -->
 		      		<c:if test="${!empty files}">
 		      			<tr align="right"><td><a href="javascript:showFile()" class="attach">첨부파일</a></td></tr>
 
@@ -262,6 +263,7 @@
 	      				</c:forEach>
 		      		</c:if>
 		      		
+		      		<!-- 이미지/게시글 -->
 		      		<tr>
 		      			<td>
 		      				<c:if test="${!empty images }">
@@ -276,7 +278,7 @@
 		      		</tr>	
 		      		
 		      		<tr>
-		      			<td align="center">
+		      			<td align="center"  id="dislike">
 		      				<a href="javascript:boardUpdateLike(${dto.getBoard_no()})">
 			      				<img class="contentRec"  src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;&nbsp;
 			      				<span class="boardUpdateLike" style="color: white">${dto.getBoard_like() }</span>&nbsp;&nbsp;&nbsp;
@@ -305,8 +307,7 @@
 		        	</tr>
 		        	<tr>
 		        		<td colspan="2" align="right">
-		        			<input id="reply_nickname" placeholder="nickname"> 
-			        		<input type="button" id="reply" value="저장">
+			        		<input type="button" id="reply" class="buttons" value="저장">
 	        			</td>
 		        	</tr>
 		        	
