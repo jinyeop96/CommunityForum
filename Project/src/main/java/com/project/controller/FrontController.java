@@ -42,19 +42,19 @@ public class FrontController {
 		return "contents";
 	}
 	
-	@RequestMapping("/section01.do")
-	public String section01() {
-		return "section01";
+	@RequestMapping("/hotel.do")
+	public String hotel() {
+		return "hotel";
 	}
 	
-	@RequestMapping("/section02.do")
-	public String section02() {
-		return "section02";
+	@RequestMapping("/restaurant.do")
+	public String restaurant(){
+		return "restaurant";
 	}
 	
-	@RequestMapping("/section03.do")
-	public String section03() {
-		return "section03";
+	@RequestMapping("/transport.do")
+	public String transport() {
+		return "transport";
 	}
 }
 
