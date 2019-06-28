@@ -8,6 +8,7 @@
 <title>plan</title>
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 </head>
+ <body>
 	<jsp:include page="/resources/include/navigation.jsp" />
 	
 	<header class="masthead bg-primary text-white text-center">
@@ -24,7 +25,10 @@
     </h4>
     
     </div>
+   
     </header>
+    </body>
+    
   
   <jsp:include page="/resources/include/footer.jsp" />
   <jsp:include page="/resources/include/copyright.jsp" />

@@ -41,6 +41,21 @@ public class FrontController {
 	public String contents() {
 		return "contents";
 	}
+	
+	@RequestMapping("/section01.do")
+	public String section01() {
+		return "section01";
+	}
+	
+	@RequestMapping("/section02.do")
+	public String section02() {
+		return "section02";
+	}
+	
+	@RequestMapping("/section03.do")
+	public String section03() {
+		return "section03";
+	}
 }
 
 
