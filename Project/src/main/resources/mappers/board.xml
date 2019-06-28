@@ -86,7 +86,7 @@
 	<!--  게시물 등록 -->
 	<insert id="insertRecord">
 		INSERT INTO board 
-			VALUES(#{board_type} ,board_seq.NEXTVAL, #{board_nickname}, #{board_pwd}, #{board_title}, #{board_content}, 0, 0, 0, SYSDATE)
+			VALUES(#{board_type} ,board_seq.NEXTVAL, #{board_nickname}, #{board_title}, #{board_content}, 0, 0, 0, SYSDATE)
 	</insert>
 	
 	<insert id="insertFile">
@@ -110,9 +110,21 @@
 			WHERE board_no = #{board_no}
 	</update>
 
+	<update id="updateLikeDown">
+		UPDATE board
+			SET board_like = board_like - 1
+			WHERE board_no = #{board_no}
+	</update>
+
 	<update id="updateDislike">
 		UPDATE board
 			SET board_dislike = board_dislike - 1
+			WHERE board_no = #{board_no}
+	</update>
+
+	<update id="updateDislikeUp">
+		UPDATE board
+			SET board_dislike = board_dislike + 1
 			WHERE board_no = #{board_no}
 	</update>
 	

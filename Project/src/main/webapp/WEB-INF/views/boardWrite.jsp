@@ -27,8 +27,6 @@
 		}
 	</style>
 	
-	<!-- 
-	파일 한개씩 추가하고 싶을 떄 사용
 	<script type="text/javascript">
 		$(function(){
 			$("#addFileBtn").click(function(){
@@ -50,7 +48,6 @@
 		}
 			
 	</script>
-		-->	
 </head>
 <body>
 	<jsp:include page="/resources/include/navigation.jsp" />
@@ -71,6 +68,8 @@
 			
 			<form action="boardWriteOk.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="board_type" value="${board_type }">
+				<input type="hidden" name="board_nickname" value="${nickname }">
+				
 				<table class="board font-black ">
 					<tr>
 						<td align="left" colspan="3">
@@ -85,22 +84,15 @@
 					</tr>
 					
 					
-					<tr id="fileArea" align="left"> 
+					<tr id="fileArea" align="left">
 						<td colspan="3">
 							<input multiple="multiple" type="file" name="file">
-						</td>
+						</td> 
 					</tr>
 					
 					<tr>
 						<td>
 						<textarea rows="10" cols="200" class="board resize-none" name="board_content" ></textarea>
-					</tr>
-					
-					<tr>
-						<td colspan="2" align="right" >
-							<input name="board_nickname" placeholder="닉네임" class="radius-10px">
-							<input name="board_pwd" placeholder="비밀번호" class="radius-10px">
-						</td>
 					</tr>
 					
 					<tr>

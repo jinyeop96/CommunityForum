@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mappers.recommend">
+	<select id="selectFromBoard" resultType="com.project.dto.RecommendDTO">
+		SELECT * FROM recommend WHERE board_no = #{board_no} AND nickname = #{nickname}
+	</select>
+
+	<select id="selectFromReply" resultType="com.project.dto.RecommendDTO">
+		SELECT * FROM recommend WHERE reply_no = #{reply_no} AND nickname = #{nickname}
+	</select>
+	
+	<!-- 첫 공감이면 레코드 만들기 -->	
+	<!-- 게시물 -->
+	<insert id="insertBoardLikeUp">
+		INSERT INTO recommend (rec_no, board_no, rec_like, rec_dislike, nickname)
+			VALUES(recommend_seq.NEXTVAL, #{board_no}, 1, 0, #{nickname})
+	</insert>
+
+	<insert id="insertBoardLikeDown">
+		INSERT INTO recommend (rec_no, board_no, rec_like, rec_dislike, nickname)
+			VALUES(recommend_seq.NEXTVAL, #{board_no}, 0, -1, #{nickname})
+	</insert>
+
+
+	<!-- 답글 -->
+	<insert id="insertReplyLikeUp">
+		INSERT INTO recommend (rec_no, reply_no, rec_like, rec_dislike, nickname)
+			VALUES(recommend_seq.NEXTVAL, #{reply_no}, 1, 0, #{nickname})
+	</insert>
+
+	<insert id="insertReplyLikeDown">
+		INSERT INTO recommend (rec_no, reply_no, rec_like, rec_dislike, nickname)
+			VALUES(recommend_seq.NEXTVAL, #{reply_no}, 0, -1, #{nickname})
+	</insert>
+	
+	
+	<!-- 게시물 -->
+	
+	<!--  좋아요 -->
+	<update id="RecUpdateLikeUpBoard">
+		update recommend
+		   set rec_like = 1
+		   where nickname = #{nickname} AND board_no = #{board_no}
+	</update>
+	
+	<update id="RecUpdateLikeDownBoard">
+		update recommend
+		   set rec_like = 0
+		   where nickname = #{nickname} AND board_no = #{board_no}
+	</update>
+	
+	<!-- 싫어요 -->
+	<update id="RecUpdateDislikeDownBoard">
+		update recommend
+		   set rec_dislike = -1
+		   where nickname = #{nickname} AND board_no = #{board_no}
+	</update>
+	
+	<update id="RecUpdateDislikeUpBoard">
+		update recommend
+		   set rec_dislike = 0
+		   where nickname = #{nickname} AND board_no = #{board_no}
+	</update>
+
+
+	<!-- 답글-->
+	
+	<!--  좋아요 -->
+	<update id="RecUpdateLikeUpReply">
+		update recommend
+		   set rec_like = 1
+		   where nickname = #{nickname}	and reply_no = #{reply_no}
+	</update>
+	
+	<update id="RecUpdateLikeDownReply">
+		update recommend
+		   set rec_like = 0
+		   where nickname = #{nickname}	and reply_no = #{reply_no}
+	</update>
+	
+	<!-- 싫어요 -->
+	<update id="RecUpdateDislikeDownReply">
+		update recommend
+		   set rec_dislike = -1
+		   where nickname = #{nickname}	and reply_no = #{reply_no}
+	</update>
+
+	<update id="RecUpdateDislikeUpReply">
+		update recommend
+		   set rec_dislike = 0
+		   where nickname = #{nickname}	and reply_no = #{reply_no}
+	</update>
+</mapper>

@@ -17,6 +17,9 @@
 	.navbar-top-right{
 		display: none;
 	}
+	.navbar-top-right-session{
+		display: none;
+	}
 }
 @media ( min-width: 992px){
 	.navbar-login{
@@ -91,6 +94,12 @@
 	color:#1abc9c;
 	border: 1px solid #1abc9c;
 	text-decoration: none;
+}
+
+.navbar-top-right-session{
+	color:#fff;
+	font-size: 15px;
+	padding: 3px;
 }
 
 /*section02.jsp */

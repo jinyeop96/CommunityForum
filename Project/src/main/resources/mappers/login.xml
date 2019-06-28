@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.project.dao.LoginDAO">
-	<select id="selectUser" resultType="com.project.dto.JoinDTO">
-		SELECT * FROM hmember WHERE j_id = #{j_id} and j_pwd=#{j_pwd}
+<mapper namespace="com.project.mappers.LoginDAO">
+	<select id="selectUser" resultType="String">
+		SELECT * FROM member WHERE id = #{id} and pwd=#{pwd}
 	</select>
 </mapper>

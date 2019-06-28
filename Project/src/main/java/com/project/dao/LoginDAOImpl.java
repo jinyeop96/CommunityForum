@@ -6,11 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.project.dto.JoinDTO;
-
-
-
-
 @Repository
 public class LoginDAOImpl implements LoginDAO {
 	
@@ -18,9 +13,8 @@ public class LoginDAOImpl implements LoginDAO {
 	private SqlSessionTemplate template;
 
 	@Override
-	public JoinDTO selectUser(Map<String, Object> map) throws Exception {
-
-		return template.selectOne("selectUser", map);
+	public String selectUser(Map<String, Object> map) throws Exception {
+		return template.selectOne("com.project.mappers.LoginDAO.selectUser", map);
 	}
 
 

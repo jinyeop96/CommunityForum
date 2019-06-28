@@ -31,9 +31,21 @@
 			WHERE reply_no = #{reply_no}
 	</update>
 
+	<update id="updateLikeDown">
+		UPDATE reply
+			SET reply_like = reply_like - 1
+			WHERE reply_no = #{reply_no}
+	</update>
+
 	<update id="updateDislike">
 		UPDATE reply
 			SET reply_dislike = reply_dislike - 1
+			WHERE reply_no = #{reply_no}
+	</update>
+
+	<update id="updateDislikeUp">
+		UPDATE reply
+			SET reply_dislike = reply_dislike + 1
 			WHERE reply_no = #{reply_no}
 	</update>
 </mapper>

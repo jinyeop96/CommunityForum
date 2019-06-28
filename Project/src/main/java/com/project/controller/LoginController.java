@@ -1,24 +1,18 @@
 package com.project.controller;
 
-
-
-
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dao.LoginDAOImpl;
-import com.project.dto.JoinDTO;
 
 @Controller
 public class LoginController {
@@ -29,36 +23,28 @@ public class LoginController {
 		
 		
 		@RequestMapping("/loginok.do")
-		public String userlogin(@RequestParam String j_id,@RequestParam String j_pwd, HttpSession session) throws Exception{
-			System.out.println("넘어온값 ="+j_id);
-			System.out.println("넘어온값 ="+j_pwd);
+		public String userlogin(@RequestParam String id,@RequestParam String pwd, HttpSession session, Model model, HttpServletRequest request) throws Exception{
 			Map<String, Object> result = new HashMap<String, Object>();
-			result.put("j_id", j_id);
-			result.put("j_pwd", j_pwd);
-			System.out.println("매핑후 결과값 ="+result.get("j_id"));
-			System.out.println("매핑후 결과값 ="+result.get("j_pwd"));
-			JoinDTO sucess = login.selectUser(result);
-			if(sucess != null) {
-				String id = sucess.getJ_id();
-				String pwd = sucess.getJ_pwd();
-				String phone = sucess.getJ_mobile();
-				
-				System.out.println("쿼리후 결과값 ="+id);
-				System.out.println("쿼리후 결과값 ="+pwd);
-				System.out.println("쿼리후 결과값 ="+phone);
-				
-				session.setAttribute("memberinfo", sucess);
-				
-				return "Logintrue";
-				
-				
-				
+			result.put("id", id);
+			result.put("pwd", pwd);
+			
+			String nickname = login.selectUser(result);	// id, pwd 로 멤버 가져옴
+			
+			
+			if(nickname != null) {	// 가져온게 있을 때
+				session.setAttribute("nickname", nickname);
+				return "redirect:main.do";
 			}else {
-				JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 확인해주세요", "경고",JOptionPane.INFORMATION_MESSAGE);
-
+				
+				model.addAttribute("msg", "다시 한번 확인해주세요.");
+				
 				return "login";
 			}
-			
-				
+		}
+		
+		@RequestMapping("logout.do")
+		public String logout(HttpSession session, HttpServletRequest request) {
+			session.invalidate();
+			return "redirect:"+request.getHeader("Referer");	// 로그아웃 한 페이지로 다시 돌아감.
 		}
 }

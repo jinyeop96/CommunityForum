@@ -23,7 +23,9 @@
 		});
 		
 		
+		///////////////////////////일반 클릭///////////////////
 		
+		// 첨부파일 토글링
 		function showFile(){
 			$(".files").toggle();  
 		}
@@ -37,8 +39,27 @@
 			}
 		}
 		
+		//////////////////////////////// 가져오기들///////////////////////////////////
+		// 좋아요 싫어요 새로고침 가져오기
+		function getLikeDislike(){
+			$.ajax({
+				url: "getLikeDislike.do",
+				type:"get",
+				data: {"board_no": "${dto.getBoard_no()}"},
+				success:function(result){
+					$(".boardUpdateLike").text(result.likes);
+					$(".boardUpdateDislike").text(result.dislikes); 
+				},
+				error:function(){
+					alert("오류가 생겼습니다.");
+				}
+			});
+		}
 		
-		function getReplyList(pageParam){  // 해당 글의 답변 다 가져오기
+		
+		
+		// 해당 글의 답변 다 가져오기
+		function getReplyList(pageParam){  
 			if(pageParam == null){
 				pageParam = 1;
 			}
@@ -58,6 +79,7 @@
 			});
 		};	// getReplyList()
 		
+		// content -> 댓글 아래 나타나는 게시물 가져오기
 		function boardBottom(pageParam){  
 			if(pageParam == null){
 				pageParam = ${pageParam};	//가장 처음 boardContent.jsp에 들어올 때는 board.jsp의 몇번째 페이지 였는지 알아야함. 안그러면 bottomBoard에는 무조건 page1으로 감.
@@ -76,9 +98,12 @@
 		};	// getReplyList()
 		
 		
-		function reply(){	// 답변 등록
 		
-			
+		/////////////댓글 쓰기///////////////////////////
+		
+		
+		// 답변 등록
+		function reply(){	
 			$.ajax({
 				url:"replyUpdate.do",
 				type:"get",
@@ -95,13 +120,19 @@
 		};	//reply();
 	
 	
-		/// 좋아요 & 싫어요
-		function updateLike(reply_no){
+		////////////////좋아요 싫어요/////////////////////
+		
+		
+		/// 댓글 좋아요 & 싫어요
+		function replyUpdateLike(reply_no){
 			$.ajax({
-				url: "updateLike.do",
+				url: "replyUpdateLike.do",
 				type:"get",
 				data: {"reply_no": reply_no},
 				success:function(result){
+					if(result.msg == "이미 공감 하셨습니다."){
+						alert(result.msg);
+					}
 					getReplyList();
 				},
 				error:function(){
@@ -110,12 +141,15 @@
 			});
 		}
 
-		function updateDislike(reply_no){
+		function replyUpdateDislike(reply_no){
 			$.ajax({
-				url: "updateDislike.do",
+				url: "replyUpdateDislike.do",
 				type:"get",
 				data: {"reply_no": reply_no},
 				success:function(result){
+					if(result.msg == "이미 공감 하셨습니다."){
+						alert(result.msg);
+					}
 					getReplyList();
 				},
 				error:function(){
@@ -125,13 +159,16 @@
 		}
 		
 		
-		//////////////////////////////////////원글 좋아요&싫어요////////////////
+		///원글 좋아요&싫어요
 		function boardUpdateLike(board_no){
 			$.ajax({
 				url: "boardUpdateLike.do",
 				type:"get",
 				data: {"board_no": board_no},
 				success:function(result){
+					if(result.msg == "이미 공감 하셨습니다."){
+						alert(result.msg);
+					}
 					getLikeDislike();
 				},
 				error:function(){
@@ -146,22 +183,10 @@
 				type:"get",
 				data: {"board_no": board_no},
 				success:function(result){
+					if(result.msg == "이미 공감 하셨습니다."){
+						alert(result.msg);
+					}
 					getLikeDislike();
-				},
-				error:function(){
-					alert("오류가 생겼습니다.");
-				}
-			});
-		}
-		
-		function getLikeDislike(){
-			$.ajax({
-				url: "getLikeDislike.do",
-				type:"get",
-				data: {"board_no": "${dto.getBoard_no()}"},
-				success:function(result){
-					$(".boardUpdateLike").text(result.likes);
-					$(".boardUpdateDislike").text(result.dislikes); 
 				},
 				error:function(){
 					alert("오류가 생겼습니다.");

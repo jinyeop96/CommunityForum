@@ -5,7 +5,6 @@ public class BoardDTO {
 	private String board_type;
 	private int board_no;
 	private String board_nickname;
-	private String board_pwd;
 	private String board_title;
 	private String board_content;
 	private int board_view;
@@ -37,12 +36,6 @@ public class BoardDTO {
 	}
 	public void setBoard_nickname(String board_nickname) {
 		this.board_nickname = board_nickname;
-	}
-	public String getBoard_pwd() {
-		return board_pwd;
-	}
-	public void setBoard_pwd(String board_pwd) {
-		this.board_pwd = board_pwd;
 	}
 	public String getBoard_title() {
 		return board_title;
