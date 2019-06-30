@@ -123,7 +123,7 @@
 		       			</li>
 			
 						<li class="nav-item mx-0 mx-lg-1">
-		       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="#">${nickname }</a>
+		       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="memberinfo.do">${nickname }</a>
 		       			</li>
 					</c:if>
 				</ul>
@@ -138,7 +138,7 @@
 			</c:if>
 			
 			<c:if test="${!empty nickname }">
-				<a class="navbar-top-right-session" href="#">${nickname }</a> 
+				<a class="navbar-top-right-session" href="memberinfo.do">${nickname }</a> 
 				<a class="navbar-top-right" href="logout.do">Logout</a>
 			</c:if>
 		</div>

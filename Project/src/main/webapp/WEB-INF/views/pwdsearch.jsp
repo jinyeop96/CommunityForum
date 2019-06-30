@@ -12,23 +12,22 @@
 function searchBtn(){
 	
 	
-	if($('#j_id').val()  ==""){
+	if($('#id').val()  ==""){
 		alert("아이디을 입력해주세요");
-		$('#j_id').focus();
+		$('#id').focus();
 		return ;
 	}
 	
-	if($('#j_mobile').val()  ==""){
+	if($('#email').val()  ==""){
 		alert("연락처를 입력해주세요");
-		$('#j_mobile').focus();
+		$('#email').focus();
 		return ;
 	}
 	
-	var id =$('#j_id').val();
-	var number = $('#j_mobile').val();
-	var memdata = {'j_id' : id, 'j_mobile' : number};
-	alert (id);
-	alert (number);
+	var id =$('#id').val();
+	var email = $('#email').val();
+	var memdata = {'id' : id, 'email' : email};
+
 	
 	$.ajax({
 		url : "searchpwdOK.do",
@@ -39,7 +38,7 @@ function searchBtn(){
 			if(data !=""){
 				alert("회원님의 비밀번호는"+data+"입니다.");	
 			}else{
-				alert("아이디와 연락처를 확인해주세요.")
+				alert("아이디와 이메일주소를 확인해주세요.")
 			}
 			
 			
@@ -71,12 +70,12 @@ function searchBtn(){
       	<table>
       		<tr>
       			<th>UserID</th>
-      			<td><input class="input" name="j_id" id ="j_id"></td> 
+      			<td><input class="input" name="id" id ="id"></td> 
       		</tr>
       		
       		<tr>
-      			<th>MobileNumber</th>
-      			<td><input class="input"  name="j_mobile" id="j_mobile" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" ></td>
+      			<th>EmailAdress</th>
+      			<td><input class="input"  name="email" id="email" ></td>
       		</tr>
       	</table>
       	<input id="loginBtn" type="button" value="PwdFind" onclick="searchBtn()"><br>

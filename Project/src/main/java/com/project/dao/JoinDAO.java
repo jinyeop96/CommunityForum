@@ -22,6 +22,10 @@ public interface JoinDAO {
 
 	public String searchpwd(Map<String, Object> result) throws Exception;
 	
+	public JoinDTO memeberinfo(String nickname) throws Exception;
+
+	public void infoupdate(Map<String, Object> map) throws Exception;
+	
 
 
 	
