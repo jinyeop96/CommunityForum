@@ -136,11 +136,9 @@ public class BoardController {
 		/*
 		// 로그인 되어있다면 nickname 받아와서
 		String nickname = (String) session.getAttribute("nickname");
-		System.out.println("nickname = "+nickname);
 		if(nickname != null) {
 			// 해당 글에 nickname이 추천or비추천 했는지 레코드 가져옴
-			System.out.println("nickname = "+nickname);
-			model.addAttribute("rec", recommendService.selectRecInfo(pageParam, session));	
+			model.addAttribute("rec", recommendService.selectFromBoard(board_no, session));	
 		}
 		*/
 		
@@ -208,12 +206,12 @@ public class BoardController {
 		map.put("likes", board.getLikes(board_no));
 		map.put("dislikes", board.getDislikes(board_no));
 
-		/*
+		/*	//로그인 했다면 관련 recommend테이블 가져오기
 		String nickname = (String) session.getAttribute("nickname");
 		if(nickname != null) {
-			map.put("rec", recommendService.selectRecInfo(board_no, session));
+			map.put("rec", recommendService.selectFromBoard(board_no, session));
 		}
-		 */
+		*/
 		return map;
 	}
 	

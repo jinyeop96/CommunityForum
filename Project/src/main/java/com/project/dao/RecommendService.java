@@ -55,6 +55,9 @@ public class RecommendService {
 				data.put("msg", "이미 공감 하셨습니다.");
 			}
 		}
+		
+		data.put("rec", selectFromBoard(board_no, session));
+		
 		return data;
 	}
 
@@ -152,7 +155,7 @@ public class RecommendService {
 		
 	}
 
-	public  RecommendDTO selectRecInfo(int board_no, HttpSession session) {
+	public  RecommendDTO selectFromBoard(int board_no, HttpSession session) {
 		map.put("board_no", board_no);
 		map.put("nickname", session.getAttribute("nickname"));
 		

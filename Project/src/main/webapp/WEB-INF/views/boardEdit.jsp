@@ -14,6 +14,21 @@
 			}
 		}
 		
+		function submitConf(){
+			var board_title = $("#board_title").val();
+			var board_content = $("#board_content").val();
+			
+			if(board_title == ""){
+				alert("제목 써주세요");
+				return false;
+			} else if(board_content == ""){
+				alert("글 꼭 써주세요");
+				return false;
+			}
+			
+			return true;
+		}
+		
 		$(function(){
 			$("#fileDelAll").click(function(){
 				var check = $(this).is(":checked");
@@ -68,18 +83,18 @@
 				<table class="board font-black ">
 					<tr>
 						<td align="left" colspan="3">
-							<input name="board_title" placeholder="제목" class="title" value="${dto.getBoard_title() }">
+							<input name="board_title" placeholder="제목" class="title" value="${dto.getBoard_title() }" id="board_title">
 						</td>
 					</tr>
 					
+					<!-- 이 게시물이 첨부파일이 있을때 -->
 					<c:if test="${!empty files }">
 						<tr><td align="left">
 							 첨부파일삭제 
 						</td></tr> 
 
-						<tr><td align="left">
-							 <input type="checkbox" id="fileDelAll" value="${files }">전체삭제 
-						</td></tr>
+						<tr><td align="left"><input type="checkbox" id="fileDelAll" value="${files }">전체삭제 </td></tr>
+						
 						<c:forEach items="${files }" var="name">
 							<tr>
 								<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -91,6 +106,7 @@
 						<tr><td><br></td></tr>
 					</c:if>					
 					
+					<!--  첨부파일 추가  -->
 				 	<tr><td align="left">
 						 첨부파일추가
 					</td></tr>
@@ -103,13 +119,13 @@
 					
 					<tr>
 						<td>
-						<textarea rows="10" cols="200" class="board resize-none" name="board_content" >${dto.getBoard_content() }</textarea>
+						<textarea rows="10" cols="200" class="board resize-none" name="board_content" id="board_content" >${dto.getBoard_content() }</textarea>
 					</tr>
 					
 					<tr>
 						<td colspan="3" align="right">
 							<input type="button" value="취소" onclick="cancelConf()" class="buttons">
-							<input type="submit" value="저장" class="buttons">
+							<input type="submit" value="저장" class="buttons" onclick="return submitConf()">
 						</td>
 					</tr>
 				</table>			

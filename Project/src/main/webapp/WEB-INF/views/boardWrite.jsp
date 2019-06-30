@@ -13,6 +13,21 @@
 				history.back();
 			}
 		}
+		
+		function submitConf(){
+			var board_title = $("#board_title").val();
+			var board_content = $("#board_content").val();
+			
+			if(board_title == ""){
+				alert("제목 써주세요");
+				return false;
+			} else if(board_content == ""){
+				alert("글 꼭 써주세요");
+				return false;
+			}
+			
+			return true;
+		}
 		/*
 		$(function(){
 			$("#addFileBtn").click(function(){	
@@ -73,7 +88,7 @@
 				<table class="board font-black ">
 					<tr>
 						<td align="left" colspan="3">
-							<input name="board_title" placeholder="제목" class="title">
+							<input name="board_title" placeholder="제목" class="title" id="board_title">
 						</td>
 					</tr>
 					<tr style="padding: -5px;">
@@ -92,13 +107,13 @@
 					
 					<tr>
 						<td>
-						<textarea rows="10" cols="200" class="board resize-none" name="board_content" ></textarea>
+						<textarea rows="10" cols="200" class="board resize-none" name="board_content" id="board_content"></textarea>
 					</tr>
 					
 					<tr>
 						<td colspan="3" align="right">
 							<input type="button" value="취소" onclick="cancelConf()" class="buttons">
-							<input type="submit" value="저장" class="buttons">
+							<input type="submit" value="저장" class="buttons" onclick="return submitConf()">
 						</td>
 					</tr>
 				</table>			

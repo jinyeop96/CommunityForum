@@ -8,7 +8,7 @@
 <title>게시판</title>
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 	<style type="text/css">
-		#floppyDisk{
+		.floppyDisk{
 			width: 18px;
 		}
 	</style>
@@ -79,7 +79,7 @@
 					      			<td colspan="7" ><a href="content.do?board_no=${dto.getBoard_no() }&board_type=${board_type}&pageParam=${page.getPage()}" style="color: #000">
 					      				<h6>
 					      					${dto.getBoard_title() } [${dto.getBoard_reply() }]
-					      					<c:if test="${dto.getBoard_hasFile() == 1 }"><img id="floppyDisk" src="<c:url value='/resources/img/logos/floppyDisk.png'/>"></c:if>
+					      					<c:if test="${dto.getBoard_hasFile() == 1 }"><img class="floppyDisk" src="<c:url value='/resources/img/logos/floppyDisk.png'/>"></c:if>
 					      				</h6>
 					      			</a></td> 
 					      		</tr>

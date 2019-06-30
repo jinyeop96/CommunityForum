@@ -60,7 +60,8 @@
 				data: {"board_no": "${dto.getBoard_no()}"},
 				success:function(result){
 					$(".boardUpdateLike").text(result.likes);
-					$(".boardUpdateDislike").text(result.dislikes); 
+					$(".boardUpdateDislike").text(result.dislikes);
+					
 				},
 				error:function(){
 					alert("오류가 생겼습니다.");
@@ -318,16 +319,15 @@
 		      		<tr><td><br></td></tr>
 		      		
 		      		<tr>	
-		      			<td align="center" >
-		      				<a href="javascript:boardUpdateLike(${dto.getBoard_no()})">
+		      			<td align="center">
+		      				<a href="javascript:boardUpdateLike(${dto.getBoard_no()})" id="like2">
 			      				<img class="contentRec"  src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;&nbsp;
-			      				<span class="boardUpdateLike" style="color: white">${dto.getBoard_like() }</span>&nbsp;&nbsp;&nbsp;
+			      				<font class="boardUpdateLike" style="color: white; text-decoration: none;">${dto.getBoard_like() }</font>&nbsp;&nbsp;&nbsp;
 		      				</a>
-
 		      				
 		      				<a href="javascript:boardUpdateDislike(${dto.getBoard_no()})">
 			      				<img class="contentRec" src="<c:url value='/resources/img/logos/dislike2.png'/>">&nbsp;&nbsp;&nbsp;
-			      				<span class="boardUpdateDislike" style="color: white">${dto.getBoard_dislike() }</span>
+			      				<font class="boardUpdateDislike" style="color: white; text-decoration: none;">${dto.getBoard_dislike() }</font>
 		      				</a>
 		      			</td>
 		      		</tr>
