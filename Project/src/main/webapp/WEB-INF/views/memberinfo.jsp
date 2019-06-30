@@ -28,19 +28,19 @@
       	<table style="width: 100%">
       	  
       	  <tr>
-      	  <th>이름</th>
+      	  <th>Name</th>
       	   <td>${dto.getName() }</td>
       	  </tr>
       	  <tr>
-      	  <th>아이디</th>
+      	  <th>I   D</th>
       	   <td>${dto.getId() }</td>
       	  </tr>
       	  <tr>
-      	  <th>닉네임</th>
+      	  <th>NickName</th>
       	   <td>${dto.getNickname() }</td>
       	  </tr>
       	  <tr>
-      	  <th>이메일</th>
+      	  <th>Email Adress</th>
       	   <td>${dto.getEmail() }</td>
       	  </tr>
       	</table>
