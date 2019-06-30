@@ -92,4 +92,5 @@
 		   set rec_dislike = 0
 		   where nickname = #{nickname}	and reply_no = #{reply_no}
 	</update>
+	
 </mapper>

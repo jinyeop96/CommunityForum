@@ -130,7 +130,7 @@
 				type:"get",
 				data: {"reply_no": reply_no},
 				success:function(result){
-					if(result.msg == "이미 공감 하셨습니다."){
+					if(result.msg != null){
 						alert(result.msg);
 					}
 					getReplyList();
@@ -147,7 +147,7 @@
 				type:"get",
 				data: {"reply_no": reply_no},
 				success:function(result){
-					if(result.msg == "이미 공감 하셨습니다."){
+					if(result.msg != null){
 						alert(result.msg);
 					}
 					getReplyList();
@@ -166,7 +166,7 @@
 				type:"get",
 				data: {"board_no": board_no},
 				success:function(result){
-					if(result.msg == "이미 공감 하셨습니다."){
+					if(result.msg != null){
 						alert(result.msg);
 					}
 					getLikeDislike();
@@ -183,7 +183,7 @@
 				type:"get",
 				data: {"board_no": board_no},
 				success:function(result){
-					if(result.msg == "이미 공감 하셨습니다."){
+					if(result.msg != null){
 						alert(result.msg);
 					}
 					getLikeDislike();
@@ -279,10 +279,11 @@
 		      		
 		      		<tr>
 		      			<td align="center"  id="dislike">
-		      				<a href="javascript:boardUpdateLike(${dto.getBoard_no()})">
-			      				<img class="contentRec"  src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;&nbsp;
-			      				<span class="boardUpdateLike" style="color: white">${dto.getBoard_like() }</span>&nbsp;&nbsp;&nbsp;
-		      				</a>
+
+			      				<a href="javascript:boardUpdateLike(${dto.getBoard_no()})">
+				      				<img class="contentRec"  src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;&nbsp;
+				      				<span class="boardUpdateLike" style="color: white">${dto.getBoard_like() }</span>&nbsp;&nbsp;&nbsp;
+			      				</a>
 		      				
 		      				<a href="javascript:boardUpdateDislike(${dto.getBoard_no()})">
 			      				<img class="contentRec" src="<c:url value='/resources/img/logos/dislike2.png'/>">&nbsp;&nbsp;&nbsp;

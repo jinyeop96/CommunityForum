@@ -38,5 +38,7 @@ public interface RecommendDAO {
 	public void RecUpdateDislikeDownReply(Map<String, Object> map);
 	
 	public void RecUpdateDislikeUpReply(Map<String, Object> map);
+	
+	
 
 }

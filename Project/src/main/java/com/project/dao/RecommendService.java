@@ -22,13 +22,22 @@ public class RecommendService {
 	@Autowired
 	private RecommendDAOImpl recommend;
 	
+	RecommendDTO rec = new RecommendDTO();
 	Map<String, Object> map = new HashMap<String, Object>();
 	
+	
+	// 게시글 추천 관련
 	public Map<String, Object> boardUpdateLike(int board_no, HttpSession session){
 		Map<String, Object> msg = new HashMap<String, Object>();
 
 		map.put("board_no", board_no);
 		map.put("nickname", session.getAttribute("nickname"));
+		
+		// 로그인이 안되어 있을 경우
+		if (map.get("nickname") == null) {
+			msg.put("msg", "회원만 가능합니다.");
+			return msg;
+		}
 
 		RecommendDTO dto = recommend.selectFromBoard(map);
 	
@@ -47,6 +56,7 @@ public class RecommendService {
 				msg.put("msg", "이미 공감 하셨습니다.");
 			}
 		}
+		
 		return msg;
 	}
 
@@ -55,6 +65,12 @@ public class RecommendService {
 		
 		map.put("board_no", board_no);
 		map.put("nickname", session.getAttribute("nickname"));
+		
+		// 로그인이 안되어 있을 경우
+		if (map.get("nickname") == null) {
+			msg.put("msg", "회원만 가능합니다.");
+			return msg;
+		}
 		
 		RecommendDTO dto = recommend.selectFromBoard(map);
 	
@@ -73,14 +89,22 @@ public class RecommendService {
 				msg.put("msg", "이미 공감 하셨습니다.");
 			}
 		}
+		
 		return msg;
 	}
 
+	// 답변글 추천 관련
 	public Map<String, Object> replyUpdateLike(int reply_no, HttpSession session){
 		Map<String, Object> msg = new HashMap<String, Object>();
 		
 		map.put("reply_no", reply_no);
 		map.put("nickname", session.getAttribute("nickname"));
+		
+		// 로그인이 안되어 있을 경우
+		if (map.get("nickname") == null) {
+			msg.put("msg", "회원만 가능합니다.");
+			return msg;
+		}
 		
 		RecommendDTO dto = recommend.selectFromReply(map);
 		
@@ -108,7 +132,13 @@ public class RecommendService {
 		map.put("reply_no", reply_no);
 		map.put("nickname", session.getAttribute("nickname"));
 		
-		RecommendDTO dto = recommend.selectFromReply(map);
+		// 로그인이 안되어 있을 경우
+		if (map.get("nickname") == null) {
+			msg.put("msg", "회원만 가능합니다.");
+			return msg;
+		}
+		
+		RecommendDTO dto = recommend.selectFromReply(map); 
 		
 		if(dto == null) {	
 			recommend.insertReplyLikeDown(map);			
@@ -127,4 +157,13 @@ public class RecommendService {
 		return msg;
 		
 	}
+
+	public  RecommendDTO selectRecInfo(int board_no, HttpSession session) {
+		map.put("board_no", board_no);
+		map.put("nickname", session.getAttribute("nickname"));
+		
+		rec = recommend.selectFromBoard(map);
+		return rec;
+	}
+	
 }
