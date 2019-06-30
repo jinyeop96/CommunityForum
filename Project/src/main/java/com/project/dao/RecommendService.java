@@ -22,8 +22,11 @@ public class RecommendService {
 	@Autowired
 	private RecommendDAOImpl recommend;
 	
+	RecommendDTO rec = new RecommendDTO();
 	Map<String, Object> map = new HashMap<String, Object>();
 	
+	
+	// 게시글 추천 관련
 	public Map<String, Object> boardUpdateLike(int board_no, HttpSession session){
 		Map<String, Object> data = new HashMap<String, Object>();
 
@@ -86,6 +89,7 @@ public class RecommendService {
 		return data;
 	}
 
+	// 답변글 추천 관련
 	public Map<String, Object> replyUpdateLike(int reply_no, HttpSession session){
 		Map<String, Object> data = new HashMap<String, Object>();
 		
@@ -147,4 +151,13 @@ public class RecommendService {
 		return data;
 		
 	}
+
+	public  RecommendDTO selectRecInfo(int board_no, HttpSession session) {
+		map.put("board_no", board_no);
+		map.put("nickname", session.getAttribute("nickname"));
+		
+		rec = recommend.selectFromBoard(map);
+		return rec;
+	}
+	
 }

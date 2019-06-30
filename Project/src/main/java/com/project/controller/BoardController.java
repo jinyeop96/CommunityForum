@@ -41,6 +41,7 @@ public class BoardController {
 	
 	Pagination pagination;
 	Map<String, Object> map = new HashMap<String, Object>();
+	RecommendDTO rec = new RecommendDTO();
 
 	// 전체 게시판 가져오기
 	@RequestMapping("/board.do")	 
@@ -124,13 +125,24 @@ public class BoardController {
 	
 
 	@RequestMapping("/content.do")
-	public String content(@RequestParam int board_no, @RequestParam String board_type,@RequestParam int pageParam, Model model) throws IOException {
+	public String content(@RequestParam int board_no, @RequestParam String board_type,@RequestParam int pageParam, Model model, HttpSession session) throws IOException {
 		board.updateView(board_no); 	//조회수 증가
 		
 		model.addAttribute("dto", board.selectOne(board_no));	// 해당 게시물 가져오기
 		model.addAttribute("replyNum", reply.getRecords(board_no));	// 해당 게시물의 답글 수 가져오기
 		model.addAttribute("board_type", board_type);	// bottomBoard(댓글 아래 다음 게시물들) 을 위해 board_type을 넘겨준다
 		model.addAttribute("pageParam", pageParam);	// bottomBoard(댓글 아래 다음 게시물들) 을 위해 현재페이지(pageParam)을 넘겨준다
+		
+		/*
+		// 로그인 되어있다면 nickname 받아와서
+		String nickname = (String) session.getAttribute("nickname");
+		System.out.println("nickname = "+nickname);
+		if(nickname != null) {
+			// 해당 글에 nickname이 추천or비추천 했는지 레코드 가져옴
+			System.out.println("nickname = "+nickname);
+			model.addAttribute("rec", recommendService.selectRecInfo(pageParam, session));	
+		}
+		*/
 		
 		// 해당 게시물에 첨부되어 있을 첨부파일 가져오기
 		List<String> files = board.selectFile(board_no);
@@ -192,10 +204,16 @@ public class BoardController {
 	// 원글의 좋아요 or 싫어요 누르면 바로 실행되는 함수
 	@RequestMapping("/getLikeDislike.do")
 	@ResponseBody
-	public Map<String, Object> getLikeDislike(@RequestParam int board_no) {
+	public Map<String, Object> getLikeDislike(@RequestParam int board_no, HttpSession session) {
 		map.put("likes", board.getLikes(board_no));
 		map.put("dislikes", board.getDislikes(board_no));
-		 
+
+		/*
+		String nickname = (String) session.getAttribute("nickname");
+		if(nickname != null) {
+			map.put("rec", recommendService.selectRecInfo(board_no, session));
+		}
+		 */
 		return map;
 	}
 	

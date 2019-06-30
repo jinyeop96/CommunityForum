@@ -323,6 +323,7 @@
 			      				<img class="contentRec"  src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;&nbsp;
 			      				<span class="boardUpdateLike" style="color: white">${dto.getBoard_like() }</span>&nbsp;&nbsp;&nbsp;
 		      				</a>
+
 		      				
 		      				<a href="javascript:boardUpdateDislike(${dto.getBoard_no()})">
 			      				<img class="contentRec" src="<c:url value='/resources/img/logos/dislike2.png'/>">&nbsp;&nbsp;&nbsp;
