@@ -11,8 +11,17 @@ public class BoardDTO {
 	private int board_like;
 	private int board_dislike;
 	private String board_date;
+	private int board_hasFile;
 	
 	
+	
+	
+	public int getBoard_hasFile() {
+		return board_hasFile;
+	}
+	public void setBoard_hasFile(int board_hasFile) {
+		this.board_hasFile = board_hasFile;
+	}
 	public int getBoard_reply() {
 		return board_reply;
 	}

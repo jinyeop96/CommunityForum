@@ -15,8 +15,8 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<!-- <resources location="file:///C:/Users/JINYEOP/Desktop/uploadFiles/" mapping="/image/**" /> -->
-	<resources location="file:///C:/Users/TJ/Desktop/uploadFiles/" mapping="/image/**" />
+	<resources location="file:///C:/Users/JINYEOP/Desktop/uploadFiles/" mapping="/image/**" />
+	<!-- <resources location="file:///C:/Users/TJ/Desktop/uploadFiles/" mapping="/image/**" /> -->
 
 
 
@@ -57,7 +57,7 @@
 
 	<beans:bean id="uploadPath" class="java.lang.String">
 <!--<beans:constructor-arg value="C:/Users/JINYEOP/Desktop/uploadFiles/" /> -->
-	<beans:constructor-arg value="C:/Users/TJ/Desktop/uploadFiles/" />
+	<beans:constructor-arg value="C:/Users/JINYEOP/Desktop/uploadFiles/" />
 
 	</beans:bean>
 

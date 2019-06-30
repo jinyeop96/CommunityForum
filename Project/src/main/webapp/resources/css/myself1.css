@@ -123,6 +123,9 @@
 
 
 /*content.jsp*/
+#floppyDisk{
+	width: 18px;
+}
 .content-title{
 	font-size: 20pt;
 	fonf-weight: bold;

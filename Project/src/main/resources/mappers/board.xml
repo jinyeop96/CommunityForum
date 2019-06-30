@@ -86,7 +86,7 @@
 	<!--  게시물 등록 -->
 	<insert id="insertRecord">
 		INSERT INTO board 
-			VALUES(#{board_type} ,board_seq.NEXTVAL, #{board_nickname}, #{board_title}, #{board_content}, 0, 0, 0, SYSDATE)
+			VALUES(#{board_type} ,board_seq.NEXTVAL, #{board_nickname}, #{board_title}, #{board_content}, 0, 0, 0, SYSDATE, 0)
 	</insert>
 	
 	<insert id="insertFile">
@@ -152,6 +152,24 @@
 		update board
 			SET board_title = #{board_title},
 				board_content = #{board_content}
+			where board_no = #{board_no}
+	</update>
+	
+	<select id="hasFile" resultType="int">
+		select board_hasfile
+			from board
+			where board_no = #{board_no}
+	</select>
+	
+	<update id="hasFileUp">
+		update board
+			set board_hasfile = 1
+			where board_no = #{board_no}
+	</update>
+
+	<update id="hasFileDown">
+		update board
+			set board_hasfile = 0
 			where board_no = #{board_no}
 	</update>
 	

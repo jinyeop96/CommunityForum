@@ -97,6 +97,23 @@ public class BoardDAOImpl implements BoardDAO{
 		return template.selectList("com.project.mappers.board.selectFile", board_no);
 	}
 	
+	@Override
+	public int hasFile(int board_no) {
+		return template.selectOne("com.project.mappers.board.hasFile", board_no);
+		
+	}
+	
+	@Override
+	public void hasFileUp(int board_no) {
+		template.update("com.project.mappers.board.hasFileUp", board_no);
+	}
+	
+	@Override
+	public void hasFileDown(int board_no) {
+		template.update("com.project.mappers.board.hasFileDown", board_no);
+	}
+	
+	
 	// -----------------게시물 등록--------------
 	@Override
 	public void insertRecord(Map<String, Object> map) {

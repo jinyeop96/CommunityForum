@@ -86,7 +86,8 @@ public class BoardController {
 		List<MultipartFile> fileList = files.getFiles("file"); 
 		
 		if(fileList.get(0).getOriginalFilename() != "") {	// 첨부파일이 있을때만 실행함.
-			fileService.fileUpload(fileList, board.getLatest());	//getLatest() :  insertRecord()의  board_no 얻기 위한 메서드 (같은 board_no으로 boardfile 테이블에 저장할예정)
+			board.hasFileUp(board.getLatest());		//getLatest() : 지금 업로드한 글의 board_no
+			fileService.fileUpload(fileList, board.getLatest());	
 		}  
 		
 		return "redirect:board.do?pageParam="+1+"&board_type="+request.getParameter("board_type")+"&boardSearch=no";
@@ -240,14 +241,14 @@ public class BoardController {
 		map.put("board_type", board_type);
 		map.put("board_no", board_no);
 		
-		// 변경한 게시글로 변경
+		// 수정한 게시글로 변경
 		board.updateContent(map);	
 		
 		// 삭제 하는 첨부파일
-		String[] fileDel = request.getParameterValues("fileDel");	// checkbox를 배열로 가져온다
+		String[] fileDel = request.getParameterValues("fileDel");	// checkbox의 value 배열로 가져온다
 		
-		if( fileDel != null) {
-			for(String name: fileDel) {
+		if( fileDel != null) {	// 삭제를 체크한게 있다면 
+			for(String name: fileDel) {	// 이름(checkbox의 value가 이름임)을 각각 가져와서 삭제해줌
 				map.put("boardfile_name", name);
 				fileService.deleteFile(map);	// 우선 boardfile table에 있는 레코드 삭제  (board_no, boardfile_name 으로 삭제함)
 				
@@ -260,8 +261,15 @@ public class BoardController {
 		// 파일 추가한게 있다면 List로 받아줌
 		List<MultipartFile> fileList = multipart.getFiles("file");
 		if(fileList.get(0).getOriginalFilename() != "") {	// 첨부파일이 있을때만 실행함.
+			board.hasFileUp(board_no);
 			fileService.fileUpload(fileList, board_no);	 // 해당 글번호(board_no)에 파일이름 다 넣어줌
 		} 
+		
+		// 수정 완료 후 해당 글에 대한 파일이 있는지 다시 확인 후, 없다면 board테이블의 board_hasFile -1 을 해줌
+		List<String> fileNames = board.selectFile(board_no);
+		if(fileNames.isEmpty()) {
+			board.hasFileDown(board_no);
+		}
 		
 		// 다시 content.jsp 로 가면서 변경사항 바로 보이게끔 함
 		return "redirect:content.do?board_no="+board_no+"&board_type="+board_type+"&pageParam="+pageParam;
