@@ -28,6 +28,12 @@ public class LoginDAOImpl implements LoginDAO {
 	public void infoupdate(Map<String, Object> map) throws Exception{
 		template.update("infoupdate", map);
 	}
+     
+	@Override
+	public int withraw(Map<String, Object> map) throws Exception{
+          
+		return template.delete("memberwitraw", map);
+		}
 	
 	
 		

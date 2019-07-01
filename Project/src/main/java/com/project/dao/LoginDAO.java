@@ -12,4 +12,6 @@ public interface LoginDAO {
 	  public JoinDTO memeberinfo(String nickname) throws Exception;
 
 	  public void infoupdate(Map<String, Object> map) throws Exception;
+
+	  public int withraw(Map<String, Object> map) throws Exception;
 }

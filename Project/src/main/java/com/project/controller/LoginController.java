@@ -1,9 +1,11 @@
 package com.project.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +50,7 @@ public class LoginController {
 		//회원정보 보기
 		//필요한 정보를 가져오기 위한 session에 저장된 닉네임을 가져와서 쿼리문에 대입하여 정보를 가져온다
 		@RequestMapping("/memberinfo.do")
-		public String memberinfo(HttpServletRequest request, HttpSession session, Model model) throws Exception{
+		public String memberinfo(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception{
 			String nickname = (String) session.getAttribute("nickname");
 			model.addAttribute("dto", login.memeberinfo(nickname)) ;
 			return "memberinfo";
@@ -56,7 +58,7 @@ public class LoginController {
 		
 		//회원정보 수정 페이지로 이동
 		@RequestMapping("/memberupdate.do")
-		public String memberupdate (HttpServletRequest request, HttpSession session, Model model) throws Exception{
+		public String memberupdate (HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception{
 			String nickname = (String) session.getAttribute("nickname");
 			model.addAttribute("dto", login.memeberinfo(nickname)) ;
 			return "memberupdate";
@@ -74,5 +76,29 @@ public class LoginController {
 	        login.infoupdate(map);
 	        session.setAttribute("nickname", nickname);
 	        return "redirect:memberinfo.do";
+		}
+		
+		@RequestMapping("/member_withraw.do")
+		public String memberwithraw(HttpSession session, Model model) throws Exception{
+			String nickname = (String)session.getAttribute("nickname");
+			model.addAttribute("dto", login.memeberinfo(nickname)) ;
+			return "memberwithraw";
+		}
+		
+		@RequestMapping("/memberwithrawOK.do")
+		public void withrawOK (@RequestParam String id, @RequestParam String pwd, Model model, HttpServletResponse response, HttpSession session) throws Exception{
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("id", id);
+			map.put("pwd", pwd);
+			LoginDTO dto = login.selectUser(map);
+			PrintWriter out = response.getWriter();
+			
+			if(dto != null) {
+				login.withraw(map);
+				out.println("<script>alert('Member withdraw Sucess'); location.href='main.do';</script>");
+				session.invalidate();
+			}else {
+				out.println("<script>alert('Wrong Password'); location.href='member_withraw.do';</script>");
+			}
 		}
 }

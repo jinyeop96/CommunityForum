@@ -21,31 +21,22 @@
 	 <!--  section01 -->
 	<header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
-      <h3 class="masthead-heading text-uppercase mb-0"> ${dto.getNickname() }님의 정보페이지</h3>
+      <h3 class="masthead-heading text-uppercase mb-0"> 회원탈퇴</h3>
       
       <div id="loginDiv" align="center" style="width: 100%">
-      <form method="post" action="<%=request.getContextPath()%>/memberupdate.do">
+      <form method="post" action="<%=request.getContextPath()%>/memberwithrawOK.do">
+         <input type="hidden" name="id" value="${dto.getId() }">
       	<table style="width: 100%">
       	  
       	  <tr>
-      	  <th>Name</th>
-      	   <td>${dto.getName() }</td>
+      	   <td colspan="2" align="center">${dto.getName() }님 정말로 탈퇴하시겠습니까?</td>
       	  </tr>
       	  <tr>
-      	  <th>I   D</th>
-      	   <td>${dto.getId() }</td>
-      	  </tr>
-      	  <tr>
-      	  <th>NickName</th>
-      	   <td>${dto.getNickname() }</td>
-      	  </tr>
-      	  <tr>
-      	  <th>Email Adress</th>
-      	   <td>${dto.getEmail() }</td>
+      	  <td colspan="2" align="center"><input type="password" name = "pwd" placeholder="비밀번호입력"> </td>
       	  </tr>
       	</table>
-      	<input type="submit" id="loginBtn" value="회원정보 수정">
-      	<input type="button" id="loginBtn" value="회원 탈퇴" onclick="location.href='member_withraw.do'">
+      	<input type="submit" id="loginBtn" value="회원 탈퇴">
+      	<input type="button" id="loginBtn" value="취소" onclick="history.back()">
       	</form>
       </div>
     </div>
