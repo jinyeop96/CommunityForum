@@ -70,20 +70,20 @@ public class JoinController {
 	@RequestMapping("/searchIdOK.do")
 	public String searchId(@RequestParam String name, @RequestParam String email) throws Exception{
 		Map<String, Object> result = new HashMap<String, Object>();
-		System.out.println(name);
 		result.put("name", name);
 		result.put("email", email);
-		System.out.println(result.get("name"));
 		  String id = join.searchId(result);
 		  System.out.println(id);
 		return id;
 	}
 	
+	//비밀번호 찾기 폼으로 이동
 	@RequestMapping("pwd_search.do")
 	public String pwdsearch() {
 		return "pwdsearch";
 	}
 	
+	//비밀번호 찾기폼에서 입력받은 id와 email을 기반으로 비밀번호값을 찾고 리턴
 	@ResponseBody
 	@RequestMapping("/searchpwdOK")
 	public String searchpwd(@RequestParam String id, @RequestParam String email) throws Exception{
@@ -94,35 +94,6 @@ public class JoinController {
 		return pwd;
 	}
 	
-	@RequestMapping("/memberinfo.do")
-	public String memberinfo(HttpServletRequest request, HttpSession session, Model model) throws Exception{
-		String nickname = (String) session.getAttribute("nickname");
-		System.out.println(nickname);
-		model.addAttribute("dto", join.memeberinfo(nickname)) ;
 
-		return "memberinfo";
-	}
-	
-	@RequestMapping("/memberupdate.do")
-	public String memberupdate (HttpServletRequest request, HttpSession session, Model model) throws Exception{
-		String nickname = (String) session.getAttribute("nickname");
-		System.out.println(nickname);
-		model.addAttribute("dto", join.memeberinfo(nickname)) ;
-		return "memberupdate";
-	}
-	
-	@RequestMapping("/memberupdateOK.do")
-	public String updateOK(@RequestParam String id, @RequestParam String nickname, @RequestParam String email, Model model, HttpSession session) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println(id);
-        map.put("id", id);
-        map.put("nickname", nickname);
-        map.put("email", email);
-        System.out.println(map.get("id"));
-        join.infoupdate(map);
-        session.setAttribute("nickname", nickname);
-        
-		return "redirect:memberinfo.do";
-	}
 	
 }

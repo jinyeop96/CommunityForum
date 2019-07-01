@@ -50,12 +50,5 @@ public class JoinDAOImpl implements JoinDAO{
 	public String searchpwd(Map<String, Object> map) throws Exception{
 		return template.selectOne("searchpwd", map);
 	}
-	@Override
-	public JoinDTO memeberinfo(String nickname) throws Exception{
-		return template.selectOne("memberinfo", nickname);
-	}
-	@Override
-	public void infoupdate(Map<String, Object> map) throws Exception{
-		template.update("infoupdate", map);
-	}
+
 }
