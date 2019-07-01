@@ -23,24 +23,24 @@ public class JoinDAOImpl implements JoinDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
-//가입
+//媛��엯
 	@Override
 	public void insert(JoinDTO dto) throws Exception {
 		template.insert("insert", dto);
 		
 	}
-//아이디 중복체크
+//�븘�씠�뵒 以묐났泥댄겕
 	@Override
 	public int findId(Map<String, Object> map) throws Exception {
 		return template.selectOne("findid", map);
 	}
-//닉네임 중복체크
+//�땳�꽕�엫 以묐났泥댄겕
 	@Override
 	public int findnick(Map<String, Object> map) throws Exception {
 		
 		return template.selectOne("findnick", map);
 	}
-	//아이디 찾기 
+	//�븘�씠�뵒 李얘린 
 	@Override
 	public String searchId(Map<String, Object> map) throws Exception{
        return template.selectOne("searchId", map);
@@ -50,4 +50,5 @@ public class JoinDAOImpl implements JoinDAO{
 	public String searchpwd(Map<String, Object> map) throws Exception{
 		return template.selectOne("searchpwd", map);
 	}
+
 }

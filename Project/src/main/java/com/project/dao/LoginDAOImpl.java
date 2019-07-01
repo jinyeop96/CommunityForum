@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.dto.JoinDTO;
 import com.project.dto.LoginDTO;
 
 @Repository
@@ -19,7 +20,20 @@ public class LoginDAOImpl implements LoginDAO {
 		return template.selectOne("com.project.mappers.LoginDAO.selectUser", map);
 	}
 
-
+	@Override
+	public JoinDTO memeberinfo(String nickname) throws Exception{
+		return template.selectOne("memberinfo", nickname);
+	}
+	@Override
+	public void infoupdate(Map<String, Object> map) throws Exception{
+		template.update("infoupdate", map);
+	}
+     
+	@Override
+	public int withraw(Map<String, Object> map) throws Exception{
+          
+		return template.delete("memberwitraw", map);
+		}
 	
 	
 		

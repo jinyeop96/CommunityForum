@@ -5,4 +5,8 @@
 	<select id="selectUser" resultType="com.project.dto.LoginDTO">
 		SELECT * FROM member WHERE id = #{id} and pwd=#{pwd}
 	</select>
+	
+	<delete id="memberwitraw">
+	  delete from member where id = #{id} and pwd=#{pwd}
+	</delete>
 </mapper>

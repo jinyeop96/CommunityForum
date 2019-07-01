@@ -18,7 +18,7 @@
 
 </head>
 	<jsp:include page="/resources/include/navigation.jsp" />
-	<script src="./resources/js/login.js" ></script>	
+
 
 	 <!--  section01 -->
 	<header class="masthead bg-primary text-white text-center">

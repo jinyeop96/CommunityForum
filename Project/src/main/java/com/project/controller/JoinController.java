@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -35,13 +36,13 @@ public class JoinController {
 	public String join() {
 		return "join";
 	}
-//가입 	
+//媛��엯 	
 	@RequestMapping("/join_ok.do")
 	public String joinok(JoinDTO dto, Model model) throws Exception {
 		this.join.insert(dto);
 		return "redirect:login.do";
 	}
-//아이디 중복체크	
+//�븘�씠�뵒 以묐났泥댄겕	
 	@ResponseBody
 	@RequestMapping("/idcheck.do")
 	public  int checkId(String id) throws Exception{
@@ -50,7 +51,7 @@ public class JoinController {
 		int result = join.findId(map);
 		return result;
 	}
-//닉네임 중복 체크 	
+//�땳�꽕�엫 以묐났 泥댄겕 	
 	@ResponseBody
 	@RequestMapping("/nickcheck.do")
 	public  int checknick(String nickname) throws Exception{
@@ -59,12 +60,12 @@ public class JoinController {
 		int result = join.findnick(map);
 		return result;
 	}
-	//아이디 찾기 페이지로 이동
+	//�븘�씠�뵒 李얘린 �럹�씠吏�濡� �씠�룞
 	@RequestMapping("/id_search.do")
 	public String idsearch() {
 		return "idsearch";
 	}
-	//아이디 찾기 결과
+	//�븘�씠�뵒 李얘린 寃곌낵
 	@ResponseBody
 	@RequestMapping("/searchIdOK.do")
 	public String searchId(@RequestParam String name, @RequestParam String email) throws Exception{
@@ -72,14 +73,17 @@ public class JoinController {
 		result.put("name", name);
 		result.put("email", email);
 		  String id = join.searchId(result);
+		  System.out.println(id);
 		return id;
 	}
 	
+	//비밀번호 찾기 폼으로 이동
 	@RequestMapping("pwd_search.do")
 	public String pwdsearch() {
 		return "pwdsearch";
 	}
 	
+	//비밀번호 찾기폼에서 입력받은 id와 email을 기반으로 비밀번호값을 찾고 리턴
 	@ResponseBody
 	@RequestMapping("/searchpwdOK")
 	public String searchpwd(@RequestParam String id, @RequestParam String email) throws Exception{
@@ -89,5 +93,7 @@ public class JoinController {
 		String pwd = join.searchpwd(result);
 		return pwd;
 	}
+	
+
 	
 }
