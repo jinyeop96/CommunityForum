@@ -14,7 +14,11 @@
 		      		<c:forEach items="${list }" var="dto">
 			      		<tr>
 			      			<td colspan="7" ><a href="content.do?board_no=${dto.getBoard_no() }&board_type=${board_type}&pageParam=${page.getPage()}" style="color: #000">
-			      				<h6>${dto.getBoard_title() } [${dto.getBoard_reply() }]</h6>
+			      				<h6>
+			      					${dto.getBoard_title() } [${dto.getBoard_reply() }]
+			      					<c:if test="${dto.getBoard_hasFile() == 1 }"><img class="floppyDisk" src="<c:url value='/resources/img/logos/floppyDisk.png'/>"></c:if>
+			      				</h6>
+			      				
 			      			</a></td>
 			      		</tr>
 			      		<tr>
@@ -24,11 +28,7 @@
 			      			<td class="text-center">조회 ${dto.getBoard_view() }</td>
 			      		</tr>
 			      		
-			      		<tr>
-			      			<td colspan="7">
-			      				<hr style="border-top: 1px solid white;">
-			      			</td>
-			      		</tr>
+			      		<tr><td colspan="7"><hr></td></tr>
 			      		
 		      		</c:forEach>
 		      	

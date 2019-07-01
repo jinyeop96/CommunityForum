@@ -97,4 +97,7 @@ public class RecommendDAOImpl implements RecommendDAO{
 	public void RecUpdateDislikeUpReply(Map<String, Object> map) {
 		template.update("com.project.mappers.recommend.RecUpdateDislikeUpReply", map);
 	}
+	
+	
+	
 }

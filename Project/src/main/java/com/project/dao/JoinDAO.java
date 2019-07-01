@@ -22,6 +22,8 @@ public interface JoinDAO {
 
 	public String searchpwd(Map<String, Object> result) throws Exception;
 	
+	
+	
 
 
 	

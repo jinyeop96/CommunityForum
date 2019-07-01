@@ -47,11 +47,13 @@ $(function(){
 							alert("중복된 아이디입니다.");
 							$("#id_leng").html("");
 							$('#c_pwd').attr("readonly",true);
+						
 							
 						}else{
 							alert("사용가능한 아이디입니다.");
 							$("#id_leng").html("");
 							$('#c_pwd').attr("readonly",false);
+							
 						}
 					},
 					error : function(data){
@@ -80,8 +82,12 @@ $(function(){
 				
 					if(data == '1'){
 						$('#checknick').html("중복된 닉네임입니다.");
+						$('#nickjoin').attr('disabled', true);
+						
 					}else{
 						$('#checknick').html("");
+						$('#nickjoin').attr('disabled', false);
+						
 					}
 					
 				}else{
@@ -158,7 +164,7 @@ $(function(){
       			<td colspan="2"  align="center"><input class="input" name="email" id="email"  style="margin-right: 85px" placeholder="메일주소입력" >
       			</td> 
       			</table>
-      	<input  type="submit" value="가입하기" >&nbsp;&nbsp;
+      	<input  type="submit" value="가입하기" disabled="disabled" id="nickjoin">&nbsp;&nbsp;
       	<input type="button" value="돌아가기" onclick="history.back();"> 
       	</form>
       </div>

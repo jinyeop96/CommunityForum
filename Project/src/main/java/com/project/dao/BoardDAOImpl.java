@@ -97,6 +97,23 @@ public class BoardDAOImpl implements BoardDAO{
 		return template.selectList("com.project.mappers.board.selectFile", board_no);
 	}
 	
+	@Override
+	public int hasFile(int board_no) {
+		return template.selectOne("com.project.mappers.board.hasFile", board_no);
+		
+	}
+	
+	@Override
+	public void hasFileUp(int board_no) {
+		template.update("com.project.mappers.board.hasFileUp", board_no);
+	}
+	
+	@Override
+	public void hasFileDown(int board_no) {
+		template.update("com.project.mappers.board.hasFileDown", board_no);
+	}
+	
+	
 	// -----------------게시물 등록--------------
 	@Override
 	public void insertRecord(Map<String, Object> map) {
@@ -104,7 +121,24 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	@Override
+	public void deleteFile(Map<String, Object> map) {
+		template.delete("com.project.mappers.board.deleteRecord", map);
+	}
+	
+	@Override
 	public void insertFile(Map<String, Object> map) {
 		template.insert("com.project.mappers.board.insertFile", map);		
+	}
+	
+	// ---------게시물 삭제----------
+	@Override
+	public void boardDelete(int board_no) {
+		template.delete("com.project.mappers.board.boardDelete", board_no);
+	}
+	
+	// -------게시물 수정-------
+	@Override
+	public void updateContent(Map<String, Object> map) {
+		template.update("com.project.mappers.board.updateContent", map);
 	}
 }

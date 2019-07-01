@@ -123,6 +123,9 @@
 
 
 /*content.jsp*/
+#floppyDisk{
+	width: 18px;
+}
 .content-title{
 	font-size: 20pt;
 	fonf-weight: bold;
@@ -142,10 +145,10 @@
 }
 
 .buttons{
-    border-radius: 15px;
+    border-radius: 8px;
     background-color: transparent;
     border: 1px solid white;
-    padding: 3px 30px;
+    padding: 0px 15px;
 }
 
 .searchBtn{
@@ -174,6 +177,10 @@
 .contentRec{
 	max-width: 40px;
     height: auto;
+}
+
+.floppyDisk{
+	width: 18px;
 }
 
 

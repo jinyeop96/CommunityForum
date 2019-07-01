@@ -24,6 +24,18 @@
 		
 		
 		///////////////////////////일반 클릭///////////////////
+		// 게시물 삭제
+		function boardDelete(){
+			if(confirm("정말로 게시물을 삭제하시겠습니까?")){
+				location.href="boardDelete.do?board_no=${dto.getBoard_no()}&board_type=${dto.getBoard_type()}";
+			}
+		}
+
+		function boardEdit(){
+			if(confirm("게시물 수정하시겠습니까?")){
+				location.href="boardEdit.do?board_no=${dto.getBoard_no()}&board_type=${dto.getBoard_type()}&pageParam=${pageParam}";
+			}
+		}
 		
 		// 첨부파일 토글링
 		function showFile(){
@@ -32,9 +44,9 @@
 		
 		// 페이지 버튼 눌렀을 떄 위쪽으로 올라가는 에니메이션
 		function pageUp(num){	
-			if(num == 1){
-				$("html, body").animate({scrollTop : $("#dislike").offset().top}, 400); 
-			} else {
+			if(num == 1){	//댓글 다음 페이지 누르면 자동으로 위쪽으로 맞춰짐
+				$("html, body").animate({scrollTop : $("#thumb").offset().top}, 400);
+			} else {		//게시글 아래 나오는 게시글들
 				$("html, body").animate({scrollTop : $("#reply_content").offset().top}, 400);
 			}
 		}
@@ -48,7 +60,8 @@
 				data: {"board_no": "${dto.getBoard_no()}"},
 				success:function(result){
 					$(".boardUpdateLike").text(result.likes);
-					$(".boardUpdateDislike").text(result.dislikes); 
+					$(".boardUpdateDislike").text(result.dislikes);
+					
 				},
 				error:function(){
 					alert("오류가 생겼습니다.");
@@ -109,7 +122,7 @@
 				type:"get",
 				data: { "board_no": "${dto.getBoard_no()}",			//해당 원글 번호
 						"reply_content": $("#reply_content").val(),	//답글
-						"reply_nickname": $("#reply_nickname").val() },	// 닉네임 (나중에 session으로 처리할 때 nickname으로 할 예정)
+						"reply_nickname": "${nickname}" },	// 닉네임 (나중에 session으로 처리할 때 nickname으로 할 예정)
 			
 				success:function(){
 						$("#reply_content").val("");
@@ -130,7 +143,7 @@
 				type:"get",
 				data: {"reply_no": reply_no},
 				success:function(result){
-					if(result.msg == "이미 공감 하셨습니다."){
+					if(result.msg != null){
 						alert(result.msg);
 					}
 					getReplyList();
@@ -147,7 +160,7 @@
 				type:"get",
 				data: {"reply_no": reply_no},
 				success:function(result){
-					if(result.msg == "이미 공감 하셨습니다."){
+					if(result.msg != null){
 						alert(result.msg);
 					}
 					getReplyList();
@@ -166,7 +179,7 @@
 				type:"get",
 				data: {"board_no": board_no},
 				success:function(result){
-					if(result.msg == "이미 공감 하셨습니다."){
+					if(result.msg != null){
 						alert(result.msg);
 					}
 					getLikeDislike();
@@ -183,7 +196,7 @@
 				type:"get",
 				data: {"board_no": board_no},
 				success:function(result){
-					if(result.msg == "이미 공감 하셨습니다."){
+					if(result.msg != null){
 						alert(result.msg);
 					}
 					getLikeDislike();
@@ -199,10 +212,17 @@
 	<style type="text/css">
 		.attach{
 		    font-weight: bold;
-		    color: white;
+		    color: black;  
 		    text-decoration: underline;
 		    font-style: italic;
 		    font-size: 15px;
+		}
+		#back{
+			color: white;
+			text-decoration: none;
+		}
+		#back:hover{
+			font-style: italic;
 		}
 	</style>
 </head>
@@ -216,6 +236,12 @@
 	      	<%pageContext.setAttribute("newLineChar", "\n"); %>	<%-- \n -> newLineChar로 --%>
 	      	<div class="board" align="center"> 
       			<table class="board font-black">
+      				<tr>
+      					<td>
+      						<a href="board.do?board_type=${board_type }&pageParam=${pageParam }&boardSearch=no" class="buttons" id="back" >게시판으로</a>
+      					</td>
+      				</tr>
+      			
 		      		<tr>
 		      			<th class="content-title">${dto.getBoard_title() }</th>
 		      		</tr>
@@ -237,17 +263,30 @@
 		      		</tr>
 		      				      		
 		      		<tr>
-		      			<td id="dislike">비추천 : <span class="boardUpdateDislike">${dto.getBoard_dislike() }</span></td> 
+		      			<td>비추천 : <span class="boardUpdateDislike">${dto.getBoard_dislike() }</span></td> 
 		      		</tr>
 		      				      		
 		      		<tr>
-		      			<td>답글 : <span id="replyNum">${replyNum }</span></td> 
+		      			<td colspan="4">답글 : <span id="replyNum">${replyNum }</span></td>
 		      		</tr>
+		      		
+		      		<!--  글 작성자가 게시글에 들어오면 보이는 버튼들 -->
+	      			<c:if test="${!empty nickname}">
+	      				<c:if test="${nickname == dto.getBoard_nickname() }">
+	      					<tr>
+	      						<td colspan="7" align="right">
+				      				<input type="button" class="buttons" onclick="boardDelete()" value="삭제"> 
+				      				<input type="button" class="buttons" onclick="boardEdit()" value="수정">
+	      						</td>
+	      					</tr>
+	      				</c:if>
+	      			</c:if>
 		      		
 		      		<tr>
 		      			<td><hr style="border: none; border-top: 1px solid white"></td>
 		      		</tr>
 		      		
+		      		<!--  첨부파일 -->
 		      		<c:if test="${!empty files}">
 		      			<tr align="right"><td><a href="javascript:showFile()" class="attach">첨부파일</a></td></tr>
 
@@ -255,13 +294,14 @@
 		      				<tr align="right" class="files"> 
 		      					<td> 
 		      						<a class="font-black attach" href="<spring:url value='/image/${file }'/> " >
-		      						 	<span>${file.substring(48) }</span>
+		      						 	<span>${file.substring(47) }</span>
 		      						</a>
 		      					</td>
 		      				</tr>
 	      				</c:forEach>
 		      		</c:if>
 		      		
+		      		<!-- 이미지/게시글 -->
 		      		<tr>
 		      			<td>
 		      				<c:if test="${!empty images }">
@@ -275,16 +315,19 @@
 		      			</td>
 		      		</tr>	
 		      		
-		      		<tr>
+		      		<tr><td id="thumb"><br></td></tr>
+		      		<tr><td><br></td></tr>
+		      		
+		      		<tr>	
 		      			<td align="center">
-		      				<a href="javascript:boardUpdateLike(${dto.getBoard_no()})">
+		      				<a href="javascript:boardUpdateLike(${dto.getBoard_no()})" id="like2">
 			      				<img class="contentRec"  src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;&nbsp;
-			      				<span class="boardUpdateLike" style="color: white">${dto.getBoard_like() }</span>&nbsp;&nbsp;&nbsp;
+			      				<font class="boardUpdateLike" style="color: white; text-decoration: none;">${dto.getBoard_like() }</font>&nbsp;&nbsp;&nbsp;
 		      				</a>
 		      				
 		      				<a href="javascript:boardUpdateDislike(${dto.getBoard_no()})">
 			      				<img class="contentRec" src="<c:url value='/resources/img/logos/dislike2.png'/>">&nbsp;&nbsp;&nbsp;
-			      				<span class="boardUpdateDislike" style="color: white">${dto.getBoard_dislike() }</span>
+			      				<font class="boardUpdateDislike" style="color: white; text-decoration: none;">${dto.getBoard_dislike() }</font>
 		      				</a>
 		      			</td>
 		      		</tr>
@@ -298,17 +341,28 @@
 				<%-- 답변글 뿌려주기 --%>
 				<table class="board font-black" id="replyTable"></table> <%--table : 선 긋기, table-hover : 마우스 올렸을 때 색변화 --%> 
 		        
-		        <%-- 답변 글쓰기 폼 --%>
+		        <%-- 답변 글쓰기 폼 --%>	
 		        <table class="board">
-		        	<tr>
-		        		<td><textarea class="board resize-none" rows="4"  placeholder="댓글 쓰기" id="reply_content" ></textarea></td>
-		        	</tr>
-		        	<tr>
-		        		<td colspan="2" align="right">
-		        			<input id="reply_nickname" placeholder="nickname"> 
-			        		<input type="button" id="reply" value="저장">
-	        			</td>
-		        	</tr>
+		        	<c:if test="${!empty nickname }">	<!-- 로그인 했을 때 댓글 허용 -->
+		        		<tr><td><hr style="border: none; border-top: 1px solid white"></td></tr>
+			        
+			        	<tr>
+			        		<td><textarea class="board resize-none" rows="4"  placeholder="댓글 쓰기" id="reply_content" ></textarea></td>
+			        	</tr>
+			        	<tr>
+			        		<td colspan="2" align="right">
+				        		<input type="button" id="reply" onclick="pageUp(1)" class="buttons" value="저장">
+		        			</td>
+			        	</tr>
+		        	</c:if>
+
+		        	<c:if test="${empty nickname }">	<!--  로그인 안했을 때 댓글 비허용 -->
+		        		<tr><td><hr style="border: none; border-top: 1px solid white"></td></tr>
+			        	
+			        	<tr>
+			        		<td><textarea class="board resize-none" rows="4"  placeholder="댓글 쓰기" id="reply_content" readonly >회원만 댓글 쓸 수 있습니다.</textarea></td>
+			        	</tr>
+		        	</c:if>
 		        	
 		        	<tr><td><hr style="border: none; border-top: 1px solid white"></td></tr>
 		        </table>

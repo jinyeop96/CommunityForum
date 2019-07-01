@@ -26,4 +26,12 @@ select id from member where name=#{name} and email=#{email}
 select pwd from member where id=#{id} and email=#{email}
 </select>
 
+<select id="memberinfo" resultType="com.project.dto.JoinDTO">
+select *from member where nickname=#{nickname}
+</select>
+
+<update id="infoupdate" >
+update member set nickname=#{nickname}, email=#{email} where id = #{id}
+</update>
+
 </mapper>

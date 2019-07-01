@@ -12,24 +12,22 @@
 function searchBtn(){
 	
 	
-	if($('#j_name').val()  ==""){
+	if($('#name').val()  ==""){
 		alert("이름을 입력해주세요");
-		$('#j_name').focus();
+		$('#name').focus();
 		return ;
 	}
 	
-	if($('#j_mobile').val()  ==""){
-		alert("연락처를 입력해주세요");
-		$('#j_mobile').focus();
+	if($('#email').val()  ==""){
+		alert("이메일주소를 입력해주세요");
+		$('#email').focus();
 		return ;
 	}
 	
-	var name =$('#j_name').val();
-	var number = $('#j_mobile').val();
-	var memdata = {'j_name' : name, 'j_mobile' : number};
-	alert (name);
-	alert (number);
-	
+	var name =$('#name').val();
+	var email = $('#email').val();
+	var memdata = {'name' : name, 'email' : email};
+
 	$.ajax({
 		url : "searchIdOK.do",
 		type : "post",
@@ -39,7 +37,7 @@ function searchBtn(){
 			if(data !=""){
 				alert("회원님의 아이디는"+data+"입니다.");	
 			}else{
-				alert("이름과 연락처를 확인해주세요.")
+				alert("이름과 이메일을 확인해주세요.")
 			}
 			
 			
@@ -71,12 +69,12 @@ function searchBtn(){
       	<table>
       		<tr>
       			<th>UserName</th>
-      			<td><input class="input" name="j_name" id ="j_name"></td> 
+      			<td><input class="input" name="name" id ="name"></td> 
       		</tr>
       		
       		<tr>
-      			<th>MobileNumber</th>
-      			<td><input class="input"  name="j_mobile" id="j_mobile" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" ></td>
+      			<th>EmailAdress</th>
+      			<td><input class="input"  name="email" id="email"  ></td>
       		</tr>
       	</table>
       	<input id="loginBtn" type="button" value="IdFind" onclick="searchBtn()"><br>

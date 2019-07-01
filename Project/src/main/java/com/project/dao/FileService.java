@@ -73,7 +73,10 @@ public class FileService {
 		
 		
 	}
-	
+
+	public void deleteFile(Map<String, Object> map) {
+		board.deleteFile(map);
+	}
 }
 
 
