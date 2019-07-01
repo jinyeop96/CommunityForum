@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>호텔 검색</title>
+<title>숙박시설 검색</title>
 	<style type="text/css">
 		#map{
 			width: 100%;
@@ -20,15 +20,9 @@
 #category li:last-child{margin-right:0;border-right:0;}
 #category li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
 #category li .category_bg {background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png) no-repeat;}
-#category li .bank {background-position: -10px 0;}
-#category li .mart {background-position: -10px -36px;}
-#category li .pharmacy {background-position: -10px -72px;}
-#category li .oil {background-position: -10px -108px;}
-#category li .cafe {background-position: -10px -144px;}
-#category li .store {background-position: -10px -180px;}
-#category li .food {background-position: -10px -216px;}
-#category li .subway {background-position: -10px -252px;}
-#category li .hospital {background-position: -10px -288px;}
+#category li .hotel {background-position: -10px 0;}
+
+
 #category li.on .category_bg {background-position-x:-46px;}
 .placeinfo_wrap {position:absolute;bottom:28px;left:-150px;width:300px;}
 .placeinfo {position:relative;width:100%;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;padding-bottom: 10px;background: #fff;}
@@ -50,7 +44,7 @@
 	<header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
     
-    <h1 class="masthead-heading text-uppercase mb-0">맛집 검색</h1> <br><br><br>
+    <h1 class="masthead-heading text-uppercase mb-0">숙박시설 검색</h1> <br><br><br>
 
 
 
@@ -58,30 +52,11 @@
     <div id="map" style="width:100%;height:100%; position:relative;overflow:hidden; "></div>
     
     <ul id="category" style="color:black;">
-        <li id="BK9" data-order="0"> 
-            <span class="category_bg bank" ></span>
-            은행
+        <li id="AD5" data-order="0"> 
+            <span class="category_bg hotel" ></span>
+            숙박시설
         </li>       
-        <li id="MT1" data-order="1"> 
-            <span class="category_bg mart"></span>
-            마트
-        </li>  
-        <li id="PM9" data-order="2"> 
-            <span class="category_bg pharmacy"></span>
-            약국
-        </li>  
-        <li id="OL7" data-order="3"> 
-            <span class="category_bg oil"></span>
-            주유소
-        </li>  
-        <li id="CE7" data-order="4"> 
-            <span class="category_bg cafe"></span>
-            카페
-        </li>  
-        <li id="CS2" data-order="5"> 
-            <span class="category_bg store"></span>
-            편의점
-        </li>
+       
     </ul>
 </div>
 
