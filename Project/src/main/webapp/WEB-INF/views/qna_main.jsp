@@ -11,7 +11,58 @@
 <script>
 
 $(function(){
-	//jquery mouseover와 mouseleave를 통해 해당 태그에 마우스 이벤트를 발생시킨다.
+	
+	
+	$(document).ready(function(){
+	    $("#checkBox01").change(function(){
+	        if($("#checkBox01").is(":checked")){
+	        	$("#qna_show1").css("display","block");
+	        }else{
+	        	$("#qna_show1").css("display","none");
+	        }
+	    });
+	});
+	
+	$(document).ready(function(){
+	    $("#checkBox02").change(function(){
+	        if($("#checkBox02").is(":checked")){
+	        	$("#qna_show2").css("display","block");
+	        }else{
+	        	$("#qna_show2").css("display","none");
+	        }
+	    });
+	});
+	
+	$(document).ready(function(){
+	    $("#checkBox03").change(function(){
+	        if($("#checkBox03").is(":checked")){
+	        	$("#qna_show3").css("display","block");
+	        }else{
+	        	$("#qna_show3").css("display","none");
+	        }
+	    });
+	});
+	
+	$(document).ready(function(){
+	    $("#checkBox04").change(function(){
+	        if($("#checkBox04").is(":checked")){
+	        	$("#qna_show4").css("display","block");
+	        }else{
+	        	$("#qna_show4").css("display","none");
+	        }
+	    });
+	});
+	
+	$(document).ready(function(){
+	    $("#checkBox05").change(function(){
+	        if($("#checkBox05").is(":checked")){
+	        	$("#qna_show5").css("display","block");
+	        }else{
+	        	$("#qna_show5").css("display","none");
+	        }
+	    });
+	});
+	/* //jquery mouseover와 mouseleave를 통해 해당 태그에 마우스 이벤트를 발생시킨다.
 	//해당태그에 마우스가 올라갈 시 display block을 시켜 태그를 보여주고
 	//마우스가 떠날시 display none으로 태그를 숨긴다.
 	$("#qna1").mouseover(function(){
@@ -48,7 +99,7 @@ $(function(){
 	$("#qna5").mouseleave(function(){
 		$("qna_show5").css("display","none");
 	});
-
+ */
 	
 	
 	//qna form 등록 버튼 입력시 
@@ -117,7 +168,7 @@ function div_OnOff(v,id){
       	
       	<h1 style = " font-size:20px; margin-top:40px;" align="center">자주하는 질문</h1>
       		
-      		<h6 id="qna1">군인만 가입이 가능한가요?</h6>
+      		<h6 id="qna1">군인만 가입이 가능한가요?<tr> <input type="checkbox" id="checkBox01"><tr> ←클릭 </h6>
       		<div>
 	      		<h5 id="qna_show1" style="display:none;">대한민국 국민 누구나 가입가능합니다.</h5>
 	      	</div>
@@ -125,7 +176,7 @@ function div_OnOff(v,id){
       		<br id="br1">	
       		<br id="br2">
       	
-      		<h6 id="qna2">숙식 업체의 선별기준은 무엇인가요?</h6>
+      		<h6 id="qna2">숙식 업체의 선별기준은 무엇인가요? <tr> <input type="checkbox" id="checkBox02"><tr> ←클릭</h6>
       		<div>
       		  <h5 id="qna_show2" style="display:none;">군장병들과 가족분들이 평가해주신 평점으로 선별됩니다~</h5>
       		</div>
@@ -133,7 +184,7 @@ function div_OnOff(v,id){
       	<br id="br3">
       	<br id="br4">
       	
-      	<h6 id="qna3">비밀번호를 잊어 버렸어요.</h6>
+      	<h6 id="qna3">비밀번호를 잊어 버렸어요. <tr> <input type="checkbox" id="checkBox03"><tr> ←클릭</h6>
       	<div>
       		<h5 id="qna_show3" style="display:none;">영업시간 내에 연락주시거나 비밀번호 찾기로 해결하실 수 있습니다.</h5>	
       	</div>	
@@ -141,7 +192,7 @@ function div_OnOff(v,id){
       	<br id="br5">
       	<br id="br6">
       	
-      	<h6 id="qna4">이 사이트를 만든사람과 연락해서 취업시키고 싶은데 어떻게 하죠?</h6>
+      	<h6 id="qna4">이 사이트를 만든사람과 연락해서 취업시키고 싶은데 어떻게 하죠? <tr> <input type="checkbox" id="checkBox04"><tr> ←클릭</h6>
     	<div>
     		<h5 id="qna_show4" style="display:none;">제발 연락주세요. 제발. 먹고살고 싶습니다.</h5>
     	</div>
@@ -149,7 +200,7 @@ function div_OnOff(v,id){
     	<br id="br7">
     	<br id="br8">
     	
-    	<h6 id="qna5">사이트가 왜 이모양 이꼴이죠?</h6>
+    	<h6 id="qna5">사이트가 왜 이모양 이꼴이죠? <tr> <input type="checkbox" id="checkBox05"><tr> ←클릭</h6>
     	<div>	
     		<h5 id="qna_show5" style="display:none;">그럼 니가만들어 뒤질래?</h5>
     	</div>
