@@ -73,6 +73,9 @@ function email(){
 //가입폼내의 인풋박스에 입력값이 없으면 경고창을 띄우며 해당 인풋박스로 이동
 function formchk(){
 	
+	var emailcheck = $('#email').val();
+	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	
 	if($('#id').val()  ==""){
 		alert("아이디 입력해주세요");
 		$('#id').focus();
@@ -106,6 +109,13 @@ function formchk(){
 		alert("이메일 입력");
 		$('#email').focus();
 		return false;
+	}else if(emailcheck.match(regExp)!=null){
+		return true;	
+	}else{
+		alert("이메일 형식이 맞지 않습니다."); 
+		return false;
 	}
-	return true;
+	
+	
+	
 }
