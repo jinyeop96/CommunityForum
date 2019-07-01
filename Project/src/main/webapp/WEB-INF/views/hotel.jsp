@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
 #category li:last-child{margin-right:0;border-right:0;}
 #category li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
 #category li .category_bg {background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png) no-repeat;}
-#category li .bank {background-position: -10px 0;}
+#category li .bank {background-position: -10px 0;} 
 #category li .mart {background-position: -10px -36px;}
 #category li .pharmacy {background-position: -10px -72px;}
 #category li .oil {background-position: -10px -108px;}
