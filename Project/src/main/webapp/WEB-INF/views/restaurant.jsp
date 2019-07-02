@@ -97,6 +97,12 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 
+//지도 타입 변경 컨트롤을 생성한다
+var mapTypeControl = new kakao.maps.MapTypeControl();
+
+// 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
+map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places();  
 
