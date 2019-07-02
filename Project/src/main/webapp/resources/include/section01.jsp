@@ -6,7 +6,7 @@
     <div class="container">
 
       <!-- Portfolio Section Heading -->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">오늘 밤 어디가? >< </h2>
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">숙박업소 바로가기</h2>
 
       <!-- Icon Divider -->
       <div class="divider-custom">
@@ -23,7 +23,7 @@
         <!-- Hohel Item 1 -->
         <div>            
             <form action="hotel.do">
-            	<input name="hotel_search" placeholder="가고싶은 곳!!!">
+            	<input name="hotel_search" placeholder="지역명으로 입력주세요.">
             	<input type="submit" value="search">
             </form>
           

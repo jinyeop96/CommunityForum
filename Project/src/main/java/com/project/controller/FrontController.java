@@ -48,7 +48,11 @@ public class FrontController {
 	}
 	
 	@RequestMapping("/hotel.do")
-	public String hotel() {
+	public String hotel(HttpServletRequest request, Model model) {
+		String hotel_search = request.getParameter("hotel_search").trim();
+		if( hotel_search != null) {
+			model.addAttribute("hotel_search", hotel_search);
+		}
 		return "hotel";
 	}
 	
@@ -62,18 +66,13 @@ public class FrontController {
 		return "transport";
 	}
 
-	@RequestMapping("/address.do")
-	public String address(HttpServletRequest request, Model model) {
-		String address = request.getParameter("address");
-		if(address != null) {
-			model.addAttribute("address", address);
-		}
-		return "address";
-	}
-
 	@RequestMapping("/hotelPopup.do")
 	@ResponseBody
-	public ModelAndView hotelPopup(ModelAndView mav) {
+	public ModelAndView hotelPopup(HttpServletRequest request, ModelAndView mav ) {
+		String hotel_search = request.getParameter("hotel_search").trim();
+		if(hotel_search != null) {
+			mav.addObject("hotel_search", hotel_search);
+		}
 		mav.setViewName("ajax/hotelPopup");
 		return mav;
 	}
