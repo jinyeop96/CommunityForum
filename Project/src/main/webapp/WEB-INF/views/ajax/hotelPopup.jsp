@@ -1,19 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>숙박시설 검색</title>
-	<style type="text/css">
+<div class="map_wrap">
+
+    <div id="map" style="width:100%;height:100%; position:relative;overflow:hidden; margin-top:2px; border-radius: 15px "></div>
+    
+    <ul id="category" style="color:black;">
+ 
+        <li id="AD5" data-order="0">     
+            <span class="category_bg hotel" ></span>
+            숙박시설
+        </li>       
+	
+		<li><img src="<c:url value='/resources/img/logos/close.png'/>" id="close" style="width: 30px; margin-top: 9px;"></li>
+       
+    </ul>
+
+</div>
+
+<style type="text/css">
 		#map{
 			width: 100%;
 			height: 600px;
 		}
 
 .map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-.map_wrap {position:relative;width:100%;height:350px;}
+.map_wrap {position:relative;width:100%;height:600px;}
 #category {position:absolute;top:10px;left:10px;border-radius: 5px; border:1px solid #909090;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);background: #fff;overflow: hidden;z-index: 2;}
 #category li {float:left;list-style: none;width:50px;px;border-right:1px solid #acacac;padding:6px 0;text-align: center; cursor: pointer;}
 #category li.on {background: #eee;}
@@ -35,32 +48,17 @@
 .placeinfo .jibun {color:#999;font-size:11px;margin-top:0;}
 
 </style>
-</head>
-<body>
-
-	<jsp:include page="/resources/include/navigation.jsp" />
-	
-	<header class="masthead bg-primary text-white text-center">
-    <div class="container d-flex align-items-center flex-column">
-    
-    <h1 class="masthead-heading text-uppercase mb-0">숙박시설 검색</h1> <br><br><br>
 
 
-
-<div class="map_wrap">
-    <div id="map" style="width:100%;height:100%; position:relative;overflow:hidden; "></div>
-    
-    <ul id="category" style="color:black;">
-        <li id="AD5" data-order="0"> 
-            <span class="category_bg hotel" ></span>
-            숙박시설
-        </li>       
-       
-    </ul>
-</div>
-
+<script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86b59d080c4ee3e8f0d9fc3cfd7b71c8&libraries=services"></script>
 <script>
+$(function(){
+	$("#close").on("click", function(){
+		$("body").load("hotel.do");
+	});	
+})
+
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
@@ -253,15 +251,3 @@ function changeCategoryClass(el) {
     } 
 } 
 </script>
-</div>
-</header>
-
-	<jsp:include page="/resources/include/footer.jsp" />
-  	<jsp:include page="/resources/include/copyright.jsp" />
-  	<jsp:include page="/resources/include/modals.jsp" />
-	
-</body>
-</html>
-
-
-

@@ -22,8 +22,8 @@
 
         <!-- Hohel Item 1 -->
         <div>            
-            <form action="#">
-            	<input name="transport_search" placeholder="차!!!!">
+            <form action="address.do">
+            	<input name="address" placeholder="address test">
             	<input type="submit" value="search">
             </form>
           

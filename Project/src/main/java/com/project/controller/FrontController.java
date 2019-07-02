@@ -1,7 +1,12 @@
 package com.project.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class FrontController {
@@ -55,6 +60,22 @@ public class FrontController {
 	@RequestMapping("/transport.do")
 	public String transport() {
 		return "transport";
+	}
+
+	@RequestMapping("/address.do")
+	public String address(HttpServletRequest request, Model model) {
+		String address = request.getParameter("address");
+		if(address != null) {
+			model.addAttribute("address", address);
+		}
+		return "address";
+	}
+
+	@RequestMapping("/hotelPopup.do")
+	@ResponseBody
+	public ModelAndView hotelPopup(ModelAndView mav) {
+		mav.setViewName("ajax/hotelPopup");
+		return mav;
 	}
 }
 
