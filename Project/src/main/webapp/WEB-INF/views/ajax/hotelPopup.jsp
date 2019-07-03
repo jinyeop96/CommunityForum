@@ -83,12 +83,12 @@
 	})
 	
 	//뒤로가기
-	$(function(){
-		$("#back").click(function(){
-			var hotel_search = $(".searchLoc").val();
-			location.href='hotel.do?hotel_search='+hotel_search;
-		})
-	})
+	$("#back").on("click", function(){
+		var searchLoc = $(".searchLoc").val();
+		//$("body").load("hotel.do?hotel_search="+searchLoc,function(responseText, statusText, xhr)
+		location.href="hotel.do?hotel_search="+searchLoc;
+	}); 
+	  
 	
 	//  지도 이동
 	function search(){
