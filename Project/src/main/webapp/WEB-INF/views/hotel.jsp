@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>숙박시설 검색</title>
+<title>hotel</title>
 	<style type="text/css">
 		.search{
 		    border-radius: 5px;
