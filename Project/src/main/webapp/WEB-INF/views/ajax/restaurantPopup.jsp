@@ -8,7 +8,7 @@
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 
 
-    <style>
+ <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:500px;}
@@ -57,14 +57,6 @@
 </head>
 <body>
 
-	<jsp:include page="/resources/include/navigation.jsp" />
-	
-	<header class="masthead bg-primary text-white text-center">
-    <div class="container d-flex align-items-center flex-column">
-    
-    <h1 class="masthead-heading text-uppercase mb-0">맛집 검색</h1> <br><br><br>
-
-
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
@@ -85,22 +77,6 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86b59d080c4ee3e8f0d9fc3cfd7b71c8&libraries=services"></script>
 <script>
-$("#map").on("click", function(){
-	var filter = "win16|win32|win64|macintel|mac|"; // PC일 경우 가능한 값
-
-	if( navigator.platform){
-		if( filter.indexOf(navigator.platform.toLowerCase())<0 ){	// 모바일 접속
-			$("body").load("restaurantPopup.do?hotel_search="+searchLoc,function(responseText, statusText, xhr){ 
-				 if(statusText == "error")
-	                 alert("An error occurred: " + xhr.status + " - " + xhr.statusText);  
-			}); 
-		} else {
-			// pc 접속
-		}
-	} 
-	  
-});
-
 
 // 마커를 담을 배열입니다
 var markers = [];
@@ -326,13 +302,3 @@ function removeAllChildNods(el) {
 }
 </script>
 
-
-</header>
-
-
-	<jsp:include page="/resources/include/footer.jsp" />
-  	<jsp:include page="/resources/include/copyright.jsp" />
-  	<jsp:include page="/resources/include/modals.jsp" />
-	
-</body>
-</html>
