@@ -33,16 +33,16 @@
   	    					<a class="download" src="<c:url value='/resources/img/logos/OWY-1.png'/>" download></a>
      					</div>
      				</div>
+     				<br><br><br>
      			
      				<div class="clear"></div>
      				
-     				<div class="box_btn">
+     		<!-- 		<div class="box_btn">
      					<div class="floatR">
      						<a class="btn_down greyL" href='/resources/img/logos/510_1.jpg' target="_blank" title="오와열 로고 다운로드(GIF)">|오와열 로고 다운로드(GIF) |</a>
  							<a class="btn_down greyL marR0" href='/resources/img/logos/510_1.jpg' target="_blank" title="오와열 로고 다운로드(일러파일)">오와열 로고 다운로드(일러파일)|</a>
      					</div>
-     				</div>
-     				<br>
+     				</div> -->
      				
      				
      				<img id="logo" src="<c:url value='/resources/img/logos/510logo_2.png'/>" style="width:220px; height:160px">
@@ -57,7 +57,7 @@
      						<a class="btn_down white" scr="<c:url value='/resources/img/logos/510logo_2.png'/>" target="_blank" title="표준규격 다운로드">표준규격 다운로드</a>
      					</div>
      				</div>
-     				<br><br><br>
+     				<br><br><br><br>
      				
      				
      				<img id="logo"  src="<c:url value='/resources/img/logos/OWY-1.png'/>" style="width:220px; height:160px">
@@ -72,7 +72,7 @@
      						<a class="btn_down white" src="<c:url value='/resources/img/logos/OWY-1.png'/>" target="_blank" title="표준규격 다운로드">표준규격 다운로드</a>     						
      					</div>
      				</div>
-     				<br><br><br>
+     				<br><br><br><br>
      				
      				
      				<img id="logo"  src="<c:url value='/resources/img/logos/OWY-2.png'/>" style="width:220px; height:160px">
@@ -154,7 +154,6 @@
      			</section> -->
      			
      			 <div class="signature overflowW">
-     				 	<h6>[ Developer -> jinyoep's GF ]</h6>
      				 	<img src="" alt="">
      			 </div>
      			

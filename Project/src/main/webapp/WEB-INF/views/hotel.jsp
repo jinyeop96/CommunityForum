@@ -14,6 +14,7 @@
 		    margin-left: 5px;
 		    padding: 0px 20px;
 		}
+
 		.searchLoc{
 			border-radius: 8px;
 		}
@@ -237,6 +238,10 @@ function removeMarker() {
 }
 // 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
 function displayPlaceInfo (place) {
+
+    var content = '<div class="placeinfo" >' +  
+                    '<a class="title" onclick="closeOverlay()" title="닫기" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>';   
+
     var content = '<div class="placeinfo">' +
                     '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>';   
     if (place.road_address_name) {
