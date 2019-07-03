@@ -15,6 +15,15 @@
 		    padding: 0px 20px;
 		}
 
+	 #warning-message { display: none; }
+    @media only screen and (orientation:portrait){
+        #wrapper { display:none; }
+        #warning-message { display:block; }
+    }
+    @media only screen and (orientation:landscape){
+        #warning-message { display:none; }
+    }
+
 		.searchLoc{
 			border-radius: 8px;
 		}
@@ -228,7 +237,7 @@ function addMarker(position, order) {
     marker.setMap(map); // 지도 위에 마커를 표출합니다
     markers.push(marker);  // 배열에 생성된 마커를 추가합니다
     return marker;
-}
+}	
 // 지도 위에 표시되고 있는 마커를 모두 제거합니다
 function removeMarker() {
     for ( var i = 0; i < markers.length; i++ ) {

@@ -82,11 +82,11 @@
 					</li>
 					
 					<li class="nav-item mx-0 mx-lg-1">
-						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Browse</a>
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">편의제공</a>
 							<ul>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="hotel.do?hotel_search=">HOTEL</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="restaurant.do">RESTAURANT</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transport.do">TRANSPORT</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="hotel.do?hotel_search=">숙박</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="restaurant.do">음식점</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transport.do">교통</a></li>
 							</ul>
 					</li>
 
@@ -102,7 +102,7 @@
 					<li class="nav-item mx-0 mx-lg-1">
 						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >O.W.Y contents</a>
 						<ul>
-							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="contents.do">LOGO</a></li>
+							<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="contents.do">로고</a></li>
 						</ul>
 					</li>
 						
