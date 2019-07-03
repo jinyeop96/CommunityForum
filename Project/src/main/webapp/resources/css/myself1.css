@@ -8,10 +8,16 @@
 }
 
  .bg-primary{
-	/* background-color: #1abc9c; 
-	background-image: url("../img/bakcground/korea2.png");*/	
+	background-color: #1abc9c; 
+	/*background-image: url("../img/bakcground/korea2.png");*/	
 } 
+.bg-masthead{
+	background-color: white;
+}
 
+.text-#2c3e50{
+	color: text-#2c3e50;
+}
 
 @media ( max-width: 991px){
 	.navbar-top-right{
@@ -102,8 +108,8 @@
 	padding: 3px;
 }
 
-/*section02.jsp */
-.section2{
+/*section background */
+.section1, .section3{
 	background-color: #1abc9c;
 }
 /* 페이지 크기에 맞춤 */

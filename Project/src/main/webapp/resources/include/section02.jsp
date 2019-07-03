@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Portfolio Section -->
-  <section class="page-section section2" id="restaurant">	<%-- menu bar에서 클릭하면 해당 id로 움직임 --%>
+  <section class="page-section" id="restaurant">	<%-- menu bar에서 클릭하면 해당 id로 움직임 --%>
     <div class="container" >
 
       <!-- Portfolio Section Heading -->

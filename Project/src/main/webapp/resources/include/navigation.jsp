@@ -21,7 +21,7 @@
 
 <!--  CSS by myself -->
 <!-- <link href="/resources/css/myself1.css" rel="stylesheet" type="text/css"> -->
-<link href="<c:url value="/resources/css/myself.css" />" rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/myself1.css" />" rel="stylesheet" type="text/css">
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 	<style>
 		@media(max-width: 500px){
@@ -42,7 +42,7 @@
 	<!-- Navigation -->
 	<nav
 		class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top"
-		id="mainNav">
+		id="mainNav"> 
 		<div class="container">
 			<a class="navbar-brand js-scroll-trigger" href="main.do">
 				<img id="logo" src="<c:url value='/resources/img/logos/510_2.png'/>">
