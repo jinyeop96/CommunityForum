@@ -4,10 +4,11 @@
     
 <!-- Masthead -->
   <header class="masthead bg-primary text-white text-center">
+  
     <div class="container d-flex align-items-center flex-column">
 
       <!-- Masthead Avatar Image -->
-      <img src="<c:url value="/resources/img/portfolio/Korea.jpg" />" alt="html size" style="width:100%; height:auto;">	<%-- mapping되어 있기 떄문에 jstl로 불러오쎼용 --%> 
+      <img src="<c:url value="/resources/img/background/korea2.png" />" alt="html size" style="width:100%; height:auto;"> 	<%-- mapping되어 있기 떄문에 jstl로 불러오쎼용 --%> 
 
       <!-- Masthead Heading -->
       <h1 class="masthead-heading text-uppercase mb-0">오.와.열</h1>
@@ -20,9 +21,10 @@
         </div>
         <div class="divider-custom-line"></div>
       </div>
-
+      
       <!-- Masthead Subheading -->
       <p class="masthead-subheading font-weight-light mb-0">군인 - 민간인 대통합 프로젝트!!</p>
 
-    </div>
+	
+	</div>
   </header>

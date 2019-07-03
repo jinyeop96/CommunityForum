@@ -7,10 +7,10 @@
 	background-position: center;
 }
 
-.bg-primary{
-	background-color: #1abc9c;
-	/*background-image: url("../img/background/bg-primary.jpg");*/	
-}
+ .bg-primary{
+	/* background-color: #1abc9c; 
+	background-image: url("../img/bakcground/korea2.png");*/	
+} 
 
 
 @media ( max-width: 991px){
