@@ -13,6 +13,10 @@
 		            FROM (SELECT * FROM reply WHERE reply_group = #{board_no} ORDER BY reply_step) b)
 		    WHERE <![CDATA[ r >= #{rowStart} AND r <= #{rowEnd}]]>
 	</select>
+
+	<select id="selectAllList" resultType="com.project.dto.ReplyDTO">
+		select * from reply order by reply_group desc, reply_date desc
+	</select>
 	
 	<update id="updateReplyOthers">
 		UPDATE reply
@@ -23,6 +27,16 @@
 	<update id="updateReply">
 		INSERT INTO reply
 			VALUES(reply_seq.NEXTVAL, #{board_no}, 1, 1, #{reply_nickname}, #{reply_content}, 0, 0, SYSDATE)
+	</update>
+
+	<delete id="deleteReply">
+		delete from reply where reply_no = #{reply_no}
+	</delete>
+
+	<update id="editReplyOk">
+		update reply
+			set reply_content = #{reply_content}
+			where reply_no = #{reply_no}
 	</update>
 	
 	<update id="updateLike">

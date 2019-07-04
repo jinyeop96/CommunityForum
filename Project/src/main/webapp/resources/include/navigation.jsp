@@ -21,7 +21,7 @@
 
 <!--  CSS by myself -->
 <!-- <link href="/resources/css/myself1.css" rel="stylesheet" type="text/css"> -->
-<link href="<c:url value="/resources/css/myself1.css" />" rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/myself.css" />" rel="stylesheet" type="text/css">
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 	<style>
 		@media(max-width: 500px){
@@ -84,7 +84,7 @@
 					<li class="nav-item mx-0 mx-lg-1">
 						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Browse</a>
 							<ul>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="hotel.do?hotel_search=">HOTEL</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="hotel.do?hotel_search=">HOTEL</a></li> 
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="restaurant.do">RESTAURANT</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transport.do">TRANSPORT</a></li>
 							</ul>

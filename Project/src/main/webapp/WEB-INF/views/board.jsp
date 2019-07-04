@@ -172,12 +172,15 @@
 			      		
 			      		<%---------전체 리스트 없다면------------ --%>
 			      		<c:if test="${empty list }">
-			      			<tr> 
-				      			<td colspan="7" align="right">
-				      				<input class="buttons" type="button" value="글쓰기" onclick="location.href='boardWrite.do?board_type=${board_type}'">
-				      			</td>
-				      		</tr>
-			      		
+			      			<c:if test="${!empty nickname }">
+					      		<tr>
+					      			<td colspan="7" align="right">
+					      				<input class="buttons" type="button" value="글쓰기" onclick="location.href='boardWrite.do?board_type=${board_type}'">
+					      			</td>
+					      		</tr>
+					      		<br><br>
+			      			</c:if>
+			      			
 			      			<tr>
 			     				<th colspan="7" align="center">
 				      				<c:if test="${empty searchData }">

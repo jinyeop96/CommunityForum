@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,14 +79,113 @@
        
     </ul>
 </div>
+	
+	<br><br>
+
+<div align="center" class="board font-black">
+	<table id="board" class="font-black board"></table>
+</div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86b59d080c4ee3e8f0d9fc3cfd7b71c8&libraries=services"></script>
 <script>
+	$(function(){
+		boardBottomCon();
+		
+		//hotel.jsp 들어올때 기본적으로 댓글은 숨김
+		$(".hide").hide();	//기본적으로 댓글 숨기기
+		
+	});
+	
+	function replyDelete(reply_no){
+		if(confirm("댓글 삭제하시겠습니까?")){
+			$.ajax({
+				url:"replyDelete.do",
+				type:"get",
+				data: { "reply_no": reply_no},
+			 
+				success:function(){
+						boardBottomCon();
+						$(".hide").hide();	//기본적으로 댓글 숨기기
+				}
+			});
+		}
+	}
+	
+	function replyEdit(reply_no){
+		$(".replyEditHide"+reply_no).toggle();
+	}
+
+	// 답변 수정
+	function replyEditOk(reply_no,num, num2, pageParam){	
+		$.ajax({
+			url:"replyEditOk.do",
+			type:"get",
+			data: { "reply_no": reply_no,			//해당 원글 번호
+					"reply_content": $("#reply_content_edit"+num2).val()},	//답글
+		
+			success:function(){
+					$("#reply_content_edit"+num2).val("");
+					boardBottomCon(pageParam, 0);
+					$(".hide").hide();	//기본적으로 댓글 숨기기 
+					showReply(num);
+			}
+		});
+	};	//replyEditOk();
+
+	// 답변 달기
+	function reply(board_no, num, pageParam){	
+		$.ajax({
+			url:"replyUpdate.do",
+			type:"get",
+			data: { "board_no": board_no,			//해당 원글 번호
+					"reply_content": $("#reply_content"+num).val(),	//답글
+					"reply_nickname": "${nickname}",
+					"pageParam": pageParam },	// 닉네임 (나중에 session으로 처리할 때 nickname으로 할 예정)
+		
+			success:function(result){	// result = pageParam
+					$("#reply_content"+num).val("");
+					boardBottomCon(result, 0);
+					$(".hide").hide();	//기본적으로 댓글 숨기기
+					showReply(num);
+					$("html, body").animate({scrollTop : $("#reply"+num).offset().top}, 400);
+			}
+		});
+	};	//reply();
+
+	// 답변글 토글
+	 function showReply(num){
+		$(".reply"+num).toggle();
+		$(".editHide").hide();
+	}
+ 
+	// 지도 아래 게시물 가져오기
+	function boardBottomCon(pageParam, checkPageUp){  
+		if(pageParam == null){
+			pageParam = 1;	//가장 처음 boardContent.jsp에 들어올 때는 board.jsp의 몇번째 페이지 였는지 알아야함. 안그러면 bottomBoard에는 무조건 page1으로 감.
+		}
+		if(checkPageUp == 1){
+			$("html, body").animate({scrollTop : $("#map").offset().top}, 400);
+		}
+		
+		$.ajax({
+			url: "boardBottomCon.do",
+			type:"post",
+			async: false,
+			data: {"pageParam": pageParam,
+				   "board_type": "hotel"},
+			success:function(result){
+				$("#board").html(result).trigger("create");
+				$(".hide").hide();	//기본적으로 댓글 숨기기
+			}
+		});
+	};	
+
+// 모바일에서 지도 터치 했을 때 큰 지도로 넘어감
 $("#map").on("click", function(){
 	var filter = "win16|win32|win64|macintel|mac|"; // PC일 경우 가능한 값
 
 	if( navigator.platform){
-		if( filter.indexOf(navigator.platform.toLowerCase())<0 ){	// 모바일 접속
+		 if( filter.indexOf(navigator.platform.toLowerCase())<0 ){	// 모바일 접속
 			var searchLoc = $(".searchLoc").val();
 			$("body").load("hotelPopup.do?hotel_search="+searchLoc,function(responseText, statusText, xhr){ 
 				 if(statusText == "error")
@@ -93,11 +193,12 @@ $("#map").on("click", function(){
 			}); 
 		} else {
 			// pc 접속
-		}
+		} 
+			
 	} 
 	  
 });
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
@@ -213,13 +314,13 @@ function displayPlaces(places) {
 }
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, order) {
-    var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+		var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
         imageSize = new kakao.maps.Size(27, 28),  // 마커 이미지의 크기
         imgOptions =  {
             spriteSize : new kakao.maps.Size(72, 208), // 스프라이트 이미지의 크기
             spriteOrigin : new kakao.maps.Point(46, (order*36)), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
             offset: new kakao.maps.Point(11, 28) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-        },
+        }, 
         markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
             marker = new kakao.maps.Marker({
             position: position, // 마커의 위치
@@ -229,6 +330,11 @@ function addMarker(position, order) {
     markers.push(marker);  // 배열에 생성된 마커를 추가합니다
     return marker;
 }
+ 
+
+
+
+
 // 지도 위에 표시되고 있는 마커를 모두 제거합니다
 function removeMarker() {
     for ( var i = 0; i < markers.length; i++ ) {
