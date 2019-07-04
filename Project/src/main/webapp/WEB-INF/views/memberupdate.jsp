@@ -61,38 +61,42 @@ $(function(){
 
 </script>
 <body>
-		<jsp:include page="/resources/include/navigation.jsp" />
+		<jsp:include page="/resources/include/member_navigation.jsp" />
 
 	 <!--  section01 -->
 	<header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
       <c:set var="dto" value="${dto }" ></c:set>
-      <h3 class="masthead-heading text-uppercase mb-0">${dto.getName() }님의 정보페이지</h3>
+      <h3 class="masthead-heading text-uppercase mb-0">${dto.getName() }님의 정보 수정페이지</h3>
       
       <div id="loginDiv" align="center" style="width: 100%">
       <form method="post" onsubmit="return formcheck()" action="<%=request.getContextPath()%>/memberupdateOK.do">
       <input type="hidden" name="id" value="${dto.getId() }">
       <table>
 <tr>
-      	  <th>이름</th>
+      	  <th style="padding-right: 100px">Name</th>
       	   <td>${dto.getName() }</td>
       	   
       	  </tr>
       	  <tr>
-      	  <th>아이디</th>
+      	  <th>I   D</th>
       	   <td>${dto.getId() }</td>
       	  </tr>
       	  <tr>
-      	  <th>닉네임</th>
-      	   <td><input name="nickname" id="nickname" value="${dto.getNickname() }">
+      	  <th>Nickname</th>
+      	   <td><input name="nickname" id="nickname" style="width: 160px" value="${dto.getNickname() }">
       	   <br><span id="checknick"></span> </td> 
       	  </tr>
       	  <tr>
-      	  <th>이메일</th>
-      	   <td><input name="email" id="email" value="${dto.getEmail() }">  </td>
+      	  <th>Email</th>
+      	   <td><input name="email" id="email" style="width: 160px"  value="${dto.getEmail() }">  </td>
       	  </tr>
       	</table>
         	<input type="submit" id="loginBtn" value="수정된정보로 등록" disabled="">
+        	<input type="button" id="loginBtn" value="돌아가기"  onclick="history.back()">
+        	
+        
+
       	</form>
       </div>
     </div>
