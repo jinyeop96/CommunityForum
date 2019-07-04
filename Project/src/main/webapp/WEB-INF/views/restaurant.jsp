@@ -42,11 +42,6 @@
 #placesList .item .marker_13 {background-position: 0 -562px;}
 #placesList .item .marker_14 {background-position: 0 -608px;}
 #placesList .item .marker_15 {background-position: 0 -654px;}
-#placesList .item .marker_16 {background-position: 0 -700px;}
-#placesList .item .marker_17 {background-position: 0 -746px;}
-#placesList .item .marker_18 {background-position: 0 -792px;}
-#placesList .item .marker_19 {background-position: 0 -838px;}
-#placesList .item .marker_20 {background-position: 0 -884px;}
 
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
@@ -79,7 +74,6 @@
         </div>
         <hr>
         <ul id="placesList"></ul>
-        <div id="pagination"></div>
     </div>
 </div>
 
@@ -326,7 +320,7 @@ function removeAllChildNods(el) {
 }
 </script>
 
-
+</div>
 </header>
 
 

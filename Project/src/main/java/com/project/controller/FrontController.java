@@ -76,6 +76,17 @@ public class FrontController {
 		mav.setViewName("ajax/hotelPopup");
 		return mav;
 	}
+	
+	@RequestMapping("/restaurantPopup.do")
+	@ResponseBody
+	public ModelAndView restaurantPopup(HttpServletRequest request, ModelAndView mav) {
+		String restaurant_search = request.getParameter("restaurant_search").trim();
+		if(restaurant_search !=null) {
+			mav.addObject("restaurant_search", restaurant_search);
+		}
+		mav.setViewName("ajax/restaurantPopup");
+		return mav;
+	}
 }
 
 
