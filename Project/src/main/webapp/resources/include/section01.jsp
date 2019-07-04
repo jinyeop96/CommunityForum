@@ -6,7 +6,7 @@
     <div class="container">
 
       <!-- Portfolio Section Heading -->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">숙박업소 바로가기</h2>
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">잠자고 총쏘자>.< </h2>
 
       <!-- Icon Divider -->
       <div class="divider-custom">

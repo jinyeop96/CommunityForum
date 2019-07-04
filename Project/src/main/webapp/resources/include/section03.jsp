@@ -6,7 +6,7 @@
     <div class="container">
 
       <!-- Portfolio Section Heading -->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">집 편하게 가즈아~</h2>
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">집 갔다와서 총쏘자</h2>
 
       <!-- Icon Divider -->
       <div class="divider-custom">
@@ -22,8 +22,8 @@
 
         <!-- Hohel Item 1 -->
         <div>            
-            <form action="address.do">
-            	<input name="address" placeholder="address test">
+            <form action="transport.do">
+            	<input name="transport" placeholder="교통편을 입력하세요.">
             	<input type="submit" value="search">
             </form>
           

@@ -193,7 +193,7 @@
 $("#map").on("click", function(){
 	var filter = "win16|win32|win64|macintel|mac|"; // PC일 경우 가능한 값
 
-	if( navigator.platform){
+	 if( navigator.platform){
 		 if( filter.indexOf(navigator.platform.toLowerCase())<0 ){	// 모바일 접속
 			var searchLoc = $(".searchLoc").val();
 			$("body").load("hotelPopup.do?hotel_search="+searchLoc,function(responseText, statusText, xhr){ 
@@ -203,8 +203,8 @@ $("#map").on("click", function(){
 		} else {
 			// pc 접속
 		} 
-			
-	} 
+	}  
+
 	  
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

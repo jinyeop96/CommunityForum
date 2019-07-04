@@ -82,17 +82,20 @@
 $("#map").on("click", function(){
 	var filter = "win16|win32|win64|macintel|mac|"; // PC일 경우 가능한 값
 
-	if( navigator.platform){
+	/* if( navigator.platform){
 		if( filter.indexOf(navigator.platform.toLowerCase())<0 ){	// 모바일 접속
-			$("body").load("hotelPopup.do?hotel_search="+searchLoc,function(responseText, statusText, xhr){ 
+			$("body").load("restaurantPopup.do?hotel_search="+searchLoc,function(responseText, statusText, xhr){ 
 				 if(statusText == "error")
 	                 alert("An error occurred: " + xhr.status + " - " + xhr.statusText);  
 			}); 
 		} else {
 			// pc 접속
 		}
-	} 
-	  
+	}    */
+	$("body").load("restaurantPopup.do?restaurant_search=",function(responseText, statusText, xhr){ 
+		 if(statusText == "error")
+            alert("An error occurred: " + xhr.status + " - " + xhr.statusText);  
+	}); 
 });
 
 
