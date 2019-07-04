@@ -360,7 +360,7 @@
 		        		<tr><td><hr style="border: none; border-top: 1px solid white"></td></tr>
 			        	
 			        	<tr>
-			        		<td><textarea class="board resize-none" rows="4"  placeholder="댓글 쓰기" id="reply_content" readonly >회원만 댓글 쓸 수 있습니다.</textarea></td>
+			        		<td><textarea class="board resize-none textarea" rows="4"  placeholder="댓글 쓰기" id="reply_content" readonly >회원만 댓글 쓸 수 있습니다.</textarea></td>
 			        	</tr>
 		        	</c:if>
 		        	

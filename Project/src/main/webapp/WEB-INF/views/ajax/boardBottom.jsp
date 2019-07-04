@@ -70,5 +70,29 @@
 		      		
 		      		 
 	      		</c:if>
+	      		
+	      		<c:if test="${empty list }">
+	      			<c:if test="${!empty nickname }">
+			      		<tr>
+			      			<td colspan="7" align="right">
+			      				<input class="buttons" type="button" value="글쓰기" onclick="location.href='boardWrite.do?board_type=${board_type}'">
+			      			</td>
+			      		</tr>
+			      		<br><br>
+	      			</c:if>
+	      		
+	      			<tr>
+	     				<th colspan="7" align="center">
+		      				<c:if test="${empty searchData }">
+			     				<h3>글이 하나도 없습니다! 새로운 글을 써주세요</h3>
+		      				</c:if>
+		      				
+		      				<c:if test="${!empty searchData }">
+			     				<h3>검색 게시물이 없습니다!</h3>
+		      				</c:if>
+	     				</th>
+	     			</tr>
+	      		</c:if>
+	      		
 
 	        </table>

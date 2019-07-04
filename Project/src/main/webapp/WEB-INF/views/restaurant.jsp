@@ -60,8 +60,8 @@
     <h1 class="masthead-heading text-uppercase mb-0">맛집 검색</h1> <br><br><br>
 
 
-<div class="map_wrap">
-    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+		<div class="map_wrap">
+		    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
         <div class="option">

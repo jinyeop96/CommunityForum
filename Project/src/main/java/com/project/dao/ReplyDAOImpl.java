@@ -22,6 +22,11 @@ public class ReplyDAOImpl implements ReplyDAO{
 	}
 	
 	@Override
+	public List<BoardDTO> selectAllList() {
+		return template.selectList("com.project.mappers.reply.selectAllList");
+	}
+	
+	@Override
 	public int getRecords(int board_no) {
 		return template.selectOne("com.project.mappers.reply.getRecords", board_no);
 	}
@@ -30,6 +35,16 @@ public class ReplyDAOImpl implements ReplyDAO{
 	public void updateReply(Map<String, Object> map) {
 		template.update("com.project.mappers.reply.updateReplyOthers", map);
 		template.update("com.project.mappers.reply.updateReply", map);
+	}
+	
+	@Override
+	public void deleteReply(Map<String, Object> map) {
+		template.delete("com.project.mappers.reply.deleteReply", map);
+	}
+
+	@Override
+	public void editReplyOk(Map<String, Object> map) {
+		template.update("com.project.mappers.reply.editReplyOk", map);
 	}
 	
 	@Override

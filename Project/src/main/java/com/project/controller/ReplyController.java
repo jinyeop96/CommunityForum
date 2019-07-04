@@ -56,12 +56,34 @@ public class ReplyController {
 		// 답변 쓰기
 		@RequestMapping("/replyUpdate.do")
 		@ResponseBody
-		public void replyUpdate(HttpServletRequest request) {
+		public int replyUpdate(HttpServletRequest request) {
 			map.put("board_no", Integer.parseInt(request.getParameter("board_no")));
 			map.put("reply_nickname", request.getParameter("reply_nickname").trim());
 			map.put("reply_content", request.getParameter("reply_content")); 
 			
 			reply.updateReply(map);
+			int pageParam = Integer.parseInt(request.getParameter("pageParam"));
+			
+			return pageParam;
+		}
+
+		// 답변 삭제
+		@RequestMapping("/replyDelete.do")
+		@ResponseBody
+		public void replyDelete(HttpServletRequest request) {
+			map.put("reply_no", Integer.parseInt(request.getParameter("reply_no")));
+			
+			reply.deleteReply(map);
+			//알아서 결과값 리턴해줌
+		}
+
+		@RequestMapping("/replyEditOk.do")
+		@ResponseBody
+		public void replyEditOk(HttpServletRequest request) {
+			map.put("reply_no", Integer.parseInt(request.getParameter("reply_no")));
+			map.put("reply_content", request.getParameter("reply_content"));
+			
+			reply.editReplyOk(map);
 			//알아서 결과값 리턴해줌
 		}
 		

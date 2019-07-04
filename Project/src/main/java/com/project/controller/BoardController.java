@@ -74,6 +74,8 @@ public class BoardController {
 	/* @RequestMapping( value="/boardWriteOk.do", method=RequestMethod.POST) */
 	@RequestMapping("boardWriteOk.do")
 	public String boardWriteOk(HttpServletRequest request, MultipartRequest files,  Model model) throws IOException {
+		String board_type = request.getParameter("board_type");
+		
 		// 글 장성 
 		map.put("board_title", request.getParameter("board_title").trim());
 		map.put("board_content", request.getParameter("board_content"));
@@ -91,7 +93,13 @@ public class BoardController {
 			fileService.fileUpload(fileList, board.getLatest());	
 		}  
 		
-		return "redirect:board.do?pageParam="+1+"&board_type="+request.getParameter("board_type")+"&boardSearch=no";
+		if(board_type.equals("hotel") || board_type.equals("restaurant") || board_type.equals("transport")) {
+			return "redirect:hotel.do?hotel_search=";
+			
+		} else {
+			return "redirect:board.do?pageParam="+1+"&board_type="+board_type+"&boardSearch=no";
+		}
+		
 		
 	}
 	
@@ -144,6 +152,7 @@ public class BoardController {
 		
 		// 해당 게시물에 첨부되어 있을 첨부파일 가져오기
 		List<String> files = board.selectFile(board_no);
+		//담아서 보내줄 List
 		List<String> other = new ArrayList<String>();
 		List<String> img = new ArrayList<String>();
 		
@@ -179,6 +188,27 @@ public class BoardController {
 		mav.addObject("page", pagination);
 		mav.addObject("board_type", board_type);
 		mav.setViewName("ajax/boardBottom");	
+		
+		return mav;
+	} //entire.do
+
+	@RequestMapping("/boardBottomCon.do")
+	@ResponseBody
+	public ModelAndView boardBottomCon(@RequestParam int pageParam, @RequestParam String board_type, ModelAndView mav) {
+		pagination = new Pagination(board.getRecords(board_type), pageParam);	// (전체레코드 수, 페이지 번호)
+		Pagination replyPagination = new Pagination(board.getRecords(board_type), pageParam, 10, 5);
+		
+		map.put("rowStart", pagination.getRowStart());
+		map.put("rowEnd", pagination.getRowEnd());
+		map.put("board_type", board_type);
+		mav.addObject("list", board.selectList(map));
+		mav.addObject("replyList", reply.selectAllList());
+		
+		mav.addObject("page", pagination);
+		mav.addObject("pageParam", pageParam);
+		mav.addObject("replyPage", replyPagination);
+		mav.addObject("board_type", board_type);
+		mav.setViewName("ajax/boardBottomCon");	
 		
 		return mav;
 	} //entire.do

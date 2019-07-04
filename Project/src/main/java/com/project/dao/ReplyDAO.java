@@ -8,10 +8,16 @@ import com.project.dto.BoardDTO;
 public interface ReplyDAO {
 	
 	public List<BoardDTO> selectList(Map<String, Object> map);
+
+	public List<BoardDTO> selectAllList();
 	
 	public int getRecords(int board_no);
 	
 	public void updateReply(Map<String, Object> map);
+
+	public void deleteReply(Map<String, Object> map);
+
+	public void editReplyOk(Map<String, Object> map);
 	
 	public void updateLike(int reply_no);
 
