@@ -16,7 +16,7 @@
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script> <!-- JQuery사용을 위한 라이브러리 다운로드 -->
 <script src="./resources/js/join.js" ></script>  <!-- Join.jsp에서 사용될 함수가 저장된 라이브러리로드 -->
 <body>
-		<jsp:include page="/resources/include/navigation.jsp" />
+		<jsp:include page="/resources/include/member_navigation.jsp" />
 
 	 <!--  section01 -->
 	<header class="masthead bg-primary text-white text-center">
@@ -25,10 +25,10 @@
       
       <div id="loginDiv" align="center" style="width: 100%">
       <form method="post" action="<%=request.getContextPath()%>/memberupdate.do">
-      	<table style="width: 100%">
+      	<table >
       	  
       	  <tr>
-      	  <th>Name</th>
+      	  <th style="padding-right: 100px">Name</th>
       	   <td>${dto.getName() }</td>
       	  </tr>
       	  <tr>

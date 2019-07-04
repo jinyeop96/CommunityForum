@@ -92,7 +92,7 @@ $("#map").on("click", function(){
 
 	if( navigator.platform){
 		if( filter.indexOf(navigator.platform.toLowerCase())<0 ){	// 모바일 접속
-			$("body").load("restaurantPopup.do?hotel_search="+searchLoc,function(responseText, statusText, xhr){ 
+			$("body").load("hotelPopup.do?hotel_search="+searchLoc,function(responseText, statusText, xhr){ 
 				 if(statusText == "error")
 	                 alert("An error occurred: " + xhr.status + " - " + xhr.statusText);  
 			}); 
