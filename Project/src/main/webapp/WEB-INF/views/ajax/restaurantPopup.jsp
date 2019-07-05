@@ -1,13 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+<!DOCTYPE html>	
+
+	<table style="width: 100%">
+		<tr>
+			<td>
+				<c:if test="${empty restaurant_search }"><input class="searchLoc"><input type="button" class="search" onclick="search()" value="검색"></c:if>
+				<c:if test="${!empty restaurant_search }"><input class="searchLoc" value="${restaurant_search}"><input class="search" type="button" onclick="search()" value="검색"></c:if>
+    		</td>
+		</tr>
+	</table>
+	
 <html>
 <head>
 <meta charset="UTF-8">
 <title>restaurant</title>
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
-
-
+	
  <style>
  body, html{height:100%;}
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
@@ -43,11 +55,6 @@
 #placesList .item .marker_13 {background-position: 0 -562px;}
 #placesList .item .marker_14 {background-position: 0 -608px;}
 #placesList .item .marker_15 {background-position: 0 -654px;}
-#placesList .item .marker_16 {background-position: 0 -700px;}
-#placesList .item .marker_17 {background-position: 0 -746px;}
-#placesList .item .marker_18 {background-position: 0 -792px;}
-#placesList .item .marker_19 {background-position: 0 -838px;}
-#placesList .item .marker_20 {background-position: 0 -884px;}
 
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
@@ -55,10 +62,13 @@
 </style>
 
 
+
 </head>
 <body>
 
+
 <div class="map_wrap">
+
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
@@ -78,6 +88,16 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86b59d080c4ee3e8f0d9fc3cfd7b71c8&libraries=services"></script>
 <script>
 
+var orientation = window.orientation;
+if(orientation != undefined){
+    if(orientation == 0){
+        // 세로 모드 (평소 사용하는 각도)
+    }else if(orientation == -90){
+        // 가로 모드 (동영상 볼때 사용하는 각도)
+    }
+}
+
+
 // 마커를 담을 배열입니다
 var markers = [];
 
@@ -96,8 +116,27 @@ var mapTypeControl = new kakao.maps.MapTypeControl();
 // 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
 map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
+//지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+var zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places();  
+
+//main.jsp 에서 바로 검색해서 들어온 경우 address 값이 있으면 바로 실행
+$(function(){
+	if("${!empty hotel_search}"){
+		search();
+	} 
+})
+
+//뒤로가기
+$("#back").on("click", function(){
+	var searchLoc = $(".searchLoc").val();
+	//$("body").load("hotel.do?hotel_search="+searchLoc,function(responseText, statusText, xhr)
+	location.href="hotel.do?hotel_search="+searchLoc;
+}); 
+  
 
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -111,7 +150,7 @@ function searchPlaces() {
     var keyword = document.getElementById('keyword').value;
 
     if (!keyword.replace(/^\s+|\s+$/g, '')) {
-        alert('키워드를 입력해주세요!');
+        alert('모바일은 가로모드로 이용하셔야 더욱 사용하기 편합니다!');
         return false;
     }
 
