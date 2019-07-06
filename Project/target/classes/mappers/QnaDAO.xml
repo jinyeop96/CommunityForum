@@ -3,12 +3,28 @@
 
 <mapper namespace="com.project.dao.QnaDAO">
 	
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'N'.toString()">
+							name like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
 	
 	<insert id="qna_insert" parameterType="com.project.dto.QnaDTO">
 		insert into qna_table(seq,title,name,qna_content,pw) values(qna_seq.nextval,#{title},#{name},#{qna_content},#{pw})
 	</insert>
 	
-	<select id="qna_list" resultType="com.project.dto.QnaDTO">
+	<select id="qna_list" resultType="com.project.dto.QnaDTO" parameterType="com.project.dto.Criteria">
 		<![CDATA[
 		select 
 			seq, title, name, qna_content ,qna_reply
@@ -17,20 +33,27 @@
 				rownum rn, seq,title,name, qna_content,qna_reply
 			from 
 				qna_table
-			where rownum <= #{pageNum} *#{amount}
+			where
+		]]>
+		<include refid="criteria"></include>
+		<![CDATA[
+			 rownum <= #{pageNum} *#{amount}
 			)
 			where rn> (#{pageNum}-1) * #{amount}
-		
-		
 		]]>
+		
+		
+		
 	</select>
 	
 	<select id="qna_pwcheck" resultType="int">
 		select count(*) from qna_table where seq =#{seq} and pw=#{pw}
 	</select>
 	
-	<select id="qna_count" resultType="int">
-		select count(*) from qna_table
+	<select id="qna_count" resultType="int" parameterType="com.project.dto.Criteria">
+		select count(*) from qna_table where
+		<include refid="criteria"></include>
+		seq > 0
 	</select>
 	
 	<update id="qna_reply_insert">

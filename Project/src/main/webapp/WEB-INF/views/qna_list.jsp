@@ -9,7 +9,6 @@
 <title>QNA</title>
 <!-- jqeury import -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
@@ -188,6 +187,26 @@ var seqlist= new Array();
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 		actionForm.submit();
 	});
+	
+	
+	var searchForm = $("#searchForm");
+	
+	$("#searchForm button").on("click",function(e){
+		
+	 	if (!searchForm.find("option:selected").val()){
+			alert("검색 종류를 선택하세요");
+			return false;
+		}
+		if (!searchForm.find("input[name='keyword']").val()){
+			alert("키워드를 입력하세요");
+			return false;
+		} 
+		searchForm.find("input[name='pageNum']").val("1");
+		
+		e.preventDefault();
+		
+		searchForm.submit();
+	});
 });
 function div_OnOff(v,id){
 	//라디오 버튼 value 
@@ -212,7 +231,7 @@ function namechange(name){
 	<header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
       
-      <h1 class="masthead-heading text-uppercase mb-0" >고객센터</h1> 
+      <h1 class="masthead-heading text-uppercase mb-0" >문의사항 게시판</h1> 
       <div id="qnaDiv" align="center">
       	
       	<h1 style = " font-size:20px; margin-top:20px;" align="center" ></h1>
@@ -220,14 +239,14 @@ function namechange(name){
       		<div style="margin-bottom:300px;">
       		<!-- qna 리스트 출력 -->
       			<table class="table table-bordered table-dark"  width=500 id="example">
-	      			<tr>
-		      			<th scope="col">번호</th>
-		      			<th scope="col">이름</th>
-		      			<th scope="col">제목</th>
+	      			<tr align="center">
+		      			<th scope="col" width="100">번호</th>
+		      			<th scope="col" width="100">이름</th>
+		      			<th scope="col" width="500">제목</th>
 	      			</tr>
 	      			<tr>
 	      			<c:forEach items="${list}" var="list" varStatus="status">
-	      				<tr>
+	      				<tr align="center">
 	      				<!-- oracle sequence 생성하면 nextval값은 2가나온다. 때문에  1이없다... -->
 	      					<td style="color:white;">${(pageMaker.total - status.index) - ((pageMaker.cri.pageNum -1) * pageMaker.cri.amount)}</td>
 	      					<td style="display:none;">${list.seq}</td>
@@ -248,20 +267,40 @@ function namechange(name){
 		      			
 	      			</tr>
       			</table>
+      			
+      			<div class="row">
+      				<div class="col-lg-12">
+      					<form id="searchForm" action="/allqnalist.do" method="get">
+      						<select name="type">
+      							<option value=""
+      							<c:out value="${pageMaker.cri.type == null ?'selected':''}"/>>--</option>
+      							<option value="T"
+      							<c:out value="${pageMaker.cri.type eq 'T'? 'selected' :''}"/>>제목</option>
+      							<option value="N"
+      							<c:out value="${pageMaker.cri.type eq 'N'? 'selected' :''}"/>>이름</option>
+      						</select>
+      						<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'/>
+      						<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum}"/>'>
+      						<%-- <input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type}"/>'> --%>
+      						<input type="hidden" name="amount" value='<c:out value="${pageMaker.cri.amount}"/>'>
+      						<button class="btn btn-default">Search</button>
+      					</form>
+      				</div>
+      			</div>
       			<!-- 페이징 처리 -->
       			<div class="pull-right" style="width:500px; margin-top:10px;">
       				<ul class="pagination" style="width:200px; margin:auto;">
       					<c:if test="${pageMaker.prev}">
-      						<li class="paginate_button previous"><a href="${pageMaker.startPage-1}">Previous</a>
+      						<li class="paginate_button previous" style="margin:auto;"><a href="${pageMaker.startPage-1}">Previous</a>
       						</li>
       					</c:if>
       					
       					<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-      						<li class="paginate_button ${pageMaker.cri.pageNum == num ? "active":""} " style="margin-right:2px; border:solid 1px;"><a href="${num}" >${num}</a></li>
+      						<li class="paginate_button ${pageMaker.cri.pageNum == num ? "active":""} " style="margin-right:2px; border:solid 1px; margin:auto;"><a href="${num}" >${num}</a></li>
       					</c:forEach>
       					
       					<c:if test="${pageMaker.next}">
-      						<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
+      						<li class="paginate_button next" style="margin:auto;"><a href="${pageMaker.endPage+1}">Next</a></li>
       					</c:if>
       				</ul>
       			</div>
@@ -315,7 +354,7 @@ function namechange(name){
   </header>
   </head>
   
-  <jsp:include page="/resources/include/footer.jsp" />
+ <jsp:include page="/resources/include/footer.jsp" />
   <jsp:include page="/resources/include/copyright.jsp" />
   <jsp:include page="/resources/include/modals.jsp" />	<%-- modal.jsp 끝에 js 파일 있어서 반응형 웹이 됩니다~ 마지막에 꼭 넣으십쏘~ --%>
 

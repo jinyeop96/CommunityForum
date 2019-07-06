@@ -22,7 +22,7 @@ public class QnaController {
 	
 	// DAOs
 	@Autowired
-	public LoginDAOImpl login;	// 濡쒓렇�씤 DAO
+	public LoginDAOImpl login;	// 嚥≪뮄�젃占쎌뵥 DAO
 	
 
 
@@ -39,18 +39,20 @@ public class QnaController {
 		return "qna_main";
 	}
 
-	@RequestMapping("/allqnalist.do")  //qna 리스트
+	@RequestMapping("/allqnalist.do")  //qna 由ъ뒪�듃
 	public String allqnaList(Criteria cri, Model model) throws Exception{
 		
-		//페이징 처리 
-		model.addAttribute("pageMaker", new PageDTO(cri,qnaDao.qna_count()));
+		//�럹�씠吏� 泥섎━ 
+		System.out.println("type"+cri.getKeyword());
+		System.out.println("gopgo"+cri.getType());
+		model.addAttribute("pageMaker", new PageDTO(cri,qnaDao.qna_count(cri)));
 
 		model.addAttribute("list",qnaDao.qna_list(cri));
 		return "qna_list";
 	}
 	
 	@ResponseBody
-	@RequestMapping("/qna_pwcheck")  //qna 비밀번호 확인
+	@RequestMapping("/qna_pwcheck")  //qna 鍮꾨�踰덊샇 �솗�씤
 	public int qnapwcheck(String seq,String pw) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("seq",Integer.parseInt(seq));
@@ -62,7 +64,7 @@ public class QnaController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/allqna.do/qnainsert.do")  //qna 등록
+	@RequestMapping("/allqna.do/qnainsert.do")  //qna �벑濡�
 	public int qndInsert(String content, String title, String name, String pw) throws Exception{
 		System.out.println("content " + content);
 		System.out.println("name" + name);
@@ -78,7 +80,7 @@ public class QnaController {
 		
 	}
 
-	//사용자 qna 수정
+	//�궗�슜�옄 qna �닔�젙
 	@ResponseBody
 	@RequestMapping("allqnalist.do/qnamodify.do") 
 	public int qnaModify(String seq, String content) throws Exception {
@@ -90,7 +92,7 @@ public class QnaController {
 		return qnaDao.qnaModify(map);
 	}
 	
-	//사용자 qna 삭제
+	//�궗�슜�옄 qna �궘�젣
 	@ResponseBody
 	@RequestMapping("allqnalist.do/qnaUserdelete")
 	public int qnaUserDelete(String seq) throws Exception {
@@ -99,7 +101,7 @@ public class QnaController {
 	}
 	
 	
-	//관리자 답글 등록
+	//愿�由ъ옄 �떟湲� �벑濡�
 	@ResponseBody
 	@RequestMapping(value="/allqnalist.do/adminreply.do")
 	public int adminreply(String seq,String reply) throws Exception {
@@ -113,16 +115,13 @@ public class QnaController {
 		return qnaDao.insertReply(map);
 	}
 	
-	//관리자 질문 삭제
+	//愿�由ъ옄 吏덈Ц �궘�젣
 	@ResponseBody
 	@RequestMapping("/allqnalist.do/qna_delete")
 	public int qnadelete(String seq) throws Exception {
 	
 		return qnaDao.AdmindeleteQna(Integer.parseInt(seq));
 	}
-	
-	
-	
 	
 	
 }
