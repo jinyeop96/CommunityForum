@@ -237,7 +237,7 @@ var ps = new kakao.maps.services.Places(map);
 
 //main.jsp 에서 바로 검색해서 들어온 경우 address 값이 있으면 바로 실행
 $(function(){
-	if("${!empty hotel_search}"){
+	if("${!empty restaurant_search}"){
 		search();
 	}
 })

@@ -4,15 +4,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!DOCTYPE html>	
-
-	<table style="width: 100%">
-		<tr>
-			<td>
-				<c:if test="${empty restaurant_search }"><input class="searchLoc"><input type="button" class="search" onclick="search()" value="검색"></c:if>
-				<c:if test="${!empty restaurant_search }"><input class="searchLoc" value="${restaurant_search}"><input class="search" type="button" onclick="search()" value="검색"></c:if>
-    		</td>
-		</tr>
-	</table>
 	
 <html>
 <head>
@@ -27,6 +18,7 @@
 .map_wrap {position:relative;width:100%;height:100%;}
 #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
+.category{position:absolute; width:200px; height:200px; top:50px; left:50;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
 #menu_wrap .option{text-align: center;}
 #menu_wrap .option p {margin:10px 0;}  
@@ -66,14 +58,33 @@
 </head>
 <body>
 
+<%-- <div class="map_wrap">
+       <div id="map" style="width:100%;height:100%; position:relative;overflow:hidden; border-radius: 15px "></div>
+       
+       <ul id="category" style="color:black;">
+        
+           <li id="close" data-order="0"> 
+               <img src="<c:url value='/resources/img/logos/close.png'/>" id="back" style="width: 100px"><br>
+                  뒤로
+           </li>       
+          
+       </ul>
+   </div> --%>
+	
+	
+	<!--  style="position:absolute; width:200px; height:200px; top:50px; left:50;"-->
 
-<div class="map_wrap">
+<div class="map_wrap" >
+
+	
 
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-
+	    
     <div id="menu_wrap" class="bg_white">
+        
         <div class="option">
             <div>
+            	<a><img src="<c:url value='/resources/img/logos/close.png'/>" id="back" style="width: 35px"><br>뒤로가기</a><br><br>
                 <form onsubmit="searchPlaces(); return false;" style="color:black">
                     키워드 : <input type="text" placeholder="지역명+음식점" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
@@ -82,8 +93,10 @@
         </div>
         <hr>
         <ul id="placesList"></ul>
+   
     </div>
 </div>
+
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86b59d080c4ee3e8f0d9fc3cfd7b71c8&libraries=services"></script>
 <script>
@@ -134,7 +147,7 @@ $(function(){
 $("#back").on("click", function(){
 	var searchLoc = $(".searchLoc").val();
 	//$("body").load("hotel.do?hotel_search="+searchLoc,function(responseText, statusText, xhr)
-	location.href="hotel.do?hotel_search="+searchLoc;
+	location.href="restaurant.do?restaurant_search="+searchLoc;
 }); 
   
 

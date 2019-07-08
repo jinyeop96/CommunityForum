@@ -86,19 +86,20 @@
 							<ul>
 
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="hotel.do?hotel_search=">숙박</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="restaurant.do">음식점</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="restaurant.do?restaurant_search=">음식점</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transport.do">교통</a></li>
 
 							</ul>
 					</li>
 
 						
-				 	<li class="nav-item mx-0 mx-lg-1">
+				 	 	<li class="nav-item mx-0 mx-lg-1">
 	       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >Q&A</a>
 	       					<ul>
 	       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/allqna.do">문의사항</a>
-	       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="">공지사항</a></li>
-	       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="">업데이트</a></li>
+	       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/allqnalist.do">문의게시판</a>
+	       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/gonggi.do">공지사항</a></li>
+	       						
 	       					</ul>
 	      			</li>
 					<li class="nav-item mx-0 mx-lg-1">

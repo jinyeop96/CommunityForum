@@ -22,8 +22,8 @@
 
         <!-- Hohel Item 1 -->
         <div>            
-            <form action="#">
-            	<input name="restaurant_search" placeholder="밥!!!">
+            <form action="restaurant.do" >
+            	<input name="restaurant_search" placeholder="지역명+맛집(음식점)">
             	<input type="submit" value="search">
             </form>
           

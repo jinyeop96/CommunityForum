@@ -13,7 +13,7 @@ public interface QnaDAO {
 	
 	public int qna_pwcheck(Map<String,Object> map) throws Exception;
 
-	public int qna_count() throws Exception;
+	public int qna_count(Criteria cri) throws Exception;
 	
 	public int insertReply(Map<String,Object> map) throws Exception;
 	

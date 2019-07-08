@@ -63,6 +63,14 @@
     
     <h1 class="masthead-heading text-uppercase mb-0">맛집 검색</h1> <br><br><br>
 
+<%-- 		<table style="width: 100%">
+		<tr>
+			<td id="keyword">
+				<c:if test="${empty restaurant_search }"><input class="searchLoc"><input type="button" class="search" onclick="search()" value="검색"></c:if>
+				<c:if test="${!empty restaurant_search }"><input class="searchLoc" value="${restaurant_search }"><input class="search" type="button" onclick="search()" value="검색"></c:if>
+    		</td>
+		</tr>
+	</table> --%>
 
 		<div class="map_wrap">
 		    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
@@ -71,7 +79,7 @@
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;" style="color:black">
-                    키워드 : <input type="text" placeholder="지역명+음식점" id="keyword" size="15"> 
+                    키워드 : <input type="text" placeholder="지역명+음식점" id="keyword" size="15" value="${restaurant_search }">  <%--section02에서 검색한 값을 음식점 페이지 키워드 검색 textbox에 바로 넘겨준다. --%>
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
@@ -83,23 +91,21 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86b59d080c4ee3e8f0d9fc3cfd7b71c8&libraries=services"></script>
 <script>
+
+
 $("#map").on("click", function(){
 	var filter = "win16|win32|win64|macintel|mac|"; // PC일 경우 가능한 값
 
-	/* if( navigator.platform){
+	if( navigator.platform){
 		if( filter.indexOf(navigator.platform.toLowerCase())<0 ){	// 모바일 접속
 			$("body").load("restaurantPopup.do?hotel_search="+searchLoc,function(responseText, statusText, xhr){ 
 				 if(statusText == "error")
 	                 alert("An error occurred: " + xhr.status + " - " + xhr.statusText);  
 			}); 
 		} else {
-			// pc 접속
+			
 		}
-	}    */
-	$("body").load("restaurantPopup.do?restaurant_search=",function(responseText, statusText, xhr){ 
-		 if(statusText == "error")
-            alert("An error occurred: " + xhr.status + " - " + xhr.statusText);  
-	}); 
+	}   
 });
 
 
@@ -135,6 +141,14 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 // 키워드로 장소를 검색합니다
 searchPlaces();
 
+
+//main.jsp 에서 바로 검색해서 들어온 경우 address 값이 있으면 바로 실행
+$(function(){
+	if("${!empty hotel_search}"){
+		search();
+	}
+})
+
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 
@@ -162,7 +176,7 @@ function placesSearchCB(data, status, pagination) {
 
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
-        alert('검색 결과가 존재하지 않습니다.');
+        alert('원하시는 정보가 있을시 다시 한번 검색하세요.');
         return;
 
     } else if (status === kakao.maps.services.Status.ERROR) {
