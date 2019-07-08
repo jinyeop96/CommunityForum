@@ -58,7 +58,11 @@ public class FrontController {
 	}
 	
 	@RequestMapping("/restaurant.do")
-	public String restaurant(){
+	public String restaurant(HttpServletRequest request, Model model){
+		String restaurant_search = request.getParameter("restaurant_search").trim();
+		if( restaurant_search !=null) {
+			model.addAttribute("restaurant_search", restaurant_search);
+		}
 		return "restaurant";
 	}
 	
@@ -82,6 +86,17 @@ public class FrontController {
 	@RequestMapping("/transportTest.do")
 	public String transportTest() {
 		return "transportTest";
+	}
+
+	@RequestMapping("/restaurantPopup.do")
+	@ResponseBody
+	public ModelAndView restaurantPopup(HttpServletRequest request, ModelAndView mav) {
+		String restaurant_search = request.getParameter("restaurant_search").trim();
+		if(restaurant_search !=null) {
+			mav.addObject("restaurant_search", restaurant_search);
+		}
+		mav.setViewName("ajax/restaurantPopup");
+		return mav;
 	}
 }
 

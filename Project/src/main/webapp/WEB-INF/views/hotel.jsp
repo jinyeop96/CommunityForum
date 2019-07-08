@@ -259,30 +259,28 @@
 			}
 		});
 	};	
-	
-	// 모바일에서 지도 터치 했을 때 큰 지도로 넘어감
-	$("#map").on("click", function(){
-		var filter = "win16|win32|win64|macintel|mac|"; // PC일 경우 가능한 값
-	
-	/* 	if( navigator.platform){
-			 if( filter.indexOf(navigator.platform.toLowerCase())<0 ){	// 모바일 접속
-				var searchLoc = $(".searchLoc").val();
-				$("body").load("hotelPopup.do?hotel_search="+searchLoc,function(responseText, statusText, xhr){ 
-					 if(statusText == "error")
-		                 alert("An error occurred: " + xhr.status + " - " + xhr.statusText);  
-				}); 
-			} else {
-				// pc 접속
-			} 
-		}  */
-		var searchLoc = $(".searchLoc").val();
-		$("body").load("hotelPopup.do?board_type=${board_type}&hotel_search="+searchLoc,function(responseText, statusText, xhr){ 
-			 if(statusText == "error")
-                 alert("An error occurred: " + xhr.status + " - " + xhr.statusText);  
-		}); 
-		  
-	});
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// 모바일에서 지도 터치 했을 때 큰 지도로 넘어감
+$("#map").on("click", function(){
+	var filter = "win16|win32|win64|macintel|mac|"; // PC일 경우 가능한 값
+
+	 if( navigator.platform){
+		 if( filter.indexOf(navigator.platform.toLowerCase())<0 ){	// 모바일 접속
+			var searchLoc = $(".searchLoc").val();
+			$("body").load("hotelPopup.do?hotel_search="+searchLoc,function(responseText, statusText, xhr){ 
+				 if(statusText == "error")
+	                 alert("An error occurred: " + xhr.status + " - " + xhr.statusText);  
+			}); 
+		} else {
+			// pc 접속
+		} 
+	}  
+
+	  
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
@@ -300,12 +298,18 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var mapTypeControl = new kakao.maps.MapTypeControl();
 // 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
 map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+//지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+var zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places(map); 
 
 //main.jsp 에서 바로 검색해서 들어온 경우 address 값이 있으면 바로 실행
 $(function(){
-	if("${!empty hotel_search}"){
+	if("${!empty restaurant_search}"){
 		search();
 	}
 })

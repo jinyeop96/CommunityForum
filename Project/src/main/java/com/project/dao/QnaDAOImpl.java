@@ -40,8 +40,8 @@ public class QnaDAOImpl implements QnaDAO {
 
 
 	@Override
-	public int qna_count() throws Exception {
-		return template.selectOne("qna_count");
+	public int qna_count(Criteria cri) throws Exception {
+		return template.selectOne("qna_count",cri);
 	}
 
 

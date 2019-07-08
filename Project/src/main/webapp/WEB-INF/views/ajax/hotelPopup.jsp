@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 	<table style="width: 100%">
@@ -12,21 +12,21 @@
 		</tr>
 	</table>
 
-	<div class="map_wrap">
-	    <div id="map" style="width:100%;height:100%; position:relative;overflow:hidden; border-radius: 15px "></div>
-	    
-	    <ul id="category" style="color:black;">
-	        <li id="AD5" data-order="0"> 
-	            <span class="category_bg hotel" ></span>
-	           	 숙박시설
-	        </li>       
-	        <li id="close" data-order="0"> 
-	            <img src="<c:url value='/resources/img/logos/close.png'/>" id="back" style="width: 30px"><br>
-	            	뒤로
-	        </li>       
-	       
-	    </ul>
-	</div>
+<div class="map_wrap">
+       <div id="map" style="width:100%;height:100%; position:relative;overflow:hidden; border-radius: 15px "></div>
+       
+       <ul id="category" style="color:black;">
+           <li id="AD5" data-order="0"> 
+               <span class="category_bg hotel" ></span>
+                  숙박시설
+           </li>       
+           <li id="close" data-order="0"> 
+               <img src="<c:url value='/resources/img/logos/close.png'/>" id="back" style="width: 30px"><br>
+                  뒤로
+           </li>       
+          
+       </ul>
+   </div>
 	
 	<style type="text/css">
 		body, html {height: 100%;}
@@ -72,6 +72,11 @@
 	var mapTypeControl = new kakao.maps.MapTypeControl();
 	// 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
 	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+	
+	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+	var zoomControl = new kakao.maps.ZoomControl();
+	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+	
 	// 장소 검색 객체를 생성합니다
 	var ps = new kakao.maps.services.Places(map); 
 	

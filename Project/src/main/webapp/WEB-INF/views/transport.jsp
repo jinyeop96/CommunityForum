@@ -26,9 +26,7 @@
 	 <!--  section01 -->
 	<header class="masthead bg-primary text-white text-center">
     	<div class="container d-flex align-items-center flex-column">
-    	 
-    	 	<jsp:include page="/resources/include/navigation.jsp" />
-	
+    	 	
     <h1 class="masthead-heading text-uppercase mb-0">교통 검색</h1><br><br>
     
     
