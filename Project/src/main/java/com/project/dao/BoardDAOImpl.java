@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.dto.BoardDTO;
+import com.project.dto.BoardFileDTO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -58,25 +59,10 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	@Override
-	public void boardUpdateLike(int board_no) {
-		template.update("com.project.mappers.board.updateLike", board_no);
+	public void updateLikey(Map<String, Object> map) {
+		template.update("com.project.mappers.board.updateLikey", map);
 	}
 
-	@Override
-	public void boardUpdateLikeDown(int board_no) {
-		template.update("com.project.mappers.board.updateLikeDown", board_no);
-	}
-	
-	@Override
-	public void boardUpdateDislike(int board_no) {
-		template.update("com.project.mappers.board.updateDislike", board_no);
-	}
-
-	@Override
-	public void boardUpdateDislikeUp(int board_no) {
-		template.update("com.project.mappers.board.updateDislikeUp", board_no);
-	}
-	
 	@Override
 	public int getLikes(int board_no) {
 		return template.selectOne("com.project.mappers.board.getLikes", board_no);
@@ -95,6 +81,11 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public List<String> selectFile(int board_no) {
 		return template.selectList("com.project.mappers.board.selectFile", board_no);
+	}
+	
+	@Override
+	public List<BoardFileDTO> selectAllFile(String board_type) {
+		return template.selectList("com.project.mappers.board.selectAllFile", board_type);
 	}
 	
 	@Override
@@ -122,7 +113,12 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	@Override
 	public void deleteFile(Map<String, Object> map) {
-		template.delete("com.project.mappers.board.deleteRecord", map);
+		template.delete("com.project.mappers.board.deleteFile", map);
+	}
+
+	@Override
+	public void deleteAllFile(int board_no) {
+		template.delete("com.project.mappers.board.deleteAllFile", board_no);
 	}
 	
 	@Override

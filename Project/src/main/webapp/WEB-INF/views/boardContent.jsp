@@ -16,11 +16,15 @@
 			getReplyList();	// 처음 실행될 때 답변글 가져오는 함수 실행.
 			boardBottom();
 			
-			$("#reply").click(function(){	// 답장버튼 누르면 reply() 실행
-				reply();
-			});
+			$(".hide").hide();
+			$(".modifies").hide();
 			
 		});
+		
+		function showModifyBtn(index){
+			$(".modifyBtn"+index).toggle();
+			$(".hide").hide();
+		}
 		
 		
 		///////////////////////////일반 클릭///////////////////
@@ -31,11 +35,50 @@
 			}
 		}
 
+		// 게시물 수정
 		function boardEdit(){
 			if(confirm("게시물 수정하시겠습니까?")){
 				location.href="boardEdit.do?board_no=${dto.getBoard_no()}&board_type=${dto.getBoard_type()}&pageParam=${pageParam}";
 			}
 		}
+		
+		// 답변 수정
+		function showReplyEdit(index){
+			$(".replyEdit"+index).toggle();
+		}
+		
+		// 답변 삭제
+		function deleteReply(reply_no, pageParam){
+			if(confirm("댓글 삭제하시겠습니까?")){
+				$.ajax({
+					url:"replyDelete.do",
+					type:"get",
+					data: { "reply_no": reply_no},
+				 
+					success:function(){
+							getReplyList(pageParam);
+							$(".hide").hide();
+							$(".modifies").hide();
+					}
+				});
+			}
+		}
+		
+		// 답변 수정			
+		function replyEditOk(reply_no, index, pageParam){	
+			$.ajax({
+				url:"replyEditOk.do",
+				type:"get",
+				data: { "reply_no": reply_no,			//해당 원글 번호
+						"reply_content": $("#reply_content_edit"+index).val()},	//답글
+			
+				success:function(){
+						getReplyList(pageParam);
+						$(".hide").hide();
+						$(".modifies").hide();
+				}
+			});
+		};	//replyEditOk();
 		
 		// 첨부파일 토글링
 		function showFile(){
@@ -61,6 +104,8 @@
 				success:function(result){
 					$(".boardUpdateLike").text(result.likes);
 					$(".boardUpdateDislike").text(result.dislikes);
+					$(".hide").hide();
+					$(".modifies").hide();
 					
 				},
 				error:function(){
@@ -87,6 +132,9 @@
 				success:function(result){
 					$("#replyNum").text(result.replyNum);
 					$("#replyTable").html(result).trigger("create");
+					$(".hide").hide();
+					$(".modifies").hide();
+					
 
 				}
 			});
@@ -128,85 +176,36 @@
 						$("#reply_content").val("");
 						$("#reply_nickname").val("");
 						getReplyList();			// 댓글 달기 성공하면 바로 답변글 DB에서 가져옴
+						$(".hide").hide();
+						$(".modifies").hide();
 				}
 			});
 		};	//reply();
 	
 	
 		////////////////좋아요 싫어요/////////////////////
-		
-		
-		/// 댓글 좋아요 & 싫어요
-		function replyUpdateLike(reply_no){
+		function recommend(no, recType, likey){
 			$.ajax({
-				url: "replyUpdateLike.do",
-				type:"get",
-				data: {"reply_no": reply_no},
+				url: "recommend.do",
+				type:"post",
+				data: {"no": no,
+					   "recType": recType,
+					   "likey": likey},
+					   
 				success:function(result){
 					if(result.msg != null){
 						alert(result.msg);
 					}
 					getReplyList();
-				},
-				error:function(){
-					alert("오류가 생겼습니다.");
-				}
-			});
-		}
-
-		function replyUpdateDislike(reply_no){
-			$.ajax({
-				url: "replyUpdateDislike.do",
-				type:"get",
-				data: {"reply_no": reply_no},
-				success:function(result){
-					if(result.msg != null){
-						alert(result.msg);
-					}
-					getReplyList();
-				},
-				error:function(){
-					alert("오류가 생겼습니다.");
-				}
-			});
-		}
-		
-		
-		///원글 좋아요&싫어요
-		function boardUpdateLike(board_no){
-			$.ajax({
-				url: "boardUpdateLike.do",
-				type:"get",
-				data: {"board_no": board_no},
-				success:function(result){
-					if(result.msg != null){
-						alert(result.msg);
-					}
 					getLikeDislike();
+					$(".hide").hide();
+					$(".modifies").hide();
 				},
 				error:function(){
 					alert("오류가 생겼습니다.");
 				}
 			});
 		}
-
-		function boardUpdateDislike(board_no){
-			$.ajax({
-				url: "boardUpdateDislike.do",
-				type:"get",
-				data: {"board_no": board_no},
-				success:function(result){
-					if(result.msg != null){
-						alert(result.msg);
-					}
-					getLikeDislike();
-				},
-				error:function(){
-					alert("오류가 생겼습니다.");
-				}
-			});
-		}
-		
 	</script>
 	
 	<style type="text/css">
@@ -320,12 +319,12 @@
 		      		
 		      		<tr>	
 		      			<td align="center">
-		      				<a href="javascript:boardUpdateLike(${dto.getBoard_no()})" id="like2">
+		      				<a href="javascript:recommend(${dto.getBoard_no()}, 'board', 'like')" id="like2">
 			      				<img class="contentRec"  src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;&nbsp;
 			      				<font class="boardUpdateLike" style="color: white; text-decoration: none;">${dto.getBoard_like() }</font>&nbsp;&nbsp;&nbsp;
 		      				</a>
 		      				
-		      				<a href="javascript:boardUpdateDislike(${dto.getBoard_no()})">
+		      				<a href="javascript:recommend(${dto.getBoard_no()}, 'board', 'dislike')">
 			      				<img class="contentRec" src="<c:url value='/resources/img/logos/dislike2.png'/>">&nbsp;&nbsp;&nbsp;
 			      				<font class="boardUpdateDislike" style="color: white; text-decoration: none;">${dto.getBoard_dislike() }</font>
 		      				</a>
@@ -347,11 +346,11 @@
 		        		<tr><td><hr style="border: none; border-top: 1px solid white"></td></tr>
 			        
 			        	<tr>
-			        		<td><textarea class="board resize-none" rows="4"  placeholder="댓글 쓰기" id="reply_content" ></textarea></td>
+			        		<td><textarea class="board resize-none textarea" rows="4"  placeholder="댓글 쓰기" id="reply_content" ></textarea></td>
 			        	</tr>
 			        	<tr>
 			        		<td colspan="2" align="right">
-				        		<input type="button" id="reply" onclick="pageUp(1)" class="buttons" value="저장">
+				        		<input type="button" onclick="pageUp(1); reply();" class="buttons" value="저장">
 		        			</td>
 			        	</tr>
 		        	</c:if>

@@ -86,7 +86,7 @@
 	$("#back").on("click", function(){
 		var searchLoc = $(".searchLoc").val();
 		//$("body").load("hotel.do?hotel_search="+searchLoc,function(responseText, statusText, xhr)
-		location.href="hotel.do?hotel_search="+searchLoc;
+		location.href="hotel.do?board_type=${board_type}&hotel_search="+searchLoc;
 	}); 
 	  
 	
@@ -104,15 +104,15 @@
 	        var bounds = new kakao.maps.LatLngBounds();
 	
 	        for (var i=0; i<data.length; i++) {
-	            bounds.extend(n
-	            		
-	            		ew kakao.maps.LatLng(data[i].y, data[i].x));
+	            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
 	        }       
 	
 	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
 	        map.setBounds(bounds);
 	    } 
 	}	// 지도 이동 끝
+	
+	
 		
 	// 지도에 idle 이벤트를 등록합니다
 	kakao.maps.event.addListener(map, 'idle', searchPlaces);

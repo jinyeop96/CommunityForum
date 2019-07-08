@@ -3,6 +3,7 @@ package com.project.dao;
 import java.util.*;
 
 import com.project.dto.BoardDTO;
+import com.project.dto.BoardFileDTO;
 
 public interface BoardDAO {
 	
@@ -27,13 +28,7 @@ public interface BoardDAO {
 	
 	
 	// 게시글 좋아요&싫어요
-	public void boardUpdateLike(int board_no);	// 게시글 좋아요 +1
-
-	public void boardUpdateLikeDown(int board_no);	//게시글 좋아요 -1
-
-	public void boardUpdateDislike(int board_no);	//게시글 싫어요 -1
-	
-	public void boardUpdateDislikeUp(int board_no);	// 게시글 싫어요 +1
+	public void updateLikey(Map<String, Object> map);	// 게시글 좋아요 +1z
 
 	public int getLikes(int board_no);	// 게시글 좋아요
 	
@@ -50,10 +45,14 @@ public interface BoardDAO {
 	public void insertFile(Map<String, Object> map);	// 파일 첨부
 	
 	public void deleteFile(Map<String, Object> map);	// 파일 삭제
+
+	public void deleteAllFile(int board_no);	// 파일 삭제
 	
 	public int getLatest();	// board와 boardfile 테이블이 다르기 때문에 board먼저 insert 해주고 바로 글번호 가져옴
 	
 	public List<String> selectFile(int board_no);	// boardfile에 해당 글번호의 파일들 가져옴
+
+	public List<BoardFileDTO> selectAllFile(String board_type);	// boardfile에 해당 글번호의 파일들 가져옴
 	
 	public int hasFile(int board_no);	// 파일 여부
 	

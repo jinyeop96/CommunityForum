@@ -84,15 +84,10 @@
 					<li class="nav-item mx-0 mx-lg-1">
 						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">편의제공</a>
 							<ul>
-<<<<<<< HEAD
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="hotel.do?hotel_search=">HOTEL</a></li> 
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="restaurant.do">RESTAURANT</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transport.do">TRANSPORT</a></li>
-=======
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="hotel.do?hotel_search=">숙박</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="hotel.do?board_type=hotel&hotel_search=">숙박</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="restaurant.do">음식점</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transport.do">교통</a></li>
->>>>>>> 1e8bb6253dc1f245fe6d4a24f42d605cd91cdab1
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transportTest.do">교통테스트</a></li>
 							</ul>
 					</li>
 

@@ -27,7 +27,7 @@ public class FileService {
 	Map<String, Object> map = new HashMap<String, Object>();
 	
 	
-	public void fileUpload(List<MultipartFile> files, int board_no){
+	public void fileUpload(List<MultipartFile> files, String board_type, int board_no){
 		// 해당 날짜 String 생성
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);  int month = cal.get(Calendar.MONTH) + 1; int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -67,6 +67,7 @@ public class FileService {
 			String DBName = date + "/" + uploadName;
 			map.put("boardfile_name", DBName);
 			map.put("board_no", board_no);
+			map.put("board_type", board_type);
 			
 			board.insertFile(map);
 		}

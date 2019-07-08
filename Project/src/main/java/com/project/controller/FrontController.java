@@ -53,6 +53,7 @@ public class FrontController {
 		if( hotel_search != null) {
 			model.addAttribute("hotel_search", hotel_search);
 		}
+		model.addAttribute("board_type", request.getParameter("board_type"));
 		return "hotel";
 	}
 	
@@ -73,8 +74,14 @@ public class FrontController {
 		if(hotel_search != null) {
 			mav.addObject("hotel_search", hotel_search);
 		}
+		mav.addObject("board_type", request.getParameter("board_type"));
 		mav.setViewName("ajax/hotelPopup");
 		return mav;
+	}
+	
+	@RequestMapping("/transportTest.do")
+	public String transportTest() {
+		return "transportTest";
 	}
 }
 

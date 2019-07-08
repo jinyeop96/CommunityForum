@@ -3,10 +3,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.mappers.reply">
-	<select id="getRecords" resultType="int" >
-		SELECT COUNT(*) FROM reply WHERE reply_group = #{board_no}	<!--  board_no == reply_group -->
-	</select>
-	
 	<select id="selectList" resultType="com.project.dto.ReplyDTO">
 		SELECT * 
 		    FROM(SELECT ROWNUM r, b.*
@@ -29,6 +25,10 @@
 			VALUES(reply_seq.NEXTVAL, #{board_no}, 1, 1, #{reply_nickname}, #{reply_content}, 0, 0, SYSDATE)
 	</update>
 
+	<select id="getRecords" resultType="int" >
+		SELECT COUNT(*) FROM reply WHERE reply_group = #{board_no}	<!--  board_no == reply_group -->
+	</select>
+
 	<delete id="deleteReply">
 		delete from reply where reply_no = #{reply_no}
 	</delete>
@@ -39,27 +39,36 @@
 			where reply_no = #{reply_no}
 	</update>
 	
-	<update id="updateLike">
-		UPDATE reply
-			SET reply_like = reply_like + 1
-			WHERE reply_no = #{reply_no}
-	</update>
 
-	<update id="updateLikeDown">
-		UPDATE reply
-			SET reply_like = reply_like - 1
-			WHERE reply_no = #{reply_no}
-	</update>
+	<update id="updateLikey">
+		<!-- 좋아요  -->
+		<if test="likey == 'like'">		
+			<if test="upDown == 'up'">	<!-- +1 -->
+				UPDATE reply
+					SET reply_like = reply_like + 1
+					WHERE reply_no = #{no}
+			</if>
 
-	<update id="updateDislike">
-		UPDATE reply
-			SET reply_dislike = reply_dislike - 1
-			WHERE reply_no = #{reply_no}
-	</update>
+			<if test="upDown == 'down'"> <!-- -1 -->
+				UPDATE reply
+					SET reply_like = reply_like - 1
+					WHERE reply_no = #{no}
+			</if>
+		</if>
 
-	<update id="updateDislikeUp">
-		UPDATE reply
-			SET reply_dislike = reply_dislike + 1
-			WHERE reply_no = #{reply_no}
+		<!-- 싫어요 -->
+		<if test="likey == 'dislike'">
+			<if test="upDown == 'up'">
+				UPDATE reply
+					SET reply_dislike = reply_dislike + 1
+					WHERE reply_no = #{no}
+			</if>
+
+			<if test="upDown == 'down'">
+				UPDATE reply
+					SET reply_dislike = reply_dislike - 1
+					WHERE reply_no = #{no}
+			</if>
+		</if>
 	</update>
 </mapper>
