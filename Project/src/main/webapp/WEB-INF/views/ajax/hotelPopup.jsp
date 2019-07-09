@@ -91,7 +91,7 @@
 	$("#back").on("click", function(){
 		var searchLoc = $(".searchLoc").val();
 		//$("body").load("hotel.do?hotel_search="+searchLoc,function(responseText, statusText, xhr)
-		location.href="hotel.do?hotel_search="+searchLoc;
+		location.href="hotel.do?board_type=${board_type}&hotel_search="+searchLoc;
 	}); 
 	  
 	
@@ -116,6 +116,8 @@
 	        map.setBounds(bounds);
 	    } 
 	}	// 지도 이동 끝
+	
+	
 		
 	// 지도에 idle 이벤트를 등록합니다
 	kakao.maps.event.addListener(map, 'idle', searchPlaces);

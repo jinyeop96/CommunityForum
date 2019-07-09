@@ -79,6 +79,7 @@
 		SELECT * FROM board WHERE board_no = #{board_no}
 	</select>
 	
+	<!-- 조회수 -->
 	<update id="updateView">
 		UPDATE board SET board_view = board_view + 1 WHERE board_no = #{board_no}
 	</update>
@@ -89,65 +90,90 @@
 			VALUES(#{board_type} ,board_seq.NEXTVAL, #{board_nickname}, #{board_title}, #{board_content}, 0, 0, 0, SYSDATE, 0)
 	</insert>
 	
+	<!-- 글번호에 파일 넣기 -->
 	<insert id="insertFile">
-		INSERT INTO boardfile values(#{board_no}, #{boardfile_name}, SYSDATE)
+		INSERT INTO boardfile values(#{board_no}, #{boardfile_name}, SYSDATE, #{board_type})
 	</insert>
 	
-	<delete id="deleteRecord">
+	<!-- 게시물에 있는 파일 삭제 삭제 -->
+	<delete id="deleteFile">
 		DELETE FROM boardfile WHERE board_no = #{board_no} AND boardfile_name = #{boardfile_name}
 	</delete>
+
+	<!-- 게시물에 있는 모든 파일 삭제 삭제 -->
+	<delete id="deleteAllFile">
+		DELETE FROM boardfile WHERE board_no = #{board_no}
+	</delete>
 	
+	<!-- 게시물 삭제 -->
+	<delete id="boardDelete">
+		DELETE FROM board WHERE board_no = #{board_no}
+	</delete>
+	
+	<!--  가장 최근에 등록한 게시물 가져오기 -->
 	<select id="getLatest" resultType="int">
 		SELECT 	board_no 
 			FROM (SELECT ROWNUM r, board_no FROM board ORDER BY board_no DESC)
 			WHERE r = 1
 	</select>
 	
+	<!-- 해당 게시물에 있는 첨부파일 가져오기 -->
 	<select id="selectFile" resultType="String">
 		SELECT boardfile_name FROM boardfile WHERE board_no = #{board_no}
 	</select>
-	
-	
-	<update id="updateLike">
-		UPDATE board
-			SET board_like = board_like + 1
-			WHERE board_no = #{board_no}
-	</update>
 
-	<update id="updateLikeDown">
-		UPDATE board
-			SET board_like = board_like - 1
-			WHERE board_no = #{board_no}
-	</update>
+	<!-- 편의제공 게시판 -->
+	<select id="selectAllFile" resultType="com.project.dto.BoardFileDTO">
+		SELECT * FROM boardfile where board_type = #{board_type}
+	</select>
+	
+	<!-- 게시물 추천 -->
+	<update id="updateLikey">
+		<if test="likey == 'like'">
+			<if test="upDown == 'up'">
+				UPDATE board
+					SET board_like = board_like + 1
+					WHERE board_no = #{no}
+			</if>
 
-	<update id="updateDislike">
-		UPDATE board
-			SET board_dislike = board_dislike - 1
-			WHERE board_no = #{board_no}
-	</update>
+			<if test="upDown == 'down'">
+				UPDATE board
+					SET board_like = board_like - 1
+					WHERE board_no = #{no}
+			</if>
+		</if>
 
-	<update id="updateDislikeUp">
-		UPDATE board
-			SET board_dislike = board_dislike + 1
-			WHERE board_no = #{board_no}
+
+		<if test="likey == 'dislike'">
+			<if test="upDown == 'up'">
+				UPDATE board
+					SET board_dislike = board_dislike + 1
+					WHERE board_no = #{no}
+			</if>
+
+			<if test="upDown == 'down'">
+				UPDATE board
+					SET board_dislike = board_dislike - 1
+					WHERE board_no = #{no}
+			</if>
+		</if>
 	</update>
 	
+	<!-- 추천 가져오기 -->
 	<select id="getLikes" resultType="int"> 
 		SELECT board_like
 			FROM board
 			WHERE board_no = #{board_no}
 	</select>
 
+	<!-- 비추천 가져오기 -->
 	<select id="getDislikes" resultType="int">
 		SELECT board_dislike
 			FROM board
 			WHERE board_no = #{board_no}
 	</select>
 	
-	<delete id="boardDelete">
-		DELETE FROM board WHERE board_no = #{board_no}
-	</delete>
-	
+	<!-- 게시물 수정 -->
 	<update id="updateContent">
 		update board
 			SET board_title = #{board_title},
@@ -155,18 +181,21 @@
 			where board_no = #{board_no}
 	</update>
 	
+	<!-- 첨부파일 있는지  -->
 	<select id="hasFile" resultType="int">
 		select board_hasfile
 			from board
 			where board_no = #{board_no}
 	</select>
 	
+	<!-- 글쓰기/수정시 첨부파일 있으면 +1 -->
 	<update id="hasFileUp">
 		update board
 			set board_hasfile = 1
 			where board_no = #{board_no}
 	</update>
 
+	<!-- 첨부파일 아예 없으면 0으로 -->
 	<update id="hasFileDown">
 		update board
 			set board_hasfile = 0

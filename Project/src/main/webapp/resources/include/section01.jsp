@@ -23,6 +23,7 @@
         <!-- Hohel Item 1 -->
         <div>            
             <form action="hotel.do">
+           	<input type="hidden" name="board_type" value="hotel">
             	<input name="hotel_search" placeholder="지역명으로 입력주세요.">
             	<input type="submit" value="search">
             </form>

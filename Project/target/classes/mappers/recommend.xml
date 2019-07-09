@@ -1,96 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.project.mappers.recommend">
-	<select id="selectFromBoard" resultType="com.project.dto.RecommendDTO">
-		SELECT * FROM recommend WHERE board_no = #{board_no} AND nickname = #{nickname}
+	<!-- 게시글 혹은 답변글 전체 가져가기 -> 게시글/답변       추천/비추천 눌렀을때 확인 후 등록 or 추천 up down 해줌 -->
+	<select id="selectRecommend" resultType="com.project.dto.RecommendDTO">
+		<if test="recType == 'reply'">
+			SELECT * FROM recommend WHERE reply_no = #{no} AND nickname = #{nickname}
+		</if>
+
+		<if test="recType == 'board'">
+			SELECT * FROM recommend WHERE board_no = #{no} AND nickname = #{nickname}
+		</if>
 	</select>
 
-	<select id="selectFromReply" resultType="com.project.dto.RecommendDTO">
-		SELECT * FROM recommend WHERE reply_no = #{reply_no} AND nickname = #{nickname}
-	</select>
+
+	<!-- 첫 좋아요일때 새로 insert -->
+	<insert id="insertNew">
+		<if test="recType == 'board'">	
+			<if test="likey == 'like'">
+				INSERT INTO recommend (rec_no, board_no, rec_like, rec_dislike, nickname)
+					VALUES(recommend_seq.NEXTVAL, #{no}, 1, 0, #{nickname})
+			</if>
+
+			<if test="likey == 'dislike'">
+				INSERT INTO recommend (rec_no, board_no, rec_like, rec_dislike, nickname)
+					VALUES(recommend_seq.NEXTVAL, #{no}, 0, -1, #{nickname})
+				
+			</if>
+		</if>
+
+		<if test="recType == 'reply'">
+			<if test="likey == 'like'">
+				INSERT INTO recommend (rec_no, reply_no, rec_like, rec_dislike, nickname)
+					VALUES(recommend_seq.NEXTVAL, #{no}, 1, 0, #{nickname})
+				
+			</if>
+
+			<if test="likey == 'dislike'">
+				INSERT INTO recommend (rec_no, reply_no, rec_like, rec_dislike, nickname)
+					VALUES(recommend_seq.NEXTVAL, #{no}, 0, -1, #{nickname})
+			</if>
+		</if>
+	</insert>
 	
-	<!-- 첫 공감이면 레코드 만들기 -->	
+	
 	<!-- 게시물 -->
-	<insert id="insertBoardLikeUp">
-		INSERT INTO recommend (rec_no, board_no, rec_like, rec_dislike, nickname)
-			VALUES(recommend_seq.NEXTVAL, #{board_no}, 1, 0, #{nickname})
-	</insert>
+	
 
-	<insert id="insertBoardLikeDown">
-		INSERT INTO recommend (rec_no, board_no, rec_like, rec_dislike, nickname)
-			VALUES(recommend_seq.NEXTVAL, #{board_no}, 0, -1, #{nickname})
-	</insert>
+	<update id="updateLikey">
+		<if test="recType == 'reply'">
+			<if test="likey == 'like'">
+				<if test="upDown == 'up'">
+					update recommend
+					   set rec_like = 1
+					   where nickname = #{nickname}	and reply_no = #{no}
+				</if>
 
+				<if test="upDown == 'down'">
+					update recommend
+					   set rec_like = 0
+					   where nickname = #{nickname}	and reply_no = #{no}
+				</if>
+			</if>
 
-	<!-- 답글 -->
-	<insert id="insertReplyLikeUp">
-		INSERT INTO recommend (rec_no, reply_no, rec_like, rec_dislike, nickname)
-			VALUES(recommend_seq.NEXTVAL, #{reply_no}, 1, 0, #{nickname})
-	</insert>
+			<if test="likey == 'dislike'">
+				<if test="upDown == 'up'">
+					update recommend
+					   set rec_dislike = 0
+					   where nickname = #{nickname}	and reply_no = #{no}
+				</if>
 
-	<insert id="insertReplyLikeDown">
-		INSERT INTO recommend (rec_no, reply_no, rec_like, rec_dislike, nickname)
-			VALUES(recommend_seq.NEXTVAL, #{reply_no}, 0, -1, #{nickname})
-	</insert>
-	
-	
-	<!-- 게시물 -->
-	
-	<!--  좋아요 -->
-	<update id="RecUpdateLikeUpBoard">
-		update recommend
-		   set rec_like = 1
-		   where nickname = #{nickname} AND board_no = #{board_no}
-	</update>
-	
-	<update id="RecUpdateLikeDownBoard">
-		update recommend
-		   set rec_like = 0
-		   where nickname = #{nickname} AND board_no = #{board_no}
-	</update>
-	
-	<!-- 싫어요 -->
-	<update id="RecUpdateDislikeDownBoard">
-		update recommend
-		   set rec_dislike = -1
-		   where nickname = #{nickname} AND board_no = #{board_no}
-	</update>
-	
-	<update id="RecUpdateDislikeUpBoard">
-		update recommend
-		   set rec_dislike = 0
-		   where nickname = #{nickname} AND board_no = #{board_no}
-	</update>
+				<if test="upDown == 'down'">
+					update recommend
+					   set rec_dislike = -1
+					   where nickname = #{nickname}	and reply_no = #{no}
+				</if>
+			</if>
+		</if>
 
 
-	<!-- 답글-->
-	
-	<!--  좋아요 -->
-	<update id="RecUpdateLikeUpReply">
-		update recommend
-		   set rec_like = 1
-		   where nickname = #{nickname}	and reply_no = #{reply_no}
-	</update>
-	
-	<update id="RecUpdateLikeDownReply">
-		update recommend
-		   set rec_like = 0
-		   where nickname = #{nickname}	and reply_no = #{reply_no}
-	</update>
-	
-	<!-- 싫어요 -->
-	<update id="RecUpdateDislikeDownReply">
-		update recommend
-		   set rec_dislike = -1
-		   where nickname = #{nickname}	and reply_no = #{reply_no}
-	</update>
 
-	<update id="RecUpdateDislikeUpReply">
-		update recommend
-		   set rec_dislike = 0
-		   where nickname = #{nickname}	and reply_no = #{reply_no}
+
+		<if test="recType == 'board'">
+			<if test="likey == 'like'">
+				<if test="upDown == 'up'">
+					update recommend
+					   set rec_like = 1
+					   where nickname = #{nickname} AND board_no = #{no}
+				</if>
+
+				<if test="upDown == 'down'">
+					update recommend
+					   set rec_like = 0
+					   where nickname = #{nickname} AND board_no = #{no}
+				</if>
+			</if>
+
+			<if test="likey == 'dislike'">
+				<if test="upDown == 'up'">
+					update recommend
+					   set rec_dislike = 0
+					   where nickname = #{nickname}	and board_no = #{no}
+				</if>
+
+				<if test="upDown == 'down'">
+					update recommend
+					   set rec_dislike = -1
+					   where nickname = #{nickname}	and board_no = #{no}
+				</if>
+			</if>
+		</if>
 	</update>
+	
+	
+	
+	
 	
 </mapper>

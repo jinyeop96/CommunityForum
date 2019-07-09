@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,9 +25,6 @@ public class ReplyController {
 	@Autowired
 	public FileService fileService;
 	
-	@Autowired
-	private RecommendService recommendService;
-	
 	@Resource(name="uploadPath")
 	String uploadPath;
 	
@@ -48,6 +44,7 @@ public class ReplyController {
 			
 			mav.addObject("list", reply.selectList(map));
 			mav.addObject("page", pagination);
+			mav.addObject("pageParam", pageParam);
 			mav.addObject("replyNum", reply.getRecords(board_no));
 			mav.setViewName("ajax/replyList");
 			return mav;
@@ -56,15 +53,12 @@ public class ReplyController {
 		// 답변 쓰기
 		@RequestMapping("/replyUpdate.do")
 		@ResponseBody
-		public int replyUpdate(HttpServletRequest request) {
+		public void replyUpdate(HttpServletRequest request) {
 			map.put("board_no", Integer.parseInt(request.getParameter("board_no")));
 			map.put("reply_nickname", request.getParameter("reply_nickname").trim());
 			map.put("reply_content", request.getParameter("reply_content")); 
 			
 			reply.updateReply(map);
-			int pageParam = Integer.parseInt(request.getParameter("pageParam"));
-			
-			return pageParam;
 		}
 
 		// 답변 삭제
@@ -87,19 +81,4 @@ public class ReplyController {
 			//알아서 결과값 리턴해줌
 		}
 		
-		
-		// 좋아요
-		@RequestMapping("/replyUpdateLike.do")
-		@ResponseBody
-		public Map<String, Object> updateLike(@RequestParam int reply_no, HttpSession session) {
-			return recommendService.replyUpdateLike(reply_no, session);
-			
-		}
-		
-		//싫어요
-		@RequestMapping("/replyUpdateDislike.do")
-		@ResponseBody
-		public Map<String, Object> updateDislike(@RequestParam int reply_no, HttpSession session) {
-			return recommendService.replyUpdateDisike(reply_no, session);
-		}
 }

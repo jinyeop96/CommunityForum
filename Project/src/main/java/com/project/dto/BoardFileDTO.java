@@ -5,8 +5,17 @@ public class BoardFileDTO {
 	private int board_no;
 	private String boardfile_name;
 	private String boardfile_date;
+	private String board_type;
 	
 	
+	
+	
+	public String getBoard_type() {
+		return board_type;
+	}
+	public void setBoard_type(String board_type) {
+		this.board_type = board_type;
+	}
 	public int getBoard_no() {
 		return board_no;
 	}

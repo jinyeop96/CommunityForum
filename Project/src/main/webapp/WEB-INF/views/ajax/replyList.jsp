@@ -23,24 +23,38 @@
 	<c:if test="${!empty list }">
 		<%-- 가져온 게시물 뿌려주기 --%>
 		
+		<c:set value="0" var="index"></c:set>
    		<c:forEach items="${list }" var="reply">
    			<!-- 닉네임 -->
      		<tr>
-     			<th colspan="7">> ${reply.getReply_nickname() }</th>
+     			<th colspan="7">
+     				> ${reply.getReply_nickname() }	
+     				
+     				<c:if test="${reply.getReply_nickname() == nickname }">
+     					<a href="javascript:void(0)" onclick="showModifyBtn(${index})">
+     						<img src="<c:url value='/resources/img/logos/more.png'/>" style="float: right; width: 25px">
+     					</a>
+     				
+     					<input type="button" onclick="showReplyEdit(${index})" class="buttons modifies modifyBtn${index }" value="수정" style="float: right; margin-left: 10px"></input>
+					    <input type="button" onclick="deleteReply(${reply.getReply_no()}, ${pageParam})" class="buttons modifies modifyBtn${index }" value="삭제" style="float: right;"></input>
+     				</c:if>
+     			</th>
      		</tr>
      		
      		
      		<tr>
      			<!--  좋아요 -->
      			<td colspan="2">
-     				<a href="javascript:void(0)"  onclick="replyUpdateLike(${reply.getReply_no()})" class="font-black">
+     				<%-- <a href="javascript:void(0)"  onclick="replyUpdateLike(${reply.getReply_no()})" class="font-black"> --%>
+     				<a href="javascript:void(0)"  onclick="recommend(${reply.getReply_no()}, 'reply', 'like')" class="font-black">
      					<img class="rec" src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;${reply.getReply_like() }
     				</a>
 				</td>
 				
 				<!-- 싫어요 -->
      			<td colspan="2">
-     				<a href="javascript:void(0)"  onclick="replyUpdateDislike(${reply.getReply_no()})" class="font-black">
+     				<%-- <a href="javascript:void(0)"  onclick="replyUpdateDislike(${reply.getReply_no()})" class="font-black"> --%>
+     				<a href="javascript:void(0)"  onclick="recommend(${reply.getReply_no()}, 'reply', 'dislike')" class="font-black">
      					<img class="rec" src="<c:url value='/resources/img/logos/dislike2.png'/>">&nbsp;&nbsp;${reply.getReply_dislike() }
      				</a>
      			</td>
@@ -50,14 +64,26 @@
      		</tr>
 			
 			<!-- 답변글 -->
-     		<tr><td colspan="7"  > 
-     		&nbsp;&nbsp;&nbsp;
-     			<c:set var="replyStr" value="${fn:replace(reply.getReply_content(), '  ', '&nbsp;&nbsp;' ) }"></c:set>	<%-- 공백 가능하게 처리해줌 --%>
-      			${fn:replace(replyStr , newLineChar, "<br>")} 	<!-- \n를 해주는 과정 --> 
-     		</td></tr>
-	     		
+     		<tr>
+     			<td colspan="7"  > &nbsp;&nbsp;&nbsp;
+     				<c:set var="replyStr" value="${fn:replace(reply.getReply_content(), '  ', '&nbsp;&nbsp;' ) }"></c:set>	<%-- 공백 가능하게 처리해줌 --%>
+      				${fn:replace(replyStr , newLineChar, "<br>")} 	<!-- \n를 해주는 과정 --> 
+     			</td>
+     		</tr>
+     		
+			<tr class="hide replyEdit${index }">
+        		<td colspan="7"><textarea class="board resize-none textarea" rows="4"  placeholder="댓글 수정" id="reply_content_edit${index }" >${reply.getReply_content() }</textarea></td>
+        	</tr>
+
+        	<tr class="hide replyEdit${index }"> 
+        		<td colspan="7" align="right">
+	        		<input type="button" id="reply" onclick="replyEditOk(${reply.getReply_no() },${index }, ${pageParam })" class="buttons" value="저장">
+       			</td>
+        	</tr>     		
 	    	<!-- 답변 글 나누기 -->
 			<tr><td colspan="7"><hr></td></tr>
+			
+			<c:set value="${index +1 }" var="index"></c:set>
    		</c:forEach>
 			
 			

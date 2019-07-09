@@ -32,9 +32,6 @@ public class BoardController {
 	@Autowired
 	private FileService fileService;
 	
-	@Autowired
-	private RecommendService recommendService;
-	
 	@Resource(name="uploadPath")
 	String uploadPath;
 	
@@ -76,7 +73,7 @@ public class BoardController {
 	public String boardWriteOk(HttpServletRequest request, MultipartRequest files,  Model model) throws IOException {
 		String board_type = request.getParameter("board_type");
 		
-		// 글 장성 
+		// 글 작성 
 		map.put("board_title", request.getParameter("board_title").trim());
 		map.put("board_content", request.getParameter("board_content"));
 		map.put("board_nickname", request.getParameter("board_nickname").trim());
@@ -90,11 +87,11 @@ public class BoardController {
 		
 		if(fileList.get(0).getOriginalFilename() != "") {	// 첨부파일이 있을때만 실행함.
 			board.hasFileUp(board.getLatest());		//getLatest() : 지금 업로드한 글의 board_no
-			fileService.fileUpload(fileList, board.getLatest());	
+			fileService.fileUpload(fileList, board_type, board.getLatest());	
 		}  
 		
-		if(board_type.equals("hotel") || board_type.equals("restaurant") || board_type.equals("transport")) {
-			return "redirect:hotel.do?hotel_search=";
+		if(board_type.equals("hotel") || board_type.equals("restaurant")) {
+			return "redirect:"+board_type+".do?board_type="+board_type+"&"+board_type+"_search=";
 			
 		} else {
 			return "redirect:board.do?pageParam="+1+"&board_type="+board_type+"&boardSearch=no";
@@ -141,32 +138,24 @@ public class BoardController {
 		model.addAttribute("board_type", board_type);	// bottomBoard(댓글 아래 다음 게시물들) 을 위해 board_type을 넘겨준다
 		model.addAttribute("pageParam", pageParam);	// bottomBoard(댓글 아래 다음 게시물들) 을 위해 현재페이지(pageParam)을 넘겨준다
 		
-		/*
-		// 로그인 되어있다면 nickname 받아와서
-		String nickname = (String) session.getAttribute("nickname");
-		if(nickname != null) {
-			// 해당 글에 nickname이 추천or비추천 했는지 레코드 가져옴
-			model.addAttribute("rec", recommendService.selectFromBoard(board_no, session));	
-		}
-		*/
-		
 		// 해당 게시물에 첨부되어 있을 첨부파일 가져오기
-		List<String> files = board.selectFile(board_no);
-		//담아서 보내줄 List
-		List<String> other = new ArrayList<String>();
-		List<String> img = new ArrayList<String>();
+		List<String> getFiles = board.selectFile(board_no);
+		
+		//이미지인지 다른파일인지 분류해서 저장
+		List<String> files = new ArrayList<String>();
+		List<String> images = new ArrayList<String>();
 		
 		// 만약 첨부파일이 있다면 실행
-		if(!files.isEmpty()) {
-			for(int i = 0; i < files.size(); i++) {
-				File file = new File(uploadPath+files.get(i));	//uploadPath는 servlet-context.xml에서 수정할 수 있음
+		if(!getFiles.isEmpty()) {
+			for(int i = 0; i < getFiles.size(); i++) {
+				File file = new File(uploadPath+getFiles.get(i));	//uploadPath는 servlet-context.xml에서 수정할 수 있음
 				
 				if(new Tika().detect(file).startsWith("image")) { // 가져온 첨부파일이 어떤 형태인지 (image 인지, txt 인지 등등)
-					img.add(files.get(i)); // 이미지에 해당하는 파일을 따로 담아 images라는 이름으로 넘긴다
-					model.addAttribute("images", img);
+					images.add(getFiles.get(i)); // 이미지에 해당하는 파일을 따로 담아 images라는 이름으로 넘긴다
+					model.addAttribute("images", images);
 				} else {
-					other.add(files.get(i));	// 위와 동일
-					model.addAttribute("files", other );
+					files.add(getFiles.get(i));	// 위와 동일
+					model.addAttribute("files", files );
 				}
 			}
 		}
@@ -194,9 +183,8 @@ public class BoardController {
 
 	@RequestMapping("/boardBottomCon.do")
 	@ResponseBody
-	public ModelAndView boardBottomCon(@RequestParam int pageParam, @RequestParam String board_type, ModelAndView mav) {
+	public ModelAndView boardBottomCon(@RequestParam int pageParam, @RequestParam String board_type, ModelAndView mav) throws IOException {
 		pagination = new Pagination(board.getRecords(board_type), pageParam);	// (전체레코드 수, 페이지 번호)
-		Pagination replyPagination = new Pagination(board.getRecords(board_type), pageParam, 10, 5);
 		
 		map.put("rowStart", pagination.getRowStart());
 		map.put("rowEnd", pagination.getRowEnd());
@@ -206,28 +194,33 @@ public class BoardController {
 		
 		mav.addObject("page", pagination);
 		mav.addObject("pageParam", pageParam);
-		mav.addObject("replyPage", replyPagination);
 		mav.addObject("board_type", board_type);
 		mav.setViewName("ajax/boardBottomCon");	
 		
+		// 해당 게시물에 첨부되어 있을 첨부파일 가져오기
+		List<BoardFileDTO> getFiles = board.selectAllFile(board_type);
+		
+		//이미지인지 다른파일인지 분류해서 저장
+		List<BoardFileDTO> files = new ArrayList<BoardFileDTO>();
+		List<BoardFileDTO> images = new ArrayList<BoardFileDTO>();
+		
+		// 만약 첨부파일이 있다면 실행
+		if(!getFiles.isEmpty()) {
+			for(int i = 0; i < getFiles.size(); i++) {
+				File file = new File(uploadPath+getFiles.get(i).getBoardfile_name());	//uploadPath는 servlet-context.xml에서 수정할 수 있음
+				
+				if(new Tika().detect(file).startsWith("image")) { // 가져온 첨부파일이 어떤 형태인지 (image 인지, txt 인지 등등)
+					images.add(getFiles.get(i)); // 이미지에 해당하는 파일을 따로 담아 images라는 이름으로 넘긴다
+					mav.addObject("images", images);
+				} else {
+					files.add(getFiles.get(i));	// 위와 동일
+					mav.addObject("files", files );
+				}
+			}
+		}
+		
 		return mav;
 	} //entire.do
-	
-	
-	/////////원글 좋아요&싫어요////////////////
-	@RequestMapping("/boardUpdateLike.do")
-	@ResponseBody
-	public Map<String, Object> boardUpdateLike(@RequestParam int board_no, HttpSession session) {
-		return recommendService.boardUpdateLike(board_no, session);
-	} 
-	
-	
-	@RequestMapping("/boardUpdateDislike.do")
-	@ResponseBody
-	public Map<String, Object> boardUpdateDislike(@RequestParam int board_no, HttpSession session) {
-		return recommendService.boardUpdateDislike(board_no, session);
-	}
-
 	
 	// 원글의 좋아요 or 싫어요 누르면 바로 실행되는 함수
 	@RequestMapping("/getLikeDislike.do")
@@ -236,12 +229,6 @@ public class BoardController {
 		map.put("likes", board.getLikes(board_no));
 		map.put("dislikes", board.getDislikes(board_no));
 
-		/*	//로그인 했다면 관련 recommend테이블 가져오기
-		String nickname = (String) session.getAttribute("nickname");
-		if(nickname != null) {
-			map.put("rec", recommendService.selectFromBoard(board_no, session));
-		}
-		*/
 		return map;
 	}
 	
@@ -260,6 +247,8 @@ public class BoardController {
 				file.delete();
 			}
 		}
+		
+		board.deleteAllFile(board_no);
 				
 		return "redirect:board.do?pageParam=1&board_type="+board_type+"&boardSearch=no";
 	}
@@ -308,7 +297,7 @@ public class BoardController {
 		List<MultipartFile> fileList = multipart.getFiles("file");
 		if(fileList.get(0).getOriginalFilename() != "") {	// 첨부파일이 있을때만 실행함.
 			board.hasFileUp(board_no);
-			fileService.fileUpload(fileList, board_no);	 // 해당 글번호(board_no)에 파일이름 다 넣어줌
+			fileService.fileUpload(fileList, board_type, board_no);	 // 해당 글번호(board_no)에 파일이름 다 넣어줌
 		} 
 		
 		// 수정 완료 후 해당 글에 대한 파일이 있는지 다시 확인 후, 없다면 board테이블의 board_hasFile -1 을 해줌
@@ -317,6 +306,9 @@ public class BoardController {
 			board.hasFileDown(board_no);
 		}
 		
+		if(board_type.equals("hotel") || board_type.equals("restaurant")) {
+			return "redirect:"+board_type+".do?board_type="+board_type+"&"+board_type+"_search=";
+		}
 		// 다시 content.jsp 로 가면서 변경사항 바로 보이게끔 함
 		return "redirect:content.do?board_no="+board_no+"&board_type="+board_type+"&pageParam="+pageParam;
 	}
