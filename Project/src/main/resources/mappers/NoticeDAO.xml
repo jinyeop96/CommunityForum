@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.dao.NotieceDAO">
+	<insert id="noticeRegister" parameterType="com.project.dto.NoticeDTO">
+		insert into notice_table values (notice_seq.nextval,#{title},#{content})
+	</insert>
+	
+	<select id="noticeList" resultType="com.project.dto.NoticeDTO">
+		select * from notice_table
+	</select>
+	
+	<select id="noticeRead" parameterType="int" resultType="com.project.dto.NoticeDTO">
+		select * from notice_table where seq = #{seq}
+	</select>
+	
+	<update id="noticeModify" parameterType="com.project.dto.NoticeDTO">
+		update notice_table set title=#{title},content=#{content} where seq =#{seq}
+	</update>
+	
+	<delete id="noticeDelete" parameterType="int">
+		delete from notice_table where seq =#{seq}
+	</delete>
+</mapper>

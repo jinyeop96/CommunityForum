@@ -73,7 +73,7 @@ public class BoardController {
 	public String boardWriteOk(HttpServletRequest request, MultipartRequest files,  Model model) throws IOException {
 		String board_type = request.getParameter("board_type");
 		
-		// 글 장성 
+		// 글 작성 
 		map.put("board_title", request.getParameter("board_title").trim());
 		map.put("board_content", request.getParameter("board_content"));
 		map.put("board_nickname", request.getParameter("board_nickname").trim());
@@ -91,7 +91,7 @@ public class BoardController {
 		}  
 		
 		if(board_type.equals("hotel") || board_type.equals("restaurant")) {
-			return "redirect:"+board_type+".do?board_type="+board_type+"&hotel_search=";
+			return "redirect:"+board_type+".do?board_type="+board_type+"&"+board_type+"_search=";
 			
 		} else {
 			return "redirect:board.do?pageParam="+1+"&board_type="+board_type+"&boardSearch=no";
@@ -307,7 +307,7 @@ public class BoardController {
 		}
 		
 		if(board_type.equals("hotel") || board_type.equals("restaurant")) {
-			return "redirect:"+board_type+".do?board_type="+board_type+"&hotel_search=";
+			return "redirect:"+board_type+".do?board_type="+board_type+"&"+board_type+"_search=";
 		}
 		// 다시 content.jsp 로 가면서 변경사항 바로 보이게끔 함
 		return "redirect:content.do?board_no="+board_no+"&board_type="+board_type+"&pageParam="+pageParam;
