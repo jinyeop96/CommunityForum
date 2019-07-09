@@ -98,7 +98,7 @@
 						<c:forEach items="${files }" var="name">
 							<tr>
 								<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="checkbox" class="fileDel" name="fileDel" value="${name }">${name.substring(47) }
+									<input type="checkbox" class="fileDel" name="fileDel" value="${name }">${name.substring(46) }
 								</td>
 							</tr>
 						</c:forEach>

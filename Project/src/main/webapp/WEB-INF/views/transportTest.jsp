@@ -72,7 +72,6 @@
 		
 		function searchIntercityBusLaneAJAX(departTerminal, arrivalTerminal) {
 			var str = "";
-			str += "<br>";
 			
 			// 출발터미널 ID에 1만 있으면 찾는 경로 없음 표시 & return
 			if(departTerminal == 1){
@@ -217,7 +216,6 @@
 		
 		function searchExpressBusLaneAJAX(departTerminal, arrivalTerminal) {
 				var str = "";
-				str += "<br>";
 				
 				// 출발터미널 ID에 1만 있으면 찾는 경로 없음 표시 & return
 				if(departTerminal == 1){
@@ -359,7 +357,6 @@
 			
 			function searchTrainAJAX(departTerminal, arrivalTerminal) {
 				var str = "";
-				str += "<br>";
 				
 				// 출발터미널 ID에 1만 있으면 찾는 경로 없음 표시 & return
 				if(departTerminal == 1){
@@ -433,14 +430,11 @@
 				<button onclick="getTable();">click</button>
 			</div>
 				
-			<br>
-			<h5 class="font-black division">고속버스</h5>
+			<br><br><br><h5 class="font-black division">고속버스</h5>
 			<div id="expressDiv" class="font-black" style="width: 100%"></div>
-			<br>
-			<h5 class="font-black division">시외버스</h5>
+			<br><br><br><h5 class="font-black division">시외버스</h5>
 			<div id="intercityDiv" class="font-black" style="width: 100%"></div>
-			<br>
-			<h5 class="font-black division">기차</h5>
+			<br><br><br><h5 class="font-black division">기차</h5>
 			<div id="trainDiv" class="font-black" style="width: 100%"></div>
 	    </div>
     </header>
