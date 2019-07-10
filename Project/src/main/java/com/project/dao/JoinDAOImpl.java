@@ -40,6 +40,12 @@ public class JoinDAOImpl implements JoinDAO{
 		
 		return template.selectOne("findnick", map);
 	}
+	
+	@Override
+	public int findemail(Map<String, Object> map) throws Exception{
+
+		return template.selectOne("findemail", map);
+	}
 	//�븘�씠�뵒 李얘린 
 	@Override
 	public String searchId(Map<String, Object> map) throws Exception{
@@ -47,8 +53,9 @@ public class JoinDAOImpl implements JoinDAO{
 		
 	}
 	@Override
-	public String searchpwd(Map<String, Object> map) throws Exception{
-		return template.selectOne("searchpwd", map);
+	public int searchpwd(Map<String, Object> map) throws Exception{
+		return template.update("searchpwd", map);
 	}
+	
 
 }

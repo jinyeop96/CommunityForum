@@ -36,7 +36,7 @@ function searchBtn(){
 		dataType : "text",
 		success:function(data){
 			if(data !=""){
-				alert("회원님의 비밀번호는"+data+"입니다.");	
+				alert("임시 비밀번호  "+data+"  로 변경되었습니다");	
 			}else{
 				alert("아이디와 이메일주소를 확인해주세요.")
 			}
