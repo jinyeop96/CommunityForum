@@ -10,43 +10,41 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+<script type="text/javascript">
 
-
+</script>
+<script src="./resources/js/login.js" ></script>
 <title>Login</title>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script> <!-- JQuery사용을 위한 라이브러리 다운로드 -->
-<script src="./resources/js/join.js" ></script>  <!-- Join.jsp에서 사용될 함수가 저장된 라이브러리로드 -->
 <body>
 		<jsp:include page="/resources/include/member_navigation.jsp" />
 
 	 <!--  section01 -->
 	<header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
-      <h3 class="masthead-heading text-uppercase mb-0"> ${dto.getNickname() }님의 정보페이지</h3>
+      <c:set var="dto" value="${dto }" ></c:set>
+      <h3 class="masthead-heading text-uppercase mb-0">${dto.getName() } Password Change</h3>
       
       <div id="loginDiv" align="center" style="width: 100%">
-      <form method="post" action="<%=request.getContextPath()%>/memberupdate.do">
-      	<table >
+      <form method="post" action="<%=request.getContextPath()%>/pwdchangeOK.do">
+      <input type="hidden" name="id" value="${dto.getId() }">
+      <table>
+      	  <tr>
+      	   <td><input type="password" name="pwd" id="pwd" placeholder="변경할비밀번호입력" style="width: 160px" onkeyup="PwdLength()">
+      	   <br><span style='font-size: 12px; color: red;' id="pwd_leng"  ></span> </td> 
+      	  </tr>
       	  
       	  <tr>
-      	  <th style="padding-right: 100px">Name</th>
-      	   <td>${dto.getName() }</td>
+      	   <td><input type="password" id="c_pwd" placeholder="비밀번호확인" style="width: 160px" onkeyup="PwdChk()">
+      	   <br><span style='font-size: 12px; color: red;' id="pwd_chk"  ></span> </td> 
       	  </tr>
-      	  <tr>
-      	  <th>I   D</th>
-      	   <td>${dto.getId() }</td>
-      	  </tr>
-      	  <tr>
-      	  <th>NickName</th>
-      	   <td>${dto.getNickname() }</td>
-      	  </tr>
-      	  <tr>
-      	  <th>Email Adress</th>
-      	   <td>${dto.getEmail() }</td>
-      	  </tr>
+      	  
       	</table>
-      	<input type="submit" id="loginBtn" value="회원정보 수정"><br>
-      	<input type="button" id="loginBtn" value="비밀번호 변경" onclick="location.href='member_pwdchange.do'"><br>
-      	   	<input type="button" id="loginBtn" value="회원 탈퇴" onclick="location.href='member_withraw.do'">
+        	<input type="submit"  value="비밀번호 변경"  id="changeBTN" disabled="disabled" >
+        	<input type="button"  value="돌아가기"  onclick="history.back()">
+        	
+        
+
       	</form>
       </div>
     </div>

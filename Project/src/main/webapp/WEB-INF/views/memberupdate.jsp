@@ -89,10 +89,12 @@ $(function(){
       	  </tr>
       	  <tr>
       	  <th>Email</th>
-      	   <td><input name="email" id="email" style="width: 160px"  value="${dto.getEmail() }">  </td>
+      	   <td><input name="email" id="email" style="width: 160px"  value="${dto.getEmail() }" >  </td>
       	  </tr>
+      	  
+      	  
       	</table>
-        	<input type="submit" id="loginBtn" value="수정된정보로 등록" disabled="">
+        	<input type="submit" id="loginBtn" value="수정된정보로 등록" >
         	<input type="button" id="loginBtn" value="돌아가기"  onclick="history.back()">
         	
         

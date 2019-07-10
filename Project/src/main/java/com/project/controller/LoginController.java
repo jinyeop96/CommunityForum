@@ -9,13 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.dao.LoginDAOImpl;
-import com.project.dto.LoginDTO;
+import com.project.dto.JoinDTO;
+
 
 @Controller
 public class LoginController {
@@ -23,20 +25,22 @@ public class LoginController {
 	// DAOs
 		@Autowired
 		public LoginDAOImpl login;	// 로그인 DAO
+		@Autowired
+		BCryptPasswordEncoder passEncoder; //비밀번호 암호화를 위해 필요
+		
 		
 		
 		@RequestMapping("/loginok.do")
-		public String userlogin(@RequestParam String id,@RequestParam String pwd, HttpSession session, Model model, HttpServletRequest request) throws Exception{
-			Map<String, Object> result = new HashMap<String, Object>();
-			result.put("id", id);
-			result.put("pwd", pwd);
-			LoginDTO dto = login.selectUser(result);	// id, pwd 로 멤버 가져옴
+		public String userlogin(JoinDTO dto, HttpSession session, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+			 	
+			JoinDTO logindto = login.selectUser(dto);	// id, pwd 로 멤버 가져옴
 			
-			
-			if(dto != null) {	// 가져온게 있을 때
-				session.setAttribute("nickname", dto.getNickname());
+			boolean passmatch = passEncoder.matches(dto.getPwd(), logindto.getPwd()); //기존 dto에 들어가있는 pwd와 결과값으로 받아온 pwd의 암호화 입력값이 같은지 확인
+			if(logindto != null && passmatch) {	// 가져온게 있을 때
+				session.setAttribute("nickname", logindto.getNickname());
 				return "redirect:main.do";
 			}else {
+				
 				model.addAttribute("msg", "다시 한번 확인해주세요.");
 				return "login";
 			}
@@ -78,6 +82,25 @@ public class LoginController {
 	        return "redirect:memberinfo.do";
 		}
 		
+		@RequestMapping("/member_pwdchange.do")
+		public String pwdchange(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception{
+			String nickname = (String) session.getAttribute("nickname");
+			model.addAttribute("dto", login.memeberinfo(nickname)) ;
+			return "pwdchange";
+		}
+		
+		@RequestMapping("/pwdchangeOK.do")
+		public void pwdchangeok(JoinDTO dto, Model model, HttpServletResponse response) throws Exception{
+			PrintWriter out = response.getWriter();
+			String inputpwd = dto.getPwd();
+			String bcryptpwd = passEncoder.encode(inputpwd);
+			dto.setPwd(bcryptpwd);
+			login.changepwd(dto);
+			out.println("<script>alert('Pass word change Success'); location.href='memberinfo.do';</script>");
+		}
+		
+		
+		
 		@RequestMapping("/member_withraw.do")
 		public String memberwithraw(HttpSession session, Model model) throws Exception{
 			String nickname = (String)session.getAttribute("nickname");
@@ -86,16 +109,14 @@ public class LoginController {
 		}
 		
 		@RequestMapping("/memberwithrawOK.do")
-		public void withrawOK (@RequestParam String id, @RequestParam String pwd, Model model, HttpServletResponse response, HttpSession session) throws Exception{
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("id", id);
-			map.put("pwd", pwd);
-			LoginDTO dto = login.selectUser(map);
-			PrintWriter out = response.getWriter();
+		public void withrawOK (JoinDTO dto, Model model, HttpServletResponse response, HttpSession session) throws Exception{
 			
-			if(dto != null) {
-				login.withraw(map);
-				out.println("<script>alert('Member withdraw Sucess'); location.href='main.do';</script>");
+			JoinDTO memdto = login.selectUser(dto);
+			PrintWriter out = response.getWriter();
+			boolean passmatch = passEncoder.matches(dto.getPwd(), memdto.getPwd());
+			if(memdto != null&&passmatch) {
+				login.withraw(dto);
+				out.println("<script>alert('Member withdraw Success'); location.href='main.do';</script>");
 				session.invalidate();
 			}else {
 				out.println("<script>alert('Wrong Password'); location.href='member_withraw.do';</script>");

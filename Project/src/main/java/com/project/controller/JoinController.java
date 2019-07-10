@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,6 +30,9 @@ import com.project.dto.JoinDTO;
 public class JoinController {
 	
 	@Autowired
+	BCryptPasswordEncoder bcryptEncoder;
+	
+	@Autowired
 	public JoinDAOImpl join;
 	
 	
@@ -39,6 +43,9 @@ public class JoinController {
 //媛��엯 	
 	@RequestMapping("/join_ok.do")
 	public String joinok(JoinDTO dto, Model model) throws Exception {
+		String inputpwd = dto.getPwd();
+		String bcryptpwd = bcryptEncoder.encode(inputpwd);
+		dto.setPwd(bcryptpwd);
 		this.join.insert(dto);
 		return "redirect:login.do";
 	}
@@ -58,6 +65,15 @@ public class JoinController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("nickname", nickname);
 		int result = join.findnick(map);
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/emailcheck.do")
+	public  int checkemail(String email) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("email", email);
+		int result = join.findemail(map);
 		return result;
 	}
 	//�븘�씠�뵒 李얘린 �럹�씠吏�濡� �씠�룞
@@ -88,12 +104,23 @@ public class JoinController {
 	@RequestMapping("/searchpwdOK")
 	public String searchpwd(@RequestParam String id, @RequestParam String email) throws Exception{
 		Map<String, Object> result = new HashMap<String, Object>();
+		String pwd = "";
+		for(int i=0; i<12; i++) {
+			pwd += (char)((Math.random()*26)+97);
+		}
+		String bcryptpwd = bcryptEncoder.encode(pwd);
+		System.out.println(pwd);
 		result.put("id", id);
 		result.put("email", email);
-		String pwd = join.searchpwd(result);
-		return pwd;
+		result.put("pwd", bcryptpwd);
+		int num = join.searchpwd(result);
+		System.out.println(result.get("pwd"));
+		if(num == 0) {
+			pwd ="";
+			return pwd;
+		}else {
+			return pwd;
+		}
 	}
-	
-
 	
 }
