@@ -27,7 +27,7 @@
 		}  
 	
 		function getIntercityTerminalID() {
-			$("#resultDiv").empty();
+			$("#intercityDiv").empty();
 			var depart = document.getElementById('depart').value.trim();
 			var arrival = document.getElementById('arrival').value.trim();
 			var xhr = new XMLHttpRequest(); 
@@ -39,6 +39,7 @@
 					var resultObj = JSON.parse(xhr.responseText);
 					
 					var resultArr = resultObj.result;
+					console.log(resultArr);
 					
 					var departTerminals = new Array();	// 출발터미널 ID
 					var arrivalTerminals = new Array();	// 도착터미널 ID
@@ -50,8 +51,8 @@
 						for(var j = 0; j < destinationTerminals.length; j++){ //출발지 기준 모든 도착터미널 가져옴
 							// 도착터미널 중에서 입력받은 arrival이 포함되어 있다면 배열에 터미널ID 저장
 							if(destinationTerminals[j].stationName.includes(arrival)){ 
-								departTerminals.push(result);
-								arrivalTerminals.push(destinationTerminals[j]);
+								departTerminals.push(result.stationID);
+								arrivalTerminals.push(destinationTerminals[j].stationID); 
 							}
 						}   
 					} 
@@ -62,9 +63,9 @@
 					} else {
 						for(var i = 0; i < departTerminals.length; i++){
 							// 버스 경로 찾는 함수로 index에 해당하는 터미널 ID 넘겨줌
-							searchIntercityBusLaneAJAX(departTerminals[i].stationID, arrivalTerminals[i].stationID);
-						} 
-						searchPubTransPathAJAX(departTerminals[0].x, departTerminals[0].y, arrivalTerminals[0].x, arrivalTerminals[0].y);
+							searchIntercityBusLaneAJAX(departTerminals[i], arrivalTerminals[i]); 
+						}  
+						
 					} 
 				} 
 			}
@@ -78,7 +79,7 @@
 				str += "<div class='box'>";
 				str += "찾는 경로가 없습니다.";
 				str += "</div>";
-				$("#resultDiv").append(str);
+				$("#intercityDiv").append(str);
 				return;
 			}
 			
@@ -89,8 +90,11 @@
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {  
 					var resultObj = JSON.parse(xhr.responseText);
+					console.log(resultObj);
 					
 					var resultArr = resultObj["result"]["station"];
+					
+					console.log(resultArr);
 					
 					for (var i = 0; i < resultArr.length; i++) {
 						//운행시간표 띄어쓰기로 나눠서 저장
@@ -142,7 +146,7 @@
 							str += "</tr>";
 							j++;
 						}
-						
+						console.log(nightScheduleArr);
 						if(nightScheduleArr[0] != ""){
 							str += "<tr>";
 							str += "	<td>";
@@ -161,13 +165,13 @@
 						str += "</table>";
 					//	str += "</div>";
 					}	//for (var i = 0; i < resultArr.length; i++)
-					$("#resultDiv").append(str);
+					$("#intercityDiv").append(str);
 				}	//if (xhr.readyState == 4 && xhr.status == 200)
 			}
 		}	//searchIntercityBusLaneAJAX()
 	
 		function getExpressTerminalID() {
-			$("#resultDiv").empty();
+			$("#expressDiv").empty();
 			var depart = document.getElementById('depart').value.trim();
 			var arrival = document.getElementById('arrival').value.trim();
 			var xhr = new XMLHttpRequest(); 
@@ -179,6 +183,7 @@
 					var resultObj = JSON.parse(xhr.responseText);
 					
 					var resultArr = resultObj.result;
+					console.log(resultArr);
 					
 					var departTerminals = new Array();	// 출발터미널 ID
 					var arrivalTerminals = new Array();	// 도착터미널 ID
@@ -190,8 +195,8 @@
 						for(var j = 0; j < destinationTerminals.length; j++){ //출발지 기준 모든 도착터미널 가져옴
 							// 도착터미널 중에서 입력받은 arrival이 포함되어 있다면 배열에 터미널ID 저장
 							if(destinationTerminals[j].stationName.includes(arrival)){ 
-								departTerminals.push(result);
-								arrivalTerminals.push(destinationTerminals[j]); 
+								departTerminals.push(result.stationID);
+								arrivalTerminals.push(destinationTerminals[j].stationID); 
 							}
 						}   
 					} 
@@ -202,10 +207,8 @@
 					} else {
 						for(var i = 0; i < departTerminals.length; i++){
 							// 버스 경로 찾는 함수로 index에 해당하는 터미널 ID 넘겨줌
-							searchExpressBusLaneAJAX(departTerminals[i].stationID, arrivalTerminals[i].stationID); 
+							searchExpressBusLaneAJAX(departTerminals[i], arrivalTerminals[i]); 
 						}  
-						
-						searchPubTransPathAJAX(departTerminals[0].x, departTerminals[0].y, arrivalTerminals[0].x, arrivalTerminals[0].y);
 						
 					} 
 				} 
@@ -220,7 +223,7 @@
 					str += "<div class='box'>";
 					str += "찾는 경로가 없습니다.";
 					str += "</div>";
-					$("#resultDiv").append(str);
+					$("#expressDiv").append(str);
 					return;
 				}
 				
@@ -231,9 +234,11 @@
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == 4 && xhr.status == 200) {  
 						var resultObj = JSON.parse(xhr.responseText);
+						console.log(resultObj);
 						
 						var resultArr = resultObj["result"]["station"];
 						
+						console.log(resultArr);
 						
 						for (var i = 0; i < resultArr.length; i++) {
 							//운행시간표 띄어쓰기로 나눠서 저장
@@ -281,7 +286,7 @@
 								str += "</tr>";
 								j++;
 							}
-						
+							console.log(nightScheduleArr);
 							if(nightScheduleArr[0] != ""){
 								str += "<tr>";
 								str += "	<td>";
@@ -300,13 +305,13 @@
 							str += "</table>";
 							//str += "</div>";	
 						}	//for (var i = 0; i < resultArr.length; i++)
-						$("#resultDiv").append(str);
+						$("#expressDiv").append(str);
 					}	//if (xhr.readyState == 4 && xhr.status == 200) 
 				}
 			}	//searchBusLaneAJAX()
 		
 			function getTrainTerminalID() {
-				$("#resultDiv").empty();
+				$("#trainDiv").empty();
 				var depart = document.getElementById('depart').value.trim();
 				var arrival = document.getElementById('arrival').value.trim();
 				var xhr = new XMLHttpRequest(); 
@@ -319,7 +324,6 @@
 						
 						var resultArr = resultObj.result;
 						console.log(resultArr);
-						console.log("sdad");
 						
 						var departTerminals = new Array();	// 출발터미널 ID
 						var arrivalTerminals = new Array();	// 도착터미널 ID
@@ -331,8 +335,8 @@
 							for(var j = 0; j < destinationTerminals.length; j++){ //출발지 기준 모든 도착터미널 가져옴
 								// 도착터미널 중에서 입력받은 arrival이 포함되어 있다면 배열에 터미널ID 저장
 								if(destinationTerminals[j].stationName.includes(arrival)){ 
-									departTerminals.push(result);
-									arrivalTerminals.push(destinationTerminals[j]); 
+									departTerminals.push(result.stationID);
+									arrivalTerminals.push(destinationTerminals[j].stationID); 
 								}
 							}    
 						} 
@@ -344,9 +348,9 @@
 						} else {
 							for(var i = 0; i < departTerminals.length; i++){
 								// 버스 경로 찾는 함수로 index에 해당하는 터미널 ID 넘겨줌
-								searchTrainAJAX(departTerminals[i].stationID, arrivalTerminals[i].stationID); 
+								searchTrainAJAX(departTerminals[i], arrivalTerminals[i]); 
 							}  
-							//searchPubTransPathAJAX(departTerminals[0].x, departTerminals[0].y, arrivalTerminals[0].x, arrivalTerminals[0].y);
+							
 						} 
 					} 
 				}
@@ -360,7 +364,7 @@
 					str += "<div class='box'>";
 					str += "찾는 경로가 없습니다.";
 					str += "</div>";
-					$("#resultDiv").append(str);
+					$("#trainDiv").append(str);
 					return;
 				}
 				
@@ -403,40 +407,12 @@
 							}
 							str += "</table>";
 						}	//for (var i = 0; i < resultArr.length; i++)
-						$("#resultDiv").append(str);
+						$("#trainDiv").append(str);
 					}	//if (xhr.readyState == 4 && xhr.status == 200)
 				}
 			}	//searchTrainAJAX() 
 		
-			
-		$(function(){
-			$('input[name="radio"]').click(function(){
-				var depart = $("#depart").val(); 
-				var arrival = $("#arrival").val(); 
-				
-				$("#searchDiv").empty();
-				var str = "";
-				
-				if(depart == null && arrival == null){
-					str += '<input type="text" id="depart" placeholder="출발지">';
-					str += '<input type="text" id="arrival" placeholder="도착지">';
-				} else{
-					str += '<input type="text" id="depart" placeholder="출발지" value='+depart+'>';
-					str += '<input type="text" id="arrival" placeholder="도착지" value='+arrival+'>';
-				}
-				
-				var radioVal = $('input[name="radio"]:checked').val();
-				if(radioVal == 1){
-					str += '<button onclick="getExpressTerminalID();">검색</button>';
-				} else if(radioVal == 2){
-					str += '<button onclick="getIntercityTerminalID();">검색</button>';
-				} else if(radioVal == 3){
-					str += '<button onclick="getTrainTerminalID();">검색</button>';
-				}
-				
-				$("#searchDiv").append(str);
-			})  
-		});
+		
 		
 		
 			
@@ -449,18 +425,21 @@
 	<header class="masthead bg-primary text-white text-center">
 	    <div class="container d-flex align-items-center flex-column">
 	    
-	    	<div id="map" style="width:100%;height:400px; border-radius: 15px"></div>
-	    	
+	    	<div id="map" style="width:100%;height:400px;"></div>
+	    
 	    	<div>
-	    		<input type="radio" name="radio" value="1" >고속
-	    		<input type="radio" name="radio" value="2" >시외
-	    		<input type="radio" name="radio" value="3" >기차
-	    	</div>
-	    	
-			<div id="searchDiv"></div>
-	 		
-	 		<div id="resultDiv" class="font-black" style="width: 100%"></div>
-		</div>
+				<input type="text" id="depart" placeholder="출발지"> 
+				<input type="text" id="arrival" placeholder="도착지"> 
+				<button onclick="getTable();">검색</button>
+			</div>
+				
+			<br><br><br><h5 class="font-black division">고속버스</h5>
+			<div id="expressDiv" class="font-black" style="width: 100%"></div>
+			<br><br><br><h5 class="font-black division">시외버스</h5>
+			<div id="intercityDiv" class="font-black" style="width: 100%"></div>
+			<br><br><br><h5 class="font-black division">기차</h5>
+			<div id="trainDiv" class="font-black" style="width: 100%"></div>
+	    </div>
 	    
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=qvqco74zp8"></script>
 
@@ -506,8 +485,37 @@
             $("#geoFail").html('<h5 style="margin-top:5px; color: black;">현재위치 가져오기 실패</h5>'); 
         }
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    //경로
+    
+   
+    
+    /* var sx = 126.93737555322481;
+	var sy = 37.55525165729346;
+	var ex = 126.88265238619182;
+	var ey = 37.481440035175375; */
 	
-	function searchPubTransPathAJAX(sx, sy, ex, ey) {
+ 	var sx = 127.09406227235078;
+	var sy = 37.53439359449373;
+	var ex = 127.15442127024295;
+	var ey = 36.819235354251994; 
+	
+	function searchPubTransPathAJAX() {
 		var xhr = new XMLHttpRequest(); 
 		//ODsay apiKey 입력
 		var url = "https://api.odsay.com/v1/api/searchPubTransPath?SX="+sx+"&SY="+sy+"&EX="+ex+"&EY="+ey+"&apiKey=mSyhSDNsrcpvXQzQURwNYs3mElOH5pql0KFjlvvTyUU";
@@ -519,13 +527,13 @@
 				console.log( JSON.parse(xhr.responseText) ); // <- xhr.responseText 로 결과를 가져올 수 있음
 				//노선그래픽 데이터 호출
 				if(JSON.parse(xhr.responseText)["result"]["path"] != null ){ 
-					callMapObjApiAJAX((JSON.parse(xhr.responseText))["result"]["path"][0].info.mapObj, sx, sy, ex, ey);
+					callMapObjApiAJAX((JSON.parse(xhr.responseText))["result"]["path"][0].info.mapObj);
 					console.log((JSON.parse(xhr.responseText))["result"]["path"][0].info.mapObj);
 				} else{   
 					if(JSON.parse(xhr.responseText)["result"]["trainRequest"].count != 0){
 						for(var i = 0; i < JSON.parse(xhr.responseText)["result"]["trainRequest"].count; i++){
 							if(JSON.parse(xhr.responseText)["result"]["trainRequest"]["OBJ"][i].mapOBJ != ""){
-								callMapObjApiAJAX((JSON.parse(xhr.responseText))["result"]["trainRequest"]["OBJ"][i].mapOBJ, sx, sy, ex, ey);
+								callMapObjApiAJAX((JSON.parse(xhr.responseText))["result"]["trainRequest"]["OBJ"][i].mapOBJ);
 								console.log((JSON.parse(xhr.responseText))["result"]["trainRequest"]["OBJ"][i].mapOBJ);
 								return;
 							}
@@ -534,7 +542,7 @@
 					if(JSON.parse(xhr.responseText)["result"]["exBusRequest"].count != 0){
 						for(var i = 0; i < JSON.parse(xhr.responseText)["result"]["exBusRequest"].count; i++){
 							if(JSON.parse(xhr.responseText)["result"]["exBusRequest"]["OBJ"][i].mapOBJ != ""){
-								callMapObjApiAJAX((JSON.parse(xhr.responseText))["result"]["exBusRequest"]["OBJ"][i].mapOBJ, sx, sy, ex, ey);
+								callMapObjApiAJAX((JSON.parse(xhr.responseText))["result"]["exBusRequest"]["OBJ"][i].mapOBJ);
 								console.log((JSON.parse(xhr.responseText))["result"]["exBusRequest"]["OBJ"][i].mapOBJ);
 								return;
 							}
@@ -543,7 +551,7 @@
 					if(JSON.parse(xhr.responseText)["result"]["outBusRequest"].count != 0){
 						for(var i = 0; i < JSON.parse(xhr.responseText)["result"]["outBusRequest"].count; i++){
 							if(JSON.parse(xhr.responseText)["result"]["outBusRequest"]["OBJ"][i].mapOBJ != ""){
-								callMapObjApiAJAX((JSON.parse(xhr.responseText))["result"]["outBusRequest"]["OBJ"][i].mapOBJ, sx, sy, ex, ey);
+								callMapObjApiAJAX((JSON.parse(xhr.responseText))["result"]["outBusRequest"]["OBJ"][i].mapOBJ);
 								console.log((JSON.parse(xhr.responseText))["result"]["outBusRequest"]["OBJ"][i].mapOBJ);
 								return;
 							}
@@ -553,14 +561,12 @@
 			} 
 		}
 	}
-	var marker = null;
-	var lineArray;
 	
-	function callMapObjApiAJAX(mabObj, sx, sy, ex, ey){
-		if(marker != null){
-			//marker.setMap(null);
-		}
-		var xhr = new XMLHttpRequest(); 
+	 //길찾기 API 호출
+	searchPubTransPathAJAX();
+	
+	function callMapObjApiAJAX(mabObj){
+		var xhr = new XMLHttpRequest();
 		//ODsay apiKey 입력
 		var url = "https://api.odsay.com/v1/api/loadLane?mapObject=0:0@"+mabObj+"&apiKey=mSyhSDNsrcpvXQzQURwNYs3mElOH5pql0KFjlvvTyUU";
 		xhr.open("GET", url, true);
@@ -568,7 +574,6 @@
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				var resultJsonData = JSON.parse(xhr.responseText);
-				console.log(resultJsonData);
 				drawNaverMarker(sx,sy);					// 출발지 마커 표시
 				drawNaverMarker(ex,ey);					// 도착지 마커 표시
 				drawNaverPolyLine(resultJsonData);		// 노선그래픽데이터 지도위 표시
@@ -586,17 +591,15 @@
 	
 	// 지도위 마커 표시해주는 함수
 	function drawNaverMarker(x,y){
-		
-		marker = new naver.maps.Marker({
+		var marker = new naver.maps.Marker({
 		    position: new naver.maps.LatLng(y, x),
 		    map: map
 		});
 	}
 	
-	
-	
 	// 노선그래픽 데이터를 이용하여 지도위 폴리라인 그려주는 함수
 	function drawNaverPolyLine(data){
+		var lineArray;
 		
 		for(var i = 0 ; i < data.result.lane.length; i++){
 			for(var j=0 ; j <data.result.lane[i].section.length; j++){

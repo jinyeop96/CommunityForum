@@ -1,6 +1,5 @@
 package com.project.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -18,14 +17,10 @@ public class RecommendController {
 	@Autowired
 	private RecommendService recommendService;
 	
-	Map<String, Object> map = new HashMap<String, Object>();
-	
 	@RequestMapping("recommend.do")
 	@ResponseBody
 	public Map<String, Object> recommend(int no, String recType, String likey, HttpSession session) {
-		map = recommendService.recommend(no, recType, likey, session);
-		System.out.println(map.get("msg"));
-		return map;
+		return recommendService.recommend(no, recType, likey, session);
 	}
 
 }
