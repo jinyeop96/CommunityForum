@@ -15,7 +15,7 @@
 		font-style: italic;
 	}
 </style>
-
+<script src="./resources/js/login.js" ></script>
 </head>
 	<jsp:include page="/resources/include/navigation.jsp" />
 
@@ -26,7 +26,7 @@
       
       <h1 class="masthead-heading text-uppercase mb-0">로그인</h1>
       <div id="loginDiv" align="center">
-      <form action="<%=request.getContextPath()%>/loginok.do" method="post">
+      <form onsubmit="return loginformchk()" action="<%=request.getContextPath()%>/loginok.do" method="post">
       	<table>
       		<tr>
       			<td><input class="input" name="id" id ="id" placeholder="user ID"></td> 
@@ -37,7 +37,6 @@
       		</tr>
       	</table>
       	<input id="loginBtn" type="submit" value="Login"><br>
-      	<c:if test="${!empty msg }">${msg }<br></c:if> 
       	<a href="javascript:void(0)" class="find"  onclick="location.href='id_search.do'">find id</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;  
       	<a href="javascript:void(0)" class="find" onclick="location.href='pwd_search.do'">find pwd</a> 
       	</form>
