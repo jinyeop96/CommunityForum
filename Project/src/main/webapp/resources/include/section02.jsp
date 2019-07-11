@@ -24,7 +24,7 @@
         <div>            
             <form action="restaurant.do" >
                 <input type="hidden" name="board_type" value="restaurant">
-            	<input name="restaurant_search" placeholder="지역명+맛집(음식점)">
+            	<input style="width:210px;" name="restaurant_search" placeholder="지역명+맛집(음식점)">
             	<input type="submit" value="search">
             </form>
           

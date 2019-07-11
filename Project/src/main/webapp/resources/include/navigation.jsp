@@ -87,7 +87,7 @@
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="hotel.do?board_type=hotel&hotel_search=">숙박</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="restaurant.do?board_type=restaurant&restaurant_search=">음식점</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transport.do">교통</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transportTest.do">교통테스트</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transportTest.do?board_type=transportTest&transportTest1_search=&transportTest2_search="  >교통테스트</a></li>
 							</ul>
 					</li>
 

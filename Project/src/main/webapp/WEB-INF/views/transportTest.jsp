@@ -15,6 +15,8 @@
 	</style>
 <script type="text/javascript" src="<c:url value='/resources/jquery-3.4.1.js'/>"></script>
 	<script>
+	
+	
 		$(function(){
 			$(".division").hide();
 		})
@@ -424,10 +426,10 @@
 	<header class="masthead bg-primary text-white text-center">
 	    <div class="container d-flex align-items-center flex-column">
 	    	<div>
-				<input type="text" id="depart" placeholder="출발지">
-				<input type="text" id="arrival" placeholder="도착지">
+				<input type="text" width="200px" id="depart" placeholder="출발지" value="${transportTest1_search}">
+				<input type="text" width="200px" id="arrival" placeholder="도착지" value="${transportTest2_search}">
 				<!-- <button onclick="searchBusLaneAJAX();">click</button> -->
-				<button onclick="getTable();">click</button>
+				<button value="search" onclick="getTable();">click</button>
 			</div>
 				
 			<br><br><br><h5 class="font-black division">고속버스</h5>
