@@ -2,9 +2,8 @@ $(document).ready(function(){
 	$('#changeBTN').attr('disabled', true);
 });
 
-
-
-
+//로그인 폼 체크 펑션
+//아이디, 비밀번호 입력값 확인
 function loginformchk(){
 	if($('#id').val()  ==""){
 		alert("아이디 입력해주세요");
@@ -35,9 +34,9 @@ function PwdLength(event){
 		 $('#pwd_leng').html("");
 		 
 	 }
-		
-	}
+}
 
+//비밀번호 2개 확인 펑션
 function PwdChk(event){
     var pwd = $('#pwd').val();
 	var chk = $('#c_pwd').val();
