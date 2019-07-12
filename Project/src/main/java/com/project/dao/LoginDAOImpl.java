@@ -16,8 +16,8 @@ public class LoginDAOImpl implements LoginDAO {
 	private SqlSessionTemplate template;
 
 	@Override
-	public LoginDTO selectUser(Map<String, Object> map) throws Exception {
-		return template.selectOne("com.project.mappers.LoginDAO.selectUser", map);
+	public JoinDTO selectUser(JoinDTO dto) throws Exception {
+		return template.selectOne("com.project.mappers.LoginDAO.selectUser", dto);
 	}
 
 	@Override
@@ -30,10 +30,17 @@ public class LoginDAOImpl implements LoginDAO {
 	}
      
 	@Override
-	public int withraw(Map<String, Object> map) throws Exception{
+	public int withraw(JoinDTO dto) throws Exception{
           
-		return template.delete("memberwitraw", map);
+		return template.delete("memberwitraw", dto);
 		}
+    @Override
+	public void changepwd(JoinDTO dto) {
+		template.update( "pwdchange", dto);
+
+		
+	}
+	
 	
 	
 		

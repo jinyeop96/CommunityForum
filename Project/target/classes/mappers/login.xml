@@ -2,11 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.mappers.LoginDAO">
-	<select id="selectUser" resultType="com.project.dto.LoginDTO">
-		SELECT * FROM member WHERE id = #{id} and pwd=#{pwd}
+	<select id="selectUser" resultType="com.project.dto.JoinDTO">
+		SELECT * FROM member WHERE id = #{id} 
 	</select>
 	
 	<delete id="memberwitraw">
-	  delete from member where id = #{id} and pwd=#{pwd}
+	  delete from member where id = #{id} 
 	</delete>
+	
+	<update id="pwdchange">
+	  update member set pwd = #{pwd} where id = #{id}
+	</update>
 </mapper>

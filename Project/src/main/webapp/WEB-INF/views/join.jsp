@@ -21,7 +21,8 @@ font-size: 12px;
 <script src="./resources/js/join.js" ></script>  <!-- Join.jsp에서 사용될 함수가 저장된 라이브러리로드 -->
 <script >
 $(function(){
-	
+	var nickresult = 0;
+	var emailresult = 0;
 	
 	
 	$("#idcheck").click(function(){
@@ -47,13 +48,14 @@ $(function(){
 							alert("중복된 아이디입니다.");
 							$("#id_leng").html("");
 							$('#c_pwd').attr("readonly",true);
+							idresult = 0;
 						
 							
 						}else{
 							alert("사용가능한 아이디입니다.");
 							$("#id_leng").html("");
 							$('#c_pwd').attr("readonly",false);
-							
+							idresult = 1;
 						}
 					},
 					error : function(data){
@@ -82,14 +84,19 @@ $(function(){
 				
 					if(data == '1'){
 						$('#checknick').html("중복된 닉네임입니다.");
-						$('#nickjoin').attr('disabled', true);
+						$('#joinbtn').attr('disabled', true);
+						nickresult = 0;
 						
 					}else{
 						$('#checknick').html("");
-						$('#nickjoin').attr('disabled', false);
-						
-					}
+						nickresult = 1;
+						}
 					
+					if(emailresult ==1 && nickresult ==1){
+						$('#joinbtn').attr('disabled', false);	
+					}else{
+						$('#joinbtn').attr('disabled', true);
+					}
 				}else{
 					$('#checknick').html("닉네임 입력해주세요.");
 				}
@@ -102,6 +109,51 @@ $(function(){
 		
 		
 	});
+	
+	$("#email").keyup(function(){
+		var email;
+		email=$('#email').val();
+		$.ajax({
+			url :"emailcheck.do",
+			type : "post",
+			data : {
+				email : email
+			},
+			dataType : "text",
+			success:function(data){
+				if(email !=''){
+				
+					if(data == '1'){
+						$('#emailcheck').html("중복된 이메일입니다.");
+						
+						 emailresult = 0;
+						
+					}else{
+						$('#emailcheck').html("");
+						
+						 emailresult = 1;
+						
+						if(emailresult ==1 && nickresult ==1){
+							$('#joinbtn').attr('disabled', false);	
+						}else{
+							$('#joinbtn').attr('disabled', true);
+						}
+						
+					}
+					
+				}else{
+					$('#emailcheck').html("이메일을 입력해주세요.");
+				}
+				
+			},
+			error : function(data){
+				alert("통신오류 " + data);
+			}
+		});
+		
+		
+	});
+	
 	
 	
 	
@@ -162,9 +214,10 @@ $(function(){
       		
       		<tr>
       			<td colspan="2"  align="center"><input class="input" name="email" id="email"  style="margin-right: 85px" placeholder="메일주소입력" >
+      			<br><span style="font-size: 12px; color: red;" id="emailcheck"></span>
       			</td> 
       			</table>
-      	<input  type="submit" value="가입하기" disabled="disabled" id="nickjoin">&nbsp;&nbsp;
+      	<input  type="submit" value="가입하기" disabled="disabled" id="joinbtn">&nbsp;&nbsp;
       	<input type="button" value="돌아가기" onclick="history.back();"> 
       	</form>
       </div>

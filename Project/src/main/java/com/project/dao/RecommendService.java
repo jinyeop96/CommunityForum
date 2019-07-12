@@ -33,7 +33,7 @@ public class RecommendService {
 		// 우선 세션 로그인이 되어있는지 확인 후 안되어 있으면 return 
 		String nickname = (String) session.getAttribute("nickname");
 		if (nickname == null) {
-			data.put("msg", "회원만 가능합니다.");
+			data.put("msg", "회원만 가능합니다");
 			return data;
 		}
 		

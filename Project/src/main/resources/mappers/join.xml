@@ -18,13 +18,17 @@ insert into member values(#{id},#{pwd},#{name},#{nickname},#{email})
   select count(*) from member where nickname=#{nickname}  
 </select>
 
+<select id="findemail" resultType="int">
+  select count(*) from member where email=#{email}  
+</select>
+
 <select id="searchId"  resultType="String">
 select id from member where name=#{name} and email=#{email}
 </select>
 
-<select id="searchpwd"  resultType="String">
-select pwd from member where id=#{id} and email=#{email}
-</select>
+<update id="searchpwd">
+update member set pwd=#{pwd} where id = #{id} and email=#{email}
+</update>
 
 <select id="memberinfo" resultType="com.project.dto.JoinDTO">
 select *from member where nickname=#{nickname}
