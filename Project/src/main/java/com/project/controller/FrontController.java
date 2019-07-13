@@ -67,11 +67,6 @@ public class FrontController {
 		return "restaurant";
 	}
 	
-	@RequestMapping("/transport.do")
-	public String transport() {
-		return "transport";
-	}
-
 	@RequestMapping("/hotelPopup.do")
 	@ResponseBody
 	public ModelAndView hotelPopup(HttpServletRequest request, ModelAndView mav ) {

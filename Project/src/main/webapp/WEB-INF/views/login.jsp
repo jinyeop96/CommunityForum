@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Login</title>
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <style type="text/css">
 	.find{
 		color: white;
@@ -41,9 +42,23 @@
       	<a href="javascript:void(0)" class="find"  onclick="location.href='id_search.do'">find id</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;  
       	<a href="javascript:void(0)" class="find" onclick="location.href='pwd_search.do'">find pwd</a> 
       	</form>
-      </div>
+      </div> 
+      
+      <div id="naver_id_login"></div>
+      
     </div>
   </header>
+  
+   <script type="text/javascript">
+	  	var naver_id_login = new naver_id_login("j8R_N6PAsO7uCvkZDq3n", "http://localhost:8054");
+	  	var state = naver_id_login.getUniqState();
+	  	naver_id_login.setButton("white", 2,40);
+	  	naver_id_login.setDomain("http://127.0.0.1:8054");
+	  	naver_id_login.setState(state);
+	  	naver_id_login.setPopup();
+	  	naver_id_login.init_naver_id_login();
+  </script>
+
   
   
   <jsp:include page="/resources/include/footer.jsp" />
