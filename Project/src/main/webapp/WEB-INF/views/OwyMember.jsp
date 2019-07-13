@@ -17,10 +17,9 @@
     	
     	<br><br>
     	
-    	<h4>Oh jinyeop[PM] - Birth : 1996 / Good skills : everything </h4>
-    	<h4>Bang sangwon - Birth : 1993 / Good skills : nothing</h4>
-    	<h4>Yoo chihyuk - Birth : 1985 / Good Skills : Javascript, C++, Sql</h4>
-    	<h4>Kim dokyun - Birth : 1994 / Good Skills : Unity</h4>
+    	<h4>Jinyeop Oh[PM] - Birth : 1996 / Good skills : everything </h4>
+    	<h4>Sangwon Bang - Birth : 1993 / Good skills : nothing</h4>
+    	<h4>Chihyuk Yoo - Birth : 1985 / Good Skills : Javascript, C++, Sql</h4>
     </div>	
     
     

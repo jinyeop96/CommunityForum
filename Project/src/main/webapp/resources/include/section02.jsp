@@ -20,12 +20,44 @@
       <!-- Portfolio Grid Items -->
       <div align="center">
 
-        <!-- Hohel Item 1 -->
+
+<script>
+
+function readyCheck() {
+
+	  if(fe.restaurant_search.value == "") {
+
+	    alert("지역명과 음식점(맛집)을 입력하세요!");
+
+	    fe.restaurant_search.focus();
+
+	    return false;
+
+	  }
+	  
+	  else if(fe.restaurant_search.value == "") {
+
+		    alert("지역명과 음식점(맛집)을 입력하세요!");
+
+		    fe.restaurant_search.focus();
+
+		    return false;
+
+		  }
+
+		  else return true;
+
+		}
+
+
+</script>
+
+
         <div>            
-            <form action="restaurant.do" >
+            <form action="restaurant.do" name="fe">
                 <input type="hidden" name="board_type" value="restaurant">
-            	<input name="restaurant_search" placeholder="지역명+맛집(음식점)">
-            	<input type="submit" value="search">
+            	<input style="width:210px;" name="restaurant_search" placeholder="지역명+맛집(음식점)">
+            	<input id="search" type="submit" value="search"  onclick="return readyCheck()">
             </form>
           
         </div>

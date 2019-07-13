@@ -2,7 +2,6 @@
 $(document).ready(function(){
 	$('#c_pwd').attr("readonly",true);//시작시 비밀번호 입력 인풋창은 입력불가
 	$('#pwd').attr("readonly",true);//시작시 비밀번호 확인 인풋창은 입력불가
-	
 });
 //비밀번호 입력창 입력제한 및 알림 펑션
 function PwdLength(event){
@@ -19,16 +18,11 @@ function PwdLength(event){
 			$('#pwd').attr("readonly",false);
 	 }else{
 		 $('#pwd_leng').html("영,숫자 조합 8자리 이상 입력해주세요");
-		
 	 }
 	 if(pwd.length<=0){
 		 $('#pwd_leng').html("");
-		 
 	 }
-		
-	}
-
-	 
+}
 
 //비밀번호 확인 펑션
 function PwdChk(event){
@@ -46,29 +40,8 @@ function PwdChk(event){
 	}
 	if(chk.trim()==''){
 		$('#pwd_chk').html("");
-		
 	}
 }
-
-
-function email_check(email){
-	var regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    return (email != '' && email != 'undefined' && regex.test(email));
-}
-
-function email(){
-	var emaill = $('#j_email').val();
-	
-	if(!email_check(email)){
-		alert("이메일형식이 올바르지 않습니다.");
-		return false;
-	}else{
-		return true;
-	}
-	
-}
-
-
 
 //가입폼내의 인풋박스에 입력값이 없으면 경고창을 띄우며 해당 인풋박스로 이동
 function formchk(){

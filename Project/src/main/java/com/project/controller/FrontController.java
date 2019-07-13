@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -80,9 +81,19 @@ public class FrontController {
 	}
 	
 	@RequestMapping("/transportTest.do")
-	public String transportTest() {
+	public String transportTest(HttpServletRequest request, Model model) {
+		String transportTest1_search = request.getParameter("transportTest1_search").trim();
+		String transportTest2_search = request.getParameter("transportTest2_search").trim();
+		
+		if(transportTest1_search !=null && transportTest2_search !=null) {
+			model.addAttribute("transportTest1_search", transportTest1_search);
+			model.addAttribute("transportTest2_search", transportTest2_search);
+		}		
+		model.addAttribute("board_type", request.getParameter("board_type"));
 		return "transportTest";
 	}
+	
+	
 
 	@RequestMapping("/restaurantPopup.do")
 	@ResponseBody

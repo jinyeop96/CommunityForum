@@ -304,7 +304,7 @@
 				
 				var radioVal = $('input[name="radio"]:checked').val();
 				if(radioVal == 1){
-					str += '<button onclick="getTerminalID(1);test()">검색</button>';
+					str += '<button onclick="getTerminalID(1);">검색</button>';
 				} else if(radioVal == 2){
 					str += '<button onclick="getTerminalID(2);">검색</button>';
 				} else if(radioVal == 3){
@@ -314,11 +314,6 @@
 				$("#searchDiv").append(str);
 			})  
 		});
-		
-		function test(){
-			alert("asd");
-		}
-			
 			
 </script>
 </head>
@@ -331,6 +326,7 @@
 	    	<div id="map" style="width:100%;height:400px; border-radius: 15px"></div>
 	    	
 	    	<div>
+
 	    		<input type="radio" name="radio" value="1" >고속
 	    		<input type="radio" name="radio" value="2" >시외
 	    		<input type="radio" name="radio" value="3" >기차

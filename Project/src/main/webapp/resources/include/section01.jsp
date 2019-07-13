@@ -20,12 +20,46 @@
       <!-- Portfolio Grid Items -->
       <div align="center" >
 
-        <!-- Hohel Item 1 -->
+
+	<script>
+
+function hotelCheck() {
+
+	  if(fd.hotel_search.value == "") {
+
+	    alert("찾고자 하는 지역명을 입력하세요!.");
+
+	    fd.hotel_search.focus();
+
+	    return false;
+
+	  }
+	  
+	  else if(fd.hotel_search.value == "") {
+
+		    alert("찾고자 하는 지역명을 입력하세요!.");
+
+		    fd.hotel_search.focus();
+
+		    return false;
+
+		  }
+
+		  else return true;
+
+		}
+
+
+</script>
+	
+
+
+
         <div>            
-            <form action="hotel.do">
+            <form action="hotel.do" name="fd">
            	<input type="hidden" name="board_type" value="hotel">
-            	<input name="hotel_search" placeholder="지역명으로 입력주세요.">
-            	<input type="submit" value="search">
+            	<input style="width:200px;" name="hotel_search" placeholder="지역명으로 입력주세요.">
+            	<input type="submit" value="search" onclick="return hotelCheck()">
             </form>
           
         </div>

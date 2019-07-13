@@ -20,11 +20,43 @@
       <!-- Portfolio Grid Items -->
       <div align="center">
 
+	<script>
+
+function check() {
+
+  if(fr.transportTest1_search.value == "") {
+
+    alert("출발지와 도착지를 입력하세요!");
+
+    fr.transportTest1_search.focus();
+
+    return false;
+
+  }
+
+  else if(fr.transportTest2_search.value == "") {
+
+    alert("출발지와 도착지를 입력하세요!");
+
+    fr.transportTest2_search.focus();
+
+    return false;
+
+  }
+
+  else return true;
+
+}
+
+</script>
+
         <!-- Hohel Item 1 -->
         <div>            
-            <form action="transport.do">
-            	<input name="transport" placeholder="교통편을 입력하세요.">
-            	<input type="submit" value="search">
+        
+            <form action="transportTest.do" name="fr">
+            	<input type="text" style="width:210px;" id="depart" name="transportTest1_search" placeholder="출발지를 입력하세요.">
+            	<input type="text" style="width:210px;" id="arrival" name="transportTest2_search" placeholder="도착지를 입력하세요.">
+            	<input id="search1" type="submit" value="search" onclick="return check()">
             </form>
           
         </div>

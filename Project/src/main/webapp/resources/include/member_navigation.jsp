@@ -84,11 +84,10 @@
 					<li class="nav-item mx-0 mx-lg-1">
 						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">편의제공</a>
 							<ul>
-
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="hotel.do?hotel_search=">숙박</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="restaurant.do?restaurant_search=">음식점</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transport.do">교통</a></li>
-
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transport.do?transport_search=">교통</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transportTest.do?transportTest_search=">교통테스트</a></li>
 							</ul>
 					</li>
 
@@ -120,11 +119,7 @@
 					</c:if>		
 					
 					<c:if test="${!empty nickname }">
-						<li class="nav-item mx-0 mx-lg-1">
-		       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="logout.do">Logout</a>
-		       			</li>
-			
-						<li class="nav-item mx-0 mx-lg-1">
+							<li class="nav-item mx-0 mx-lg-1">
 		       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="memberinfo.do">${nickname }</a>
 		       			</li>
 					</c:if>
