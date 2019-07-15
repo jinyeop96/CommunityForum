@@ -19,6 +19,8 @@
 	}
 </style>
 <script src="./resources/js/login.js" ></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 </head>
 	<jsp:include page="/resources/include/navigation.jsp" />
 
@@ -56,7 +58,35 @@
 	    apiURL += "&state=" + state;
 	    session.setAttribute("state", state);
 	%>
-    	<a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>	    
+    	<a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+    	
+        <a id="kakaologinbtn" href="javascript:loginWithKakao()"><img src="./resources/img/kakao.png"></a>
+        <input type="button" value="문의메일쓰기" onclick="location.href='<%=request.getContextPath()%>/mailpage.do'">
+        
+        <script type='text/javascript'>
+           Kakao.init('fa5422f3d426ecd7023329085641e7dc');
+    function loginWithKakao() {
+  
+      Kakao.Auth.login({
+        success: function(authObj) {
+        	 Kakao.API.request({
+        	       url: '/v1/user/me',
+        	       success: function(res) {
+        	             var kakaonick = res.properties.nickname;
+        	             location.href="kakao.do?kakaonick="+kakaonick;
+        	           }
+        	         })
+
+        },
+        fail: function(err) {
+          alert(JSON.stringify(err));
+        }
+      });
+    };
+  
+</script>
+        
+    		    
       
       	<div id="fb-root"></div>
 		<div class="fb-login-button"  data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
