@@ -45,7 +45,7 @@
       	</form>
       </div> 
       
-   <%
+   <%	//네이버 로그인
 	    String clientId = "j8R_N6PAsO7uCvkZDq3n";//애플리케이션 클라이언트 아이디값";
 	    String redirectURI = URLEncoder.encode("http://localhost:8054/controller/naver/callback.do", "UTF-8");
 	    SecureRandom random = new SecureRandom();
@@ -58,8 +58,14 @@
 	%>
     	<a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>	    
       
+      	<div id="fb-root"></div>
+		<div class="fb-login-button"  data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
     </div>
   </header>
+ 	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v3.3&appId=420903221845504&autoLogAppEvents=1"></script>
+  <script type="text/javascript">
+
+  </script>
   
   
 
