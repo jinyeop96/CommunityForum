@@ -284,36 +284,49 @@
 					}	//if (xhr.readyState == 4 && xhr.status == 200)
 				}
 			}	//searchTrainAJAX() 
-		
 			
 		$(function(){
-			$('input[name="radio"]').click(function(){ // 라디오버튼 툴렀을때
-				var depart = $("#depart").val(); 
-				var arrival = $("#arrival").val(); 
-				
-				$("#searchDiv").empty();
-				
-				var str = "";
-				if(depart == null && arrival == null){ 
-					str += '<input type="text" id="depart" placeholder="출발지">';
-					str += '<input type="text" id="arrival" placeholder="도착지">';
-				} else{
-					str += '<input type="text" id="depart" placeholder="출발지" value='+depart+'>';
-					str += '<input type="text" id="arrival" placeholder="도착지" value='+arrival+'>';
-				}
-				
-				var radioVal = $('input[name="radio"]:checked').val();
-				if(radioVal == 1){
-					str += '<button onclick="getTerminalID(1);">검색</button>';
-				} else if(radioVal == 2){
-					str += '<button onclick="getTerminalID(2);">검색</button>';
-				} else if(radioVal == 3){
-					str += '<button onclick="getTerminalID(3);">검색</button>';
-				}
-				
-				$("#searchDiv").append(str);
-			})  
+			// hotel.jsp에서 라디오 버튼 눌렀을때
+			$('input[name="radio"]').click(function(){
+				search($("#depart").val(),  $("#arrival").val());
+			})
+			
+			// 만약 main.jsp 에서 넘어온 검색값이 있다면
+			if("${transportTest1_search}" != ""){
+				$("input[name = 'radio']").eq(${radio}).attr("checked", true);	// radio로 넘어온 숫자로 n번째 라디오 버튼 클릭     *section03.jsp에서 radio버튼으로 값을 받아옴
+				search("${transportTest1_search}", "${transportTest2_search}");	// search()로 출발/도착지 넘겨줌
+				$("#searchBtn").click();										// 검색버튼 클릭해서 바로 결과 나옴			* search()에서 만들어지는 버튼의 id
+			}
 		});
+		
+		function search(depart, arrival){
+			$("#searchDiv").empty();
+			
+			var str = "";
+			if(depart == null && arrival == null){	//출발/도착이 없을때 (navigation.jsp 로 바로 들어올 땐 검색값이 없음) 
+				str += '<input type="text" id="depart" placeholder="출발지">';
+				str += '<input type="text" id="arrival" placeholder="도착지">';
+			} else{									// main.jsp 혹은 입력된 상태에서 라디오버튼 눌렀을때 값을  value에 넣어줌
+				str += '<input type="text" id="depart" placeholder="출발지" value='+depart+'>';
+				str += '<input type="text" id="arrival" placeholder="도착지" value='+arrival+'>';
+			}
+			
+			// 라디오 버튼 value
+			var radioVal = $('input[name="radio"]:checked').val();
+			if(radioVal == 1){
+				str += '<button id="searchBtn" class="buttons" onclick="getTerminalID(1);">검색</button>';	// 고속
+			} else if(radioVal == 2){
+				str += '<button id="searchBtn" class="buttons" onclick="getTerminalID(2);">검색</button>';	// 시외
+			} else if(radioVal == 3){
+				str += '<button id="searchBtn" class="buttons" onclick="getTerminalID(3);">검색</button>';	// 기차
+			}
+			
+			$("#searchDiv").append(str);
+			
+		}
+		
+			
+		
 			
 </script>
 </head>

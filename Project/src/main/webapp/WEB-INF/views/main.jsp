@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>오와열</title>
 <style type="text/css" media="screen">
 #content {  
   position:absolute;
@@ -13,6 +14,14 @@
   left: 40%;     /* 레이어의 시작점이 왼쪽으로 부터 50% 지정 */
   text-align: left; 
   padding: 0px;
+}
+
+.names{
+	width: 100%; height: 100%
+}
+
+.contacts{
+	width: 80%; height: 100%; margin-top:5px;
 }
 </style> 
  
@@ -63,11 +72,34 @@
   
 <body> 
 <div id="content">
-<center><a href="http://onore.co.kr" target="_blank"><img src="resources/img/banner/bangsang.png" style="width:100%; height:100%;" ></a></center>
-<br>
-<center><a href="https://www.instagram.com/vang_sang/" target="_blank"><img src="resources/img/banner/bang_insta.png" style="width:100%; height:100%;" /></a></center>
-<br>
+	<center><img src="resources/img/banner/sangwon.png" class="names"></center>
+	<!-- <center><font class="names">SANGWON BANG</font></center> --> 
+	<center><a href="javascript:void(0)" target="_blank"><img src="resources/img/banner/sangwon_phone.png" class="contacts"/></a></center>
+	<center><a href="https://www.instagram.com/vang_sang/" target="_blank"><img  src="resources/img/banner/sangwon_insta.png" class="contacts" /></a></center>
+	<br>  
+
+	<center><img src="resources/img/banner/jinyeop.png"  class="names" ></center>
+	<center><a href="javascript:void(0)" target="_blank"><img  src="resources/img/banner/jinyeop_phone.png" class="contacts" /></a></center>
+	<center><a href="https://www.instagram.com/ohhh_jinyeop/" target="_blank"><img src="resources/img/banner/jinyeop_insta.png" class="contacts"/></a></center>
+	<center><a href="javascript:void(0)" target="_blank"><img  src="resources/img/banner/jinyeop_kakao.png" class="contacts"/></a></center>
+	<br> 
+	
+	<center><img src="resources/img/banner/chihyeock.png" class="names"  ></center>
+	<center><a href="javascript:void(0)" target="_blank"><img src="resources/img/banner/chihyeock_phone.png" class="contacts" /></a></center>
+	<br>	
+	 
 </div>
 </body>
 
+ 
 </html>
+
+
+
+
+
+
+
+
+
+

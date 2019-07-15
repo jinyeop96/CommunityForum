@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -88,6 +87,7 @@ public class FrontController {
 		if(transportTest1_search !=null && transportTest2_search !=null) {
 			model.addAttribute("transportTest1_search", transportTest1_search);
 			model.addAttribute("transportTest2_search", transportTest2_search);
+			model.addAttribute("radio", Integer.parseInt(request.getParameter("radio")));
 		}		
 		model.addAttribute("board_type", request.getParameter("board_type"));
 		return "transportTest";
@@ -106,6 +106,12 @@ public class FrontController {
 		mav.setViewName("ajax/restaurantPopup");
 		return mav;
 	}
+	
+	@RequestMapping("/naver/callback.do")
+	public String naverCallback() {
+		return "naver/callback";
+	}
+
 }
 
 

@@ -41,7 +41,10 @@ function check() {
     fr.transportTest2_search.focus();
 
     return false;
-
+ 
+  } else if (!$("input[name='radio']").is(":checked")){
+	  alert("교통 수단을 선택하세요!");
+	  return false;
   }
 
   else return true;
@@ -54,9 +57,17 @@ function check() {
         <div>            
         
             <form action="transportTest.do" name="fr">
-            	<input type="text" style="width:210px;" id="depart" name="transportTest1_search" placeholder="출발지를 입력하세요.">
-            	<input type="text" style="width:210px;" id="arrival" name="transportTest2_search" placeholder="도착지를 입력하세요.">
-            	<input id="search1" type="submit" value="search" onclick="return check()">
+            	<input type="hidden" name="board_type" value="transportTest">
+            	
+            	<input type="radio" name="radio" value="0" >고속
+	    		<input type="radio" name="radio" value="1" >시외
+	    		<input type="radio" name="radio" value="2" >기차
+	    	
+	    		<br> 
+            
+            	<input type="text" style="width:100px;" id="depart" class="input" name="transportTest1_search" placeholder='출발터미널'>
+            	<input type="text" style="width:100px;" id="arrival" class="input" name="transportTest2_search" placeholder='도착터미널'>
+            	<input id="search1" type="submit" value="search" class="buttons" onclick="return check()">
             </form>
           
         </div>

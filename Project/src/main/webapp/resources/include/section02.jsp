@@ -56,8 +56,8 @@ function readyCheck() {
         <div>            
             <form action="restaurant.do" name="fe">
                 <input type="hidden" name="board_type" value="restaurant">
-            	<input style="width:210px;" name="restaurant_search" placeholder="지역명+맛집(음식점)">
-            	<input id="search" type="submit" value="search"  onclick="return readyCheck()">
+            	<input style="width:210px;" name="restaurant_search" class="input" placeholder='"자등리 맛집"'>
+            	<input id="search" type="submit" value="search" class="buttons-section2"  onclick="return readyCheck()">
             </form>
           
         </div>

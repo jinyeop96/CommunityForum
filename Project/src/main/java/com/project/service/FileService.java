@@ -1,4 +1,4 @@
-package com.project.dao;
+package com.project.service;
 
 import java.io.File;
 import java.util.Calendar;
@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.project.dao.BoardDAOImpl;
 
 @Service
 //@Configurable - 비지니스 로직을 생성자에 넣고 싶다면 이렇게 해야함

@@ -58,8 +58,8 @@ function hotelCheck() {
         <div>            
             <form action="hotel.do" name="fd">
            	<input type="hidden" name="board_type" value="hotel">
-            	<input style="width:200px;" name="hotel_search" placeholder="지역명으로 입력주세요.">
-            	<input type="submit" value="search" onclick="return hotelCheck()">
+            	<input style="width:200px;" class="input" name="hotel_search" placeholder='"양구군 남면 용하리"'>
+            	<input type="submit" value="search" class="buttons" onclick="return hotelCheck()">
             </form>
           
         </div>

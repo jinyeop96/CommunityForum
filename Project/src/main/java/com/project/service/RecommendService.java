@@ -1,4 +1,4 @@
-package com.project.dao;
+package com.project.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.dao.BoardDAOImpl;
+import com.project.dao.RecommendDAOImpl;
+import com.project.dao.ReplyDAOImpl;
 import com.project.dto.RecommendDTO;
 
 @Service
