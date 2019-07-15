@@ -16,3 +16,6 @@
 
   <!-- Custom scripts for this template -->
   <script src="<c:url value='/resources/js/freelancer.min.js' />"></script>
+  
+ </body>
+ </html>
