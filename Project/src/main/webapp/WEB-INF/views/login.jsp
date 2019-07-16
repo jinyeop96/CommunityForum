@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name = "google-signin-client_id" content="811363179923-l5jjuf3mjdrnrdmvl534rubl31frp24e.apps.googleusercontent.com">
 <title>Login</title>
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 <style type="text/css">
@@ -20,7 +21,7 @@
 </style>
 <script src="./resources/js/login.js" ></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 	<jsp:include page="/resources/include/navigation.jsp" />
 
@@ -58,38 +59,59 @@
 	    apiURL += "&state=" + state;
 	    session.setAttribute("state", state);
 	%>
-    	<a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-    	
-        <a id="kakaologinbtn" href="javascript:loginWithKakao()"><img src="./resources/img/kakao.png"></a>
+   <table>
+	<tr>
+	<td>
+		<a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+	</td>
+	<td>
+	    <a href="javascript:loginWithKakao()"><img src="./resources/img/kakaobtn.png"></a>
+	</td>
+	</tr>
+	<tr>
+	<td colspan="2">
+	    <div align="center" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+	</td>
+	</tr>
+   </table>
+<script type="text/javascript">
+
+Kakao.init('fa5422f3d426ecd7023329085641e7dc');
+function loginWithKakao() {
+
+  Kakao.Auth.login({
+    success: function(authObj) {
+    	 Kakao.API.request({
+    	       url: '/v1/user/me',
+    	       success: function(res) {
+    	    	     var kakaonick = res.properties.nickname;
+    	             var kakaoemail = res.kaccount_email;
+    	             location.href="kakao.do?kakaonick="+kakaonick+"&kakaoemail="+kakaoemail;
+    	           }
+    	         })
+
+    },
+    fail: function(err) {
+      alert(JSON.stringify(err));
+    }
+  });
+};
+
+ function onSignIn(googleUser) {
+	  var profile = googleUser.getBasicProfile();
+	  var gname = profile.getName();
+	  var gemail = profile.getEmail();
+	  var auth2 = gapi.auth2.getAuthInstance();
+	  auth2.disconnect();
+        location.href="google.do?gname="+gname+"&gemail="+gemail;
+	}
+ </script>
+        
         <input type="button" value="문의메일쓰기" onclick="location.href='<%=request.getContextPath()%>/mailpage.do'">
         
-        <script type='text/javascript'>
-           Kakao.init('fa5422f3d426ecd7023329085641e7dc');
-    function loginWithKakao() {
-  
-      Kakao.Auth.login({
-        success: function(authObj) {
-        	 Kakao.API.request({
-        	       url: '/v1/user/me',
-        	       success: function(res) {
-        	             var kakaonick = res.properties.nickname;
-        	             location.href="kakao.do?kakaonick="+kakaonick;
-        	           }
-        	         })
-
-        },
-        fail: function(err) {
-          alert(JSON.stringify(err));
-        }
-      });
-    };
-  
-</script>
         
-    		    
-      
-    </div>
-  </header>
+  </div>
+</header>
   
   
 

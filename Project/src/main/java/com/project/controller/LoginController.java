@@ -173,12 +173,21 @@ public class LoginController {
 		}
 		
 		@RequestMapping("/kakao.do")
-		public void kakao(@RequestParam String kakaonick, HttpServletResponse response,HttpSession session) throws Exception {
+		public void kakao(@RequestParam String kakaonick,@RequestParam String kakaoemail, HttpServletResponse response,HttpSession session) throws Exception {
 		session.setAttribute("nickname", kakaonick);
-		System.out.println(session.getAttribute("nickname"));
+		session.setAttribute("email", kakaoemail);
 		PrintWriter out = response.getWriter(); 
 		out.println("<script>location.href='main.do';</script>");
-		}		
+		}
+		
+		@RequestMapping("/google.do")
+		public void googlelogin (@RequestParam String gname, @RequestParam String gemail, HttpServletResponse response, HttpSession session) throws Exception{
+		session.setAttribute("nickname", gname);
+		session.setAttribute("email", gemail);
+		PrintWriter out = response.getWriter(); 
+		out.println("<script>location.href='main.do';</script>");
+		}
+		
 		
 		@RequestMapping("/mailpage.do")
 		public String mail() {
@@ -221,5 +230,7 @@ public class LoginController {
 			
 			out.println("<script>alert('Mail send Success'); location.href='main.do';</script>");
 
-		}		
+		}
+		
+
 }
