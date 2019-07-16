@@ -51,12 +51,11 @@
 
 <meta charset="UTF-8">
 <title>plan</title>
+<script type="text/javascript" src="<c:url value='/resources/jquery-3.4.1.js' />"></script>
 
-<script language="JavaScript">
-
-<script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 </head>
  <body>
+ 	<jsp:include page="/resources/include/banner.jsp" />
 	<jsp:include page="/resources/include/navigation.jsp" />
 	
 	<header class="masthead bg-primary text-white text-center">

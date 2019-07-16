@@ -107,6 +107,12 @@ public class FrontController {
 		return mav;
 	}
 	
+	@RequestMapping("/banner.do")
+	@ResponseBody
+	public ModelAndView banner(ModelAndView mav) {
+		mav.setViewName("banner/banner");
+		return mav;
+	}
 }
 
 

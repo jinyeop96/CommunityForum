@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>교통 테스트</title>
 	<style type="text/css">
 		.division{
@@ -13,9 +14,12 @@
 		    border-radius: 15px;
 		}
 	</style>
+	
+	
 <script type="text/javascript" src="<c:url value='/resources/jquery-3.4.1.js'/>"></script>
+
 	<script>
-		function getTerminalID(type) {
+		 function getTerminalID(type) {
 			$("#resultDiv").empty();
 			var depart = document.getElementById('depart').value.trim();
 			var arrival = document.getElementById('arrival').value.trim();
@@ -329,12 +333,14 @@
 		
 			
 </script>
-</head>
+	
+</head> 
 <body>
+	
 	<jsp:include page="/resources/include/navigation.jsp" />
 	
 	<header class="masthead bg-primary text-white text-center">
-	    <div class="container d-flex align-items-center flex-column">
+	    <div class="container d-flex align-items-center flex-column"> 
 	    
 	    	<div id="map" style="width:100%;height:400px; border-radius: 15px"></div>
 	    	
@@ -349,7 +355,6 @@
 	 		
 	 		<div id="resultDiv" class="font-black" style="width: 100%"></div>
 		</div>
-	    
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=qvqco74zp8"></script>
 
 	
@@ -514,10 +519,10 @@
     </script>
 	    
     </header>
-  
-  	
+    
 	<jsp:include page="/resources/include/footer.jsp" />
-  	<jsp:include page="/resources/include/copyright.jsp" />
+  	<jsp:include page="/resources/include/copyright.jsp" /> 
+  	<jsp:include page="/resources/include/banner.jsp" />
  	<jsp:include page="/resources/include/bottomJs.jsp" />	<%-- modal.jsp 끝에 js 파일 있어서 반응형 웹이 됩니다~ 마지막에 꼭 넣으십쏘~ --%>
 	
 

@@ -536,6 +536,7 @@ function removeAllChildNods(el) {
 	<jsp:include page="/resources/include/footer.jsp" />
   	<jsp:include page="/resources/include/copyright.jsp" />
   	<jsp:include page="/resources/include/modals.jsp" />
+  	<jsp:include page="/resources/include/banner.jsp" flush="false" /> 
 	
 </body>
 </html>

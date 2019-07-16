@@ -67,11 +67,12 @@
 		    font-style: italic;
 		    font-size: 15px;
 		}
+		
 	</style>
 
 </head>
 <body>
-
+	<jsp:include page="/resources/include/banner.jsp" />
 	<jsp:include page="/resources/include/navigation.jsp" />
 	
 	<header class="masthead bg-primary text-white text-center">
@@ -82,8 +83,7 @@
 	<table style="width: 100%">
 		<tr>
 			<td id="searchBar">
-				<c:if test="${empty hotel_search }"><input class="searchLoc"><input type="button" class="search" onclick="search()" value="검색"></c:if>
-				<c:if test="${!empty hotel_search }"><input class="searchLoc" value="${hotel_search }"><input class="search" type="button" onclick="search()" value="검색"></c:if>
+				<input class="searchLoc" value="${hotel_search }"><input class="search" type="button" onclick="search()" value="검색">
     		</td>
 		</tr>
 	</table>
