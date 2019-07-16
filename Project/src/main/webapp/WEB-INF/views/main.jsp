@@ -11,17 +11,32 @@
   width:300px;    /* 퀵메뉴, 배너 이미지의 너비*/
   margin:0px 0px 0px 785px;   /* 가장 오른쪽의 수치가 화면 가운데에서 얼마만큼 오른쪽으로 레이어를 붙일 것인지 설정  */ 
   top: 220px;  /* 배너 상단에서 얼마나 떨어뜨릴지 설정*/
-  left: 40%;     /* 레이어의 시작점이 왼쪽으로 부터 50% 지정 */
+  left: 40%;     /* 레이어의 시작점이 왼쪽으로 부터 50%  지정 */
   text-align: left; 
   padding: 0px;
 }
 
 .names{
-	width: 100%; height: 100%
+	font-size: 15pt;
+	font-weight: bold;
 }
 
 .contacts{
-	width: 80%; height: 100%; margin-top:5px;
+	width: 30px; height: 100%; margin: 3px 0; 
+	
+}
+
+.fonts{
+	text-decoration: none; 
+	font-weight: bold;
+	font-size: 14pt;
+	color: black;
+}
+.fonts:hover{
+	text-decoration: none;
+	font-style: italic;
+	color: 1abc9c; 
+
 }
 </style> 
  
@@ -72,8 +87,7 @@
   
 <body> 
 <div id="content">
-	<center><img src="resources/img/banner/sangwon.png" class="names"></center>
-	<!-- <center><font class="names">SANGWON BANG</font></center> --> 
+<!-- 	<center><img src="resources/img/banner/sangwon.png" class="names"></center>
 	<center><a href="javascript:void(0)" target="_blank"><img src="resources/img/banner/sangwon_phone.png" class="contacts"/></a></center>
 	<center><a href="https://www.instagram.com/vang_sang/" target="_blank"><img  src="resources/img/banner/sangwon_insta.png" class="contacts" /></a></center>
 	<br>  
@@ -86,9 +100,58 @@
 	
 	<center><img src="resources/img/banner/chihyeock.png" class="names"  ></center>
 	<center><a href="javascript:void(0)" target="_blank"><img src="resources/img/banner/chihyeock_phone.png" class="contacts" /></a></center>
+	<br> -->	 
+
+	<center><font class="names">SANGWON BANG</font></center> 
+	<center>
+		<a href="javascript:void(0)" target="_blank" class="fonts">
+			<img src="resources/img/banner/phone.png" class="contacts"/>&nbsp;&nbsp;010 6362 1073
+		</a>
+	</center>
+	
+	<center>
+		<a href="https://www.instagram.com/vang_sang/" target="_blank" class="fonts">
+			<img  src="resources/img/banner/instagram.png" class="contacts" />&nbsp;&nbsp;vang_sang
+		</a>
+	</center>
+	
+	<center>
+		<a href="javascript:void(0)" target="_blank" class="fonts">
+			<img  src="resources/img/banner/kakaotalk.png" class="contacts"/>&nbsp;&nbsp;wony1073
+		</a>
+		</center>
+	<br>  
+
+
+	<center><font class="names">JINYEOP OH</font></center>
+	<center>
+		<a href="javascript:void(0)" target="_blank" class="fonts">
+			<img src="resources/img/banner/phone.png" class="contacts"/>&nbsp;&nbsp;010 6362 1073
+		</a>
+	</center>
+	<center>
+		<a href="https://www.instagram.com/vang_sang/" target="_blank" class="fonts">
+			<img  src="resources/img/banner/instagram.png" class="contacts" />&nbsp;&nbsp;ohhh_jinyeop
+		</a>
+	</center>
+	<center>
+		<a href="javascript:void(0)" target="_blank" class="fonts">
+			<img  src="resources/img/banner/kakaotalk.png" class="contacts"/>&nbsp;&nbsp;ojy96
+		</a>
+	</center>
+	<br> 
+	
+	
+	
+	<center><font class="names">CHIHYEOCK YOO</font></center>
+	<center>
+		<a href="javascript:void(0)" target="_blank" class="fonts">
+			<img src="resources/img/banner/phone.png" class="contacts"/>&nbsp;&nbsp;010 3553 1079
+		</a> 
+	</center>
 	<br>	
 	 
-</div>
+</div> 
 </body>
 
  

@@ -30,28 +30,30 @@
 	<header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
       
-      <h1 class="masthead-heading text-uppercase mb-0">로그인</h1>
+      <h1 class="masthead-heading text-uppercase mb-0">문의사항 이메일</h1>
       <div id="loginDiv" align="center">
 
 
       <form onsubmit="return mailformchk()" method = "post" action="<%=request.getContextPath()%>/mailtest.do">
+      		<input type="hidden" name="tomail" value="owa101010@gmail.com">
+      		<input type="hidden" name="frommail" value="${email }">
           <table>
-            <tr>
+           <!--  <tr>
              <th>관리자메일주소</th>
                <td> <input name = "tomail" value="owa101010@gmail.com" readonly="readonly"> </td>
             </tr>
             <tr>
              <th>답변메일받을주소</th>
                <td> <input name = "frommail" id ="frommail" > </td>
-            </tr>
-                        <tr>
-             <th>문의제목</th>
-               <td> <input name = "mailtitle" id ="mailtitle"> </td>
+            </tr> -->
+            <tr>
+         	    <th>문의제목</th>
+               	<td> <input name = "mailtitle" id ="mailtitle"> </td>
             </tr>
             
             <tr>
-            <th>문의내용</th>
-               <td> <textarea name = "mailcont" id ="mailcont" cols="30px" rows="10px" style="resize: none"></textarea> </td>
+            	<th>문의내용</th>
+               	<td> <textarea name = "mailcont" id ="mailcont" cols="30px" rows="10px" style="resize: none"></textarea> </td>
             </tr>
 
             

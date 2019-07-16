@@ -107,11 +107,6 @@ public class FrontController {
 		return mav;
 	}
 	
-	@RequestMapping("/naver/callback.do")
-	public String naverCallback() {
-		return "naver/callback";
-	}
-
 }
 
 
