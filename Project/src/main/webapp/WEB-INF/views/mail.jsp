@@ -35,20 +35,13 @@
 
 
       <form onsubmit="return mailformchk()" method = "post" action="<%=request.getContextPath()%>/mailtest.do">
-      		<input type="hidden" name="tomail" value="owa101010@gmail.com">
-      		<input type="hidden" name="frommail" value="${email }">
-          <table>
-           <!--  <tr>
-             <th>관리자메일주소</th>
-               <td> <input name = "tomail" value="owa101010@gmail.com" readonly="readonly"> </td>
-            </tr>
-            <tr>
-             <th>답변메일받을주소</th>
-               <td> <input name = "frommail" id ="frommail" > </td>
-            </tr> -->
-            <tr>
-         	    <th>문의제목</th>
-               	<td> <input name = "mailtitle" id ="mailtitle"> </td>
+      	<input type="hidden" name = "tomail" value="owa101010@gmail.com" >
+        <input type="hidden" name = "frommail" value="${email }" >
+       
+      	<table>
+        	<tr>
+             	<th>문의제목</th>
+              	<td> <input name = "mailtitle" id ="mailtitle"> </td>
             </tr>
             
             <tr>
@@ -64,8 +57,6 @@
             </tr>
           </table>
        	</form>
-
-
 
 
       </div> 

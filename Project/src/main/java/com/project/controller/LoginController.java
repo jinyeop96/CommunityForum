@@ -19,6 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dao.LoginDAOImpl;
 import com.project.dto.JoinDTO;
@@ -168,14 +170,6 @@ public class LoginController {
 		}
 	}
 	
-	@RequestMapping("/kakao.do")
-	public void kakao(@RequestParam String kakaonick, HttpServletResponse response,HttpSession session) throws Exception {
-	session.setAttribute("nickname", kakaonick);
-	System.out.println(session.getAttribute("nickname"));
-	PrintWriter out = response.getWriter(); 
-	out.println("<script>location.href='main.do';</script>");
-	}		
-	
 	@RequestMapping("/mailpage.do")
 	public String mail() {
 		return "mail";
@@ -211,6 +205,8 @@ public class LoginController {
 		mimeMessage.setFrom(new InternetAddress(frommail));
         mimeMessage.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(tomail));
 		
+		
+		
 		mimeMessage.setSubject(mailtitle);
 		mimeMessage.setText(mailcont);
 		Transport.send(mimeMessage);
@@ -223,12 +219,21 @@ public class LoginController {
 	public String naverCallback() {
 		return "naver/callback";
 	}
-	
-	@RequestMapping("/facebookLogin.do")
-	public String facebookLogin(@RequestParam String name, @RequestParam String email, HttpSession session) {
-		session.setAttribute("nickname", name);
+
+	@RequestMapping("/loginAPIOk.do")
+	public String loginAPIOk(@RequestParam String nickname, @RequestParam String email, HttpSession session){
+		session.setAttribute("nickname", nickname);
 		session.setAttribute("email", email);
 		
 		return "redirect:main.do";
+	}
+	
+
+	@RequestMapping("loginAPI.do")
+	@ResponseBody
+	public ModelAndView loginAPI(ModelAndView mav) {
+		System.out.println("api");
+		mav.setViewName("ajax/loginAPI");
+		return mav;
 	}
 }

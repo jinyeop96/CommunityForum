@@ -15,8 +15,10 @@ font-size: 12px;
 }
 </style>
 <title>Login</title>
-<script src="http://code.jquery.com/jquery-3.4.1.js"></script> <!-- JQuery사용을 위한 라이브러리 다운로드 -->
 <script src="./resources/js/join.js" ></script>  <!-- Join.jsp에서 사용될 함수가 저장된 라이브러리로드 -->
+<script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script >
 $(function(){
 	//회원가입 버튼 활성/비활성을 할때 확인위한 변수 선언
@@ -247,6 +249,15 @@ $(function(){
       	<input  type="submit" value="가입하기" disabled="disabled" id="joinbtn">&nbsp;&nbsp;
       	<input type="button" value="돌아가기" onclick="history.back();"> 
       	</form>
+      	
+      	<!-- 로그인 api 불러오기 -->
+      	<table id="loginAPI"></table>
+  
+  		<script type="text/javascript">
+  			$(function(){
+  				$("#loginAPI").load("loginAPI.do");
+  			})
+  		</script>
       </div>
     </div>
   </header>

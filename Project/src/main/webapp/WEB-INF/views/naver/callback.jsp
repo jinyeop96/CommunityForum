@@ -87,11 +87,12 @@
             System.out.println("inputLine = " + inputLine);
             jsonObject = (JSONObject) parser.parse(inputLine);		// 파싱해주면 유니코드 값이 변환 됨
             jsonObject = (JSONObject) jsonObject.get("response");	// response부분만 다시 jsonObject객체에 넣어줌
-            nickname = (String)jsonObject.get("nickname");			// response중에서 nickname만 가져옴
             email = (String)jsonObject.get("email");
+            nickname = (String)jsonObject.get("email");			// response중에서 nickname만 가져옴
             
             session.setAttribute("nickname", nickname);	//세션에 nickname 저장 
             session.setAttribute("email", email);	//세션에 nickname 저장 
+            //response.sendRedirect("<script>location.href='main.do'</script>");
             response.sendRedirect("http://localhost:8054/controller/main.do");
             
         }

@@ -5,7 +5,7 @@ var contcheck;
 function mailformchk(){
 	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	var emailcheck = $('#frommail').val();
-	if($('#frommail').val()  ==""){
+/*	if($('#frommail').val()  ==""){
 		alert("답변 받을 이메일주소를 입력해주세요");
 		$('#frommail').focus();
 		mailcheck = 0;
@@ -19,7 +19,7 @@ function mailformchk(){
 		mailcheck = 0;
 		return false;
 		
-	}
+	}*/
 	
 	if($('#mailtitle').val()  ==""){
 		alert("제목을 입력해주세요");
@@ -39,7 +39,7 @@ function mailformchk(){
 		contcheck = 1;
 	}
 	
-	if(mailcheck == 1 && titlecheck ==1 && mailcont ==1){
+	if(/*mailcheck == 1 &&*/ titlecheck ==1 && mailcont ==1){
 		return true;
 	}
 	
