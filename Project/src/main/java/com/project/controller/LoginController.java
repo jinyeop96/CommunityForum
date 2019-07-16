@@ -3,12 +3,20 @@ package com.project.controller;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Address;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tika.metadata.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -163,4 +171,55 @@ public class LoginController {
 				//회원 정보가 없거나 pwd가 불일치할경우 경고창과 페이지이동
 			}
 		}
+		
+		@RequestMapping("/kakao.do")
+		public void kakao(@RequestParam String kakaonick, HttpServletResponse response,HttpSession session) throws Exception {
+		session.setAttribute("nickname", kakaonick);
+		System.out.println(session.getAttribute("nickname"));
+		PrintWriter out = response.getWriter(); 
+		out.println("<script>location.href='main.do';</script>");
+		}		
+		
+		@RequestMapping("/mailpage.do")
+		public String mail() {
+			return "mail";
+		}
+		
+		@RequestMapping("/mailtest.do")
+		public void sendmail(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			PrintWriter out = response.getWriter();
+			String tomail = request.getParameter("tomail");
+			String frommail = request.getParameter("frommail");
+			String mailtitle = request.getParameter("mailtitle");
+			String mailcont = request.getParameter("mailcont");
+			mailcont += "\n" + frommail;
+			final String host = "smtp.gmail.com";
+			final String accountid = "owa101010";
+			final String accountpwd = "m86304321";
+			final int port = 465;
+			
+			Properties props = System.getProperties();
+			props.put("mail.smtp.host", host);
+			props.put("mail.smtp.port", port);
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.ssl.enable", "true");
+			props.put("mail.smtp.ssl.trust", host);
+			Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+				protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+					return new javax.mail.PasswordAuthentication(accountid, accountpwd);
+				}
+			});
+			session.setDebug(true);
+			
+			javax.mail.Message mimeMessage = new MimeMessage(session);
+			mimeMessage.setFrom(new InternetAddress(frommail));
+	        mimeMessage.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(tomail));
+			
+			mimeMessage.setSubject(mailtitle);
+			mimeMessage.setText(mailcont);
+			Transport.send(mimeMessage);
+			
+			out.println("<script>alert('Mail send Success'); location.href='main.do';</script>");
+
+		}		
 }
