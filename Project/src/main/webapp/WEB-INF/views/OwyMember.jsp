@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>OwyMember</title>
+  
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
+
 </head>
 	<jsp:include page="/resources/include/navigation.jsp" />
 	
@@ -23,13 +25,14 @@
     </div>	
     
     
-    
     <!--카카오 지도 생성  API 코드-->
-    
+ 
 <div id="map" style="width:100%;height:400px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86b59d080c4ee3e8f0d9fc3cfd7b71c8"></script>
+
 <script>
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(37.496272, 127.028882), // 지도의 중심좌표
@@ -75,7 +78,7 @@ infowindow.open(map, marker);
 <h5>[서울특별시 강남구 역삼1동 강남대로 더조은컴퓨터아카데미 - 형제빌딩 3층 301호]</h5>
 
 </body>
-    	
+
     
     </header>
   

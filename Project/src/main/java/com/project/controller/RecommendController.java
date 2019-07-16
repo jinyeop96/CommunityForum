@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.dao.RecommendService;
+import com.project.service.RecommendService;
 
 @Controller
 public class RecommendController {

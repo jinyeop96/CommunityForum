@@ -14,6 +14,22 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<!-- 로그인 api에서 받아온 값이 json형식이기 때문에 parsing 해주어야 한다 -->
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+				
+		<!-- https://mvnrepository.com/artifact/com.github.scribejava/scribejava-core -->
+		<!-- 로그인 api 사용시 필요 -->
+		<dependency>
+		    <groupId>com.github.scribejava</groupId>
+		    <artifactId>scribejava-core</artifactId>
+		    <version>5.5.0</version>
+		</dependency>
+				
 		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
 		<!-- 파일 업로드시 어떤 파일인지 확인  -->
 		<dependency>

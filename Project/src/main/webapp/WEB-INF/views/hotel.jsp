@@ -7,6 +7,52 @@
 <head>
 <meta charset="UTF-8">
 <title>hotel</title>
+
+<style type="text/css" media="screen">
+
+#content {  
+  position:absolute;
+  height:600px;   /* 퀵메뉴, 배너 이미지의 높이 */
+  width:170px;    /* 퀵메뉴, 배너 이미지의 너비*/
+  margin:0px 0px 0px 625px;   /* 가장 오른쪽의 수치가 화면 가운데에서 얼마만큼 오른쪽으로 레이어를 붙일 것인지 설정  */ 
+  top: 110px;  /* 배너 상단에서 얼마나 떨어뜨릴지 설정*/
+  left: 50%;     /* 레이어의 시작점이 왼쪽으로 부터 50% 지정 */
+  text-align: left;
+  padding: 0px;
+}
+
+.names{
+	width: 100%; height: 100%
+}
+
+.contacts{
+	width: 80%; height: 100%; margin-top:5px;
+}
+</style> 
+ 
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>  
+<script type="text/javascript">
+        $(function() {
+            var offset = $("#content").offset();
+            var topPadding = 100;
+            $(window).scroll(function() {
+    
+                if ($(window).scrollTop() > offset.top) {
+                    $("#content").stop().animate({
+                        marginTop: $(window).scrollTop() - offset.top + topPadding
+                    }, 600);
+                } else {
+                    $("#content").stop().animate({
+                        marginTop: 50
+                    });
+                };
+             });
+        });
+</script>
+</head>
+
+
+
 	<style type="text/css">
 		.search{
 		    border-radius: 5px;
@@ -28,14 +74,14 @@
 		.searchLoc{
 			border-radius: 8px;
 		}
-		@media(max-width: 450px){
+		@media(max-width: 600px){
 			#searchBar{
 				display: none;
 			}
 			.map_wrap {position:relative;width:100%;height:150px;}
 		}
-		@media(min-width: 451px){
-			.map_wrap {position:relative;width:100%;height:400px;} 
+		@media(min-width: 500px){
+			.map_wrap {position:relative;width:100%;height:500px;} 
 		}
 		.map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 		#category {position:absolute;top:10px;left:10px;border-radius: 5px; border:1px solid #909090;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);background: #fff;overflow: hidden;z-index: 2;}
@@ -70,6 +116,9 @@
 
 </head>
 <body>
+
+
+
 
 	<jsp:include page="/resources/include/navigation.jsp" />
 	
@@ -488,6 +537,28 @@ function changeCategoryClass(el) {
 </script>
 </div>
 </header>
+
+<body> 
+<div id="content">
+	<center><img src="resources/img/banner/sangwon.png" class="names"></center>
+	<!-- <center><font class="names">SANGWON BANG</font></center> --> 
+	<center><a href="javascript:void(0)" target="_blank"><img src="resources/img/banner/sangwon_phone.png" class="contacts"/></a></center>
+	<center><a href="https://www.instagram.com/vang_sang/" target="_blank"><img  src="resources/img/banner/sangwon_insta.png" class="contacts" /></a></center>
+	<br>  
+
+	<center><img src="resources/img/banner/jinyeop.png"  class="names" ></center>
+	<center><a href="javascript:void(0)" target="_blank"><img  src="resources/img/banner/jinyeop_phone.png" class="contacts" /></a></center>
+	<center><a href="https://www.instagram.com/ohhh_jinyeop/" target="_blank"><img src="resources/img/banner/jinyeop_insta.png" class="contacts"/></a></center>
+	<center><a href="javascript:void(0)" target="_blank"><img  src="resources/img/banner/jinyeop_kakao.png" class="contacts"/></a></center>
+	<br> 
+	
+	<center><img src="resources/img/banner/chihyeock.png" class="names"  ></center>
+	<center><a href="javascript:void(0)" target="_blank"><img src="resources/img/banner/chihyeock_phone.png" class="contacts" /></a></center>
+	<br>	
+	 
+</div>
+</body>
+
 
 	<jsp:include page="/resources/include/footer.jsp" />
   	<jsp:include page="/resources/include/copyright.jsp" />
