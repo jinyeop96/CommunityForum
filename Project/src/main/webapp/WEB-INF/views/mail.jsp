@@ -36,9 +36,17 @@
 
       <form onsubmit="return mailformchk()" method = "post" action="<%=request.getContextPath()%>/mailtest.do">
       	<input type="hidden" name = "tomail" value="owa101010@gmail.com" >
-        <input type="hidden" name = "frommail" value="${email }" >
-       
+      	<c:if test="${!empty email }">
+      	<input type="hidden" name = "frommail" value="${email }" >
+      	</c:if>
+
       	<table>
+        <c:if test="${empty email }">
+        <tr>
+        <th>답변받을 메일주소</th><td><input name = "frommail" ></td>
+        </tr>
+      	</c:if>
+      	
         	<tr>
              	<th>문의제목</th>
               	<td> <input name = "mailtitle" id ="mailtitle"> </td>
