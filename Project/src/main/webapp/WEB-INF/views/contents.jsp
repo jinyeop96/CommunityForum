@@ -20,9 +20,9 @@
   position:absolute;
   height:600px;   /* 퀵메뉴, 배너 이미지의 높이 */
   width:170px;    /* 퀵메뉴, 배너 이미지의 너비*/
-  margin:0px 0px 0px 625px;   /* 가장 오른쪽의 수치가 화면 가운데에서 얼마만큼 오른쪽으로 레이어를 붙일 것인지 설정  */ 
+  margin:0px 0px 0px 600px;   /* 가장 오른쪽의 수치가 화면 가운데에서 얼마만큼 오른쪽으로 레이어를 붙일 것인지 설정  */ 
   top: 110px;  /* 배너 상단에서 얼마나 떨어뜨릴지 설정*/
-  left: 60%;     /* 레이어의 시작점이 왼쪽으로 부터 50% 지정 */
+  left: 50%;     /* 레이어의 시작점이 왼쪽으로 부터 50% 지정 */
   text-align: left;
   padding: 0px;
 }
@@ -34,6 +34,16 @@
 .contacts{
 	width: 80%; height: 100%; margin-top:5px;
 }
+
+a#topBtn { position: fixed; /* 포지션 고정 */ 
+right: 2%; /* 오른쪽에서 2% - %도 할수 있음*/ 
+bottom: 5px; /* 밑에서 5px */ 
+display: none; /* 보여지지 없음 - 기본적으로 안보여지게 */ 
+z-index: 9999; /* 포지션을 먼저 지정후 z-좌표(레이어) : 9999입니다. */ 
+width:75px;
+height:100px;}
+
+
 </style> 
  
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>  
@@ -56,6 +66,26 @@
         });
 </script>
 </head>
+
+<script>
+$(function() {
+	   // 보이기 | 숨기기
+	   $(window).scroll(function() {
+	      if ($(this).scrollTop() > 130) { //250 넘으면 버튼이 보여짐니다.
+	            $('#topBtn').fadeIn();
+	            } else {
+	            $('#topBtn').fadeOut();
+	      }
+	   });
+	   // 버튼 클릭시
+	   $("#topBtn").click(function() {   
+	   $('html, body').animate({
+	     scrollTop : 0    // 0 까지 animation 이동합니다.
+	    }, 400);          // 속도 400
+	    return false;
+	    });
+	  });
+</script>
 
 <script language="JavaScript">
 
@@ -121,6 +151,8 @@
 	<center><a href="javascript:void(0)" target="_blank"><img src="resources/img/banner/chihyeock_phone.png" class="contacts" /></a></center>
 	<br>	
 	 
+	 <a id="topBtn"><img src="resources/img/portfolio/up.png" width="10" height="10" alt="upButton" class="names">TOP</a>
+	 
 </div>
 </body>
      
@@ -133,7 +165,7 @@
      				<div class=="floatL w55per marB20 re100">
      					<h3 class="title">- O.W.Y 로고 No.1 -</h3>
      					<ol class="marB20 grey2">
-     						<h5>[팀프로젝트 명인 '오와열'이 내재 돼있고 군 관련 프로그램인 특성을 살려 군번줄을 형상화]&메인 로고</h5>
+     						<h5>[팀프로젝트 명인 '오와열'이 내재 돼있고 군 관련 프로그램인 특성을 살려 군번줄을 형상화&메인 로고]</h5>
      					</ol>
      					<div class="line marB20"></div>
      					<div class="box_btn">

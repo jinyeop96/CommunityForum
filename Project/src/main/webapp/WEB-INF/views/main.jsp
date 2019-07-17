@@ -24,9 +24,19 @@
 .contacts{
 	width: 80%; height: 100%; margin-top:5px;
 }
+
+a#topBtn { position: fixed; /* 포지션 고정 */ 
+right: 2%; /* 오른쪽에서 2% - %도 할수 있음*/ 
+bottom: 5px; /* 밑에서 5px */ 
+display: none; /* 보여지지 없음 - 기본적으로 안보여지게 */ 
+z-index: 9999; /* 포지션을 먼저 지정후 z-좌표(레이어) : 9999입니다. */ 
+width:75px;
+height:100px;}
+
 </style> 
  
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>  
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
         $(function() {
             var offset = $("#content").offset();
@@ -46,6 +56,49 @@
         });
 </script>
 </head>
+
+
+<script>
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 500) {
+                $('#MOVE_TOP_BTN').fadeIn();
+            } else {
+                $('#MOVE_TOP_BTN').fadeOut();
+            }
+        });
+        
+        $("#MOVE_TOP_BTN").click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 400);
+            return false;
+        });
+    });
+</script>
+
+<script>
+$(function() {
+	   // 보이기 | 숨기기
+	   $(window).scroll(function() {
+	      if ($(this).scrollTop() > 130) { //250 넘으면 버튼이 보여짐니다.
+	            $('#topBtn').fadeIn();
+	            } else {
+	            $('#topBtn').fadeOut();
+	      }
+	   });
+	   // 버튼 클릭시
+	   $("#topBtn").click(function() {   
+	   $('html, body').animate({
+	     scrollTop : 0    // 0 까지 animation 이동합니다.
+	    }, 400);          // 속도 400
+	    return false;
+	    });
+	  });
+</script>
+
+
+
 
 
 
@@ -88,6 +141,8 @@
 	<center><img src="resources/img/banner/chihyeock.png" class="names"  ></center>
 	<center><a href="javascript:void(0)" target="_blank"><img src="resources/img/banner/chihyeock_phone.png" class="contacts" /></a></center>
 	<br>	
+	 
+	 <a id="topBtn"><img src="resources/img/portfolio/up.png" width="10" height="10" alt="upButton" class="names">TOP</a>
 	 
 </div>
 </body>
