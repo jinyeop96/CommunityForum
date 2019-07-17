@@ -3,17 +3,14 @@ package com.project.controller;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
-
-import javax.mail.Session;
-import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,13 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.project.dao.LoginDAOImpl;
 import com.project.dto.JoinDTO;
 
 
+
 @Controller
 public class LoginController {
+
+	
+	@Autowired
+	private JavaMailSender MailSender;
 	
 	// DAOs
 	@Autowired
@@ -36,7 +37,7 @@ public class LoginController {
 	@Autowired
 	BCryptPasswordEncoder passEncoder; //비밀번호 암호화를 위해 필요
 	
-	
+
 	
 	@RequestMapping("/loginok.do")
 	public void userlogin(JoinDTO dto, HttpSession session, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -56,12 +57,21 @@ public class LoginController {
 			passmatch = passEncoder.matches(dto.getPwd(), logindto.getPwd());
 			//DB에 저장된 pwd와 로그인시 입력한 pwd가 match하는지 확인
 			if(logindto != null&&passmatch) {
-				// logindto가 값을 갖고있으며 비밀번호 암호화값이 같다면
-				session.setAttribute("nickname", logindto.getNickname());
-				session.setAttribute("email", logindto.getEmail());
-				//session에 nickname키에 결과값으로 받아온 logindto의 nickname을 넣어준다
-				out.println("<script>location.href='main.do';</script>");
-				// 메인페이지로 이동	
+				// logindto가 값을 갖고있으며 비밀번호 암호화값이 같고
+				if(logindto.getVerify().equals("y") ) {
+					//db의 인증값이 y라면
+					session.setAttribute("nickname", logindto.getNickname());
+					session.setAttribute("email", logindto.getEmail());
+					//session에 nickname키에 결과값으로 받아온 logindto의 nickname을 넣어준다
+					out.println("<script>location.href='main.do';</script>");
+					// 메인페이지로 이동
+					
+				}else {
+					//db의 인증값이 n라면
+					out.println("<script>alert('Not Verify Email');location.href='login.do';</script>");
+					//인증안된거 알리고 다시 로그인 페이지로
+				}
+					
 			}else {
 				out.println("<script>alert('WRONG PASSWORD');location.href='login.do';</script>");
 				// pwd가 틀려서 logindto에 결과값이 없을때
@@ -183,36 +193,12 @@ public class LoginController {
 		String mailtitle = request.getParameter("mailtitle");
 		String mailcont = request.getParameter("mailcont");
 		mailcont += "\n" + frommail;
-		final String host = "smtp.gmail.com";
-		final String accountid = "owa101010";
-		final String accountpwd = "m86304321";
-		final int port = 465;
-		
-		Properties props = System.getProperties();
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.port", port);
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.ssl.enable", "true");
-		props.put("mail.smtp.ssl.trust", host);
-		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-				return new javax.mail.PasswordAuthentication(accountid, accountpwd);
-			}
-		});
-		session.setDebug(true);
-		
-		javax.mail.Message mimeMessage = new MimeMessage(session);
-		//mimeMessage.setFrom(new InternetAddress(frommail));
-        mimeMessage.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(tomail));
-		
-		
-		
-		mimeMessage.setSubject(mailtitle);
-		mimeMessage.setText(mailcont);
-		Transport.send(mimeMessage);
-		
+		MimeMessage mail = MailSender.createMimeMessage();
+		mail.setSubject(mailtitle);
+		mail.setText(mailcont);
+		mail.addRecipient(RecipientType.TO, new InternetAddress(tomail));
+		MailSender.send(mail);
 		out.println("<script>alert('Mail send Success'); location.href='main.do';</script>");
-
 	}
 		
 	@RequestMapping("/naver/callback.do")

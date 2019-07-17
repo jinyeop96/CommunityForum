@@ -15,10 +15,11 @@ font-size: 12px;
 }
 </style>
 <title>Login</title>
-<script src="./resources/js/join.js" ></script>  <!-- Join.jsp에서 사용될 함수가 저장된 라이브러리로드 -->
-<script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
+<script src="./resources/jquery-3.4.1.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="./resources/js/join.js" ></script>  <!-- Join.jsp에서 사용될 함수가 저장된 라이브러리로드 -->
+
 <script >
 $(function(){
 	//회원가입 버튼 활성/비활성을 할때 확인위한 변수 선언
@@ -191,6 +192,7 @@ $(function(){
       <h1 class="masthead-heading text-uppercase mb-0">회원 가입</h1>
       <div id="loginDiv" align="center" style="width: 100%">
       <form onsubmit="return formchk()" method="post" action="<%=request.getContextPath()%>/join_ok.do">
+      <input type="hidden" name="verify" value="n">
       <!-- form안에 submit버튼 입력시 formchk()에서 체크후 return값이 true일 경우 form안에 있는 값들을 post형식으로 join_ok.do로 넘겨준다 -->
       	<table style="width: 100%">
       	<!-- 아이디 입력 공간
@@ -239,7 +241,7 @@ $(function(){
       	 -->	
       		<tr>
       			<td colspan="2"  align="center"><input class="input" name="email" id="email"  style="margin-right: 85px" placeholder="메일주소입력" >
-      			<br><span style="font-size: 12px; color: red;" id="emailcheck"></span>
+      			<br><span style="font-size: 12px; color: red;" id="emailcheck">가입시 인증메일이 발송됩니다.</span>
       			</td> 
       			</table>
        <!-- 버튼영역 

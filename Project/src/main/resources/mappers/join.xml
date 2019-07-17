@@ -5,9 +5,12 @@
 <mapper namespace="com.project.dao.joinDAO">
 
 <select id="insert" parameterType="com.project.dto.JoinDTO">
-insert into member values(#{id},#{pwd},#{name},#{nickname},#{email})  
+insert into member values(#{id},#{pwd},#{name},#{nickname},#{email},#{verify})  
 </select>
 
+<update id="mailverify">
+update member set verify='y' where email = #{email}
+</update>
 
 <select id="findid" resultType="int">
   select count(*) from member where id=#{id}  

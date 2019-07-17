@@ -22,6 +22,8 @@ public interface JoinDAO {
 	public String searchId(Map<String, Object> map) throws Exception;
 
 	public int searchpwd(Map<String, Object> result) throws Exception;
+
+	public void emailverify(String email) throws Exception;
 }
 
 	

@@ -1,34 +1,63 @@
 package com.project.controller;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
+import java.util.Random;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.project.dao.JoinDAOImpl;
 import com.project.dto.JoinDTO;
 
+
 @Controller
 public class JoinController {
+	
+	@Autowired
+	private JavaMailSender MailSender;
+	
+	private boolean lowerCheck;
+	private int size;
+
+	 public String getKey(int size, boolean lowerCheck) {
+	        this.size = size;
+	        this.lowerCheck = lowerCheck;
+	        return init();
+	    }
+
+	    private String init() {
+	        Random  ran = new Random();
+	        StringBuffer sb = new StringBuffer();
+	        int num = 0;
+	        do {
+	            num = ran.nextInt(75)+48;
+	            if((num>=48 && num<=57) || (num>=65 && num<=90) || (num>=97 && num<=122)) {
+	                sb.append((char)num);
+	            }else {
+	                continue;
+	            }
+	        } while (sb.length() < size);
+	        if(lowerCheck) {
+	            return sb.toString().toLowerCase();
+	        }
+	        return sb.toString();
+	    }
+
+
+
+	
+	
+	
 	
 	@Autowired
 	BCryptPasswordEncoder bcryptEncoder;
@@ -49,7 +78,7 @@ public class JoinController {
 	@RequestMapping("/join_ok.do")
 	public void joinok(JoinDTO dto, Model model, HttpServletResponse response) throws Exception {
 		// id,pwd,name,nickname,email값이 넘어오며 joindto로 자동매칭
-		PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();
 		//경고창과 페이지 이동을 위해 프린트라이터를 사용하기위해 선언해준다
 		String inputpwd = dto.getPwd();
 		// pwd암호화를 위해 dto에 자동매칭되있는 pwd를 inputpwd로 값을가져옴
@@ -59,11 +88,51 @@ public class JoinController {
 		//암호화된 bcryptpwd를 다시 dto에 넣어준다
 		this.join.insert(dto);
 		//joindaoimple의 insert로 값들이 저장되어있는 dto를 넘겨준다
-		out.println("<script>alert('JoinSuccess'); location.href='login.do';</script>");
-		//경고창과 이동할 페이지 설정
-		
+		MimeMessage mail = MailSender.createMimeMessage();
+		//메일 보내기 (해당내용은 servlet-context에 추가되있음)
+		mail.setSubject("[오와열  이메일 인증]");
+		//제목
+		mail.setText("메일인증 http://localhost:8484/controller/verify.do?email="+dto.getEmail());
+		//내용
+		mail.addRecipient(RecipientType.TO, new InternetAddress(dto.getEmail()));
+		//보낼곳
+		MailSender.send(mail);
+		//보내자
+		out.println("<script>alert('Send Verify Email'); location.href='login.do';</script>");
+		//인증메일 발송 안내 및 로그인 창으로 이동
 	}
-    //id중복 체크	
+	
+	@RequestMapping("emailverify.do")
+	public String emailverify() {
+		return "emailverify";
+	}
+	
+	@RequestMapping("/verify.do")
+	public String mailverify(@RequestParam String email) throws Exception{
+		//이메일에 포함된 링크를 누르면 이 매핑으로 연결됨
+		join.emailverify(email);
+		//이메일 값을 받고 인증값을 n에서 y로 변경
+		return "login";
+		//login페이지로
+	}
+	
+	@RequestMapping("/reverify.do")
+	public void remailverify(@RequestParam String email, HttpServletResponse response) throws Exception{
+		PrintWriter out = response.getWriter();
+		MimeMessage mail = MailSender.createMimeMessage();
+		//메일 보내기 (해당내용은 servlet-context에 추가되있음)
+		mail.setSubject("[오와열  이메일 인증]");
+		//제목
+		mail.setText("메일인증 http://localhost:8484/controller/verify.do?email="+email);
+		//내용
+		mail.addRecipient(RecipientType.TO, new InternetAddress(email));
+		//보낼곳
+		MailSender.send(mail);
+		//보내자
+		out.println("<script>alert('Send Verify Email'); location.href='login.do';</script>");
+		//인증메일 발송 안내 및 로그인 창으로 이동
+	}
+	//id중복 체크	
 	@ResponseBody
 	@RequestMapping("/idcheck.do")
 	public  int checkId(String id) throws Exception{
@@ -105,6 +174,7 @@ public class JoinController {
 		return result;
 		//결과값이 들어간 result를 반환해준다.
 	}
+
 	//ID찾기 페이지로 이동
 	@RequestMapping("/id_search.do")
 	public String idsearch() {
@@ -164,5 +234,7 @@ public class JoinController {
 			//searchpwd의 결과값이 0이 아닐때 위에 생성된 임시 비밀번호값이 들어가 있는 pwd를 반환
 		}
 	}
+	
+
 	
 }

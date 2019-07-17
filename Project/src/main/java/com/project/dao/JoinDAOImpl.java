@@ -56,6 +56,11 @@ public class JoinDAOImpl implements JoinDAO{
 	public int searchpwd(Map<String, Object> map) throws Exception{
 		return template.update("searchpwd", map);
 	}
+	@Override
+	public void emailverify(String email) throws Exception{
+		template.update("mailverify", email);
+		
+	}
 	
 
 }
