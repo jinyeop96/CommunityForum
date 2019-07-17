@@ -8,8 +8,13 @@
 </head>
 	<jsp:include page="/resources/include/navigation.jsp" />
 <script type="text/javascript">
-$(function(){ 
+
+$(document).ready(function(){
+	$('#loginBtn').attr('disabled', true);
 	
+});
+
+$(function(){ 
 
 $("#email").keyup(function(){
 	//email입력창에 키입력이 들어왔을때 동작
@@ -39,7 +44,7 @@ $("#email").keyup(function(){
 				$('#emailcheck').html("이메일을 입력해주세요.");
 				//email입력란이 비어있을 경우 span태그에 이메일입력안내문구 삽입
 				$('#loginBtn').attr('disabled', true);
-				//email이 입력되어있지 않으므로 회원가입버튼 비활성화
+				//email이 입력되어있지 않으므로 버튼 비활성화
 			}
 		},
 		error : function(data){
@@ -58,7 +63,7 @@ $("#email").keyup(function(){
 	<header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
       
-      <h1 class="masthead-heading text-uppercase mb-0">Find PassWord</h1>
+      <h1 class="masthead-heading text-uppercase mb-0">Verify Email Send</h1>
       <div id="loginDiv">
       <form method="post" action="<%=request.getContextPath()%>/reverify.do">
       	<table>
@@ -69,7 +74,7 @@ $("#email").keyup(function(){
       			</td>
       		</tr>
       	</table>
-      	<input id="loginBtn" type="submit" value="Verify email Send" ><br>
+      	<input id="loginBtn" type="submit" value="Verify Email Send" ><br>
       	<input  id="loginBtn" type="button" value="Login_page" onclick="location.href='login.do'">
       	</form>
       </div>
