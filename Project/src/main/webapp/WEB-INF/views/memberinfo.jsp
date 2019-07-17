@@ -15,6 +15,7 @@
 <title>Login</title>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script> <!-- JQuery사용을 위한 라이브러리 다운로드 -->
 <script src="./resources/js/join.js" ></script>  <!-- Join.jsp에서 사용될 함수가 저장된 라이브러리로드 -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <body>
 		<jsp:include page="/resources/include/member_navigation.jsp" />
 
@@ -46,6 +47,7 @@
       	</table>
       	<input type="submit" id="loginBtn" value="회원정보 수정"><br>
       	<input type="button" id="loginBtn" value="비밀번호 변경" onclick="location.href='member_pwdchange.do'"><br>
+      	<input type="button" id="loginBtn" value="문의메일쓰기" onclick="location.href='<%=request.getContextPath()%>/mailpage.do'"><br>
       	   	<input type="button" id="loginBtn" value="회원 탈퇴" onclick="location.href='member_withraw.do'">
       	</form>
       </div>

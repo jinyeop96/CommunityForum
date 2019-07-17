@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.security.SecureRandom" %>
-<%@ page import="java.math.BigInteger" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name = "google-signin-client_id" content="811363179923-l5jjuf3mjdrnrdmvl534rubl31frp24e.apps.googleusercontent.com">
 <title>Login</title>
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 <style type="text/css">
@@ -18,9 +16,9 @@
 		font-style: italic;
 	}
 </style>
-<script src="./resources/js/login.js" ></script>
+<script src="<c:url value='/resources/js/login.js'/>" ></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 	<jsp:include page="/resources/include/navigation.jsp" />
 
@@ -31,72 +29,41 @@
       
       <h1 class="masthead-heading text-uppercase mb-0">로그인</h1>
       <div id="loginDiv" align="center">
+      <!-- 일반 로그인 -->
       <form onsubmit="return loginformchk()" action="<%=request.getContextPath()%>/loginok.do" method="post">
       	<table>
       		<tr>
-      			<td><input class="input" name="id" id ="id" placeholder="user ID"></td> 
+      			<td><input class="input" name="id" id ="id" placeholder="userID"></td> 
       		</tr>
       		
       		<tr>
       			<td><input class="input" type="password" name="pwd" id="pwd" placeholder="password" ></td>
       		</tr>
       	</table>
+      	
       	<input id="loginBtn" type="submit" value="Login"><br>
       	<a href="javascript:void(0)" class="find"  onclick="location.href='id_search.do'">find id</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;  
       	<a href="javascript:void(0)" class="find" onclick="location.href='pwd_search.do'">find pwd</a> 
       	</form>
       </div> 
-      
-   <%
-	    String clientId = "j8R_N6PAsO7uCvkZDq3n";//애플리케이션 클라이언트 아이디값";
-	    String redirectURI = URLEncoder.encode("http://localhost:8054/controller/naver/callback.do", "UTF-8");
-	    SecureRandom random = new SecureRandom();
-	    String state = new BigInteger(130, random).toString();
-	    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
-	    apiURL += "&client_id=" + clientId;
-	    apiURL += "&redirect_uri=" + redirectURI;
-	    apiURL += "&state=" + state;
-	    session.setAttribute("state", state);
-	%>
-    	<a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-    	
-        <a id="kakaologinbtn" href="javascript:loginWithKakao()"><img src="./resources/img/kakao.png"></a>
-        <input type="button" value="문의메일쓰기" onclick="location.href='<%=request.getContextPath()%>/mailpage.do'">
         
-        <script type='text/javascript'>
-           Kakao.init('fa5422f3d426ecd7023329085641e7dc');
-    function loginWithKakao() {
+       <!-- 로그인 api 불러오기 -->
+      	<table id="loginAPI"></table>
   
-      Kakao.Auth.login({
-        success: function(authObj) {
-        	 Kakao.API.request({
-        	       url: '/v1/user/me',
-        	       success: function(res) {
-        	             var kakaonick = res.properties.nickname;
-        	             location.href="kakao.do?kakaonick="+kakaonick;
-        	           }
-        	         })
-
-        },
-        fail: function(err) {
-          alert(JSON.stringify(err));
-        }
-      });
-    };
-  
-</script>
+  		<script type="text/javascript">
+  			$(function(){
+  				$("#loginAPI").load("loginAPI.do");
+  			})
+  		</script>
         
-    		    
-      
-    </div>
-  </header>
-  
-  
-
+        
+        
+  </div>
+</header>
   
   
   <jsp:include page="/resources/include/footer.jsp" />
   <jsp:include page="/resources/include/copyright.jsp" />
-  <jsp:include page="/resources/include/modals.jsp" />	<%-- modal.jsp 끝에 js 파일 있어서 반응형 웹이 됩니다~ 마지막에 꼭 넣으십쏘~ --%>
+  <jsp:include page="/resources/include/bottomJs.jsp" />	<%-- modal.jsp 끝에 js 파일 있어서 반응형 웹이 됩니다~ 마지막에 꼭 넣으십쏘~ --%>
 
 </html>

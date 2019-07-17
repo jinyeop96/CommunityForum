@@ -21,7 +21,7 @@
 
 <!--  CSS by myself -->
 <!-- <link href="/resources/css/myself1.css" rel="stylesheet" type="text/css"> -->
-<link href="<c:url value="/resources/css/myself.css" />" rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/myself1.css" />" rel="stylesheet" type="text/css">
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 	<style>
 		@media(max-width: 500px){
@@ -77,7 +77,8 @@
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=free&boardSearch=no">자유게시판</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=review&boardSearch=no">후기게시판</a></li>
 								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=question&boardSearch=no">질문게시판</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=findPeople&boardSearch=no">사람찾습니다!</a></li>							
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=findPeople&boardSearch=no">사람찾습니다!</a></li>		
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="board.do?pageParam=1&board_type=reserveForce&boardSearch=no">예비역게시판</a></li>					
 							</ul>
 					</li>
 					
@@ -96,6 +97,7 @@
 	       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >Q&A</a>
 	       					<ul>
 	       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/allqna.do">문의사항</a>
+	       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/mailpage.do">문의사항-이메일</a>
 	       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/allqnalist.do">문의게시판</a>
 	       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/gonggi.do">공지사항</a></li>
 	       						

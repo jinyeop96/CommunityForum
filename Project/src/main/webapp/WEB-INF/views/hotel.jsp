@@ -8,79 +8,6 @@
 <meta charset="UTF-8">
 <title>hotel</title>
 
-<style type="text/css" media="screen">
-
-#content {  
-  position:absolute;
-  height:600px;   /* 퀵메뉴, 배너 이미지의 높이 */
-  width:170px;    /* 퀵메뉴, 배너 이미지의 너비*/
-  margin:0px 0px 0px 625px;   /* 가장 오른쪽의 수치가 화면 가운데에서 얼마만큼 오른쪽으로 레이어를 붙일 것인지 설정  */ 
-  top: 110px;  /* 배너 상단에서 얼마나 떨어뜨릴지 설정*/
-  left: 50%;     /* 레이어의 시작점이 왼쪽으로 부터 50% 지정 */
-  text-align: left;
-  padding: 0px;
-}
-
-.names{
-	width: 100%; height: 100%
-}
-
-.contacts{
-	width: 80%; height: 100%; margin-top:5px;
-}
-
-a#topBtn { position: fixed; /* 포지션 고정 */ 
-right: 2%; /* 오른쪽에서 2% - %도 할수 있음*/ 
-bottom: 5px; /* 밑에서 5px */ 
-display: none; /* 보여지지 없음 - 기본적으로 안보여지게 */ 
-z-index: 9999; /* 포지션을 먼저 지정후 z-좌표(레이어) : 9999입니다. */ 
-width:75px;
-height:100px;}
-
-
-</style> 
- 
-<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>  
-<script type="text/javascript">
-        $(function() {
-            var offset = $("#content").offset();
-            var topPadding = 100;
-            $(window).scroll(function() {
-    
-                if ($(window).scrollTop() > offset.top) {
-                    $("#content").stop().animate({
-                        marginTop: $(window).scrollTop() - offset.top + topPadding
-                    }, 600);
-                } else {
-                    $("#content").stop().animate({
-                        marginTop: 50
-                    });
-                };
-             });
-        });
-</script>
-</head>
-
-<script>
-$(function() {
-	   // 보이기 | 숨기기
-	   $(window).scroll(function() {
-	      if ($(this).scrollTop() > 130) { //250 넘으면 버튼이 보여짐니다.
-	            $('#topBtn').fadeIn();
-	            } else {
-	            $('#topBtn').fadeOut();
-	      }
-	   });
-	   // 버튼 클릭시
-	   $("#topBtn").click(function() {   
-	   $('html, body').animate({
-	     scrollTop : 0    // 0 까지 animation 이동합니다.
-	    }, 400);          // 속도 400
-	    return false;
-	    });
-	  });
-</script>
-
 
 
 	<style type="text/css">
@@ -113,6 +40,7 @@ $(function() {
 		@media(min-width: 500px){
 			.map_wrap {position:relative;width:100%;height:500px;} 
 		}
+		body, html{width: 100%}
 		.map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 		#category {position:absolute;top:10px;left:10px;border-radius: 5px; border:1px solid #909090;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);background: #fff;overflow: hidden;z-index: 2;}
 		#category li {float:left;list-style: none;width:50px;px;border-right:1px solid #acacac;padding:6px 0;text-align: center; cursor: pointer;}
@@ -142,13 +70,13 @@ $(function() {
 		    font-style: italic;
 		    font-size: 15px;
 		}
+		
 	</style>
 
 </head>
 <body>
 
-
-
+	<jsp:include page="/resources/include/banner.jsp"/>
 
 	<jsp:include page="/resources/include/navigation.jsp" />
 	
@@ -160,8 +88,7 @@ $(function() {
 	<table style="width: 100%">
 		<tr>
 			<td id="searchBar">
-				<c:if test="${empty hotel_search }"><input class="searchLoc"><input type="button" class="search" onclick="search()" value="검색"></c:if>
-				<c:if test="${!empty hotel_search }"><input class="searchLoc" value="${hotel_search }"><input class="search" type="button" onclick="search()" value="검색"></c:if>
+				<input class="searchLoc" value="${hotel_search }"><input class="search" type="button" onclick="search()" value="검색">
     		</td>
 		</tr>
 	</table>
@@ -568,33 +495,12 @@ function changeCategoryClass(el) {
 </div>
 </header>
 
-<body> 
-<div id="content">
-	<center><img src="resources/img/banner/sangwon.png" class="names"></center>
-	<!-- <center><font class="names">SANGWON BANG</font></center> --> 
-	<center><a href="javascript:void(0)" target="_blank"><img src="resources/img/banner/sangwon_phone.png" class="contacts"/></a></center>
-	<center><a href="https://www.instagram.com/vang_sang/" target="_blank"><img  src="resources/img/banner/sangwon_insta.png" class="contacts" /></a></center>
-	<br>  
-
-	<center><img src="resources/img/banner/jinyeop.png"  class="names" ></center>
-	<center><a href="javascript:void(0)" target="_blank"><img  src="resources/img/banner/jinyeop_phone.png" class="contacts" /></a></center>
-	<center><a href="https://www.instagram.com/ohhh_jinyeop/" target="_blank"><img src="resources/img/banner/jinyeop_insta.png" class="contacts"/></a></center>
-	<center><a href="javascript:void(0)" target="_blank"><img  src="resources/img/banner/jinyeop_kakao.png" class="contacts"/></a></center>
-	<br> 
-	
-	<center><img src="resources/img/banner/chihyeock.png" class="names"  ></center>
-	<center><a href="javascript:void(0)" target="_blank"><img src="resources/img/banner/chihyeock_phone.png" class="contacts" /></a></center>
-	<br>	
-	 
-	  <a id="topBtn"><img src="resources/img/portfolio/up.png" width="10" height="10" alt="upButton" class="names">TOP</a>
-	 
-</div>
-</body>
 
 
 	<jsp:include page="/resources/include/footer.jsp" />
   	<jsp:include page="/resources/include/copyright.jsp" />
   	<jsp:include page="/resources/include/modals.jsp" />
+  	
 	
 </body>
 </html>

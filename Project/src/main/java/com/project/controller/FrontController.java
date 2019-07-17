@@ -107,11 +107,12 @@ public class FrontController {
 		return mav;
 	}
 	
-	@RequestMapping("/naver/callback.do")
-	public String naverCallback() {
-		return "naver/callback";
+	@RequestMapping("/banner.do")
+	@ResponseBody
+	public ModelAndView banner(ModelAndView mav) {
+		mav.setViewName("banner/banner");
+		return mav;
 	}
-
 }
 
 
