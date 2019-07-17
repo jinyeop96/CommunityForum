@@ -116,7 +116,7 @@ public class JoinController {
 		//login페이지로
 	}
 	
-	@RequestMapping("/reverify.do")
+/*	@RequestMapping("/reverify.do")
 	public void remailverify(@RequestParam String email, HttpServletResponse response) throws Exception{
 		PrintWriter out = response.getWriter();
 		MimeMessage mail = MailSender.createMimeMessage();
@@ -131,7 +131,8 @@ public class JoinController {
 		//보내자
 		out.println("<script>alert('Send Verify Email'); location.href='login.do';</script>");
 		//인증메일 발송 안내 및 로그인 창으로 이동
-	}
+	}*/
+
 	//id중복 체크	
 	@ResponseBody
 	@RequestMapping("/idcheck.do")
@@ -230,6 +231,18 @@ public class JoinController {
 			return pwd;
 			//searchpwd의 결과값이 0일때 pwd를 ""초기화하고 리턴해준다
 		}else {
+			
+			MimeMessage mail = MailSender.createMimeMessage();
+			//메일 보내기 (해당내용은 servlet-context에 추가되있음)
+			mail.setSubject("[오와열  임시 비밀번호 안내 메일]");
+			//제목
+			mail.setContent("<script><h4>회원님의 임시비밀번호는</h4><h1>"+pwd+"</h1><h4> 입니다.</h4>"
+					+ "<h4>로그인후 비밀번호 변경을 통해 반드시 비밀번호 변경을 부탁드립니다.</h4>"
+					+ "http://localhost:8484/controller/login.do</script>", "text/html; charset=utf-8");
+			//내용
+			mail.addRecipient(RecipientType.TO, new InternetAddress(email));
+			//보낼곳
+			MailSender.send(mail);
 			return pwd;
 			//searchpwd의 결과값이 0이 아닐때 위에 생성된 임시 비밀번호값이 들어가 있는 pwd를 반환
 		}

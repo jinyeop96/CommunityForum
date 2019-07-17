@@ -16,7 +16,6 @@ update member set verify='y' where email = #{email}
   select count(*) from member where id=#{id}  
 </select>
 
-
 <select id="findnick" resultType="int">
   select count(*) from member where nickname=#{nickname}  
 </select>

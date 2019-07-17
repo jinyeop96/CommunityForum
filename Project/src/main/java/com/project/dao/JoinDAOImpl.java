@@ -61,6 +61,11 @@ public class JoinDAOImpl implements JoinDAO{
 		template.update("mailverify", email);
 		
 	}
+	@Override
+	public int verifycheck(String email) throws Exception{
+		
+		return template.selectOne("mailverifycheck", email);
+	}
 	
 
 }

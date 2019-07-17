@@ -43,8 +43,8 @@
       	
       	<input id="loginBtn" type="submit" value="Login"><br>
       	<a href="javascript:void(0)" class="find"  onclick="location.href='id_search.do'">find id</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;  
-      	<a href="javascript:void(0)" class="find" onclick="location.href='pwd_search.do'">find pwd</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;
-      	<a href="javascript:void(0)" class="find" onclick="location.href='emailverify.do'">Verify Email</a>  
+      	<a href="javascript:void(0)" class="find" onclick="location.href='pwd_search.do'">find pwd</a>
+      	  
       	</form>
       </div> 
         

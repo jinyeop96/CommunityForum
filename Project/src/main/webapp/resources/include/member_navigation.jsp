@@ -21,7 +21,7 @@
 
 <!--  CSS by myself -->
 <!-- <link href="/resources/css/myself1.css" rel="stylesheet" type="text/css"> -->
-<link href="<c:url value="/resources/css/myself.css" />" rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/myself1.css" />" rel="stylesheet" type="text/css">
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 	<style>
 		@media(max-width: 500px){
@@ -84,10 +84,10 @@
 					<li class="nav-item mx-0 mx-lg-1">
 						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">편의제공</a>
 							<ul>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="hotel.do?hotel_search=">숙박</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="restaurant.do?restaurant_search=">음식점</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transport.do?transport_search=">교통</a></li>
-								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transportTest.do?transportTest_search=">교통테스트</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="hotel.do?board_type=hotel&hotel_search=">숙박</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="restaurant.do?board_type=restaurant&restaurant_search=">음식점</a></li>
+								<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="transportTest.do?radio=9&transportTest1_search=&transportTest2_search=&board_type=transportTest">교통</a></li>
+
 							</ul>
 					</li>
 
@@ -96,6 +96,7 @@
 	       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >Q&A</a>
 	       					<ul>
 	       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/allqna.do">문의사항</a>
+	       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/mailpage.do">문의사항-이메일</a>
 	       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/allqnalist.do">문의게시판</a>
 	       						<li><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<%=request.getContextPath()%>/gonggi.do">공지사항</a></li>
 	       						
@@ -119,7 +120,7 @@
 					</c:if>		
 					
 					<c:if test="${!empty nickname }">
-							<li class="nav-item mx-0 mx-lg-1">
+									<li class="nav-item mx-0 mx-lg-1">
 		       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="memberinfo.do">${nickname }</a>
 		       			</li>
 					</c:if>
