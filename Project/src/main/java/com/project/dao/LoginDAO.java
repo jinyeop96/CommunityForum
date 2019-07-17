@@ -1,9 +1,8 @@
 package com.project.dao;
 
 import java.util.Map;
-
 import com.project.dto.JoinDTO;
-import com.project.dto.LoginDTO;
+
 
 public interface LoginDAO {
 	
