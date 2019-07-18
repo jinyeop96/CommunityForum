@@ -101,7 +101,7 @@
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;" style="color:black">
-                    키워드 : <input type="text" placeholder="지역명+음식점" id="keyword" size="15" value="${restaurant_search}">  <%--section02에서 검색한 값을 음식점 페이지 키워드 검색 textbox에 바로 넘겨준다. --%>
+                    키워드 : <input type="text" placeholder="지역명+음식점" id="keyword" size="10" value="${restaurant_search}">  <%--section02에서 검색한 값을 음식점 페이지 키워드 검색 textbox에 바로 넘겨준다. --%>
                     <button type="submit">검색하기</button> 
                 </form>
             </div>

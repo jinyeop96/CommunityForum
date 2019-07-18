@@ -64,7 +64,7 @@
 	<center><font class="names">JINYEOP OH</font></center>
 	<center>
 		<a href="javascript:void(0)" target="_blank" class="fonts">
-			<img src="resources/img/banner/phone.png" class="contacts"/>&nbsp;&nbsp;010 6362 1073
+			<img src="resources/img/banner/phone.png" class="contacts"/>&nbsp;&nbsp;010 3119 3464
 		</a>
 	</center>
 	<center>

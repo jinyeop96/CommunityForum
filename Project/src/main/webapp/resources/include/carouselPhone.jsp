@@ -11,38 +11,59 @@
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
   </ol>
-  
-  
+  </div>
   
   <div class="carousel-inner" role="listbox">
     <div class="carousel-item active">
-      <img class="d-block img-fluid" src="resources/img/background/a1.jpg" alt="First slide"  style="width:2000px; height:500px">
+      <img class="d-block img-fluid" src="resources/img/background/white.png" alt="First slide"  style="width:2000px; height:200px">
       <div class="carousel-caption">
-          <h3>군인1</h3>
-          <p>시발 군대 시발</p>
+      <center><font class="names" style="color:black">SANGWON BANG</font></center>
+
+		<a href="javascript:void(0)" target="_blank" class="fonts">
+			<img src="resources/img/banner/phone.png" class="contacts"/>&nbsp;&nbsp;010 6362 1073
+		</a>
+
+	
+		<a href="https://www.instagram.com/vang_sang/" target="_blank" class="fonts">
+			<img  src="resources/img/banner/instagram.png" class="contacts" />&nbsp;&nbsp;vang_sang
+		</a>
+	
+
+		<a href="javascript:void(0)" target="_blank" class="fonts">
+			<img  src="resources/img/banner/kakaotalk.png" class="contacts"/>&nbsp;&nbsp;wony1073
+		</a>
         </div>
     </div>
     
     
     
     <div class="carousel-item">
-     <img class="d-block img-fluid" src="resources/img/background/a2.jpg" alt="Second slide"  style="width:2000px; height:500px">
+     <img class="d-block img-fluid" src="resources/img/background/white.png" alt="Second slide"  style="width:2000px; height:200px">
   <div class="carousel-caption">
-          <h3>군인2</h3>
-          <p>시발 전역하자</p>
-        </div>    
+   	<center><font class="names">JINYEOP OH</font></center>
+		<a href="javascript:void(0)" target="_blank" class="fonts">
+			<img src="resources/img/banner/phone.png" class="contacts"/>&nbsp;&nbsp;010 3119 3464
+		</a>
+		<a href="https://www.instagram.com/vang_sang/" target="_blank" class="fonts">
+			<img  src="resources/img/banner/instagram.png" class="contacts" />&nbsp;&nbsp;ohhh_jinyeop
+		</a>
+		<a href="javascript:void(0)" target="_blank" class="fonts">
+			<img  src="resources/img/banner/kakaotalk.png" class="contacts"/>&nbsp;&nbsp;ojy96
+		</a>
       </div>
+      
     
     
     
     <div class="carousel-item">
-      <img class="d-block img-fluid" src="resources/img/background/a3.jpg" alt="Third slide"  style="width:2000px; height:500px">
+      <img class="d-block img-fluid" src="resources/img/background/white.png" alt="Third slide"  style="width:2000px; height:200px">
   <div class="carousel-caption">
-          <h3>군인3</h3>
-          <p>맛다시 주십쇼</p>
+        	<center><font class="names">CHIHYEOCK YOO</font></center>
+		<a href="javascript:void(0)" target="_blank" class="fonts">
+			<img src="resources/img/banner/phone.png" class="contacts"/>&nbsp;&nbsp;010 3553 1079
+		</a> 
         </div>
        </div>
-    
     
     
   </div>
@@ -67,6 +88,8 @@
       <span class="glyphicon glyphicon-chevron-right"></span>
       <span class="sr-only">Next</span>
     </a>
+
+
 
 </body>
 </html>
