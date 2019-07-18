@@ -113,6 +113,20 @@ public class FrontController {
 		mav.setViewName("banner/banner");
 		return mav;
 	}
+	
+	@RequestMapping("/carousel.do")
+	@ResponseBody
+	public ModelAndView carousel(ModelAndView mav) {
+		mav.setViewName("carousel/carousel");
+		return mav;
+	}
+	
+	@RequestMapping("/carouselPhone.do")
+	@ResponseBody
+	public ModelAndView carouselPhone(ModelAndView mav) {
+		mav.setViewName("carouselPhone/carouselPhone");
+		return mav;
+	}
 }
 
 

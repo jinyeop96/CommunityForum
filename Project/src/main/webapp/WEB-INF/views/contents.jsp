@@ -7,18 +7,25 @@
 
 <style type="text/css">	
 	/* banner */
-	.banner {position: relative; width: 550px; height: 300px; top: 50px;  margin:0 auto; padding:0; overflow: hidden;}
+	.banner {position: relative; width: 410px; height: 300px; top: 50px;  margin:0 auto; padding:0; overflow: hidden;}
 	.banner ul {position: absolute; margin: 0px; padding:0; list-style: none; }
-	.banner ul li {float: left; width: 550px; height: 300px; margin:0; padding:0;}
+<<<<<<< HEAD
+	.banner ul li {float: left; width: 410px; height: 300px; margin:0; padding:0;}
+=======
+	.banner ul li {float: left; width: 550px; height: 300px; margin:0; padding:0;} 
+>>>>>>> branch 'master' of https://github.com/jinyeop96/test
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <jsp:include page="/resources/include/banner.jsp"/>
+
+		 <jsp:include page="/resources/include/banner.jsp"/>
+
 
 <script language="JavaScript">
-
+ 
 	$(document).ready(function() {
+		
 		var $banner = $(".banner").find("ul");
 
 		var $bannerWidth = $banner.children().outerWidth();//이미지의 폭
@@ -34,16 +41,28 @@
 			$banner.css("height", $bannerHeight + "px");
 			//alert(bannerHeight);
 			//배너의 좌측 위치를 옮겨 준다.
-			$banner.animate({left: - $bannerWidth + "px"}, 1500, function() { //숫자는 롤링 진행되는 시간이다.
+			$banner.animate({top: - $bannerWidth + "px"}, 1500, function() { //숫자는 롤링 진행되는 시간이다.
 				//첫번째 이미지를 마지막 끝에 복사(이동이 아니라 복사)해서 추가한다.
 				$(this).append("<li>" + $(this).find("li:first").html() + "</li>");
 				//뒤로 복사된 첫번재 이미지는 필요 없으니 삭제한다.
 				$(this).find("li:first").remove();
 				//다음 움직임을 위해서 배너 좌측의 위치값을 초기화 한다.
-				$(this).css("left", 0);
+				$(this).css("top", 0);
 				//이 과정을 반복하면서 계속 롤링하는 배너를 만들 수 있다.
 			});
 		}
+		
+		/* var filter = "win16|win32|win64|macintel|mac|"; // PC일 경우 가능한 값
+		
+		 if( navigator.platform){
+			 if( filter.indexOf(navigator.platform.toLowerCase())<0 ){	// 모바일 접속
+				$(".banner").attr("width", "100%");
+				$(".banner ul li").attr("width", "100%");
+			} else {
+				// pc 접속
+			} 
+		} */
+		
 	}); 
 
 </script>
@@ -204,15 +223,26 @@
      			
      		</div>
      		
+<<<<<<< HEAD
+     	<div class="banner">
+			<ul>
+				<li><img src="resources/img/logos/510_2.png" width="370px" height="250px"></li>
+				<li><img src="resources/img/logos/510logo_2.png" width="370px" height="250px"></li>
+				<li><img src="resources/img/logos/OWY-1.png" width="370px" height="250px"></li>		
+				<li><img src="resources/img/logos/OWY-2.png" width="370px" height="250px"></li>			
+				<li><img src="resources/img/logos/OWY-3.png" width="370px" height="250px"></li>			
+				<li><img src="resources/img/logos/OWY-4.png" width="370px" height="250px"></li>				
+=======
      		
 		<div class="banner">
-			<ul>
-				<li><img src="resources/img/logos/510_2.png" width="450px" height="280px"></li>
-				<li><img src="resources/img/logos/510logo_2.png" width="450px" height="280px"></li>
-				<li><img src="resources/img/logos/OWY-1.png" width="450px" height="280px"></li>		
-				<li><img src="resources/img/logos/OWY-2.png" width="450px" height="280px"></li>			
-				<li><img src="resources/img/logos/OWY-3.png" width="450px" height="280px"></li>			
-				<li><img src="resources/img/logos/OWY-4.png" width="450px" height="280px"></li>				
+			<ul id="banners">
+				<li><img class="img" src="resources/img/logos/510_2.png" width="450px" height="280px"></li>
+				<li><img class="img" src="resources/img/logos/510logo_2.png" width="450px" height="280px"></li>
+				<li><img class="img" src="resources/img/logos/OWY-1.png" width="450px" height="280px"></li>		
+				<li><img class="img" src="resources/img/logos/OWY-2.png" width="450px" height="280px"></li>			
+				<li><img class="img" src="resources/img/logos/OWY-3.png" width="450px" height="280px"></li>			
+				<li><img class="img" src="resources/img/logos/OWY-4.png" width="450px" height="280px"></li>				
+>>>>>>> branch 'master' of https://github.com/jinyeop96/test
 			</ul>
 		</div>
 		

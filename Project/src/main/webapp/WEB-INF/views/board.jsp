@@ -17,9 +17,9 @@
  
  <body>
 
-		 <jsp:include page="/resources/include/banner.jsp"/>
 
 		<jsp:include page="/resources/include/navigation.jsp" />
+		 <jsp:include page="/resources/include/banner.jsp"/>
 	
 		 <!--  section01 -->
 		<header class="masthead bg-primary text-white text-center">
@@ -70,17 +70,51 @@
 	     			<input type="hidden" name="board_type" value="${board_type }">
 	      			 
 	      			<table class="board font-black " id="entireList"> 
-			      		<%------------------가져온 전체 게시물 있다면-------------- --%>
-			      		<c:if test="${!empty list }">
-			      			<c:if test="${!empty nickname }">
+	      				<c:if test="${!empty nickname  || !empty admin}">
+				      		<tr>
+				      			<td colspan="7" align="right">
+				      				<c:choose>
+				      					<c:when test="${!empty nickname }">						 <%-- user타입 0 = member --%>
+						      				<input class="buttons" type="button" value="글쓰기" onclick="location.href='boardWrite.do?board_type=${board_type}&user_type=0'">
+				      					</c:when>
+
+				      					<c:when test="${!empty admin }">						<%-- user타입 1 = admin --%>
+						      				<input class="buttons" type="button" value="글쓰기" onclick="location.href='boardWrite.do?board_type=${board_type}&user_type=1'">
+				      					</c:when>
+				      				</c:choose>
+				      			</td>
+				      		</tr>
+				      		<br><br>
+		      			</c:if>
+			      		<%------------------가져온 공지가 있다면-------------- --%>
+			      		<c:if test="${!empty upBoardList }">
+			      			<c:forEach items="${upBoardList }" var="upBoardDto">
+			      				<tr>
+					      			<td colspan="7" class="upBoard" ><a href="content.do?board_no=${upBoardDto.getBoard_no() }&board_type=${board_type}&pageParam=${page.getPage()}" style="color: #000">
+					      				<h6>
+					      					${upBoardDto.getBoard_title() } [${upBoardDto.getBoard_reply() }]
+					      					<c:if test="${upBoardDto.getBoard_hasFile() == 1 }"><img class="floppyDisk" src="<c:url value='/resources/img/logos/floppyDisk.png'/>"></c:if>
+					      				</h6>
+					      			</a></td> 
+					      		</tr>
 					      		<tr>
-					      			<td colspan="7" align="right">
-					      				<input class="buttons" type="button" value="글쓰기" onclick="location.href='boardWrite.do?board_type=${board_type}'">
+					      			<td class="upBoard"><b>> ${upBoardDto.getBoard_nickname() }</b></td>
+					      			<td class="upBoard">${upBoardDto.getBoard_date().substring(0, 10) }</td>
+					      			<td class="text-center upBoard">추천 ${upBoardDto.getBoard_like() }</td>
+					      			<td class="text-center upBoard">조회 ${upBoardDto.getBoard_view() }</td>
+					      			
+					      		</tr>
+					      		<tr>
+					      			<td colspan="7">
+					      				<hr style="border-top: 1px solid white;">
 					      			</td>
 					      		</tr>
-					      		<br><br>
-			      			</c:if>
-			      		 
+			      			</c:forEach>
+			      		</c:if>
+		      			
+	      				
+			      		<%------------------가져온 전체 게시물 있다면-------------- --%>
+			      		<c:if test="${!empty list }">
 			      			<%-- 가져온 게시물 뿌려주기 --%>
 				      		<c:forEach items="${list }" var="dto">
 					      		<tr>
@@ -180,19 +214,10 @@
 			      		
 			      		<%---------전체 리스트 없다면------------ --%>
 			      		<c:if test="${empty list }">
-			      			<c:if test="${!empty nickname }">
-					      		<tr>
-					      			<td colspan="7" align="right">
-					      				<input class="buttons" type="button" value="글쓰기" onclick="location.href='boardWrite.do?board_type=${board_type}'">
-					      			</td>
-					      		</tr>
-					      		<br><br>
-			      			</c:if>
-			      			
 			      			<tr>
 			     				<th colspan="7" align="center">
 				      				<c:if test="${empty searchData }">
-					     				<h3>글이 하나도 없습니다! 새로운 글을 써주세요</h3>
+					     				<h3>글이 없습니다. 로그인 시 글 작성이 가능합니다.</h3>
 				      				</c:if>
 				      				
 				      				<c:if test="${!empty searchData }">

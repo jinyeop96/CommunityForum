@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name = "google-signin-client_id" content="811363179923-l5jjuf3mjdrnrdmvl534rubl31frp24e.apps.googleusercontent.com">
 <title>Login</title>
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 <style type="text/css">
@@ -47,16 +46,9 @@
       	  
       	</form>
       </div> 
-        
-       <!-- 로그인 api 불러오기 -->
-      	<table id="loginAPI"></table>
-  
-  		<script type="text/javascript">
-  			$(function(){
-  				$("#loginAPI").load("loginAPI.do");
-  			})
-  		</script>
-        
+      
+      <!-- loginAPI.jsp -->  
+   	  <jsp:include page="/resources/include/loginAPI.jsp" />      
         
         
   </div>

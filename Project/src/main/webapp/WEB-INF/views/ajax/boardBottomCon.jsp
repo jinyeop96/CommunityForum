@@ -3,15 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>	<%-- 줄바꿈 function --%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<!DOCTYPE html>
-
 
 	      	<%pageContext.setAttribute("newLineChar", "\n"); %>	<%-- \n -> newLineChar로 --%>
       	
       			 
      			<table class=" font-black " id="entireList"> <%-- table : 선 긋기, table-hover : 마우스 올렸을 때 색변화 --%>
 	      			<!--  로그인 되어있으면 글쓰기 버튼 -->
-	      		 	<c:if test="${!empty nickname }">
+	      		 	<c:if test="${!empty nickname || !empty admin}">
 			      		<tr>
 			      			<td colspan="7" align="right">
 			      				<input class="buttons" type="button" value="글쓰기" onclick="location.href='boardWrite.do?board_type=${board_type}'">
@@ -19,6 +17,32 @@
 			      			</td>
 			      		</tr>
 	      			</c:if>
+	      			
+	      		<%------------------가져온 공지가 있다면-------------- --%>
+	      		<c:if test="${!empty upBoardList }">
+	      			<c:forEach items="${upBoardList }" var="upBoardDto">
+	      				<tr>
+			      			<td colspan="7" class="upBoard" ><a href="content.do?board_no=${upBoardDto.getBoard_no() }&board_type=${board_type}&pageParam=${page.getPage()}" style="color: #000">
+			      				<h6>
+			      					${upBoardDto.getBoard_title() } [${upBoardDto.getBoard_reply() }]
+			      					<c:if test="${upBoardDto.getBoard_hasFile() == 1 }"><img class="floppyDisk" src="<c:url value='/resources/img/logos/floppyDisk.png'/>"></c:if>
+			      				</h6>
+			      			</a></td> 
+			      		</tr>
+			      		<tr>
+			      			<td class="upBoard"><b>> ${upBoardDto.getBoard_nickname() }</b></td>
+			      			<td class="upBoard">${upBoardDto.getBoard_date().substring(0, 10) }</td>
+			      			<td class="text-center upBoard">추천 ${upBoardDto.getBoard_like() }</td>
+			      			<td class="text-center upBoard">조회 ${upBoardDto.getBoard_view() }</td>
+			      		</tr>
+			      		
+			      		<tr>
+			      			<td colspan="7">
+			      				<hr style="border-top: 1px solid white;">
+			      			</td>
+			      		</tr>
+	      			</c:forEach>
+	      		</c:if>
 
 	      		<%------------------가져온 전체 게시물 있다면-------------- --%>
 	      		<c:if test="${!empty list }">
@@ -34,7 +58,7 @@
 				      					<!-- 자료 있는지 보여주기 -->
 				      					<c:if test="${dto.getBoard_hasFile() == 1 }"><img class="floppyDisk" src="<c:url value='/resources/img/logos/floppyDisk.png'/>"></c:if>
 				      							
-				      					<c:if test="${dto.getBoard_nickname() == nickname }">	<!-- 답변글과 현재 로그인한 사람이 같을 때 수정/삭제 버튼 보여줌 -->
+				      					<c:if test="${dto.getBoard_nickname() == nickname || !empty admin }">	<!-- 답변글과 현재 로그인한 사람이 같을 때 수정/삭제 버튼 보여줌 -->
 					     					<a href="javascript:void(0)" onclick="showModifyBtn(${num}, ${dto.getBoard_no() })">
 					     						<img src="<c:url value='/resources/img/logos/more.png'/>" style="float: right; width: 25px">
 					     					</a>
@@ -100,7 +124,7 @@
 							
 
 			      		 <%-- 답변 글쓰기 폼 --%>	
-			        	<c:if test="${!empty nickname }">	<!-- 로그인 했을 때 댓글 허용 -->
+			        	<c:if test="${!empty nickname || !empty admin}">	<!-- 로그인 했을 때 댓글 허용 -->
 			        		<tr class="reply${num } hide"><td colspan="7"><hr style="width: 90%"></td></tr>
 				        
 				        	<tr class="reply${num } hide">
@@ -114,7 +138,7 @@
 				        	</tr>
 			        	</c:if>
 	
-			        	<c:if test="${empty nickname }">	<!--  로그인 안했을 때 댓글 비허용 -->
+			        	<c:if test="${empty nickname && empty admin}">	<!--  로그인 안했을 때 댓글 비허용 -->
 			        		<tr class="reply${num } hide"><td colspan="7"><hr style="width: 90%"></td></tr>
 				        	
 				        	<tr class="reply${num } hide">
@@ -135,7 +159,7 @@
 					     			<td colspan="7">
 					     				<b>>> ${reply.getReply_nickname() }</b>
 					     				
-					     				<c:if test="${reply.getReply_nickname() == nickname }">	<!-- 답변글과 현재 로그인한 사람이 같을 때 수정/삭제 버튼 보여줌 -->
+					     				<c:if test="${reply.getReply_nickname() == nickname || !empty admin}">	<!-- 답변글과 현재 로그인한 사람이 같을 때 수정/삭제 버튼 보여줌 -->
 					     					<a href="javascript:void(0)" onclick="showModifyBtn(${num2}, ${reply.getReply_no() })">
 					     						<img src="<c:url value='/resources/img/logos/more.png'/>" style="float: right; width: 25px">
 					     					</a>

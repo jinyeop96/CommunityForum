@@ -12,10 +12,19 @@ public class BoardDTO {
 	private int board_dislike;
 	private String board_date;
 	private int board_hasFile;
+	private String board_upBoard;
 	
 	
 	
 	
+	
+	
+	public String getBoard_upBoard() {
+		return board_upBoard;
+	}
+	public void setBoard_upBoard(String board_upBoard) {
+		this.board_upBoard = board_upBoard;
+	}
 	public int getBoard_hasFile() {
 		return board_hasFile;
 	}

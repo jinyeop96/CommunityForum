@@ -52,13 +52,10 @@
 
     <table>
         <c:if test="${empty email }">
-    
-    
-    
-    <tr>
-       	<td><input name = "frommail" style="width:262px;" placeholder="답변받을 메일주소" ></td>
+  		  <tr>
+       		<td><input name = "frommail" style="width:262px;" placeholder="답변받을 메일주소" ></td>
         </tr>
-      	</c:if>
+      </c:if>
       	
         	<tr>
               	<td> <input name = "mailtitle" id ="mailtitle" style="width:262px;" placeholder="문의제목" "> </td>
@@ -71,7 +68,7 @@
             
             <tr>
               <td colspan="2" align="center">
-              <input type="submit" id="loginBtn" value="메일보내기"> &nbsp;&nbsp;&nbsp;
+              <input type="submit" id="loginBtn" value="메일보내기"> <br>
               <input type="submit" id="loginBtn" value="돌아가기" onclick="history.back()">
               </td>
             </tr>

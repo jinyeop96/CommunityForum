@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -10,19 +11,13 @@
 <meta name="author" content="">
 
 <style type="text/css">
-::placeholder{
-font-size: 12px;
-}
+	::placeholder{
+		font-size: 12px;
+	}
 </style>
 <title>Login</title>
-<script src="./resources/jquery-3.4.1.js"></script>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<<<<<<< HEAD
-
-=======
-<script src="./resources/js/join.js" ></script>  <!-- Join.jsp에서 사용될 함수가 저장된 라이브러리로드 -->
->>>>>>> branch 'master' of https://github.com/jinyeop96/test
+<script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
+<script src="<c:url value='/resources/js/join.js'/>" ></script>  <!-- Join.jsp에서 사용될 함수가 저장된 라이브러리로드 -->
 
 <script >
 $(function(){
@@ -197,13 +192,15 @@ $(function(){
       <div id="loginDiv" align="center" style="width: 100%">
       <form onsubmit="return formchk()" method="post" action="<%=request.getContextPath()%>/join_ok.do">
       <input type="hidden" name="verify" value="n">
+      <input type="hidden" name="currURL" value="${pageContext.request.requestURL}">	<!-- 현재 url 을 함께 보내주어 첨삭 후, 어느 url 에서든 자동으로 맞춰서 확인 이메일로 보내줌 -->
+      
       <!-- form안에 submit버튼 입력시 formchk()에서 체크후 return값이 true일 경우 form안에 있는 값들을 post형식으로 join_ok.do로 넘겨준다 -->
       	<table style="width: 100%">
       	<!-- 아이디 입력 공간
       	input :  name, id = id  /  한글입력 불가 정규식 적용
       	span tag : id = id_leng /  아이디 길이 경고문구 출력
       	-->
-      		<tr>
+      		<tr> 
       			<td colspan="2"  align="center"><input class="input" name="id" id="id"  maxlength="16" placeholder="아이디입력(영,숫자조합)" onkeyup="this.value=this.value.replace(/[^a-z0-9]/gi,'');"  > <input type="button" id="idcheck" value="중복검사">
       			<br><span style='font-size: 12px; color: red;' id='id_leng'></span>
       			</td> 
@@ -256,14 +253,8 @@ $(function(){
       	<input type="button" value="돌아가기" onclick="history.back();"> 
       	</form>
       	
-      	<!-- 로그인 api 불러오기 -->
-      	<table id="loginAPI"></table>
-  
-  		<script type="text/javascript">
-  			$(function(){
-  				$("#loginAPI").load("loginAPI.do");
-  			})
-  		</script>
+      	<!-- loginAPI.jsp -->  
+   	  	<jsp:include page="/resources/include/loginAPI.jsp" />
       </div>
     </div>
   </header>

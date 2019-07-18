@@ -83,7 +83,15 @@
 			
 			<form action="boardWriteOk.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="board_type" value="${board_type }">
-				<input type="hidden" name="board_nickname" value="${nickname }">
+				<c:choose>
+					<c:when test="${!empty nickname }">
+						<input type="hidden" name="board_nickname" value="${nickname }">
+					</c:when>
+
+					<c:when test="${!empty admin }">
+						<input type="hidden" name="board_nickname" value="${admin }">
+					</c:when>
+				</c:choose>
 				
 				<table class="board font-black ">
 					<tr>
@@ -111,7 +119,10 @@
 					</tr>
 					
 					<tr>
-						<td colspan="3" align="right">
+						<td colspan="4" align="right">
+							<c:if test="${user_type == 1 }">
+								<input type="checkbox" name="upBoard" value="upBoard">공지사항 등록
+							</c:if>
 							<input type="button" value="취소" onclick="cancelConf()" class="buttons">
 							<input type="submit" value="저장" class="buttons" onclick="return submitConf()">
 						</td>

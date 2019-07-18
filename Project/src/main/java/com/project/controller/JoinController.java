@@ -76,7 +76,12 @@ public class JoinController {
 
 	
 	@RequestMapping("/join_ok.do")
-	public void joinok(JoinDTO dto, Model model, HttpServletResponse response) throws Exception {
+	public void joinok(JoinDTO dto, Model model, @RequestParam String currURL, HttpServletResponse response) throws Exception {
+		// 넘어온 '현재 url'을 이메일과 함께 보낼 준비를 한다
+		String[] currUrl = currURL.split("/");
+		// 아래 url은 자동으로 -> http://[url]:[port]/controller/verify.do?email=[email]; 과 같은 형식으로 해준다
+		String url = currUrl[0] + "//" + currUrl[2] + "/" + currUrl[3] + "/verify.do?email=" + dto.getEmail();
+		
 		// id,pwd,name,nickname,email값이 넘어오며 joindto로 자동매칭
         PrintWriter out = response.getWriter();
 		//경고창과 페이지 이동을 위해 프린트라이터를 사용하기위해 선언해준다
@@ -92,7 +97,7 @@ public class JoinController {
 		//메일 보내기 (해당내용은 servlet-context에 추가되있음)
 		mail.setSubject("[오와열  이메일 인증]");
 		//제목
-		mail.setText("메일인증 http://localhost:8484/controller/verify.do?email="+dto.getEmail());
+		mail.setText("메일인증" + url);
 		//내용
 		mail.addRecipient(RecipientType.TO, new InternetAddress(dto.getEmail()));
 		//보낼곳
