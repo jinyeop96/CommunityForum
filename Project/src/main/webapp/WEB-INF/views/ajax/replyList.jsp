@@ -30,7 +30,7 @@
      			<th colspan="7">
      				> ${reply.getReply_nickname() }	
      				
-     				<c:if test="${reply.getReply_nickname() == nickname }">
+     				<c:if test="${reply.getReply_nickname() == nickname || !empty admin}">
      					<a href="javascript:void(0)" onclick="showModifyBtn(${index})">
      						<img src="<c:url value='/resources/img/logos/more.png'/>" style="float: right; width: 25px">
      					</a>
@@ -45,7 +45,6 @@
      		<tr>
      			<!--  좋아요 -->
      			<td colspan="2">
-     				<%-- <a href="javascript:void(0)"  onclick="replyUpdateLike(${reply.getReply_no()})" class="font-black"> --%>
      				<a href="javascript:void(0)"  onclick="recommend(${reply.getReply_no()}, 'reply', 'like')" class="font-black">
      					<img class="rec" src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;${reply.getReply_like() }
     				</a>
@@ -53,7 +52,6 @@
 				
 				<!-- 싫어요 -->
      			<td colspan="2">
-     				<%-- <a href="javascript:void(0)"  onclick="replyUpdateDislike(${reply.getReply_no()})" class="font-black"> --%>
      				<a href="javascript:void(0)"  onclick="recommend(${reply.getReply_no()}, 'reply', 'dislike')" class="font-black">
      					<img class="rec" src="<c:url value='/resources/img/logos/dislike2.png'/>">&nbsp;&nbsp;${reply.getReply_dislike() }
      				</a>

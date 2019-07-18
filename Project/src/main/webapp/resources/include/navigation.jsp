@@ -110,7 +110,7 @@
 						</ul>
 					</li>
 						
-					<c:if test="${empty nickname }">
+					<c:if test="${empty nickname && empty admin}">
 						<li class="nav-item mx-0 mx-lg-1">
 		         			<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="login.do">Login</a>
 		       			</li>
@@ -129,19 +129,36 @@
 		       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="memberinfo.do">${nickname }</a>
 		       			</li>
 					</c:if>
+
+					<c:if test="${!empty admin }">
+						<li class="nav-item mx-0 mx-lg-1">
+		       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="logout.do">Logout</a>
+		       			</li>
+			
+						<li class="nav-item mx-0 mx-lg-1">
+		       				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger navbar-login" href="javascript:void(0)">${admin }</a>
+		       			</li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
 		
 		<div class="navbar-log-regi">
 			<!-- 메뉴바 우측상단배치 -->
-			<c:if test="${empty nickname }">
+			<c:if test="${empty nickname && empty admin}">
 				<a class="navbar-top-right" href="login.do">Login</a> 
 				<a class="navbar-top-right" href="join.do">Join</a>
 			</c:if>
 			
+			<!-- 유저 -->			
 			<c:if test="${!empty nickname }">
 				<a class="navbar-top-right-session" href="memberinfo.do">${nickname }</a> 
+				<a class="navbar-top-right" href="logout.do">Logout</a>
+			</c:if>
+	
+			<!-- 관리자 -->
+			<c:if test="${!empty admin }">
+				<a class="navbar-top-right-session" href="javascript:void(0)">${admin }</a> 
 				<a class="navbar-top-right" href="logout.do">Logout</a>
 			</c:if>
 		</div>

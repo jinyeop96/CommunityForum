@@ -4,9 +4,35 @@
 <!DOCTYPE html>
 
 	      	
-      	
+      		
       			 
      			<table class="board font-black " id="entireList"> <%-- table : 선 긋기, table-hover : 마우스 올렸을 때 색변화 --%>
+     			<%------------------가져온 공지가 있다면-------------- --%>
+	      		<c:if test="${!empty upBoardList }">
+	      			<c:forEach items="${upBoardList }" var="upBoardDto">
+	      				<tr>
+			      			<td colspan="7" class="upBoard" ><a href="content.do?board_no=${upBoardDto.getBoard_no() }&board_type=${board_type}&pageParam=${page.getPage()}" style="color: #000">
+			      				<h6>
+			      					${upBoardDto.getBoard_title() } [${upBoardDto.getBoard_reply() }]
+			      					<c:if test="${upBoardDto.getBoard_hasFile() == 1 }"><img class="floppyDisk" src="<c:url value='/resources/img/logos/floppyDisk.png'/>"></c:if>
+			      				</h6>
+			      			</a></td> 
+			      		</tr>
+			      		<tr>
+			      			<td class="upBoard"><b>> ${upBoardDto.getBoard_nickname() }</b></td>
+			      			<td class="upBoard">${upBoardDto.getBoard_date().substring(0, 10) }</td>
+			      			<td class="text-center upBoard">추천 ${upBoardDto.getBoard_like() }</td>
+			      			<td class="text-center upBoard">조회 ${upBoardDto.getBoard_view() }</td>
+			      		</tr>
+			      		
+			      		<tr>
+			      			<td colspan="7">
+			      				<hr>
+			      			</td>
+			      		</tr>
+	      			</c:forEach>
+	      		</c:if>
+	      		
 	      		<%------------------가져온 전체 게시물 있다면-------------- --%>
 	      		<c:if test="${!empty list }">
 	      		 

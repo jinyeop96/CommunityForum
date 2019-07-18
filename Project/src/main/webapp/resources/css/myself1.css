@@ -201,42 +201,9 @@
 }
 
 
-
-
-
-#content {  
-  position:absolute;
-  height:50px;   /* 퀵메뉴, 배너 이미지의 높이 */
-  width:300px;    /* 퀵메뉴, 배너 이미지의 너비*/
-  margin:0px 0px 0px 785px;   /* 가장 오른쪽의 수치가 화면 가운데에서 얼마만큼 오른쪽으로 레이어를 붙일 것인지 설정  */ 
-  top: 150px;  /* 배너 상단에서 얼마나 떨어뜨릴지 설정*/
-  left: 40%;     /* 레이어의 시작점이 왼쪽으로 부터 50%  지정 */
-  text-align: left; 
-  padding: 0px; 
+.upBoard{
+	background: #f0ff75;
 }
-
-.names{
-	font-size: 15pt;
-	font-weight: bold;
-}
-
-.contacts{
-	width: 30px; height: 100%; margin: 3px 0; 
-	
-}
-
-.fonts{
-	text-decoration: none; 
-	font-weight: bold;
-	font-size: 14pt;
-	color: black;
-}
-.fonts:hover{
-	text-decoration: none;
-	font-style: italic;
-	color: 1abc9c; 
-
-} 
 
 
 

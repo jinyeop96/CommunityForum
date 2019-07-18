@@ -28,6 +28,12 @@ public class BoardDAOImpl implements BoardDAO{
 	public List<BoardDTO> selectList(Map<String, Object> map) {	
 		return template.selectList("com.project.mappers.board.selectList", map);
 	}
+
+	@Override
+	// 레코드 전체 가져오기
+	public List<BoardDTO> selectUpBoardList(Map<String, Object> map) {	
+		return template.selectList("com.project.mappers.board.selectUpBoardList", map);
+	}
 	
 	
 	

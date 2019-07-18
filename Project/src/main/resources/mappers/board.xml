@@ -14,9 +14,19 @@
 		    FROM (SELECT ROWNUM r, b.*
 		            FROM (SELECT (SELECT COUNT(*) FROM reply WHERE reply_group = board_no) board_reply, b.* 
 		                    FROM board b
-		                    WHERE board_type = #{board_type}
+		                    WHERE board_type = #{board_type} AND board_upBoard is null
 		                    ORDER BY board_no DESC) b)
 		    WHERE <![CDATA[ r >= #{rowStart} AND r <= #{rowEnd} ]]>
+	</select>
+
+	<!-- 게시물 위 공지글 가져오기 -->
+	<select id="selectUpBoardList" resultType="com.project.dto.BoardDTO">
+		<!-- SELECT * FROM (SELECT ROWNUM r, e.* FROM entire e ORDER BY entire_no DESC) WHERE <![CDATA[ r >= #{rowStart} AND r <= #{rowStart} + 20 ]]> -->	<!-- mapper 안에선 <,> 와 같은 비교연산자는 <![CDATA[요기에 넣으셈요]]> --> -->
+		SELECT ROWNUM r, b.*
+		    FROM (SELECT (SELECT COUNT(*) FROM reply WHERE reply_group = board_no) board_reply, b.* 
+		            FROM board b
+		            WHERE  board_upBoard = 'upBoard'
+		            ORDER BY board_no DESC) b
 	</select>
 	
 		
@@ -86,8 +96,15 @@
 	
 	<!--  게시물 등록 -->
 	<insert id="insertRecord">
-		INSERT INTO board 
-			VALUES(#{board_type} ,board_seq.NEXTVAL, #{board_nickname}, #{board_title}, #{board_content}, 0, 0, 0, SYSDATE, 0)
+		<if test="board_upBoard == null">
+			INSERT INTO board ( board_type, board_no, board_nickname, board_title, board_content, board_view, board_like, board_dislike, board_date, board_hasFile)
+				VALUES(#{board_type} ,board_seq.NEXTVAL, #{board_nickname}, #{board_title}, #{board_content}, 0, 0, 0, SYSDATE, 0)
+		</if>
+		<if test="board_upBoard == 'upBoard'">
+			INSERT INTO board 
+				VALUES(#{board_type} ,board_seq.NEXTVAL, #{board_nickname}, #{board_title}, #{board_content}, 0, 0, 0, SYSDATE, 0, #{board_upBoard})
+		
+		</if>
 	</insert>
 	
 	<!-- 글번호에 파일 넣기 -->

@@ -66,7 +66,10 @@ public class LoginController {
 					out.println("<script>location.href='main.do';</script>");
 					// 메인페이지로 이동
 					
-				}else {
+				} else if(logindto.getVerify().equals("a")) {
+					session.setAttribute("admin", "관리자");
+					out.println("<script>location.href='main.do';</script>");
+				} else {
 					//db의 인증값이 n라면
 					out.println("<script>alert('Not Verify Email');location.href='login.do';</script>");
 					//인증안된거 알리고 다시 로그인 페이지로
@@ -213,13 +216,5 @@ public class LoginController {
 		
 		return "redirect:main.do";
 	}
-	
-
-	@RequestMapping("loginAPI.do")
-	@ResponseBody
-	public ModelAndView loginAPI(ModelAndView mav) {
-		System.out.println("api");
-		mav.setViewName("ajax/loginAPI");
-		return mav;
-	}
 }
+	
