@@ -11,11 +11,11 @@
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
   </ol>
-  </div>
+  
   
   <div class="carousel-inner" role="listbox">
     <div class="carousel-item active">
-      <img class="d-block img-fluid" src="resources/img/background/white.png" alt="First slide"  style="width:2000px; height:200px">
+      <img class="d-block img-fluid" src="resources/img/background/white.png" alt="First slide"  style="width:2000px; height:150px">
       <div class="carousel-caption">
       <center><font class="names" style="color:black">SANGWON BANG</font></center>
 
@@ -38,9 +38,9 @@
     
     
     <div class="carousel-item">
-     <img class="d-block img-fluid" src="resources/img/background/white.png" alt="Second slide"  style="width:2000px; height:200px">
+     <img class="d-block img-fluid" src="resources/img/background/white.png" alt="Second slide"  style="width:2000px; height:150px">
   <div class="carousel-caption">
-   	<center><font class="names">JINYEOP OH</font></center>
+   	<center><font class="names" style="color:black">JINYEOP OH</font></center>
 		<a href="javascript:void(0)" target="_blank" class="fonts">
 			<img src="resources/img/banner/phone.png" class="contacts"/>&nbsp;&nbsp;010 3119 3464
 		</a>
@@ -51,17 +51,20 @@
 			<img  src="resources/img/banner/kakaotalk.png" class="contacts"/>&nbsp;&nbsp;ojy96
 		</a>
       </div>
+        </div>
+      
       
     
     
     
     <div class="carousel-item">
-      <img class="d-block img-fluid" src="resources/img/background/white.png" alt="Third slide"  style="width:2000px; height:200px">
+      <img class="d-block img-fluid" src="resources/img/background/white.png" alt="Third slide"  style="width:2000px; height:150px">
   <div class="carousel-caption">
-        	<center><font class="names">CHIHYEOCK YOO</font></center>
+        <center><font class="names" style="color:black">CHIHYEOK YOO</font></center>
 		<a href="javascript:void(0)" target="_blank" class="fonts">
 			<img src="resources/img/banner/phone.png" class="contacts"/>&nbsp;&nbsp;010 3553 1079
 		</a> 
+
         </div>
        </div>
     
@@ -88,8 +91,6 @@
       <span class="glyphicon glyphicon-chevron-right"></span>
       <span class="sr-only">Next</span>
     </a>
-
-
 
 </body>
 </html>

@@ -24,12 +24,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 
 
-
-
-
 </head>
-
-
 
 
 	<%--
@@ -49,11 +44,11 @@
 	 --%>
 	<jsp:include page="/resources/include/navigation.jsp" flush="false" />
 	<jsp:include page="/resources/include/masthead.jsp" flush="false" />
-	<jsp:include page="/resources/include/carousel.jsp" flush="false"/>
+	<jsp:include page="/resources/include/carousel.jsp" />
 	<jsp:include page="/resources/include/section01.jsp" flush="false" />
 	<jsp:include page="/resources/include/section02.jsp" flush="false" />
 	<jsp:include page="/resources/include/section03.jsp" flush="false" />
-	<jsp:include page="/resources/include/carouselPhone.jsp" flush="false"/>
+	<jsp:include page="/resources/include/carouselPhone.jsp" />
 	<jsp:include page="/resources/include/banner.jsp" flush="false" /> 
 	<jsp:include page="/resources/include/footer.jsp" flush="false" />
 	<jsp:include page="/resources/include/copyright.jsp" flush="false" /> 

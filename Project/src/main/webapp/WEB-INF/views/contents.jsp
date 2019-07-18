@@ -9,11 +9,7 @@
 	/* banner */
 	.banner {position: relative; width: 410px; height: 300px; top: 50px;  margin:0 auto; padding:0; overflow: hidden;}
 	.banner ul {position: absolute; margin: 0px; padding:0; list-style: none; }
-<<<<<<< HEAD
-	.banner ul li {float: left; width: 410px; height: 300px; margin:0; padding:0;}
-=======
-	.banner ul li {float: left; width: 550px; height: 300px; margin:0; padding:0;} 
->>>>>>> branch 'master' of https://github.com/jinyeop96/test
+	.banner ul li {float: left; width: 550px; height: 300px; margin:0; padding:0;}
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -223,17 +219,7 @@
      			
      		</div>
      		
-<<<<<<< HEAD
-     	<div class="banner">
-			<ul>
-				<li><img src="resources/img/logos/510_2.png" width="370px" height="250px"></li>
-				<li><img src="resources/img/logos/510logo_2.png" width="370px" height="250px"></li>
-				<li><img src="resources/img/logos/OWY-1.png" width="370px" height="250px"></li>		
-				<li><img src="resources/img/logos/OWY-2.png" width="370px" height="250px"></li>			
-				<li><img src="resources/img/logos/OWY-3.png" width="370px" height="250px"></li>			
-				<li><img src="resources/img/logos/OWY-4.png" width="370px" height="250px"></li>				
-=======
-     		
+
 		<div class="banner">
 			<ul id="banners">
 				<li><img class="img" src="resources/img/logos/510_2.png" width="450px" height="280px"></li>
@@ -242,7 +228,6 @@
 				<li><img class="img" src="resources/img/logos/OWY-2.png" width="450px" height="280px"></li>			
 				<li><img class="img" src="resources/img/logos/OWY-3.png" width="450px" height="280px"></li>			
 				<li><img class="img" src="resources/img/logos/OWY-4.png" width="450px" height="280px"></li>				
->>>>>>> branch 'master' of https://github.com/jinyeop96/test
 			</ul>
 		</div>
 		
