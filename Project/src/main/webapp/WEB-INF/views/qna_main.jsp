@@ -8,6 +8,10 @@
 <!-- jquery import -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+
+  <jsp:include page="/resources/include/banner.jsp"/>
+
+
 <script>
 
 $(function(){
@@ -211,11 +215,6 @@ setInterval(function(){
     	
     	<br>
     	<br>
-    
-    
-    
-    
-    
     
     	<div id="qnaDiv2">
     		

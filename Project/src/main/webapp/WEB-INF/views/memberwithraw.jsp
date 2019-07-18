@@ -35,7 +35,7 @@
       	  <td colspan="2" align="center"><input type="password" name = "pwd" placeholder="비밀번호입력"> </td>
       	  </tr>
       	</table>
-      	<input type="submit" id="loginBtn" value="회원 탈퇴">
+      	<input type="submit" id="loginBtn" value="회원 탈퇴" style="width:100%">
       	<input type="button" id="loginBtn" value="취소" onclick="history.back()">
       	</form>
       </div>

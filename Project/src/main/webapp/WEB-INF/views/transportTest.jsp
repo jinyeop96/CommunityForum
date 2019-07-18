@@ -13,9 +13,9 @@
 		    padding: 3px 20px;
 		    border-radius: 15px;
 		}
+
 	</style>
-	
-	
+
 <script type="text/javascript" src="<c:url value='/resources/jquery-3.4.1.js'/>"></script>
 
 	<script>
@@ -330,13 +330,10 @@
 		}
 		
 			
-		
-			
 </script>
 	
 </head> 
 <body>
-	
 	<jsp:include page="/resources/include/navigation.jsp" />
 	
 	<header class="masthead bg-primary text-white text-center">
@@ -519,7 +516,7 @@
     </script>
 	    
     </header>
-    
+
 	<jsp:include page="/resources/include/footer.jsp" />
   	<jsp:include page="/resources/include/copyright.jsp" /> 
   	<jsp:include page="/resources/include/banner.jsp" />

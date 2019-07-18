@@ -53,6 +53,7 @@ public class BoardController {
 			map.put("board_type", board_type);
 			
 			model.addAttribute("list", board.selectList(map));
+			model.addAttribute("upBoardList", board.selectUpBoardList(map));
 			model.addAttribute("page", pagination);
 			model.addAttribute("board_type", board_type);
 			
@@ -63,8 +64,9 @@ public class BoardController {
 	
 	// 글 작성으로 이동
 	@RequestMapping("/boardWrite.do")
-	public String boardWrite(@RequestParam String board_type, Model model) {
-		model.addAttribute("board_type", board_type);
+	public String boardWrite(@RequestParam String board_type, @RequestParam int user_type,  Model model) {
+		model.addAttribute("board_type", board_type); 
+		model.addAttribute("user_type", user_type);
 		return "boardWrite";
 	}
 	
@@ -73,7 +75,10 @@ public class BoardController {
 	@RequestMapping("boardWriteOk.do")
 	public String boardWriteOk(HttpServletRequest request, MultipartRequest files,  Model model) throws IOException {
 		String board_type = request.getParameter("board_type");
-		
+		String upBoard = request.getParameter("upBoard");
+		if(upBoard != null) {
+			map.put("board_upBoard", request.getParameter("upBoard"));
+		}
 		// 글 작성 
 		map.put("board_title", request.getParameter("board_title").trim());
 		map.put("board_content", request.getParameter("board_content"));
@@ -119,6 +124,7 @@ public class BoardController {
 		map.put("rowEnd", pagination.getRowEnd());
 		
 		model.addAttribute("list", board.selectSearchData(map));
+		model.addAttribute("upBoardList", board.selectUpBoardList(map));
 		model.addAttribute("page", pagination);
 		model.addAttribute("board_type", request.getParameter("board_type"));
 		model.addAttribute("searchType", request.getParameter("searchType"));
@@ -131,7 +137,7 @@ public class BoardController {
 	
 
 	@RequestMapping("/content.do")
-	public String content(@RequestParam int board_no, @RequestParam String board_type,@RequestParam int pageParam, Model model, HttpSession session) throws IOException {
+	public String content(@RequestParam int board_no, @RequestParam String board_type,@RequestParam int pageParam, Model model) throws IOException {
 		board.updateView(board_no); 	//조회수 증가
 		
 		model.addAttribute("dto", board.selectOne(board_no));	// 해당 게시물 가져오기
@@ -175,6 +181,7 @@ public class BoardController {
 		map.put("board_type", board_type);
 		
 		mav.addObject("list", board.selectList(map));
+		mav.addObject("upBoardList", board.selectUpBoardList(map));
 		mav.addObject("page", pagination);
 		mav.addObject("board_type", board_type);
 		mav.setViewName("ajax/boardBottom");	
@@ -191,6 +198,7 @@ public class BoardController {
 		map.put("rowEnd", pagination.getRowEnd());
 		map.put("board_type", board_type);
 		mav.addObject("list", board.selectList(map));
+		mav.addObject("upBoardList", board.selectUpBoardList(map));
 		mav.addObject("replyList", reply.selectAllList());
 		
 		mav.addObject("page", pagination);

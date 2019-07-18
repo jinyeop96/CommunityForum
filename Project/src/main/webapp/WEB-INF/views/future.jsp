@@ -6,8 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>future</title>
-<script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
+<script src="<c:url value='/resources/jquery-3.4.1.js' />"></script>
+
 </head>
+
+	  <jsp:include page="/resources/include/banner.jsp"/>
+	
 	<jsp:include page="/resources/include/navigation.jsp" />
 	
 	<header class="masthead bg-primary text-white text-center">
@@ -24,6 +28,7 @@
     </div>
     </header>
   
+  <a id="topBtn"><img src="resources/img/portfolio/up.png" width="10" height="10" alt="upButton" class="names">TOP</a>
   
   <jsp:include page="/resources/include/footer.jsp" />
   <jsp:include page="/resources/include/copyright.jsp" />

@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name = "google-signin-client_id" content="811363179923-l5jjuf3mjdrnrdmvl534rubl31frp24e.apps.googleusercontent.com">
 <title>Login</title>
 <script src="<c:url value='/resources/jquery-3.4.1.js' /> "></script>
 <style type="text/css">
@@ -33,7 +32,7 @@
       <form onsubmit="return loginformchk()" action="<%=request.getContextPath()%>/loginok.do" method="post">
       	<table>
       		<tr>
-      			<td><input class="input" name="id" id ="id" placeholder="user ID"></td> 
+      			<td><input class="input" name="id" id ="id" placeholder="userID"></td> 
       		</tr>
       		
       		<tr>
@@ -43,19 +42,13 @@
       	
       	<input id="loginBtn" type="submit" value="Login"><br>
       	<a href="javascript:void(0)" class="find"  onclick="location.href='id_search.do'">find id</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;  
-      	<a href="javascript:void(0)" class="find" onclick="location.href='pwd_search.do'">find pwd</a> 
+      	<a href="javascript:void(0)" class="find" onclick="location.href='pwd_search.do'">find pwd</a>
+      	  
       	</form>
       </div> 
-        
-       <!-- 로그인 api 불러오기 -->
-      	<table id="loginAPI"></table>
-  
-  		<script type="text/javascript">
-  			$(function(){
-  				$("#loginAPI").load("loginAPI.do");
-  			})
-  		</script>
-        
+      
+      <!-- loginAPI.jsp -->  
+   	  <jsp:include page="/resources/include/loginAPI.jsp" />      
         
         
   </div>

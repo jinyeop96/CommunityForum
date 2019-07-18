@@ -9,6 +9,8 @@ public interface BoardDAO {
 	
 	//일반
 	public List<BoardDTO> selectList(Map<String, Object> map);	// 게시판 글 다 가져옴
+
+	public List<BoardDTO> selectUpBoardList(Map<String, Object> map);	// 게시판 글 다 가져옴
 	
 	public int getRecords(String board_type);	// 게시물 몇개인지 가져옴 (게시판 별로 작동)
 

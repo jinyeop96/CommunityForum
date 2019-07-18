@@ -270,8 +270,8 @@
 		      		</tr>
 		      		
 		      		<!--  글 작성자가 게시글에 들어오면 보이는 버튼들 -->
-	      			<c:if test="${!empty nickname}">
-	      				<c:if test="${nickname == dto.getBoard_nickname() }">
+	      			<c:if test="${!empty nickname || !empty admin}">
+	      				<c:if test="${nickname == dto.getBoard_nickname() || !empty admin }">
 	      					<tr>
 	      						<td colspan="7" align="right">
 				      				<input type="button" class="buttons" onclick="boardDelete()" value="삭제"> 
@@ -280,7 +280,7 @@
 	      					</tr>
 	      				</c:if>
 	      			</c:if>
-		      		
+
 		      		<tr>
 		      			<td><hr style="border: none; border-top: 1px solid white"></td>
 		      		</tr>
@@ -342,7 +342,7 @@
 		        
 		        <%-- 답변 글쓰기 폼 --%>	
 		        <table class="board">
-		        	<c:if test="${!empty nickname }">	<!-- 로그인 했을 때 댓글 허용 -->
+		        	<c:if test="${!empty nickname || !empty admin}">	<!-- 로그인 했을 때 댓글 허용 -->
 		        		<tr><td><hr style="border: none; border-top: 1px solid white"></td></tr>
 			        
 			        	<tr>
@@ -355,7 +355,7 @@
 			        	</tr>
 		        	</c:if>
 
-		        	<c:if test="${empty nickname }">	<!--  로그인 안했을 때 댓글 비허용 -->
+		        	<c:if test="${empty nickname && empty admin}">	<!--  로그인 안했을 때 댓글 비허용 -->
 		        		<tr><td><hr style="border: none; border-top: 1px solid white"></td></tr>
 			        	
 			        	<tr>

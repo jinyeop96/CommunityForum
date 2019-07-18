@@ -4,6 +4,41 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+<style>
+#content {  
+  position:absolute;
+  height:50px;   /* 퀵메뉴, 배너 이미지의 높이 */
+  width:300px;    /* 퀵메뉴, 배너 이미지의 너비*/
+  margin:0px 0px 0px 785px;   /* 가장 오른쪽의 수치가 화면 가운데에서 얼마만큼 오른쪽으로 레이어를 붙일 것인지 설정  */ 
+  top: 150px;  /* 배너 상단에서 얼마나 떨어뜨릴지 설정*/
+  left: 40%;     /* 레이어의 시작점이 왼쪽으로 부터 50%  지정 */
+  text-align: left; 
+  padding: 0px;  
+}
+
+.names{
+	font-size: 15pt; 
+	font-weight: bold;
+}
+
+.contacts{
+	width: 30px; height: 100%; margin: 3px 0; 
+	
+}
+
+.fonts{
+	text-decoration: none; 
+	font-weight: bold;
+	font-size: 14pt;
+	color: black;
+}
+.fonts:hover{
+	text-decoration: none;
+	font-style: italic;
+	color: 1abc9c; 
+
+} 
+</style>
 
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>  
 <script type="text/javascript">
@@ -108,7 +143,7 @@
 $(function() {
       // 보이기 | 숨기기
       $(window).scroll(function() {
-         if ($(this).scrollTop() > 130) { //250 넘으면 버튼이 보여짐니다.
+         if ($(this).scrollTop() > 110) { //250 넘으면 버튼이 보여짐니다.
                $('#topBtn').fadeIn();
                } else {
                $('#topBtn').fadeOut();
@@ -118,7 +153,7 @@ $(function() {
       $("#topBtn").click(function() {   
       $('html, body').animate({
         scrollTop : 0    // 0 까지 animation 이동합니다.
-       }, 400);          // 속도 400
+       }, 420);          // 속도 400
        return false;
        });
      });
@@ -128,7 +163,7 @@ $(function() {
 
 
 
- <a id="topBtn"><img src="<c:url value='/resources/img/portfolio/up.png'/>" width="10" height="10" alt="upButton" class="names">TOP</a>
+ <a id="topBtn"><img src="<c:url value='/resources/img/portfolio/up.png'/>" width="85" height="85" alt="upButton" class="names"></a>
 
 
 

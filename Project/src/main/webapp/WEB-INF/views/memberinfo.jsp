@@ -47,8 +47,8 @@
       	</table>
       	<input type="submit" id="loginBtn" value="회원정보 수정"><br>
       	<input type="button" id="loginBtn" value="비밀번호 변경" onclick="location.href='member_pwdchange.do'"><br>
+      	<input type="button" id="loginBtn" value="문의메일쓰기" onclick="location.href='<%=request.getContextPath()%>/mailpage.do'"><br>
       	   	<input type="button" id="loginBtn" value="회원 탈퇴" onclick="location.href='member_withraw.do'">
-      	   	<input type="button" value="문의메일쓰기" onclick="location.href='<%=request.getContextPath()%>/mailpage.do'">
       	</form>
       </div>
     </div>

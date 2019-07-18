@@ -6,7 +6,14 @@ public class JoinDTO {
 	private String name;
 	private String nickname;
 	private String email;
+	private String verify;
 	
+	public String getVerify() {
+		return verify;
+	}
+	public void setVerify(String verify) {
+		this.verify = verify;
+	}
 	public String getId() {
 		return id;
 	}

@@ -16,13 +16,23 @@
 	}
 	.find:hover{
 		font-style: italic;
-	}
+	}	
+	div{
+			  display: inline-block;
+  vertical-align: middle;
+  top:50%;
+  left:50%;
+		}
+
 </style>
 <script src="./resources/js/login.js" ></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="./resources/js/mail.js" ></script>
 
 </head>
+
+	 <jsp:include page="/resources/include/banner.jsp"/>
+
 	<jsp:include page="/resources/include/navigation.jsp" />
 
 
@@ -30,7 +40,7 @@
 	<header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
       
-      <h1 class="masthead-heading text-uppercase mb-0">문의사항 이메일</h1>
+    <h1 class="masthead-heading text-uppercase mb-0">문의사항 이메일</h1> 
       <div id="loginDiv" align="center">
 
 
@@ -40,27 +50,29 @@
       	<input type="hidden" name = "frommail" value="${email }" >
       	</c:if>
 
-      	<table>
+    <table>
         <c:if test="${empty email }">
-        <tr>
-        <th>답변받을 메일주소</th><td><input name = "frommail" ></td>
+    
+    
+    
+    <tr>
+       	<td><input name = "frommail" style="width:262px;" placeholder="답변받을 메일주소" ></td>
         </tr>
       	</c:if>
       	
         	<tr>
-             	<th>문의제목</th>
-              	<td> <input name = "mailtitle" id ="mailtitle"> </td>
+              	<td> <input name = "mailtitle" id ="mailtitle" style="width:262px;" placeholder="문의제목" "> </td>
             </tr>
             
             <tr>
-            	<th>문의내용</th>
-               	<td> <textarea name = "mailcont" id ="mailcont" cols="30px" rows="10px" style="resize: none"></textarea> </td>
-            </tr>
+               	<td> <textarea name = "mailcont" id ="mailcont" cols="30px" rows="10px" style="resize: none" placeholder="문의내용"></textarea> </td>
+            </tr>  	
 
             
             <tr>
               <td colspan="2" align="center">
-              <input type="submit" value="메일보내기"> &nbsp;&nbsp;&nbsp;<input type="button" value="돌아가기" onclick="history.back()">
+              <input type="submit" id="loginBtn" value="메일보내기"> &nbsp;&nbsp;&nbsp;
+              <input type="submit" id="loginBtn" value="돌아가기" onclick="history.back()">
               </td>
             </tr>
           </table>

@@ -22,6 +22,11 @@ color:white;
 color:black;
 }
 </style>
+
+  <jsp:include page="/resources/include/banner.jsp"/>
+
+
+
 <script>
 $(function(){
 	//jquery mouseover와 mouseleave를 통해 해당 태그에 마우스 이벤트를 발생시킨다.

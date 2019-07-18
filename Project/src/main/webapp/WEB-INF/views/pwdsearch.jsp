@@ -36,7 +36,8 @@ function searchBtn(){
 		dataType : "text",
 		success:function(data){
 			if(data !=""){
-				alert("임시 비밀번호  "+data+"  로 변경되었습니다");	
+				alert("임시 비밀번호는  "+email+"  로 발송되었습니다");
+				location.href="login.do"
 			}else{
 				alert("아이디와 이메일주소를 확인해주세요.")
 			}

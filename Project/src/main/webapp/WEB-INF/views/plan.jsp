@@ -11,8 +11,14 @@
 	.banner ul {position: absolute; margin: 0px; padding:0; list-style: none; }
 	.banner ul li {float: left; width: 340px; height: 210px; margin:0; padding:0;}
 
-</style>
+</style> 
+ 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+  <jsp:include page="/resources/include/banner.jsp"/>
+
 
 
 <script language="JavaScript">
@@ -55,7 +61,6 @@
 
 </head>
  <body>
- 	<jsp:include page="/resources/include/banner.jsp" />
 	<jsp:include page="/resources/include/navigation.jsp" />
 	
 	<header class="masthead bg-primary text-white text-center">
@@ -88,8 +93,7 @@
    
     </header>
     </body>
-    
-    
+   
   
   <jsp:include page="/resources/include/footer.jsp" />
   <jsp:include page="/resources/include/copyright.jsp" />
