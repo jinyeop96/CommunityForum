@@ -7,14 +7,16 @@
 
 <style type="text/css">	
 	/* banner */
-	.banner {position: relative; width: 550px; height: 300px; top: 50px;  margin:0 auto; padding:0; overflow: hidden;}
+	.banner {position: relative; width: 340px; height: 210px; top: 50px;  margin:0 auto; padding:0; overflow: hidden;}
 	.banner ul {position: absolute; margin: 0px; padding:0; list-style: none; }
-	.banner ul li {float: left; width: 550px; height: 300px; margin:0; padding:0;} 
+	.banner ul li {float: left; width: 340px; height: 210px; margin:0; padding:0;}
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <jsp:include page="/resources/include/banner.jsp"/>
+
+		 <jsp:include page="/resources/include/banner.jsp"/>
+
 
 <script language="JavaScript">
  
@@ -35,13 +37,13 @@
 			$banner.css("height", $bannerHeight + "px");
 			//alert(bannerHeight);
 			//배너의 좌측 위치를 옮겨 준다.
-			$banner.animate({top: - $bannerWidth + "px"}, 1500, function() { //숫자는 롤링 진행되는 시간이다.
+			$banner.animate({left: - $bannerWidth + "px"}, 1500, function() { //숫자는 롤링 진행되는 시간이다.
 				//첫번째 이미지를 마지막 끝에 복사(이동이 아니라 복사)해서 추가한다.
 				$(this).append("<li>" + $(this).find("li:first").html() + "</li>");
 				//뒤로 복사된 첫번재 이미지는 필요 없으니 삭제한다.
 				$(this).find("li:first").remove();
 				//다음 움직임을 위해서 배너 좌측의 위치값을 초기화 한다.
-				$(this).css("top", 0);
+				$(this).css("left", 0);
 				//이 과정을 반복하면서 계속 롤링하는 배너를 만들 수 있다.
 			});
 		}
@@ -81,9 +83,9 @@
 				<img id="logo"  src="<c:url value='/resources/img/logos/510_2.png'/>" alt="html size" style="width:220px; height:160px">
      			
      				<div class=="floatL w55per marB20 re100">
-     					<h3 class="title">- O.W.Y 로고 No.1 -</h3>
+     					<h3 class="title" align="center">- O.W.Y 로고 No.1 -</h3>
      					<ol class="marB20 grey2">
-     						<h5>[팀프로젝트 명인 '오와열'이 내재 돼있고 군 관련 프로그램인 특성을 살려 군번줄을 형상화&메인 로고]</h5>
+     						<h5 align="center">[팀프로젝트 명인 '오와열'이 내재 돼있고 군 관련 프로그램인 특성을 살려 군번줄을 형상화&메인 로고]</h5>
      					</ol>
      					<div class="line marB20"></div>
      					<div class="box_btn">
@@ -106,9 +108,9 @@
      				<img id="logo" src="<c:url value='/resources/img/logos/510logo_2.png'/>" style="width:220px; height:160px">
      			
      				<div class=="floatL w55per marB20 re100">
-     					<h3 class="title">- O.W.Y 로고 No.2 -</h3>
+     					<h3 class="title" align="center">- O.W.Y 로고 No.2 -</h3>
      					<ol class="marB20 grey2">
-     						<h5>['오와열' 타이틀을 제거하여 simple하게 제작된 제 2의 로고]</h5>
+     						<h5 align="center">['오와열' 타이틀을 제거하여 simple하게 제작된 제 2의 로고]</h5>
      					</ol>
      					<div class="line marB20"></div>
      					<div class="box_btn">
@@ -121,7 +123,7 @@
      				<img id="logo"  src="<c:url value='/resources/img/logos/OWY-1.png'/>" style="width:220px; height:160px">
      			
      				<div class=="floatL w55per marB20 re100">
-     					<h3 class="title">- O.W.Y 로고 No.3 -</h3>
+     					<h3 class="title" align="center">- O.W.Y 로고 No.3 -</h3>
      					<ol class="marB20 grey2">
      						<h5>[팀 프로젝트명을 밀리터리 패턴으로 형식화-1]</h5>
      					</ol>
@@ -136,9 +138,9 @@
      				<img id="logo"  src="<c:url value='/resources/img/logos/OWY-2.png'/>" style="width:220px; height:160px">
      			
      				<div class=="floatL w55per marB20 re100">
-     					<h3 class="title">- O.W.Y 로고 No.4 -</h3>
+     					<h3 class="title" align="center">- O.W.Y 로고 No.4 -</h3>
      					<ol class="marB20 grey2">
-     						<h5>[팀 프로젝트명을 밀리터리 패턴으로 형식화-2]</h5>
+     						<h5 align="center">[팀 프로젝트명을 밀리터리 패턴으로 형식화-2]</h5>
      					</ol>
      					<div class="line marB20"></div>
      					<div class="box_btn">
@@ -151,9 +153,9 @@
      				<img id="logo"  src="<c:url value='/resources/img/logos/OWY-3.png'/>" style="width:220px; height:160px">
      			
      				<div class=="floatL w55per marB20 re100">
-     					<h3 class="title">- O.W.Y 로고 No.5 -</h3>
+     					<h3 class="title" align="center">- O.W.Y 로고 No.5 -</h3>
      					<ol class="marB20 grey2">
-     						<h5>[팀 프로젝트명을 밀리터리 패턴으로 형식화-3]</h5>
+     						<h5 align="center">[팀 프로젝트명을 밀리터리 패턴으로 형식화-3]</h5>
      					</ol>
      					<div class="line marB20"></div>
      					<div class="box_btn">
@@ -166,9 +168,9 @@
      				<img id="logo"  src="<c:url value='/resources/img/logos/OWY-4.png'/>" style="width:220px; height:160px">
      			
      				<div class=="floatL w55per marB20 re100">
-     					<h3 class="title">- O.W.Y 로고 No.6 -</h3>
+     					<h3 class="title" align="center">- O.W.Y 로고 No.6 -</h3>
      					<ol class="marB20 grey2">
-     						<h5>[팀 프로젝트명을 밀리터리 패턴으로 형식화-4]</h5>
+     						<h5 align="center">[팀 프로젝트명을 밀리터리 패턴으로 형식화-4]</h5>
      					</ol>
      					<div class="line marB20"></div>
      					<div class="box_btn">
@@ -217,15 +219,15 @@
      			
      		</div>
      		
-     		
+
 		<div class="banner">
 			<ul id="banners">
-				<li><img class="img" src="resources/img/logos/510_2.png" width="450px" height="280px"></li>
-				<li><img class="img" src="resources/img/logos/510logo_2.png" width="450px" height="280px"></li>
-				<li><img class="img" src="resources/img/logos/OWY-1.png" width="450px" height="280px"></li>		
-				<li><img class="img" src="resources/img/logos/OWY-2.png" width="450px" height="280px"></li>			
-				<li><img class="img" src="resources/img/logos/OWY-3.png" width="450px" height="280px"></li>			
-				<li><img class="img" src="resources/img/logos/OWY-4.png" width="450px" height="280px"></li>				
+				<li><img class="img" src="resources/img/logos/510_2.png" width="340px" height="210px"></li>
+				<li><img class="img" src="resources/img/logos/510logo_2.png" width="340px" height="210px"></li>
+				<li><img class="img" src="resources/img/logos/OWY-1.png" width="340px" height="210px"></li>		
+				<li><img class="img" src="resources/img/logos/OWY-2.png" width="340px" height="210px"></li>			
+				<li><img class="img" src="resources/img/logos/OWY-3.png" width="340px" height="210px"></li>			
+				<li><img class="img" src="resources/img/logos/OWY-4.png" width="340px" height="210px"></li>				
 			</ul>
 		</div>
 		

@@ -116,6 +116,7 @@
 	
 	<jsp:include page="/resources/include/getBoardBottomCon.jsp" />
 
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86b59d080c4ee3e8f0d9fc3cfd7b71c8&libraries=services"></script>
 <script>
 //모바일에서 지도 터치 했을 때 큰 지도로 넘어감

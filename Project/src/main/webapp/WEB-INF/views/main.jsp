@@ -22,31 +22,9 @@
 
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>  
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript">
-        $(function() {
-            var offset = $("#content").offset();
-            var topPadding = 100;
-            $(window).scroll(function() {
-    
-                if ($(window).scrollTop() > offset.top) {
-                    $("#content").stop().animate({
-                        marginTop: $(window).scrollTop() - offset.top + topPadding
-                    }, 600);
-                } else {
-                    $("#content").stop().animate({
-                        marginTop: 50
-                    });
-                };
-             });
-        });
-</script>
+
+
 </head>
-
-
-
-
-
-
 
 
 	<%--
@@ -66,14 +44,16 @@
 	 --%>
 	<jsp:include page="/resources/include/navigation.jsp" flush="false" />
 	<jsp:include page="/resources/include/masthead.jsp" flush="false" />
-	<jsp:include page="/resources/include/carousel.jsp" flush="false"/>
+	<jsp:include page="/resources/include/carousel.jsp" />
 	<jsp:include page="/resources/include/section01.jsp" flush="false" />
 	<jsp:include page="/resources/include/section02.jsp" flush="false" />
 	<jsp:include page="/resources/include/section03.jsp" flush="false" />
+	<jsp:include page="/resources/include/carouselPhone.jsp" />
+	<jsp:include page="/resources/include/banner.jsp" flush="false" /> 
 	<jsp:include page="/resources/include/footer.jsp" flush="false" />
 	<jsp:include page="/resources/include/copyright.jsp" flush="false" /> 
 	<jsp:include page="/resources/include/bottomJs.jsp" flush="false" /> 
-	<jsp:include page="/resources/include/banner.jsp" flush="false" /> 
+
   
 
 </body>
