@@ -7,7 +7,7 @@
 	      	<%pageContext.setAttribute("newLineChar", "\n"); %>	<%-- \n -> newLineChar로 --%>
       	
       			 
-     			<table class=" font-black " id="entireList">
+     			<table class=" font-black " id="entireList"> <%-- table : 선 긋기, table-hover : 마우스 올렸을 때 색변화 --%>
 	      			<!--  로그인 되어있으면 글쓰기 버튼 -->
 	      		 	<c:if test="${!empty nickname || !empty admin}">
 			      		<tr>
@@ -21,28 +21,15 @@
    				
 	      		<%------------------가져온 공지가 있다면-------------- --%>
 	      		<c:if test="${!empty upBoardList }">
-	      			<%-- 공지글 마다 붙여줄 숫자 --%>
-	      			<c:set value="0" var="index"></c:set>
-	      			
 	      			<c:forEach items="${upBoardList }" var="upBoardDto">
-	      				<tr class="upBoardDto"${index}>
-			      			<td colspan="7" class="upBoard" >			<!-- 글번호로 내용 가져옴 -->
-			      				<a href="javascript:void(0)" onclick="showContents(${upBoardDto.getBoard_no()});" style="color: #000">
-				      				<h6>
-				      					${upBoardDto.getBoard_title() } [${upBoardDto.getBoard_reply() }]
-				      					<c:if test="${upBoardDto.getBoard_hasFile() == 1 }"><img class="floppyDisk" src="<c:url value='/resources/img/logos/floppyDisk.png'/>"></c:if>
-				      					
-				      					<c:if test="${!empty admin }">	<!-- 답변글과 현재 로그인한 사람이 같을 때 수정/삭제 버튼 보여줌 -->
-					     					<a href="javascript:void(0)" onclick="showModifyBtn(${index}, ${upBoardDto.getBoard_no() })">
-					     						<img src="<c:url value='/resources/img/logos/more.png'/>" style="float: right; width: 25px">
-											</a>
-											
-					     					<input type="button" onclick="boardEdit(${upBoardDto.getBoard_no()}, ${pageParam })" class="buttons modifies modifyBtn${index }" value="수정" style="float: right; margin-left: 10px"></input>
-					     					<input type="button" onclick="boardDelete(${upBoardDto.getBoard_no()}, ${pageParam })" value="삭제" class="buttons modifies modifyBtn${index }" style="float: right"></input>
-					     				</c:if>
-					     			</h6>
-			      				</a>
-			      			</td> 
+	      				<tr>
+			      			<%-- <td colspan="7" class="upBoard" ><a href="content.do?board_no=${upBoardDto.getBoard_no() }&board_type=${board_type}&pageParam=${page.getPage()}" style="color: #000"> --%>
+			      			<td colspan="7" class="upBoard" ><a href="javascript:void(0)" onclick="showContents(${upBoardDto.getBoard_no()});" style="color: #000">
+			      				<h6>
+			      					${upBoardDto.getBoard_title() } [${upBoardDto.getBoard_reply() }]
+			      					<c:if test="${upBoardDto.getBoard_hasFile() == 1 }"><img class="floppyDisk" src="<c:url value='/resources/img/logos/floppyDisk.png'/>"></c:if>
+			      				</h6>
+			      			</a></td> 
 			      		</tr>
 			      		<tr>
 			      			<td class="upBoard"><b>> ${upBoardDto.getBoard_nickname() }</b></td>
@@ -58,7 +45,6 @@
 			      		</tr>
 			      		
 			      		<tr id="contentsCon"></tr>
-			      		<c:set value="${index + 1 }" var="index"></c:set>
 	      			</c:forEach>
 	      		</c:if>
 
@@ -70,14 +56,14 @@
 		      		<c:forEach items="${list }" var="dto">	<!-- 이건 게시글 뿌리기 -->
 			      		<tr>	
 			      			<td colspan="4" >
-			      				<a href="javascript:void(0)" onclick="showReply(${index });" style="color: #000">
+			      				<a href="javascript:void(0)" onclick="showReply(${num });" style="color: #000">
 				      				<h6>
 				      					${dto.getBoard_title() } [${dto.getBoard_reply() }]
 				      					<!-- 자료 있는지 보여주기 -->
 				      					<c:if test="${dto.getBoard_hasFile() == 1 }"><img class="floppyDisk" src="<c:url value='/resources/img/logos/floppyDisk.png'/>"></c:if>
 				      							
 				      					<c:if test="${dto.getBoard_nickname() == nickname || !empty admin }">	<!-- 답변글과 현재 로그인한 사람이 같을 때 수정/삭제 버튼 보여줌 -->
-					     					<a href="javascript:void(0)" onclick="showModifyBtn(${index}, ${dto.getBoard_no() })">
+					     					<a href="javascript:void(0)" onclick="showModifyBtn(${num}, ${dto.getBoard_no() })">
 					     						<img src="<c:url value='/resources/img/logos/more.png'/>" style="float: right; width: 25px">
 					     					</a>
 	

@@ -115,10 +115,6 @@
 	</div>
 	
 	<jsp:include page="/resources/include/getBoardBottomCon.jsp" />
-	<div align="center" class="board font-black">
-		<table id="board" class="font-black board"></table>
-	</div>
-
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86b59d080c4ee3e8f0d9fc3cfd7b71c8&libraries=services"></script>
 <script>

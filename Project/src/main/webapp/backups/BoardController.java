@@ -32,9 +32,6 @@ public class BoardController {
 	
 	@Autowired
 	private FileService fileService;
-
-	@Autowired
-	private RecommendDAOImpl recommend;
 	
 	@Resource(name="uploadPath")
 	String uploadPath;
@@ -42,7 +39,7 @@ public class BoardController {
 	
 	Pagination pagination;
 	Map<String, Object> map = new HashMap<String, Object>();
-
+	RecommendDTO rec = new RecommendDTO();
 
 	// 전체 게시판 가져오기
 	@RequestMapping("/board.do")	 
@@ -200,13 +197,36 @@ public class BoardController {
 		map.put("rowStart", pagination.getRowStart());
 		map.put("rowEnd", pagination.getRowEnd());
 		map.put("board_type", board_type);
-		mav.addObject("list", board.selectList(map));	//게시글
-		mav.addObject("upBoardList", board.selectUpBoardList(map)); //공지들
-		//mav.addObject("replyList", reply.selectAllList());	//답변글
+		mav.addObject("list", board.selectList(map));
+		mav.addObject("upBoardList", board.selectUpBoardList(map));
+		mav.addObject("replyList", reply.selectAllList());
+		
 		mav.addObject("page", pagination);
 		mav.addObject("pageParam", pageParam);
 		mav.addObject("board_type", board_type);
-		mav.setViewName("ajax/boardBottomCon2");	
+		mav.setViewName("ajax/boardBottomCon");	
+		
+		// 해당 게시물에 첨부되어 있을 첨부파일 가져오기
+		List<BoardFileDTO> getFiles = board.selectAllFile(board_type);
+		
+		//이미지인지 다른파일인지 분류해서 저장
+		List<BoardFileDTO> files = new ArrayList<BoardFileDTO>();
+		List<BoardFileDTO> images = new ArrayList<BoardFileDTO>();
+		
+		// 만약 첨부파일이 있다면 실행
+		if(!getFiles.isEmpty()) {
+			for(int i = 0; i < getFiles.size(); i++) {
+				File file = new File(uploadPath+getFiles.get(i).getBoardfile_name());	//uploadPath는 servlet-context.xml에서 수정할 수 있음
+				
+				if(new Tika().detect(file).startsWith("image")) { // 가져온 첨부파일이 어떤 형태인지 (image 인지, txt 인지 등등)
+					images.add(getFiles.get(i)); // 이미지에 해당하는 파일을 따로 담아 images라는 이름으로 넘긴다
+					mav.addObject("images", images);
+				} else {
+					files.add(getFiles.get(i));	// 위와 동일
+					mav.addObject("files", files );
+				}
+			}
+		}
 		
 		return mav;
 	} //entire.do
@@ -304,71 +324,11 @@ public class BoardController {
 	
 	@RequestMapping("/contentsCon.do")
 	@ResponseBody
-	public ModelAndView contents(@RequestParam int board_no, @RequestParam int pageParam, ModelAndView mav, HttpSession session) throws IOException {
-		BoardFileDTO fileDto = new BoardFileDTO();
-		
-		//게시글 가져오기
-		mav.addObject("dto", board.selectOne(board_no));
-
-		pagination = new Pagination(reply.getRecords(board_no), pageParam, 10, 5);	// 10rows, 5 blocks
-		
-		map.put("rowStart", pagination.getRowStart());
-		map.put("rowEnd", pagination.getRowEnd());
-		map.put("board_no", board_no);
-		
-		mav.addObject("page", pagination);
-		
-		String nickname = (String) session.getAttribute("nickname");
-			if (nickname != null) {
-				List<RecommendDTO> dto = recommend.selectByNickname(nickname);
-				
-				List<RecommendDTO> replyRec = new ArrayList<RecommendDTO>();
-				
-				for(int i = 0; i < dto.size(); i++) {
-					if(board_no == dto.get(i).getBoard_no()) {
-						RecommendDTO boardRec = dto.get(i);
-						System.out.println("nickname = " +boardRec.getNickname());
-						mav.addObject("boardRec", boardRec);
-					}
-					
-					if(dto.get(i).getReply_no() != 0) {
-						replyRec.add(dto.get(i));
-						mav.addObject("replyRec", replyRec);
-						
-					}
-						
-				}
-			}
-		
-		//게시물의 답변 가져오기
-		mav.addObject("replyList", reply.selectList(map));
-		
-
-		// 해당 게시물에 첨부되어 있을 첨부파일 가져오기
-		List<String> fileNames = board.selectFile(board_no);	//게시글에 포함되어있는 첨부파일
-		
-		//이미지인지 다른파일인지 분류해서 저장
-		List<BoardFileDTO> files = new ArrayList<BoardFileDTO>();
-		List<BoardFileDTO> images = new ArrayList<BoardFileDTO>();
-		
-		// 만약 첨부파일이 있다면 실행
-		if(!fileNames.isEmpty()) {
-			for(int i = 0; i < fileNames.size(); i++) {
-				File file = new File(uploadPath+fileNames.get(i));	//uploadPath는 servlet-context.xml에서 수정할 수 있음
-				
-				if(new Tika().detect(file).startsWith("image")) { // 가져온 첨부파일이 어떤 형태인지 (image 인지, txt 인지 등등)
-					fileDto.setBoardfile_name(fileNames.get(i));
-					images.add(fileDto);	// 이미지에 해당하는 파일을 따로 담아 images라는 이름으로 넘긴다
-					mav.addObject("images", images);
-				} else {
-					fileDto.setBoardfile_name(fileNames.get(i));
-					files.add(fileDto);	// 파일
-					mav.addObject("files", files );
-				}
-			}
-		}
-		
-		mav.setViewName("ajax/contentsCon2");
+	public ModelAndView contents(@RequestParam int board_no, ModelAndView mav) {
+		System.out.println(board.selectOne(board_no));
+		mav.addObject("upBoardList", board.selectOne(board_no));
+		//mav.addObject("upBoardFile", board.selectOne(board_no));
+		mav.setViewName("ajax/contentsCon");
 		return mav;
 	}
 	

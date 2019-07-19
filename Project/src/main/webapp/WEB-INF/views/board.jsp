@@ -84,7 +84,7 @@
 				      				</c:choose>
 				      			</td>
 				      		</tr>
-				      		<br><br>
+				      		<tr><td><br></td></tr>
 		      			</c:if>
 			      		<%------------------가져온 공지가 있다면-------------- --%>
 			      		<c:if test="${!empty upBoardList }">

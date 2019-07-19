@@ -151,7 +151,7 @@
 				type:"post",
 				async: false,
 				data: {"pageParam": pageParam,
-					   "board_type": "${dto.getBoard_type()}"},
+					   "board_type": "${board_type}"},
 				success:function(result){
 					$("#boardBottom").html(result).trigger("create");
 				}
@@ -165,12 +165,18 @@
 		
 		// 답변 등록
 		function reply(){	
+			var reply_nickname;
+			if("${nickname}" != ""){
+				nickname = "${nickname}";
+			} else{
+				nickname = "${admin}";
+			}
 			$.ajax({
 				url:"replyUpdate.do",
 				type:"get",
 				data: { "board_no": "${dto.getBoard_no()}",			//해당 원글 번호
 						"reply_content": $("#reply_content").val(),	//답글
-						"reply_nickname": "${nickname}" },	// 닉네임 (나중에 session으로 처리할 때 nickname으로 할 예정)
+						"reply_nickname": nickname },	// 닉네임 (나중에 session으로 처리할 때 nickname으로 할 예정)
 			
 				success:function(){
 						$("#reply_content").val("");

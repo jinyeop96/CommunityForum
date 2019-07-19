@@ -1,5 +1,6 @@
 package com.project.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,10 +16,14 @@ public class RecommendDAOImpl implements RecommendDAO{
 	private SqlSessionTemplate template;
 	
 	// 해당 공감 레코드 가져오기
-
 	@Override
 	public RecommendDTO selectRecommend(Map<String, Object> map) {
 		return template.selectOne("com.project.mappers.recommend.selectRecommend", map);
+	}
+
+	@Override
+	public List<RecommendDTO> selectByNickname(String nickname) {
+		return template.selectList("com.project.mappers.recommend.selectByNickname", nickname);
 	}
 
 	// 처음으로 공감할때
