@@ -8,39 +8,58 @@
 <script>
 	$(function(){
 		boardBottomCon();
-		$(".modifies").hide();
 	});
+	function modifyBtnHide(){
+		$(".modifies").hide();
+	}
 	
 	// 게시글 + 댓글 보이기	
 	function showContents(board_no, pageParam, scrollUp){
 		if(pageParam == null){ var pageParam = 1; }
-		$("#contentsCon"+board_no).load("contentsCon.do?board_no="+board_no+"&pageParam="+pageParam);
+		$.ajax({
+			url:"contentsCon.do",
+			type: "post",
+			data: {"board_no": board_no,
+				   "pageParam": pageParam },
+			success:function(result){
+				$("#contentsCon"+board_no).html(result);
+				$(".files").hide();
+				modifyBtnHide();
+
+			}
+		});
 		
 		// 페이징 처리에서 다른 페이지 클릭했을 때만 작동
 		if( scrollUp == 1){
 			$("html, body").animate({scrollTop : $("#like"+board_no).offset().top}, 400);
 		}
-		 
+	}
+	
+	// 첨부파일 토글링
+	function showFile(){
+		$(".files").toggle();  
 	}
 	
 	// 수정/삭제 버튼 토글
-	function showModifyBtn(reply_no, board_no, reply_content){
-		var str = '<input type="button" onclick="replyEdit('+reply_no+", "+board_no+", '"+reply_content+"'"+')" class="buttons" value="수정" style="float: right; margin-left: 10px"></input>'  +
-				   '<input type="button" onclick="replyDelete('+reply_no+","+board_no+')" value="삭제" class="buttons modifies modifyBtn${num2 }" style="float: right"></input>';		
-		$("#modifyBtn"+reply_no).html(str);
-	} 
-	
-	function showModifyBtn2(board_no){
-		$(".modifyBtn"+board_no).toggle();
+	// board	
+	function showModifyBtn(no){
+		$(".modifyBtn"+no).toggle();
 	}
 	
+	// reply
+	function showModifyBtn2(reply_no, board_no){
+		var str = '<input type="button" onclick="replyEdit('+reply_no+", "+board_no+')" class="buttons" value="수정" style="float: right; margin-left: 10px"></input>'  +
+				   '<input type="button" onclick="replyDelete('+reply_no+","+board_no+')" value="삭제" class="buttons" style="float: right"></input>';		
+		$("#modifyBtn"+reply_no).html(str);
+	} 
 	 
  
 	// 댓글 수정 입력란 보이게 하기
-	function replyEdit(reply_no, board_no, reply_content){ 
+	function replyEdit(reply_no, board_no){
+		var reply_content = $("#reply_content"+reply_no)["0"].textContent;
 		var str = '<tr><td colspan="7"><textarea class="board resize-none textarea" rows="4"  placeholder="댓글 쓰기" id="reply_content_edit'+reply_no+'" >'+reply_content+'</textarea></td></tr>' +
 				  '<tr><td colspan="7" align="right"><input type="button" onclick="replyEditOk('+reply_no+", "+board_no+')" class="buttons" value="저장"></td></tr>';
-		$("#replies"+reply_no).hide();
+		$("#replies"+reply_no).hide();			//글 내용 숨기기
 		$("#replyEdit"+reply_no).html(str);		//수정 입력란+index 만 toggle하기
 	}
 	
@@ -166,7 +185,7 @@
 				   "board_type": "${board_type}"},
 			success:function(result){
 				$("#board").html(result).trigger("create");
-				$(".modifies").hide();
+				modifyBtnHide();
 			}
 		});
 	};	

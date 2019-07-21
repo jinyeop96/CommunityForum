@@ -24,6 +24,7 @@
 			var depart = document.getElementById('depart').value.trim();
 			var arrival = document.getElementById('arrival').value.trim();
 			
+			
 			var departTerminals = new Array();	// 출발터미널 ID
 			var arrivalTerminals = new Array();	// 도착터미널 ID
 			
