@@ -48,7 +48,7 @@
 		 if( navigator.platform){
 			 if( filter.indexOf(navigator.platform.toLowerCase())<0 ){	// 모바일 접속
 				 $("#content").hide();
-			 	 $("topBtn").hide();
+			 	 $("#topBtn").hide();
 			 } else {// pc 접속
 			} 
 		}  
@@ -144,7 +144,7 @@
 $(function() {
       // 보이기 | 숨기기
       $(window).scroll(function() {
-         if ($(this).scrollTop() > 110) { //110 넘으면 버튼이 보여짐니다.
+         if ($(this).scrollTop() > 50) { //110 넘으면 버튼이 보여짐니다.
                $('#topBtn').fadeIn();
                } else {
                $('#topBtn').fadeOut();
@@ -163,7 +163,7 @@ $(function() {
 
 
 
-<div id="topBtn">
+<div >
  <a id="topBtn"><img src="<c:url value='/resources/img/portfolio/up.png'/>" width="85" height="85" alt="upButton" class="names"></a>
 </div>
 

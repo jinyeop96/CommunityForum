@@ -201,9 +201,27 @@
 }
 
 
+.upBoard{
+	background: #f0ff75;
+}
+
+.upBoard-top{
+	border-radius: 8px 8px 0 0;
+}
+.upBoard-bottom{
+	border-radius: 0 0 8px 8px;
+}
+.upBoard-left{
+	border-radius: 8px 0 0 8px;
+}
+.upBoard-right{
+	border-radius: 0 8px 8px 0;
+}
 
 
-
+.no-deco:hover{
+		text-decoration: none;
+	}
 
 
 

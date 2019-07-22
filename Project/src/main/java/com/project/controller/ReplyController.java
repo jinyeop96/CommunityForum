@@ -1,10 +1,13 @@
 package com.project.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +24,13 @@ import com.project.service.FileService;
 public class ReplyController {
 	
 	@Autowired 
-	public ReplyDAOImpl reply;
+	private ReplyDAOImpl reply;
 	
 	@Autowired
-	public FileService fileService;
+	private FileService fileService;
+	
+	@Autowired
+	private RecommendDAOImpl recommend; 
 	
 	@Resource(name="uploadPath")
 	String uploadPath;
@@ -35,7 +41,7 @@ public class ReplyController {
 	
 	//해당 글 답변 가져오기
 		@RequestMapping("/replyList.do")
-		public ModelAndView replyList(@RequestParam int board_no, @RequestParam int pageParam, ModelAndView mav  ) {
+		public ModelAndView replyList(@RequestParam int board_no, @RequestParam int pageParam, ModelAndView mav, HttpSession session  ) {
 			pagination = new Pagination(reply.getRecords(board_no), pageParam, 10, 5);	// 10rows, 5 blocks
 			
 			map.put("rowStart", pagination.getRowStart());
@@ -48,6 +54,23 @@ public class ReplyController {
 			mav.addObject("pageParam", pageParam);
 			mav.addObject("replyNum", reply.getRecords(board_no));
 			mav.setViewName("ajax/replyList");
+			
+			// 현재 로그인 닉네임의 좋아요/싫어요 가져오기
+			String nickname = (String) session.getAttribute("nickname");
+				if (nickname != null) {
+					List<RecommendDTO> dto = recommend.selectByNickname(nickname);
+					
+					List<RecommendDTO> replyRec = new ArrayList<RecommendDTO>();
+					
+					for(int i = 0; i < dto.size(); i++) {
+						if(dto.get(i).getReply_no() != 0) {
+							replyRec.add(dto.get(i));
+							mav.addObject("replyRec", replyRec);
+							
+						}
+							
+					}
+				}
 			return mav;
 		}
 		

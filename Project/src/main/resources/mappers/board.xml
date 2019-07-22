@@ -60,7 +60,7 @@
 	<select id="searchData" resultType="com.project.dto.BoardDTO">
 		SELECT *
 		    FROM (SELECT ROWNUM r, b.* 
-		            FROM (SELECT  * FROM board WHERE board_type = #{board_type} ORDER BY board_no DESC) b
+		            FROM (SELECT  (SELECT COUNT(*) FROM reply WHERE reply_group = board_no) board_reply, b.* FROM board b WHERE board_type = #{board_type} ORDER BY board_no DESC) b
 				
 				<if test="searchType == 'all' ">
 			        WHERE board_title LIKE '%' || #{searchData} || '%' OR
