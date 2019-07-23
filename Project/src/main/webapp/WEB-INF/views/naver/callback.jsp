@@ -1,3 +1,4 @@
+<%@page import="java.util.StringTokenizer"%>
 <%@page import="org.json.simple.JSONArray"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.parser.JSONParser"%>
@@ -7,6 +8,7 @@
 <%@ page import="java.net.HttpURLConnection" %>
 <%@ page import="java.io.BufferedReader" %>
 <%@ page import="java.io.InputStreamReader" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,11 +25,18 @@
 	String nickname = "";
 	String email = "";
 	
+	String getUrl = request.getRequestURL().toString();
+	String[] currUrl = getUrl.split("/");
+	String reUrl = currUrl[0] + "//" + currUrl[2] + "/" + currUrl[3] + "/naver/callback.do";
+	
+	System.out.println("reUrl = " + reUrl);
+
+	
     String clientId = "j8R_N6PAsO7uCvkZDq3n";//애플리케이션 클라이언트 아이디값";
     String clientSecret = "v8S57VjC2I";//애플리케이션 클라이언트 시크릿값";
     String code = request.getParameter("code");
     String state = request.getParameter("state");
-    String redirectURI = URLEncoder.encode("http://localhost:8054/controller/naver/callback.do", "UTF-8");
+    String redirectURI = URLEncoder.encode(reUrl, "UTF-8");
     String apiURL;
     apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
     apiURL += "client_id=" + clientId;
@@ -89,11 +98,15 @@
             jsonObject = (JSONObject) jsonObject.get("response");	// response부분만 다시 jsonObject객체에 넣어줌
             email = (String)jsonObject.get("email");
             nickname = (String)jsonObject.get("email");			// response중에서 nickname만 가져옴
+            System.out.println("nickname ======= "+ nickname);
             
             session.setAttribute("nickname", nickname);	//세션에 nickname 저장 
             session.setAttribute("email", email);	//세션에 nickname 저장 
-            //response.sendRedirect("<script>location.href='main.do'</script>");
-            response.sendRedirect("http://localhost:8054/controller/main.do");
+   		
+   			
+   			String sendUrl = currUrl[0] + "//" + currUrl[2] + "/" + currUrl[3] + "/main.do";
+   			
+            response.sendRedirect(sendUrl);
             
         }
         br.close();

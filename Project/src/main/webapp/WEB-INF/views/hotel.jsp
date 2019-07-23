@@ -88,7 +88,7 @@
 	<table style="width: 100%">
 		<tr>
 			<td id="searchBar">
-				<input class="searchLoc" value="${hotel_search }"><input class="search" type="button" onclick="search()" value="검색">
+				<input class="searchLoc" value="${hotel_search }"><input class="search" type="button" onclick="search();" value="검색">
     		</td>
 		</tr>
 	</table>

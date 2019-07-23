@@ -65,7 +65,10 @@
 
 /*navigation.jsp    Menu bar */
 .menu-bar li ul {
-	background-image: url("../img/background/camo-pattern.jpg");
+	/*background-image: url("../img/background/camo-pattern.jpg"); */
+	background: #000000;
+	opacity: 0.9;
+	border-radius: 10px;
 	display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
 	height:auto;
 	padding:0px;

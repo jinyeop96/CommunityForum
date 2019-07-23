@@ -169,7 +169,8 @@
 	
 	
 	// 지도 아래 게시물 가져오기
-	function boardBottomCon(pageParam, checkPageUp){   
+	function boardBottomCon(pageParam, checkPageUp){  
+		console.log("sda");
 		if(pageParam == null){
 			pageParam = 1;	//가장 처음 boardContent.jsp에 들어올 때는 board.jsp의 몇번째 페이지 였는지 알아야함. 안그러면 bottomBoard에는 무조건 page1으로 감.
 		}
@@ -188,7 +189,7 @@
 				modifyBtnHide();
 			}
 		});
-	};	
+	};
 	
 </script>
 

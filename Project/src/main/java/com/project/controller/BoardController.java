@@ -89,6 +89,8 @@ public class BoardController {
 		map.put("board_type", request.getParameter("board_type"));
 		
 		board.insertRecord(map);
+		
+		map.clear();
 
 		
 		// name="file" 로 되어있는 파일 list에 담기
@@ -133,7 +135,6 @@ public class BoardController {
 		model.addAttribute("searchType", request.getParameter("searchType"));
 		model.addAttribute("searchData", request.getParameter("searchData"));
 		
-		
 		return "forward:board.do?pageParam="+pageParam+"&board_type="+board_type+"&boardSearch=yes";
 		//return "boardSearch";	// 다른 페이지에서 보이게 (boardSearch=yes 필요없음)
 	} //boardSearch.do
@@ -151,17 +152,17 @@ public class BoardController {
 		// 해당 게시물에 첨부되어 있을 첨부파일 가져오기
 		List<String> getFiles = board.selectFile(board_no);
 		
-		//이미지인지 다른파일인지 분류해서 저장
+		//이미지/일반파일 분류  저장
 		List<String> files = new ArrayList<String>();
 		List<String> images = new ArrayList<String>();
 		
 		// 만약 첨부파일이 있다면 실행
 		if(!getFiles.isEmpty()) {
 			for(int i = 0; i < getFiles.size(); i++) {
-				File file = new File(uploadPath+getFiles.get(i));	//uploadPath는 servlet-context.xml에서 수정할 수 있음
+				File file = new File(uploadPath+getFiles.get(i));		//uploadPath는 servlet-context.xml에서 수정할 수 있음
 				
-				if(new Tika().detect(file).startsWith("image")) { // 가져온 첨부파일이 어떤 형태인지 (image 인지, txt 인지 등등)
-					images.add(getFiles.get(i)); // 이미지에 해당하는 파일을 따로 담아 images라는 이름으로 넘긴다
+				if(new Tika().detect(file).startsWith("image")) { 		// 가져온 첨부파일이 어떤 형태인지 (image 인지, txt 인지 등등)
+					images.add(getFiles.get(i)); 						// 이미지에 해당하는 파일을 따로 담아 images라는 이름으로 넘긴다
 					model.addAttribute("images", images);
 				} else {
 					files.add(getFiles.get(i));	// 위와 동일
@@ -297,24 +298,23 @@ public class BoardController {
 		// 다시 content.jsp 로 가면서 변경사항 바로 보이게끔 함
 		return "redirect:content.do?board_no="+board_no+"&board_type="+board_type+"&pageParam="+pageParam;
 	}
-	
 
 	@RequestMapping("/boardBottomCon.do")
 	@ResponseBody
 	public ModelAndView boardBottomCon(@RequestParam int pageParam, @RequestParam String board_type, ModelAndView mav) throws IOException {
-		pagination = new Pagination(board.getRecords(board_type), pageParam);	// (전체레코드 수, 페이지 번호)
-		
-		map.put("rowStart", pagination.getRowStart());
-		map.put("rowEnd", pagination.getRowEnd());
-		map.put("board_type", board_type);
-		
-		mav.addObject("list", board.selectList(map));	//게시글
-		mav.addObject("upBoardList", board.selectUpBoardList(map)); // 공지글
-		mav.addObject("page", pagination);
-		mav.addObject("pageParam", pageParam);
-		mav.addObject("board_type", board_type);
-		mav.setViewName("ajax/boardBottomCon");	
-		
+			pagination = new Pagination(board.getRecords(board_type), pageParam);	// (전체레코드 수, 페이지 번호)
+			
+			map.put("rowStart", pagination.getRowStart());
+			map.put("rowEnd", pagination.getRowEnd());
+			map.put("board_type", board_type);
+			
+			mav.addObject("list", board.selectList(map));	//게시글
+			mav.addObject("upBoardList", board.selectUpBoardList(map)); // 공지글
+			mav.addObject("page", pagination);
+			mav.addObject("pageParam", pageParam);
+			mav.addObject("board_type", board_type);
+			
+			mav.setViewName("ajax/boardBottomCon");	
 		return mav;
 	} //entire.do
 	
