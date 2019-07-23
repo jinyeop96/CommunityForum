@@ -144,7 +144,7 @@
 $(function() {
       // 보이기 | 숨기기
       $(window).scroll(function() {
-         if ($(this).scrollTop() > 110) { //110 넘으면 버튼이 보여짐니다.
+         if ($(this).scrollTop() > 50) { //110 넘으면 버튼이 보여짐니다.
                $('#topBtn').fadeIn();
                } else {
                $('#topBtn').fadeOut();
