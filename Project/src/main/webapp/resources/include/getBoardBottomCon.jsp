@@ -7,36 +7,121 @@
 
 <script>
 	$(function(){
-		console.log("${board_type}");
 		boardBottomCon();
-		
-		//hotel.jsp 들어올때 기본적으로 댓글은 숨김
-		$(".hide").hide();	//기본적으로 댓글 숨기기
-		$(".modifies").hide();	//기본적으로 댓글 숨기기
-		
 	});
+	function modifyBtnHide(){
+		$(".modifies").hide();
+	}
 	
+	// 게시글 + 댓글 보이기	
+	function showContents(board_no, pageParam, scrollUp){
+		if(pageParam == null){ var pageParam = 1; }
+		$.ajax({
+			url:"contentsCon.do",
+			type: "post",
+			data: {"board_no": board_no,
+				   "pageParam": pageParam },
+			success:function(result){
+				$("#contentsCon"+board_no).html(result);
+				$(".files").hide();
+				modifyBtnHide();
+
+			}
+		});
+		
+		// 페이징 처리에서 다른 페이지 클릭했을 때만 작동
+		if( scrollUp == 1){
+			$("html, body").animate({scrollTop : $("#like"+board_no).offset().top}, 400);
+		}
+	}
+	
+	// 첨부파일 토글링
+	function showFile(){
+		$(".files").toggle();  
+	}
 	
 	// 수정/삭제 버튼 토글
-	function showModifyBtn(num, reply_no){
-		$(".modifyBtn"+num).toggle();	//기본적으로 댓글 숨기기
-		$(".replyEditHide"+reply_no).hide();		//수정 입력란+index 만 toggle하기
-	} 
-	
-	// 답변글 토글
-	 function showReply(num){
-		$(".reply"+num).toggle();
-		$(".editHide").hide();		// 수정입력란 다 숨기기
-
-	}	
-
-	// 댓글 수정 입력란 보이게 하기
-	function replyEdit(reply_no){
-		$(".replyEditHide"+reply_no).toggle();		//수정 입력란+index 만 toggle하기
+	// board	
+	function showModifyBtn(no){
+		$(".modifyBtn"+no).toggle();
 	}
+	
+	// reply
+	function showModifyBtn2(reply_no, board_no){
+		var str = '<input type="button" onclick="replyEdit('+reply_no+", "+board_no+')" class="buttons" value="수정" style="float: right; margin-left: 10px"></input>'  +
+				   '<input type="button" onclick="replyDelete('+reply_no+","+board_no+')" value="삭제" class="buttons" style="float: right"></input>';		
+		$("#modifyBtn"+reply_no).html(str);
+	} 
+	 
+ 
+	// 댓글 수정 입력란 보이게 하기
+	function replyEdit(reply_no, board_no){
+		var reply_content = $("#reply_content"+reply_no)["0"].textContent;
+		var str = '<tr><td colspan="7"><textarea class="board resize-none textarea" rows="4"  placeholder="댓글 쓰기" id="reply_content_edit'+reply_no+'" >'+reply_content+'</textarea></td></tr>' +
+				  '<tr><td colspan="7" align="right"><input type="button" onclick="replyEditOk('+reply_no+", "+board_no+')" class="buttons" value="저장"></td></tr>';
+		$("#replies"+reply_no).hide();			//글 내용 숨기기
+		$("#replyEdit"+reply_no).html(str);		//수정 입력란+index 만 toggle하기
+	}
+	
+	// 답변 달기
+	function reply(board_no){		//index는 게시글에 뿌리면서 붙여주는 임시 번호
+		if("${nickname}" != ""){
+			nickname = "${nickname}";
+		} else {
+			nickname = "${admin}";
+		}
 		
+		$.ajax({
+			url:"replyUpdate.do",
+			type:"post",
+			data: { "board_no": board_no,			//해당 원글 번호
+					"reply_content": $("#replyContent"+board_no).val(),	//답글
+					"reply_nickname": nickname},
+		
+			success:function(result){
+					showContents(board_no); //댓글 저장하면 똑같은 글 다시 가져오기 해서 새로고침 해줌
+			}
+		});
+	};	//reply();
+	
+		
+	// 답변 수정			
+	function replyEditOk(reply_no, board_no){	
+		$.ajax({
+			url:"replyEditOk.do",
+			type:"post",
+			data: { "reply_no": reply_no,			//해당 원글 번호
+					"reply_content": $("#reply_content_edit"+reply_no).val()},	//답글
+		
+			success:function(){
+				showContents(board_no); //댓글 저장하면 똑같은 글 다시 가져오기 해서 새로고침 해줌
+			}
+		});
+	};	//replyEditOk();
+	
+	// 댓글 삭제
+	function replyDelete(reply_no, board_no){
+		if(confirm("댓글 삭제하시겠습니까?")){
+			$.ajax({
+				url:"replyDelete.do",
+				type:"get",
+				data: { "reply_no": reply_no},
+			 
+				success:function(){
+					showContents(board_no); //댓글 저장하면 똑같은 글 다시 가져오기 해서 새로고침 해줌
+				}
+			});
+		}
+	}
+	
+	
 	// 좋아요 싫어요
-	function recommend(no, recType, likey, num, pageParam){
+	function recommend(reply_no, board_no, recType, likey, pageParam){
+		if(recType == "board"){	//게시글 에서 좋아요/싫어요 클릭 한거라면 no을 글번호로
+			no = board_no;
+		} else {				//댓글에서 한거면 no을 댓글번호로
+			no = reply_no;
+		}
 		$.ajax({
 			url: "recommend.do",
 			type:"post",
@@ -48,10 +133,9 @@
 				if(result.msg != null){
 					alert(result.msg);
 				}
-				boardBottomCon(pageParam, 0);				
-				$(".hide").hide();	 
-				$(".modifies").hide();	//기본적으로 댓글 숨기기
-				showReply(num);		
+				
+				//글번호, 페이지 가지고 가서 새로 가져오기
+				showContents(board_no, pageParam);
 			},
 			error:function(){
 				alert("오류가 생겼습니다.");
@@ -69,82 +153,24 @@
 			 
 				success:function(){
 						boardBottomCon(pageParam, 0);				//다시 글 가져옴 (현재페이지, 0(무의미한 값));
-						$(".hide").hide();							//기본적으로 댓글 숨기기 (새로가져오면서 원글 빼고 다 숨김)
-						$(".modifies").hide();	//기본적으로 댓글 숨기기
-						showReply(num);								//답변 수정한 원글 펼침 상태로
 				}
 			});
 		}
 	}
 	
-	function replyDelete(reply_no, num, pageParam){
-		if(confirm("댓글 삭제하시겠습니까?")){
-			$.ajax({
-				url:"replyDelete.do",
-				type:"get",
-				data: { "reply_no": reply_no},
-			 
-				success:function(){
-						boardBottomCon(pageParam, 0);				//다시 글 가져옴 (현재페이지, 0(무의미한 값));
-						$(".hide").hide();							//기본적으로 댓글 숨기기 (새로가져오면서 원글 빼고 다 숨김)
-						$(".modifies").hide();	//기본적으로 댓글 숨기기
-						showReply(num);								//답변 수정한 원글 펼침 상태로
-				}
-			});
-		}
-	}
+	
 	function boardEdit(board_no, pageParam){
 		location.href="boardEdit.do?board_no="+board_no+"&board_type=${board_type}&pageParam="+pageParam;
 	}
 	
 	
-	// 답변 수정			답변글번호, 각각의 글index, 댓글의 index, 현재 페이지
-	function replyEditOk(reply_no,num, num2, pageParam){	
-		$.ajax({
-			url:"replyEditOk.do",
-			type:"get",
-			data: { "reply_no": reply_no,			//해당 원글 번호
-					"reply_content": $("#reply_content_edit"+num2).val()},	//답글
-		
-			success:function(){
-					$("#reply_content_edit"+num2).val("");		//댓글 수정입력란 초기화
-					boardBottomCon(pageParam, 0);				//다시 글 가져옴 (현재페이지, 0(무의미한 값));
-					$(".hide").hide();							//기본적으로 댓글 숨기기 (새로가져오면서 원글 빼고 다 숨김) 
-					$(".modifies").hide();	//기본적으로 댓글 숨기기
-					showReply(num);								//답변 수정한 원글 펼침 상태로
-			}
-		});
-	};	//replyEditOk();
 	
-	// 답변 달기
-	function reply(board_no, num, pageParam){	
-		var nickname;
-		if("${nickname}" != ""){
-			nickname = "${nickname}";
-		} else {
-			nickname = "${admin}";
-		}
-		$.ajax({
-			url:"replyUpdate.do",
-			type:"get",
-			data: { "board_no": board_no,			//해당 원글 번호
-					"reply_content": $("#reply_content"+num).val(),	//답글
-					"reply_nickname": nickname},
-		
-			success:function(result){	// result = pageParam
-					$("#reply_content"+num).val("");
-					boardBottomCon(pageParam, 0);
-					$(".hide").hide();	//기본적으로 댓글 숨기기
-					$(".modifies").hide();	//기본적으로 댓글 숨기기
-					showReply(num);
-					$("html, body").animate({scrollTop : $("#reply"+num).offset().top}, 400);
-			}
-		});
-	};	//reply();
+	
 	
 	
 	// 지도 아래 게시물 가져오기
 	function boardBottomCon(pageParam, checkPageUp){  
+		console.log("sda");
 		if(pageParam == null){
 			pageParam = 1;	//가장 처음 boardContent.jsp에 들어올 때는 board.jsp의 몇번째 페이지 였는지 알아야함. 안그러면 bottomBoard에는 무조건 page1으로 감.
 		}
@@ -160,11 +186,15 @@
 				   "board_type": "${board_type}"},
 			success:function(result){
 				$("#board").html(result).trigger("create");
-				$(".hide").hide();	//기본적으로 댓글 숨기기
-				$(".modifies").hide();	//기본적으로 댓글 숨기기
+				modifyBtnHide();
 			}
 		});
-	};	
+	};
 	
 </script>
+
+
+	<div align="center" class="board font-black">
+		<table id="board" class="font-black board"></table>
+	</div>
 

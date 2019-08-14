@@ -16,31 +16,31 @@
   
   <div class="carousel-inner" role="listbox">
     <div class="carousel-item active">
-      <img class="d-block img-fluid" src="resources/img/background/a1.jpg" alt="First slide"  style="width:2000px; height:500px">
-      <div class="carousel-caption">
-          <h3>군인1</h3>
-          <p>시발 군대 시발</p>
-        </div>
+      <img class="d-block img-fluid" src="resources/img/background/slide1.png" alt="First slide"  style="width:100%; height:auto;">
+     <div class="carousel-caption">
+       <!--    <h3>군인1</h3>
+          <p>시발 군대 시발</p> -->
+        </div>  
     </div>
-    
+     
     
     
     <div class="carousel-item">
-     <img class="d-block img-fluid" src="resources/img/background/a2.jpg" alt="Second slide"  style="width:2000px; height:500px">
+     <img class="d-block img-fluid" src="resources/img/background/slide2.png" alt="Second slide"  style="width:100%; height:auto;">
   <div class="carousel-caption">
-          <h3>군인2</h3>
-          <p>시발 전역하자</p>
-        </div>    
+    <!--       <h3>군인2</h3> 
+          <p>시발 전역하자</p> -->
+        </div>
       </div>
     
     
     
     <div class="carousel-item">
-      <img class="d-block img-fluid" src="resources/img/background/a3.jpg" alt="Third slide"  style="width:2000px; height:500px">
+      <img class="d-block img-fluid" src="resources/img/background/slide3.png" alt="Third slide"  style="width:100%; height:auto;">
   <div class="carousel-caption">
-          <h3>군인3</h3>
-          <p>맛다시 주십쇼</p>
-        </div>
+          <!-- <h3>군인3</h3>
+          <p>맛다시 주십쇼</p> -->
+        </div> 
        </div>
     
     

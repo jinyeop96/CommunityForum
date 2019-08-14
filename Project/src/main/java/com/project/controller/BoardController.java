@@ -32,6 +32,9 @@ public class BoardController {
 	
 	@Autowired
 	private FileService fileService;
+
+	@Autowired
+	private RecommendDAOImpl recommend;
 	
 	@Resource(name="uploadPath")
 	String uploadPath;
@@ -39,7 +42,7 @@ public class BoardController {
 	
 	Pagination pagination;
 	Map<String, Object> map = new HashMap<String, Object>();
-	RecommendDTO rec = new RecommendDTO();
+
 
 	// 전체 게시판 가져오기
 	@RequestMapping("/board.do")	 
@@ -86,6 +89,8 @@ public class BoardController {
 		map.put("board_type", request.getParameter("board_type"));
 		
 		board.insertRecord(map);
+		
+		map.clear();
 
 		
 		// name="file" 로 되어있는 파일 list에 담기
@@ -130,14 +135,13 @@ public class BoardController {
 		model.addAttribute("searchType", request.getParameter("searchType"));
 		model.addAttribute("searchData", request.getParameter("searchData"));
 		
-		
 		return "forward:board.do?pageParam="+pageParam+"&board_type="+board_type+"&boardSearch=yes";
 		//return "boardSearch";	// 다른 페이지에서 보이게 (boardSearch=yes 필요없음)
 	} //boardSearch.do
 	
 
 	@RequestMapping("/content.do")
-	public String content(@RequestParam int board_no, @RequestParam String board_type,@RequestParam int pageParam, Model model) throws IOException {
+	public String content(@RequestParam int board_no, @RequestParam String board_type,@RequestParam int pageParam, Model model, HttpSession session) throws IOException {
 		board.updateView(board_no); 	//조회수 증가
 		
 		model.addAttribute("dto", board.selectOne(board_no));	// 해당 게시물 가져오기
@@ -148,17 +152,17 @@ public class BoardController {
 		// 해당 게시물에 첨부되어 있을 첨부파일 가져오기
 		List<String> getFiles = board.selectFile(board_no);
 		
-		//이미지인지 다른파일인지 분류해서 저장
+		//이미지/일반파일 분류  저장
 		List<String> files = new ArrayList<String>();
 		List<String> images = new ArrayList<String>();
 		
 		// 만약 첨부파일이 있다면 실행
 		if(!getFiles.isEmpty()) {
 			for(int i = 0; i < getFiles.size(); i++) {
-				File file = new File(uploadPath+getFiles.get(i));	//uploadPath는 servlet-context.xml에서 수정할 수 있음
+				File file = new File(uploadPath+getFiles.get(i));		//uploadPath는 servlet-context.xml에서 수정할 수 있음
 				
-				if(new Tika().detect(file).startsWith("image")) { // 가져온 첨부파일이 어떤 형태인지 (image 인지, txt 인지 등등)
-					images.add(getFiles.get(i)); // 이미지에 해당하는 파일을 따로 담아 images라는 이름으로 넘긴다
+				if(new Tika().detect(file).startsWith("image")) { 		// 가져온 첨부파일이 어떤 형태인지 (image 인지, txt 인지 등등)
+					images.add(getFiles.get(i)); 						// 이미지에 해당하는 파일을 따로 담아 images라는 이름으로 넘긴다
 					model.addAttribute("images", images);
 				} else {
 					files.add(getFiles.get(i));	// 위와 동일
@@ -188,57 +192,30 @@ public class BoardController {
 		
 		return mav;
 	} //entire.do
-
-	@RequestMapping("/boardBottomCon.do")
+	
+	// 원글의 좋아요 or 싫어요 누르면 바로 실행되는 함수
+	@RequestMapping("/getBoardLikey.do")
 	@ResponseBody
-	public ModelAndView boardBottomCon(@RequestParam int pageParam, @RequestParam String board_type, ModelAndView mav) throws IOException {
-		pagination = new Pagination(board.getRecords(board_type), pageParam);	// (전체레코드 수, 페이지 번호)
-		
-		map.put("rowStart", pagination.getRowStart());
-		map.put("rowEnd", pagination.getRowEnd());
-		map.put("board_type", board_type);
-		mav.addObject("list", board.selectList(map));
-		mav.addObject("upBoardList", board.selectUpBoardList(map));
-		mav.addObject("replyList", reply.selectAllList());
-		
-		mav.addObject("page", pagination);
-		mav.addObject("pageParam", pageParam);
-		mav.addObject("board_type", board_type);
-		mav.setViewName("ajax/boardBottomCon");	
-		
-		// 해당 게시물에 첨부되어 있을 첨부파일 가져오기
-		List<BoardFileDTO> getFiles = board.selectAllFile(board_type);
-		
-		//이미지인지 다른파일인지 분류해서 저장
-		List<BoardFileDTO> files = new ArrayList<BoardFileDTO>();
-		List<BoardFileDTO> images = new ArrayList<BoardFileDTO>();
-		
-		// 만약 첨부파일이 있다면 실행
-		if(!getFiles.isEmpty()) {
-			for(int i = 0; i < getFiles.size(); i++) {
-				File file = new File(uploadPath+getFiles.get(i).getBoardfile_name());	//uploadPath는 servlet-context.xml에서 수정할 수 있음
-				
-				if(new Tika().detect(file).startsWith("image")) { // 가져온 첨부파일이 어떤 형태인지 (image 인지, txt 인지 등등)
-					images.add(getFiles.get(i)); // 이미지에 해당하는 파일을 따로 담아 images라는 이름으로 넘긴다
-					mav.addObject("images", images);
-				} else {
-					files.add(getFiles.get(i));	// 위와 동일
-					mav.addObject("files", files );
+	public ModelAndView  getBoardLikey(@RequestParam int board_no, HttpSession session, ModelAndView mav) {
+		// 현재 로그인 닉네임의 좋아요/싫어요 가져오기
+		String nickname = (String) session.getAttribute("nickname");
+		if (nickname != null) {
+			List<RecommendDTO> dto = recommend.selectByNickname(nickname);
+			
+			for(int i = 0; i < dto.size(); i++) {
+				if(board_no == dto.get(i).getBoard_no()) {
+					RecommendDTO boardRec = dto.get(i);
+					mav.addObject("boardRec", boardRec);
 				}
 			}
 		}
 		
+		mav.addObject("likes", board.getLikes(board_no));
+		mav.addObject("dislikes", board.getDislikes(board_no));
+		mav.addObject("board_no", board_no);
+		mav.setViewName("ajax/boardLikey");
+		
 		return mav;
-	} //entire.do
-	
-	// 원글의 좋아요 or 싫어요 누르면 바로 실행되는 함수
-	@RequestMapping("/getLikeDislike.do")
-	@ResponseBody
-	public Map<String, Object> getLikeDislike(@RequestParam int board_no, HttpSession session) {
-		map.put("likes", board.getLikes(board_no));
-		map.put("dislikes", board.getDislikes(board_no));
-
-		return map;
 	}
 	
 	// 게시물 삭제
@@ -320,6 +297,99 @@ public class BoardController {
 		}
 		// 다시 content.jsp 로 가면서 변경사항 바로 보이게끔 함
 		return "redirect:content.do?board_no="+board_no+"&board_type="+board_type+"&pageParam="+pageParam;
+	}
+
+	@RequestMapping("/boardBottomCon.do")
+	@ResponseBody
+	public ModelAndView boardBottomCon(@RequestParam int pageParam, @RequestParam String board_type, ModelAndView mav) throws IOException {
+			pagination = new Pagination(board.getRecords(board_type), pageParam);	// (전체레코드 수, 페이지 번호)
+			
+			map.put("rowStart", pagination.getRowStart());
+			map.put("rowEnd", pagination.getRowEnd());
+			map.put("board_type", board_type);
+			
+			mav.addObject("list", board.selectList(map));	//게시글
+			mav.addObject("upBoardList", board.selectUpBoardList(map)); // 공지글
+			mav.addObject("page", pagination);
+			mav.addObject("pageParam", pageParam);
+			mav.addObject("board_type", board_type);
+			
+			mav.setViewName("ajax/boardBottomCon");	
+		return mav;
+	} //entire.do
+	
+	@RequestMapping("/contentsCon.do")	// 게시글 상세 가져오기
+	@ResponseBody
+	public ModelAndView contents(@RequestParam int board_no, @RequestParam int pageParam, ModelAndView mav, HttpSession session) throws IOException {
+		//게시글 가져오기
+		mav.addObject("dto", board.selectOne(board_no));
+
+		
+		
+		//게시글의 댓글 가져오기 + 페이징
+		pagination = new Pagination(reply.getRecords(board_no), pageParam, 10, 5);	// 10rows, 5 blocks
+		
+		map.put("rowStart", pagination.getRowStart());
+		map.put("rowEnd", pagination.getRowEnd());
+		map.put("board_no", board_no);
+		
+		mav.addObject("page", pagination);
+		
+		mav.addObject("replyList", reply.selectList(map));	// board_no에 해당하는 댓글 rowStart부터 rowEnd만 가져옴
+		
+		
+		
+		
+		// 현재 로그인 닉네임의 좋아요/싫어요 가져오기
+		String nickname = (String) session.getAttribute("nickname");
+			if (nickname != null) {	// 현재 로그인 했을 때만 실행
+				List<RecommendDTO> dto = recommend.selectByNickname(nickname);	//현재 로그인한 닉네임이 좋아요/싫어요 했던 게시글/댓글 번호 다 가져오기
+				List<RecommendDTO> replyRec = new ArrayList<RecommendDTO>();	//좋아요/싫어요 한 댓글 담을 List
+				
+				for(int i = 0; i < dto.size(); i++) {			
+					if(board_no == dto.get(i).getBoard_no()) {	// 현재 글번호 == 가져온 레코드 중 현재 글번호랑 일치하면
+						RecommendDTO boardRec = dto.get(i);	
+						mav.addObject("boardRec", boardRec);	// mav에 담아준다	
+					}
+					
+					if(dto.get(i).getReply_no() != 0) {			// 일단 가져온 레코드 중 null값이 아닌 경우 
+						replyRec.add(dto.get(i));
+						mav.addObject("replyRec", replyRec);	// 전부 mav에 담아준다
+						
+					}
+						
+				}
+			}
+		
+		
+		
+
+		// 해당 게시물에 첨부되어 있을 첨부파일 가져오기
+		List<String> fileNames = board.selectFile(board_no);	//게시글에 포함되어있는 첨부파일
+		
+		List<BoardFileDTO> files = new ArrayList<BoardFileDTO>();		// 파일 저장
+		List<BoardFileDTO> images = new ArrayList<BoardFileDTO>();		// 이미지 저장
+		
+		// 만약 첨부파일이 있다면 실행
+		if(!fileNames.isEmpty()) {
+			BoardFileDTO fileDto = new BoardFileDTO();
+			for(int i = 0; i < fileNames.size(); i++) {
+				File file = new File(uploadPath + fileNames.get(i));	//uploadPath는 servlet-context.xml에서 수정할 수 있음
+				
+				if(new Tika().detect(file).startsWith("image")) { // 가져온 첨부파일이 어떤 형태인지 (image 인지, txt 인지 등등)
+					fileDto.setBoardfile_name(fileNames.get(i));
+					images.add(fileDto);	// 이미지에 해당하는 파일을 따로 담아 images라는 이름으로 넘긴다
+					mav.addObject("images", images);
+				} else {
+					fileDto.setBoardfile_name(fileNames.get(i));
+					files.add(fileDto);	// 파일
+					mav.addObject("files", files );
+				}
+			}
+		}
+		
+		mav.setViewName("ajax/contentsCon");
+		return mav;
 	}
 	
 }

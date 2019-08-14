@@ -23,7 +23,7 @@
 		</dependency>
 				
 		<!-- https://mvnrepository.com/artifact/com.github.scribejava/scribejava-core -->
-		<!-- 로그인 api 사용시 필요 -->
+		<!-- 로그인 api 사용시 필요  OAuth 통합 라이브러리-->
 		<dependency>
 		    <groupId>com.github.scribejava</groupId>
 		    <artifactId>scribejava-core</artifactId>
@@ -31,7 +31,7 @@
 		</dependency>
 				
 		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
-		<!-- 파일 업로드시 어떤 파일인지 확인  -->
+		<!-- 파일 보여줄 때 어떤 파일인지 확인  -->
 		<dependency>
 		    <groupId>org.apache.tika</groupId>
 		    <artifactId>tika-core</artifactId>
@@ -210,7 +210,7 @@
 			<version>4.7</version>
 			<scope>test</scope>
         </dependency>
- <!-- 스프링 시큐리티적용 구간 -->
+		<!-- 스프링 시큐리티적용 구간 -->
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
         <dependency>
             <groupId>org.springframework.security</groupId>

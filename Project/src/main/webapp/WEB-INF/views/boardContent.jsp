@@ -15,6 +15,7 @@
 
 			getReplyList();	// 처음 실행될 때 답변글 가져오는 함수 실행.
 			boardBottom();
+			getBoardLikey();
 			
 			$(".hide").hide();
 			$(".modifies").hide();
@@ -96,17 +97,13 @@
 		
 		//////////////////////////////// 가져오기들///////////////////////////////////
 		// 좋아요 싫어요 새로고침 가져오기
-		function getLikeDislike(){
+		function getBoardLikey(){
 			$.ajax({
-				url: "getLikeDislike.do",
+				url: "getBoardLikey.do",
 				type:"get",
 				data: {"board_no": "${dto.getBoard_no()}"},
 				success:function(result){
-					$(".boardUpdateLike").text(result.likes);
-					$(".boardUpdateDislike").text(result.dislikes);
-					$(".hide").hide();
-					$(".modifies").hide();
-					
+					$("#boardLikey").html(result);
 				},
 				error:function(){
 					alert("오류가 생겼습니다.");
@@ -134,7 +131,7 @@
 					$("#replyTable").html(result).trigger("create");
 					$(".hide").hide();
 					$(".modifies").hide();
-					
+					console.log(result);
 
 				}
 			});
@@ -151,7 +148,7 @@
 				type:"post",
 				async: false,
 				data: {"pageParam": pageParam,
-					   "board_type": "${dto.getBoard_type()}"},
+					   "board_type": "${board_type}"},
 				success:function(result){
 					$("#boardBottom").html(result).trigger("create");
 				}
@@ -165,12 +162,18 @@
 		
 		// 답변 등록
 		function reply(){	
+			var reply_nickname;
+			if("${nickname}" != ""){
+				nickname = "${nickname}";
+			} else{
+				nickname = "${admin}";
+			}
 			$.ajax({
 				url:"replyUpdate.do",
 				type:"get",
 				data: { "board_no": "${dto.getBoard_no()}",			//해당 원글 번호
 						"reply_content": $("#reply_content").val(),	//답글
-						"reply_nickname": "${nickname}" },	// 닉네임 (나중에 session으로 처리할 때 nickname으로 할 예정)
+						"reply_nickname": nickname },	// 닉네임 (나중에 session으로 처리할 때 nickname으로 할 예정)
 			
 				success:function(){
 						$("#reply_content").val("");
@@ -197,7 +200,7 @@
 						alert(result.msg);
 					}
 					getReplyList();
-					getLikeDislike();
+					getBoardLikey();
 					$(".hide").hide();
 					$(".modifies").hide();
 				},
@@ -223,6 +226,7 @@
 		#back:hover{
 			font-style: italic;
 		}
+		
 	</style>
 </head>
 <body>
@@ -316,20 +320,9 @@
 		      		
 		      		<tr><td id="thumb"><br></td></tr>
 		      		<tr><td><br></td></tr>
-		      		
-		      		<tr>	
-		      			<td align="center">
-		      				<a href="javascript:recommend(${dto.getBoard_no()}, 'board', 'like')" id="like2">
-			      				<img class="contentRec"  src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;&nbsp;
-			      				<font class="boardUpdateLike" style="color: white; text-decoration: none;">${dto.getBoard_like() }</font>&nbsp;&nbsp;&nbsp;
-		      				</a>
-		      				
-		      				<a href="javascript:recommend(${dto.getBoard_no()}, 'board', 'dislike')">
-			      				<img class="contentRec" src="<c:url value='/resources/img/logos/dislike2.png'/>">&nbsp;&nbsp;&nbsp;
-			      				<font class="boardUpdateDislike" style="color: white; text-decoration: none;">${dto.getBoard_dislike() }</font>
-		      				</a>
-		      			</td>
-		      		</tr>
+					
+					<%-- 게시글 좋아요/싫어요 가져옴 --%>		      		
+		      		<tr><td  id="boardLikey" align="center"></td></tr>
 
 		      		<tr>
 		      			<td><hr style="border: none; border-top: 1px solid white"></td>

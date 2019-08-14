@@ -65,7 +65,10 @@
 
 /*navigation.jsp    Menu bar */
 .menu-bar li ul {
-	background-image: url("../img/background/camo-pattern.jpg");
+	/*background-image: url("../img/background/camo-pattern.jpg"); */
+	background: #000000;
+	opacity: 0.9;
+	border-radius: 10px;
 	display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
 	height:auto;
 	padding:0px;
@@ -201,9 +204,27 @@
 }
 
 
+.upBoard{
+	background: #f0ff75;
+}
+
+.upBoard-top{
+	border-radius: 8px 8px 0 0;
+}
+.upBoard-bottom{
+	border-radius: 0 0 8px 8px;
+}
+.upBoard-left{
+	border-radius: 8px 0 0 8px;
+}
+.upBoard-right{
+	border-radius: 0 8px 8px 0;
+}
 
 
-
+.no-deco:hover{
+		text-decoration: none;
+	}
 
 
 

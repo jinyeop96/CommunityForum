@@ -95,26 +95,26 @@
 		</tr>
 	</table> --%>
 
-		<div class="map_wrap">
-		    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-    <div id="menu_wrap" class="bg_white">
-        <div class="option">
-            <div>
-                <form onsubmit="searchPlaces(); return false;" style="color:black">
-                    키워드 : <input type="text" placeholder="지역명+음식점" id="keyword" size="10" value="${restaurant_search}">  <%--section02에서 검색한 값을 음식점 페이지 키워드 검색 textbox에 바로 넘겨준다. --%>
-                    <button type="submit">검색하기</button> 
-                </form>
-            </div>
-        </div>
-        <hr>
-        <ul id="placesList"></ul>
-    </div>
-</div>
-
-<div align="center" class="board font-black">
-	<table id="board" class="font-black board"></table>
-</div>
-
+	<div class="map_wrap">
+	    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+	    
+	    <div id="menu_wrap" class="bg_white">
+	        <div class="option">
+	            <div>
+	                <form onsubmit="searchPlaces(); return false;" style="color:black">
+	                 	 키워드 : <input type="text" placeholder="지역명+음식점" id="keyword" size="15" value="${restaurant_search}">  <%--section02에서 검색한 값을 음식점 페이지 키워드 검색 textbox에 바로 넘겨준다. --%>
+	                    <button type="submit">검색하기</button> 
+	                </form>
+            	</div>
+        	</div>
+        	
+        	<hr>
+        	
+        	<ul id="placesList"></ul>
+    	</div>
+	</div>
+	
+	<jsp:include page="/resources/include/getBoardBottomCon.jsp" />
 
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86b59d080c4ee3e8f0d9fc3cfd7b71c8&libraries=services"></script>

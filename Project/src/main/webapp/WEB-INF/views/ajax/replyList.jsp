@@ -41,21 +41,59 @@
      			</th>
      		</tr>
      		
-     		
+     		<%-- 좋아요 / 싫어요 --%>
      		<tr>
-     			<!--  좋아요 -->
-     			<td colspan="2">
-     				<a href="javascript:void(0)"  onclick="recommend(${reply.getReply_no()}, 'reply', 'like')" class="font-black">
-     					<img class="rec" src="<c:url value='/resources/img/logos/like2.png'/>">&nbsp;&nbsp;${reply.getReply_like() }
-    				</a>
-				</td>
-				
-				<!-- 싫어요 -->
-     			<td colspan="2">
-     				<a href="javascript:void(0)"  onclick="recommend(${reply.getReply_no()}, 'reply', 'dislike')" class="font-black">
-     					<img class="rec" src="<c:url value='/resources/img/logos/dislike2.png'/>">&nbsp;&nbsp;${reply.getReply_dislike() }
-     				</a>
-     			</td>
+  				<td colspan="2">
+  					<%-- 로그인 안했을 떄 --%>
+	     			<c:if test="${empty replyRec }">
+							<a href="javascript:void(0)"  onclick="recommend(${reply.getReply_no()}, 'reply', 'like')" class="font-black no-deco">
+								<img class="rec" src="<c:url value='/resources/img/logos/up1.png'/>">&nbsp;&nbsp;${reply.getReply_like() }
+							</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					
+							<a href="javascript:void(0)"  onclick="recommend(${reply.getReply_no()}, 'reply', 'dislike')" class="font-black no-deco">
+								<img class="rec" src="<c:url value='/resources/img/logos/down1.png'/>">&nbsp;&nbsp;${reply.getReply_dislike() }
+							</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</c:if>
+					
+					<%-- 로그인 했을떄 --%>
+					<c:if test="${!empty replyRec }">
+						<c:set value="0" var="loop"></c:set> 
+						<c:forEach items="${replyRec }" var="replyRec2">
+							<c:if test="${replyRec2.getReply_no() == reply.getReply_no()}">	<%-- recommend 테이블에서 nickname(현재 사용자) 의 이름으로 다 가져옴 (그간 기록된 좋아요/싫어요) --%>
+									<a href="javascript:void(0)"  onclick="recommend(${reply.getReply_no()}, 'reply', 'like')" class="font-black no-deco">
+										<c:if test="${replyRec2.getRec_like() == 1 }">
+											<img class="rec" src="<c:url value='/resources/img/logos/up2.png'/>">&nbsp;&nbsp;${reply.getReply_like() }
+										</c:if>
+										
+										<c:if test="${replyRec2.getRec_like() == 0 }">
+											<img class="rec" src="<c:url value='/resources/img/logos/up1.png'/>">&nbsp;&nbsp;${reply.getReply_like() }
+										</c:if>
+									</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									
+									<a href="javascript:void(0)"  onclick="recommend(${reply.getReply_no()}, 'reply', 'dislike')" class="font-black no-deco">
+										<c:if test="${replyRec2.getRec_dislike() == 0 }">
+											<img class="rec" src="<c:url value='/resources/img/logos/down1.png'/>">&nbsp;&nbsp;${reply.getReply_dislike() }
+										</c:if>
+		
+										<c:if test="${replyRec2.getRec_dislike() == -1 }">
+											<img class="rec" src="<c:url value='/resources/img/logos/down2.png'/>">&nbsp;&nbsp;${reply.getReply_dislike() }
+										</c:if>
+									</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<c:set value="1" var="loop"></c:set>	<%-- 해당 댓글에 대한 전의 기록이 남아있어서 좋아요/싫어요 이미지 구현됐으면 loop을 1로 바꿔준다 --%>
+							</c:if>
+						</c:forEach>
+							
+						<c:if test="${loop == 0 }">	<%-- 해당 댓글에 대한 전의 기록이 없다면   --%>
+								<a href="javascript:void(0)"  onclick="recommend(${reply.getReply_no()}, 'reply', 'like')" class="font-black no-deco">
+									<img class="rec" src="<c:url value='/resources/img/logos/up1.png'/>">&nbsp;&nbsp;${reply.getReply_like() }
+								</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								
+								<a href="javascript:void(0)"  onclick="recommend(${reply.getReply_no()}, 'reply', 'dislike')" class="font-black no-deco">
+									<img class="rec" src="<c:url value='/resources/img/logos/down1.png'/>">&nbsp;&nbsp;${reply.getReply_dislike() }
+								</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</c:if>
+					</c:if>
+				<td>
      			
      			<!-- 작성일 -->
      			<td >${reply.getReply_date() }</td>

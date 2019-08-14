@@ -5,19 +5,7 @@
 <html>
 <head>
 <title>오와열</title>
-<style type="text/css" media="screen">
 
-#content {  
-  position:absolute;
-  height:600px;   /* 퀵메뉴, 배너 이미지의 높이 */
-  width:170px;    /* 퀵메뉴, 배너 이미지의 너비*/
-  margin:0px 0px 0px 625px;   /* 가장 오른쪽의 수치가 화면 가운데에서 얼마만큼 오른쪽으로 레이어를 붙일 것인지 설정  */ 
-  top: 110px;  /* 배너 상단에서 얼마나 떨어뜨릴지 설정*/
-  left: 50%;     /* 레이어의 시작점이 왼쪽으로 부터 50% 지정 */
-  text-align: left;
-  padding: 0px;
-}
-</style>
 
 
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>  
@@ -28,11 +16,6 @@
 
 
 	<%--
-=======
-<body> 
-	
-	<%-- 
->>>>>>> branch 'master' of https://github.com/jinyeop96/test
 		resources 폴더에 css, image, js, jsp 등등 들어 있음. jsp 파일 불러오기는 아래와 같이 하시고~
 	
 		그 외 css, image, js 등은 

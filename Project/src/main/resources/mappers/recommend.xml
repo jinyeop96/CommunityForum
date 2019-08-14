@@ -13,6 +13,9 @@
 		</if>
 	</select>
 
+	<select id="selectByNickname" resultType="com.project.dto.RecommendDTO">
+		SELECT * FROM recommend WHERE nickname = #{nickname}
+	</select>
 
 	<!-- 첫 좋아요일때 새로 insert -->
 	<insert id="insertNew">
